@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:40:36 by cboussau          #+#    #+#             */
-/*   Updated: 2016/06/03 18:09:26 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/13 16:40:53 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static int	mainbis_21sh(t_struct *info)
 			ft_strdel(arg);
 			return (-1);
 		}
-		ft_putchar('\n');
 		arg++;
 	}
 	return (0);
@@ -83,8 +82,6 @@ static void	main_21sh(char **env)
 	t_struct	*info;
 
 	info = init_struct(env);
-	if (init_term(info) == -1)
-		return ;
 	while (1)
 	{
 		if (check_lst(info->lst) == 0)

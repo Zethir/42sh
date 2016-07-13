@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 12:52:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/04/21 22:56:57 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/13 16:31:47 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int		check_for_parenth(char *arg)
 	j = 0;
 	while (arg[i])
 	{
-		if (arg[i] == '{' || arg[i] == '[' || arg[i] == '<' ||
+		if (arg[i] == '{' || arg[i] == '['  ||
 				arg[i] == '(' || arg[i] == 39 || arg[i] == 34)
 			j++;
-		else if (arg[i] == '}' || arg[i] == ']' || arg[i] == '>' ||
+		else if (arg[i] == '}' || arg[i] == ']' ||
 					arg[i] == ')')
 			j--;
 		i++;
