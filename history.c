@@ -6,13 +6,29 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/14 18:28:54 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/14 20:03:29 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-void		add_history(char *line)
+/*int			do_history(char **cmd)
+{
+	int		fd;
+	char	*str;
+	char	buff[100];
+	
+	getcwd(buff, 100);
+	str = ft_strjoin(buff, "/history");
+	if ((fd = open(str, fd, O_RDONLY)))
+	{
+		perror("lol");
+	}
+			
+			
+}*/
+
+void		add_history(t_struct *info, char *line)
 {
 	char	*buf;
 	int		fd;
@@ -20,7 +36,8 @@ void		add_history(char *line)
 	char	*str;
 
 	i = 0;
-	if ((fd = open("/nfs/2015/c/cboussau/history", O_RDWR | O_APPEND)) == -1)
+	str = get_home(info->lst);
+	if ((fd = open(str, O_RDWR | O_APPEND)) == -1)
 	{
 		perror("history");
 		exit (-1);
@@ -57,8 +74,10 @@ void		deal_with_file(t_struct *info)
 {
 	int		fd;
 	char	*line;
+	char	*str;
 
-	if ((fd = open("/nfs/2015/c/cboussau/history", O_RDWR | O_CREAT, 0644)) == -1)
+	str = get_home(info->lst);
+	if ((fd = open(str, O_RDWR | O_CREAT, 0644)) == -1)
 	{
 		perror("history");
 		exit (-1);

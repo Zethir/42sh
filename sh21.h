@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:44:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/14 17:38:47 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/14 19:56:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void				sigquit(int id);
 void				deal_with_others(t_struct *info);
 void				go_to_end(t_struct *info);
 void				deal_with_file(t_struct *info);
-void				add_history(char *line);
+void				add_history(t_struct *info, char *line);
 int					arg_in_dir(t_lst *node, char *arg);
 int					print_alpha_error(char **arg);
 int					check_lst(t_lst *node);
@@ -121,6 +121,7 @@ int					start_pipe(int pipefds[], int num);
 int					check_for_chevron(t_struct *ptr);
 int					check_for_parenth(char *arg);
 int					do_echo(char **cmd);
+char				*get_home(t_lst *node);
 char				**deal_with_opt(t_struct *info, char **arg);
 char				**malloc_tab(char **arg);
 char				*deal_with_termcap(t_struct *info);
