@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:44:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/14 19:56:34 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/14 20:26:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int					start_pipe(int pipefds[], int num);
 int					check_for_chevron(t_struct *ptr);
 int					check_for_parenth(char *arg);
 int					do_echo(char **cmd);
+int					do_history(t_struct *info, char **cmd);
 char				*get_home(t_lst *node);
 char				**deal_with_opt(t_struct *info, char **arg);
 char				**malloc_tab(char **arg);

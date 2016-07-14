@@ -6,27 +6,31 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/14 20:03:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/14 20:27:24 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-/*int			do_history(char **cmd)
+int			do_history(t_struct *info, char **cmd)
 {
 	int		fd;
 	char	*str;
-	char	buff[100];
+	char	*line;
 	
-	getcwd(buff, 100);
-	str = ft_strjoin(buff, "/history");
-	if ((fd = open(str, fd, O_RDONLY)))
+	str = get_home(info->lst);
+	if ((fd = open(str, O_RDONLY)) == -1)
 	{
-		perror("lol");
+		perror("history");
+		exit (-1);
 	}
-			
-			
-}*/
+	if (!cmd[1])
+	{
+		while (get_next_line(fd, &line) > 0)
+			ft_putendl(line);
+	}
+	return (-1);
+}
 
 void		add_history(t_struct *info, char *line)
 {
