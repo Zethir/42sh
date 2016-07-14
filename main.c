@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:40:36 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/14 17:36:08 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/14 17:40:02 by cboussau         ###   ########.fr       */
 /*   Updated: 2016/07/14 17:31:48 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -63,6 +63,7 @@ static int	mainbis_21sh(t_struct *info)
 
 	line = deal_with_termcap(info);
 	ft_putchar('\n');
+	add_history(line);
 	if (!line)
 		return (-1);
 	arg = ft_strsplit(line, ';');
