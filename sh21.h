@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:44:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/14 17:36:55 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/14 17:38:47 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void				sigtstp(int id);
 void				sigquit(int id);
 void				deal_with_others(t_struct *info);
 void				go_to_end(t_struct *info);
+void				deal_with_file(t_struct *info);
+void				add_history(char *line);
 int					arg_in_dir(t_lst *node, char *arg);
 int					print_alpha_error(char **arg);
 int					check_lst(t_lst *node);
