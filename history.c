@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/14 17:32:55 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/14 18:28:54 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,22 @@ void		add_history(char *line)
 {
 	char	*buf;
 	int		fd;
+	int		i;
+	char	*str;
 
-	if ((fd = open("history", O_RDWR | O_APPEND)) == -1)
+	i = 0;
+	if ((fd = open("/nfs/2015/c/cboussau/history", O_RDWR | O_APPEND)) == -1)
 	{
 		perror("history");
 		exit (-1);
 	}
-	while (1)
-	{
-		if (get_next_line(fd, &buf) == 0)
-			break;
-		printf("%s\n", buf);
-	}
-	printf("%s\n", line);
+	while (get_next_line(fd, &buf) > 0)
+		i++;
+	i += 1;
+	str = ft_strjoin(ft_itoa(i), " ");
+	line = ft_strjoin(str, ft_strjoin(line, "\n"));
+	write(fd, line, ft_strlen(line));
+	close(fd);
 }
 
 
@@ -55,7 +58,7 @@ void		deal_with_file(t_struct *info)
 	int		fd;
 	char	*line;
 
-	if ((fd = open("history", O_RDWR | O_CREAT, 0644)) == -1)
+	if ((fd = open("/nfs/2015/c/cboussau/history", O_RDWR | O_CREAT, 0644)) == -1)
 	{
 		perror("history");
 		exit (-1);
