@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/06/03 18:08:41 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/14 16:09:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_struct	*init_struct(char **env)
 	if (!(info->node = (t_dlist *)malloc(sizeof(t_dlist))))
 		return (NULL);
 	info->node = create_node();
+	deal_with_file(info);
 	info->env = get_env(info->lst);
 	if (init_term(info) == -1)
 		return (NULL);
