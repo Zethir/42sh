@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:40:36 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/13 16:40:53 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/14 17:31:48 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int	do_argbis(t_struct *info, char *arg, char **cmd)
 		i = do_unsetenv(info->lst, arg);
 	else if (ft_strcmp(*cmd, "cd") == 0)
 		i = do_cd(info->lst, arg);
+	else if (ft_strcmp(*cmd, "echo") == 0)
+		i = do_echo(cmd);
 	else if (*cmd)
 		i = deal_with_pipe(info, arg);
 	return (i);
@@ -47,7 +49,7 @@ static int	do_arg(t_struct *info, char *arg)
 		arg = ft_strjoin(arg, line);
 	}
 	if (!(cmd = ft_strsplit_ws(arg)))
-		return (-1);
+		return (0);
 	i = do_argbis(info, arg, cmd);
 	ft_strdel(cmd);
 	return (i);
