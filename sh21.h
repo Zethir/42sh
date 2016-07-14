@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:44:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/31 17:55:23 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/14 15:10:06 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ char				**split_path(t_lst *node);
 char				*check_path(char **path, char *arg);
 char				**get_env(t_lst *node);
 char				**save_command(t_struct *ptr);
+int					do_echo(char **cmd);
 
 #endif
