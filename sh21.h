@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:44:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/14 20:26:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/16 18:46:07 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct		s_dlist
 	char			*str;
 	int				i;
 	struct s_dlist	*prev;
-	struct s_dlist *next;
+	struct s_dlist	*next;
 }					t_dlist;
 
 typedef struct		s_struct
@@ -68,7 +68,7 @@ typedef struct		s_struct
 
 t_lst				*delete_elem(t_lst *node);
 t_lst				*init_lst(char **env);
-t_dlist				*create_node();
+t_dlist				*create_node(void);
 t_struct			*init_struct(char **env);
 t_struct			*stock_struct(t_struct *info, int i);
 void				push_node_bis(t_dlist **head, t_dlist *new_node);
@@ -101,6 +101,9 @@ void				deal_with_others(t_struct *info);
 void				go_to_end(t_struct *info);
 void				deal_with_file(t_struct *info);
 void				add_history(t_struct *info, char *line);
+void				do_option(t_struct *info, char **cmd);
+void				out_of_range_error(char **cmd);
+int					do_history(t_struct *info, char **cmd);
 int					arg_in_dir(t_lst *node, char *arg);
 int					print_alpha_error(char **arg);
 int					check_lst(t_lst *node);
@@ -121,7 +124,6 @@ int					start_pipe(int pipefds[], int num);
 int					check_for_chevron(t_struct *ptr);
 int					check_for_parenth(char *arg);
 int					do_echo(char **cmd);
-int					do_history(t_struct *info, char **cmd);
 char				*get_home(t_lst *node);
 char				**deal_with_opt(t_struct *info, char **arg);
 char				**malloc_tab(char **arg);

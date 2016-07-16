@@ -6,11 +6,18 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 18:35:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/04/18 14:21:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/16 16:19:48 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+void	out_of_range_error(char **cmd)
+{
+	ft_putstr_fd("42sh: history: ", 2);
+	ft_putstr_fd(cmd[2], 2);
+	ft_putendl_fd(": history position out of range", 2);
+}
 
 void	no_command_error(char *arg)
 {

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/27 16:40:46 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/16 18:39:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	sigint(int id)
 	info = NULL;
 	info = stock_struct(info, 1);
 	if (info->pid != 0)
-	{	
+	{
 		ft_putchar('\n');
 		get_prompt(info->lst);
 	}
@@ -65,7 +65,7 @@ void	sigquit(int id)
 	tcsetattr(0, TCSANOW, &(info->term));
 	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
 	free_list(info->lst);
-	exit (0);
+	exit(0);
 }
 
 void	ft_signal(int id)

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 00:03:33 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/31 17:53:06 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/16 18:38:35 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void		deal_with_others(t_struct *info)
 		tputs(tgetstr("dc", NULL), 1, ft_putchar_int);
 	}
 	if (info->buff[0] == 4 && info->buff[1] == -1 && info->buff[2] == 127)
-	{	
-		ft_putstr("exit\n");	
+	{
+		ft_putstr("exit\n");
 		exit(-1);
 	}
 	info->node = node;

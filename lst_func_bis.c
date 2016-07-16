@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/06/03 18:15:51 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/16 18:45:53 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-t_dlist	*create_node()
+t_dlist	*create_node(void)
 {
 	t_dlist	*node;
 

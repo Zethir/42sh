@@ -6,7 +6,7 @@
 #    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/24 14:55:22 by cboussau          #+#    #+#              #
-#    Updated: 2016/07/14 16:08:19 by cboussau         ###   ########.fr        #
+#    Updated: 2016/07/16 14:12:31 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = 21sh
 SRC = main.c prompt.c env.c tools.c env_arg.c errors.c setenv.c exit.c\
 	  unsetenv.c cd.c check.c errors2.c lst_func.c tools2.c termcap.c termios.c\
 	  termcapbis.c termcapline.c pipe.c tools3.c redirections.c redirections2.c\
-	  signal.c lst_func_bis.c echo.c history.c
+	  signal.c lst_func_bis.c echo.c history.c history_option.c
 
 OBJ = $(SRC:.c=.o)
 LIB = ./libft/libft.a -ltermcap

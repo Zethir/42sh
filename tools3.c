@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/17 00:06:48 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/14 19:59:25 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/16 18:34:25 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		check_for_chevron(t_struct *ptr)
 {
 	int		i;
-	
+
 	i = 1;
 	while (ptr->arg[i])
 	{
@@ -83,7 +83,7 @@ char	*get_home(t_lst *node)
 		if (ft_strcmp(node->name, "HOME") == 0)
 		{
 			str = ft_strjoin(ft_strchr(node->line, '/'), "/history");
-			break;
+			break ;
 		}
 		node = node->next;
 	}
