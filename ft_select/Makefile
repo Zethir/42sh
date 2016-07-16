@@ -6,7 +6,7 @@
 #    By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/19 11:56:04 by qdiaz             #+#    #+#              #
-#    Updated: 2016/07/16 18:54:08 by cboussau         ###   ########.fr        #
+#    Updated: 2016/07/16 19:00:17 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ FLAGS = -Wall -Wextra -Werror -g
 
 $(NAME): $(OBJ)
 	echo "\\033[1;34mGenerating objects... Please wait\\033[0;39m"
-	make -C ./libft
+	make -C ../libft
 	echo "\\033[36mcompiling $(NAME)...\\033[0;39m"
 	gcc $(FLAGS) -ltermcap $(OBJ) $(LIB) -o $(NAME)
 	echo "\\033[32m$(NAME) has been created !\\033[0;39m"
@@ -34,12 +34,12 @@ all: $(NAME)
 
 clean:
 	rm -f $(OBJ)
-	make -C libft/ clean
+	make -C ../libft/ clean
 	echo "\\033[31mobjects files has been removed !\\033[0;39m"
 
 fclean: clean
 	rm -f $(NAME)
-	make fclean -C libft
+	make fclean -C ../libft
 	echo "\\033[31m$(NAME) has been removed !\\033[0;39m"
 
 re: fclean $(NAME)

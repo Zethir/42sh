@@ -6,14 +6,14 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/20 15:32:28 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/05/19 15:47:23 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/16 18:56:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <signal.h>
 # include <term.h>
 # include <termios.h>

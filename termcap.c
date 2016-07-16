@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/16 18:50:33 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/16 19:01:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char		*deal_with_termcap(t_struct *info)
 	int			ret;
 	
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
+	node = info->node;
 	while ((ret = read(0, info->buff, BUFF_SIZE) != -1))
 	{
 		deal_with_charac(info);
@@ -103,7 +104,6 @@ char		*deal_with_termcap(t_struct *info)
 			break;
 		if (*info->buff == 9 && node->str != NULL)
 			tab_completion(info, node->str);
-			break ;
 	}
 	return (node->str);
 }

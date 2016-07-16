@@ -6,7 +6,7 @@
 #    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/24 14:55:22 by cboussau          #+#    #+#              #
-#    Updated: 2016/07/16 18:51:17 by qdiaz            ###   ########.fr        #
+#    Updated: 2016/07/16 19:04:06 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,12 @@ all : $(NAME)
 clean:
 	rm -f $(OBJ)
 	make -C libft/ clean
+	make -C ft_select/ clean
 
 fclean: clean
 	rm -rf $(NAME)
 	make fclean -C libft
+	make fclean -C ft_select/
 
 re: fclean $(NAME)
 
