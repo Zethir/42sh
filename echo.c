@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 14:55:27 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/07/14 17:31:45 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/16 18:46:56 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,16 @@ static void		print_echo(char *cmd)
 	}
 }
 
-int		do_echo(char **cmd)
+int				do_echo(char **cmd)
 {
 	int i;
 	int cnt;
 
 	i = 1;
 	cnt = 0;
-
 	if (!cmd[1])
 		ft_putchar('\n');
-	else 
+	else
 	{
 		if (cmd[1] && ft_strcmp(cmd[1], "-n") != 0)
 			cnt = 1;

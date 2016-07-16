@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 17:31:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/31 18:43:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/16 18:41:01 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		data_series(t_struct *ptr, int i)
 		line = deal_with_termcap(ptr);
 		ft_putchar('\n');
 		if (ft_strcmp(line, ptr->arg[i]) == 0)
-			break;
+			break ;
 		ft_putendl_fd(line, fd[1]);
 		line = ft_strdup("");
 	}
@@ -33,7 +33,7 @@ void		data_series(t_struct *ptr, int i)
 	close(fd[0]);
 }
 
-void			redirection_err_out(t_struct *ptr, int i)
+void		redirection_err_out(t_struct *ptr, int i)
 {
 	int		ret;
 
@@ -41,20 +41,20 @@ void			redirection_err_out(t_struct *ptr, int i)
 	if ((ret = open(ptr->arg[i], O_WRONLY | O_CREAT | O_APPEND, 0644)) == -1)
 	{
 		perror(ptr->arg[i]);
-		exit (-1);
+		exit(-1);
 	}
 	dup2(ret, 1);
 	dup2(ret, 2);
 	close(ret);
 }
 
-void			redirection_in(t_struct *ptr, int fd, int i)
+void		redirection_in(t_struct *ptr, int fd, int i)
 {
 	int		ret;
 
 	i += 1;
 	if ((ret = open(ptr->arg[i], O_RDONLY)) == -1)
-	{	
+	{
 		perror(ptr->arg[i]);
 		exit(-1);
 	}
@@ -65,7 +65,7 @@ void			redirection_in(t_struct *ptr, int fd, int i)
 	}
 }
 
-char	**save_command(t_struct *ptr)
+char		**save_command(t_struct *ptr)
 {
 	char	**str;
 	int		i;
@@ -76,9 +76,9 @@ char	**save_command(t_struct *ptr)
 	while (ptr->arg[i])
 	{
 		if (ft_strstr(ptr->arg[i], ">") != NULL)
-			break;
+			break ;
 		else if (ft_strstr(ptr->arg[i], "<") != NULL)
-			break;
+			break ;
 		str[i] = ft_strdup(ptr->arg[i]);
 		i++;
 	}
@@ -86,7 +86,7 @@ char	**save_command(t_struct *ptr)
 	return (str);
 }
 
-void			exec_cmd(t_struct *ptr, char **str)
+void		exec_cmd(t_struct *ptr, char **str)
 {
 	char	*path;
 
@@ -94,6 +94,6 @@ void			exec_cmd(t_struct *ptr, char **str)
 	if (execve(path, str, ptr->env) < 0)
 	{
 		no_command_error(ptr->arg[0]);
-		exit (-1);
+		exit(-1);
 	}
 }

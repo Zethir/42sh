@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/14 16:09:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/16 18:38:01 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-int		reset_term(t_struct *info)
+int			reset_term(t_struct *info)
 {
 	if (tcgetattr(0, &(info->term)) == -1)
 		return (-1);
@@ -22,7 +22,7 @@ int		reset_term(t_struct *info)
 	return (0);
 }
 
-int		init_term(t_struct *info)
+int			init_term(t_struct *info)
 {
 	char			*name_term;
 
