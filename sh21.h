@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:44:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/14 20:26:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/16 18:09:26 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void				deal_with_others(t_struct *info);
 void				go_to_end(t_struct *info);
 void				deal_with_file(t_struct *info);
 void				add_history(t_struct *info, char *line);
+void				tab_completion(t_struct *info, char *str);
 int					arg_in_dir(t_lst *node, char *arg);
 int					print_alpha_error(char **arg);
 int					check_lst(t_lst *node);

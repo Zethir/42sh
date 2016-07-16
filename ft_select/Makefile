@@ -3,30 +3,31 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/03/24 14:55:22 by cboussau          #+#    #+#              #
-#    Updated: 2016/07/16 15:53:03 by qdiaz            ###   ########.fr        #
+#    Created: 2016/04/19 11:56:04 by qdiaz             #+#    #+#              #
+#    Updated: 2016/05/20 16:20:17 by qdiaz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 21sh
-
-SRC = main.c prompt.c env.c tools.c env_arg.c errors.c setenv.c exit.c\
-	  unsetenv.c cd.c check.c errors2.c lst_func.c tools2.c termcap.c termios.c\
-	  termcapbis.c termcapline.c pipe.c tools3.c redirections.c redirections2.c\
-	  signal.c lst_func_bis.c echo.c history.c auto_complete.c
-
+NAME = ft_select
+SRC = main.c init_term.c tools.c ft_select.c ft_action.c ft_key.c\
+	  ft_print.c ft_size.c list_tools.c tools2.c ft_signal.c\
+	  ft_move.c
 OBJ = $(SRC:.c=.o)
-LIB = ./libft/libft.a -ltermcap
-FLAGS = -Wall -Wextra -Werror
+LIB = ./libft/libft.a
+FLAGS = -Wall -Wextra -Werror -g
+
+.SILENT:
 
 $(NAME): $(OBJ)
+	echo "\\033[1;34mGenerating objects... Please wait\\033[0;39m"
 	make -C ./libft
-	make -C ./ft_select
-	gcc $(FLAGS) $(OBJ) $(LIB) -o $(NAME)
+	echo "\\033[36mcompiling $(NAME)...\\033[0;39m"
+	gcc $(FLAGS) -ltermcap $(OBJ) $(LIB) -o $(NAME)
+	echo "\\033[32m$(NAME) has been created !\\033[0;39m"
 
-all : $(NAME)
+all: $(NAME)
 
 %.o: %.c
 	gcc $(FLAGS) -o $@ -c $<
@@ -34,10 +35,12 @@ all : $(NAME)
 clean:
 	rm -f $(OBJ)
 	make -C libft/ clean
+	echo "\\033[31mobjects files has been removed !\\033[0;39m"
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 	make fclean -C libft
+	echo "\\033[31m$(NAME) has been removed !\\033[0;39m"
 
 re: fclean $(NAME)
 
