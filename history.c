@@ -6,18 +6,37 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/16 18:45:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/17 19:25:44 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-static void	history_option(t_struct *info, char **cmd)
+static void	history_option(t_struct *info, char **cmd, int fd)
 {
-	if (cmd[1][0] == '-')
-		do_option(info, cmd);
-	else if (cmd[1][0] >= '0' && cmd[1][0] <= '9')
-		printf("hello\n");
+	t_dlist	*dlst;
+	int		nbr;
+	int		i;
+	char	*line;
+
+	i = 0;
+	dlst = info->node;
+	if (numeric_error(cmd) == 1)
+		return ;
+	nbr = ft_atoi(cmd[1]);
+	while (info->node->prev)
+	{
+		info->node = info->node->prev;
+		i++;
+	}
+	info->node = dlst;
+	nbr = i - nbr;
+	while (get_next_line(fd, &line) > 0)
+	{
+		if (nbr < 0)
+			ft_putendl(line);
+		nbr--;
+	}
 }
 
 int			do_history(t_struct *info, char **cmd)
@@ -38,11 +57,17 @@ int			do_history(t_struct *info, char **cmd)
 			ft_putendl(line);
 	}
 	else if (cmd[1])
-		history_option(info, cmd);
+	{
+		if (cmd[1][0] == '-')
+			do_option(info, cmd);
+		else
+			history_option(info, cmd, fd);
+	}
+	close(fd);
 	return (-1);
 }
 
-void		add_history(t_struct *info, char *line)
+void		add_history(t_struct *info)
 {
 	char	*buf;
 	int		fd;
@@ -60,12 +85,12 @@ void		add_history(t_struct *info, char *line)
 		i++;
 	i += 1;
 	str = ft_strjoin(ft_itoa(i), " ");
-	line = ft_strjoin(str, ft_strjoin(line, "\n"));
-	write(fd, line, ft_strlen(line));
+	str = ft_strjoin(str, info->node->str);
+	ft_putendl_fd(str, fd);
 	close(fd);
 }
 
-static char	*split_line(char *line)
+char		*split_line(char *line)
 {
 	int		i;
 

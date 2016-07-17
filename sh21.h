@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:44:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/16 18:51:40 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/17 18:32:58 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,21 +100,23 @@ void				sigquit(int id);
 void				deal_with_others(t_struct *info);
 void				go_to_end(t_struct *info);
 void				deal_with_file(t_struct *info);
-void				add_history(t_struct *info, char *line);
+void				add_history(t_struct *info);
 void				tab_completion(t_struct *info, char *str);
 void				do_option(t_struct *info, char **cmd);
 void				out_of_range_error(char **cmd);
+void				option_r(t_struct *info, char *str);
+void				do_builtins(t_struct *info);
 int					do_history(t_struct *info, char **cmd);
 int					arg_in_dir(t_lst *node, char *arg);
 int					print_alpha_error(char **arg);
 int					check_lst(t_lst *node);
 int					get_intel(t_lst *node, char *str);
 int					get_intel_bis(t_lst *node, char *str);
-int					do_exit(char *line);
-int					deal_with_env(t_struct *info, char *line);
-int					do_setenv(t_lst *node, char *line);
-int					do_unsetenv(t_lst *node, char *line);
-int					do_cd(t_lst *node, char *line);
+int					do_exit(char **arg);
+int					deal_with_env(t_struct *info, char **arg);
+int					do_setenv(t_lst *node, char **arg);
+int					do_unsetenv(t_lst *node, char **arg);
+int					do_cd(t_lst *node, char **arg);
 int					get_index(t_lst *node);
 int					ft_strccmp(const char *s1, const char *s2, char c);
 int					check_caract(char *str, char c);
@@ -125,6 +127,9 @@ int					start_pipe(int pipefds[], int num);
 int					check_for_chevron(t_struct *ptr);
 int					check_for_parenth(char *arg);
 int					do_echo(char **cmd);
+int					check_builtins(t_struct *info);
+int					numeric_error(char **cmd);
+char				*split_line(char *line);
 char				*get_home(t_lst *node);
 char				**deal_with_opt(t_struct *info, char **arg);
 char				**malloc_tab(char **arg);

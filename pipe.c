@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 18:50:48 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/16 15:31:27 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/17 17:55:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	exec_pipe_bis(t_struct *ptr, int pipefds[], int j, int i)
 		close_pipefds(pipefds, ptr->num);
 		if (check_for_chevron(ptr) == 1)
 			deal_with_redirection(ptr);
+		else if (check_builtins(ptr) == 1)
+			do_builtins(ptr);
 		else if (execve(str, ptr->arg, ptr->env) < 0)
 		{
 			no_command_error(ptr->arg[0]);
@@ -54,6 +56,8 @@ static void	exec_pipe(t_struct *info)
 	{
 		info->arg = ft_strsplit_ws(info->cmd[i]);
 		if (access(ft_strjoin(*info->right_path, *info->arg), X_OK) != -1)
+			exec_pipe_bis(info, pipefds, j, i);
+		else if (check_builtins(info) == 1)
 			exec_pipe_bis(info, pipefds, j, i);
 		else
 		{

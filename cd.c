@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 13:41:53 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/14 15:09:50 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/17 17:51:42 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,10 @@ static void		deal_with_cd_arg(char *arg)
 		closedir(dir);
 }
 
-int				do_cd(t_lst *node, char *line)
+int				do_cd(t_lst *node, char **arg)
 {
-	char		**arg;
 	int			i;
 
-	arg = ft_strsplit_ws(line);
 	arg++;
 	i = 0;
 	while (arg[i])

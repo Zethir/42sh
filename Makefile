@@ -6,7 +6,7 @@
 #    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/24 14:55:22 by cboussau          #+#    #+#              #
-#    Updated: 2016/07/16 19:04:06 by cboussau         ###   ########.fr        #
+#    Updated: 2016/07/17 17:38:59 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = 21sh
 SRC = main.c prompt.c env.c tools.c env_arg.c errors.c setenv.c exit.c\
 	  unsetenv.c cd.c check.c errors2.c lst_func.c tools2.c termcap.c termios.c\
 	  termcapbis.c termcapline.c pipe.c tools3.c redirections.c redirections2.c\
-	  signal.c lst_func_bis.c echo.c history.c auto_complete.c history_option.c
+	  signal.c lst_func_bis.c echo.c history.c auto_complete.c history_option.c \
+	  history_option2.c builtins.c
 
 OBJ = $(SRC:.c=.o)
 LIB = ./libft/libft.a -ltermcap
@@ -39,7 +40,7 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 	make fclean -C libft
-	make fclean -C ft_select/
+	make fclean -C ft_select
 
 re: fclean $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 19:39:25 by cboussau          #+#    #+#             */
-/*   Updated: 2016/04/13 16:22:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/17 17:44:15 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,10 @@ static void	handle_arg_setenv(t_lst *node, char **arg)
 		ft_putendl_fd("setenv: Variable name must begin with a letter.", 2);
 }
 
-int			do_setenv(t_lst *node, char *line)
+int			do_setenv(t_lst *node, char **arg)
 {
-	char	**arg;
 	int		i;
 
-	arg = ft_strsplit_ws(line);
 	arg++;
 	i = 1;
 	while (arg[i])
@@ -72,6 +70,5 @@ int			do_setenv(t_lst *node, char *line)
 		return (-1);
 	else
 		handle_arg_setenv(node, arg);
-	ft_strdel(arg);
 	return (-1);
 }

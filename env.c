@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/25 18:53:08 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/17 17:41:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,10 @@ void		restore_env(t_lst *node, char **save)
 	}
 }
 
-int			deal_with_env(t_struct *info, char *line)
+int			deal_with_env(t_struct *info, char **arg)
 {
 	char	**save;
-	char	**arg;
 
-	arg = ft_strsplit_ws(line);
 	arg++;
 	if (*arg)
 	{

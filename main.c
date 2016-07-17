@@ -6,43 +6,16 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:40:36 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/16 18:52:01 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/17 19:09:00 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
 
-static int	do_argbis(t_struct *info, char *arg, char **cmd)
-{
-	int		i;
-
-	i = 0;
-	if (ft_strcmp(*cmd, "exit") == 0)
-		i = do_exit(arg);
-	else if (ft_strcmp(*cmd, "env") == 0)
-		i = deal_with_env(info, arg);
-	else if (ft_strcmp(*cmd, "setenv") == 0)
-		i = do_setenv(info->lst, arg);
-	else if (ft_strcmp(*cmd, "unsetenv") == 0)
-		i = do_unsetenv(info->lst, arg);
-	else if (ft_strcmp(*cmd, "cd") == 0)
-		i = do_cd(info->lst, arg);
-	else if (ft_strcmp(*cmd, "echo") == 0)
-		i = do_echo(cmd);
-	else if (ft_strcmp(*cmd, "history") == 0)
-		i = do_history(info, cmd);
-	else if (*cmd)
-		i = deal_with_pipe(info, arg);
-	return (i);
-}
-
 static int	do_arg(t_struct *info, char *arg)
 {
-	int		i;
-	char	**cmd;
 	char	*line;
 
-	i = 0;
 	while (check_for_parenth(arg) != 0)
 	{
 		get_prompt(info->lst);
@@ -50,11 +23,8 @@ static int	do_arg(t_struct *info, char *arg)
 		ft_putchar('\n');
 		arg = ft_strjoin(arg, line);
 	}
-	if (!(cmd = ft_strsplit_ws(arg)))
-		return (0);
-	i = do_argbis(info, arg, cmd);
-	ft_strdel(cmd);
-	return (i);
+	deal_with_pipe(info, arg);
+	return (-1);
 }
 
 static int	mainbis_21sh(t_struct *info)
@@ -64,9 +34,9 @@ static int	mainbis_21sh(t_struct *info)
 
 	line = deal_with_termcap(info);
 	ft_putchar('\n');
-	add_history(info, line);
 	if (!line)
 		return (-1);
+	add_history(info);
 	arg = ft_strsplit(line, ';');
 	while (*arg)
 	{

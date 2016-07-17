@@ -6,11 +6,30 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 18:35:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/16 16:19:48 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/17 18:28:19 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
+
+int	 numeric_error(char **cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[1][i])
+	{
+		if (cmd[1][i] < '0' || cmd[1][i] > '9')
+		{
+			ft_putstr_fd("42sh: history: ", 2);
+			ft_putstr_fd(cmd[1], 2);
+			ft_putendl_fd(": numeric argument required", 2);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 
 void	out_of_range_error(char **cmd)
 {

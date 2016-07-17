@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/16 18:43:47 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/17 15:33:31 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,11 @@ void			do_option(t_struct *info, char **cmd)
 	}
 	else if (ft_strcmp(cmd[1], "-d") == 0)
 		option_d(info, cmd, str);
+	else if (ft_strcmp(cmd[1], "-r") == 0)
+	{
+		if (!cmd[2])
+			option_r(info, str);
+		else
+			ft_putendl_fd("Option [-r] doesn't need any arguments", 2);
+	}
 }
