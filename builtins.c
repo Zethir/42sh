@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/17 17:51:32 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/18 15:28:04 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int		check_builtins(t_struct *info)
 {
-	if (ft_strcmp(info->arg[0], "exit") == 0)
-		return (1);
-	else if (ft_strcmp(info->arg[0], "env") == 0)
+	if (ft_strcmp(info->arg[0], "env") == 0)
 		return (1);
 	else if (ft_strcmp(info->arg[0], "setenv") == 0)
 		return (1);
@@ -35,9 +33,7 @@ int		check_builtins(t_struct *info)
 
 void	do_builtins(t_struct *info)
 {
-	if (ft_strcmp(info->arg[0], "exit") == 0)
-		do_exit(info->arg);
-	else if (ft_strcmp(info->arg[0], "env") == 0)
+	if (ft_strcmp(info->arg[0], "env") == 0)
 		deal_with_env(info, info->arg);
 	else if (ft_strcmp(info->arg[0], "setenv") == 0)
 		do_setenv(info->lst, info->arg);

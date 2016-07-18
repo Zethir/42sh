@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:40:36 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/17 19:09:00 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/18 15:28:07 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	do_arg(t_struct *info, char *arg)
 {
 	char	*line;
+	char	**cmd;
 
 	while (check_for_parenth(arg) != 0)
 	{
@@ -23,6 +24,9 @@ static int	do_arg(t_struct *info, char *arg)
 		ft_putchar('\n');
 		arg = ft_strjoin(arg, line);
 	}
+	cmd = ft_strsplit_ws(arg);
+	if (ft_strcmp(cmd[0], "exit") == 0)
+		do_exit(cmd);
 	deal_with_pipe(info, arg);
 	return (-1);
 }
