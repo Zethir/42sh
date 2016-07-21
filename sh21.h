@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:44:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/17 18:32:58 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/21 18:00:29 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <curses.h>
 # include <term.h>
 # include <sys/ioctl.h>
+# include <signal.h>
 
 # define RED "[31m"
 # define PURPLE "[1;35m"
@@ -106,6 +107,7 @@ void				do_option(t_struct *info, char **cmd);
 void				out_of_range_error(char **cmd);
 void				option_r(t_struct *info, char *str);
 void				do_builtins(t_struct *info);
+void				free_dlist(t_dlist *node);
 int					do_history(t_struct *info, char **cmd);
 int					arg_in_dir(t_lst *node, char *arg);
 int					print_alpha_error(char **arg);

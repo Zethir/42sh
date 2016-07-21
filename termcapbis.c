@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 00:03:33 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/16 18:38:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/21 16:58:54 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,34 @@
 
 static void	deal_with_down(t_struct *info)
 {
-	t_dlist		*node;
-
-	node = info->node;
 	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 66 &&
 			info->node->next)
 	{
 		tputs(tgetstr("rc", NULL), 1, ft_putchar_int);
-		node->i = ft_strlen(node->str);
+		info->node->i = ft_strlen(info->node->str);
 		tputs(tgetstr("ce", NULL), 1, ft_putchar_int);
-		node = info->node->next;
-		ft_putstr(node->str);
-		node->i = ft_strlen(node->str);
-		tputs(tgoto(tgetstr("ch", NULL), 0, node->i + 3), 1, ft_putchar_int);
+		info->node = info->node->next;
+		ft_putstr(info->node->str);
+		info->node->i = ft_strlen(info->node->str);
+		tputs(tgoto(tgetstr("ch", NULL), 0, info->node->i + 3), 1,
+				ft_putchar_int);
 	}
-	info->node = node;
 }
 
 static void	deal_with_up(t_struct *info)
 {
-	t_dlist		*node;
-
-	node = info->node;
 	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 65
 			&& info->node->prev)
 	{
 		tputs(tgetstr("rc", NULL), 1, ft_putchar_int);
-		node->i = ft_strlen(node->str);
+		info->node->i = ft_strlen(info->node->str);
 		tputs(tgetstr("ce", NULL), 1, ft_putchar_int);
-		node = info->node->prev;
-		ft_putstr(node->str);
-		node->i = ft_strlen(node->str);
-		tputs(tgoto(tgetstr("ch", NULL), 0, node->i + 3), 1, ft_putchar_int);
+		info->node = info->node->prev;
+		ft_putstr(info->node->str);
+		info->node->i = ft_strlen(info->node->str);
+		tputs(tgoto(tgetstr("ch", NULL), 0, info->node->i + 3), 1, 
+				ft_putchar_int);
 	}
-	info->node = node;
 }
 
 void		deal_with_others(t_struct *info)

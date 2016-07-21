@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/17 19:25:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/21 16:52:35 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	history_option(t_struct *info, char **cmd, int fd)
 {
-	t_dlist	*dlst;
+	t_dlist	*dlist;
 	int		nbr;
-	int		i;
 	char	*line;
+	int		i;
 
 	i = 0;
-	dlst = info->node;
+	dlist = info->node;
 	if (numeric_error(cmd) == 1)
 		return ;
 	nbr = ft_atoi(cmd[1]);
@@ -29,7 +29,7 @@ static void	history_option(t_struct *info, char **cmd, int fd)
 		info->node = info->node->prev;
 		i++;
 	}
-	info->node = dlst;
+	info->node = dlist;
 	nbr = i - nbr;
 	while (get_next_line(fd, &line) > 0)
 	{

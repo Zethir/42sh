@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/16 18:50:48 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/17 17:55:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/20 16:28:31 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@ static void	exec_pipe_bis(t_struct *ptr, int pipefds[], int j, int i)
 {
 	char	*str;
 
-	ptr->pid = fork();
+
+	if (check_builtins(ptr) == 0)
+		ptr->pid = fork();
+	else
+		ptr->pid = 0;
 	str = ft_strjoin(*ptr->right_path, ptr->arg[0]);
 	if (ptr->pid == 0)
 	{
@@ -30,7 +34,7 @@ static void	exec_pipe_bis(t_struct *ptr, int pipefds[], int j, int i)
 		close_pipefds(pipefds, ptr->num);
 		if (check_for_chevron(ptr) == 1)
 			deal_with_redirection(ptr);
-		else if (check_builtins(ptr) == 1)
+		if (check_builtins(ptr) == 1)
 			do_builtins(ptr);
 		else if (execve(str, ptr->arg, ptr->env) < 0)
 		{
@@ -55,9 +59,9 @@ static void	exec_pipe(t_struct *info)
 	while (info->cmd[i])
 	{
 		info->arg = ft_strsplit_ws(info->cmd[i]);
-		if (access(ft_strjoin(*info->right_path, *info->arg), X_OK) != -1)
+		if (check_builtins(info) == 1)
 			exec_pipe_bis(info, pipefds, j, i);
-		else if (check_builtins(info) == 1)
+		else if (access(ft_strjoin(*info->right_path, *info->arg), X_OK) != -1)
 			exec_pipe_bis(info, pipefds, j, i);
 		else
 		{
