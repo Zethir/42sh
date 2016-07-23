@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:44:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/21 18:00:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/23 18:24:19 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void				sigcont(int id);
 void				sigtstp(int id);
 void				sigquit(int id);
 void				deal_with_others(t_struct *info);
-void				go_to_end(t_struct *info);
 void				deal_with_file(t_struct *info);
 void				add_history(t_struct *info);
 void				tab_completion(t_struct *info, char *str);
@@ -108,6 +107,12 @@ void				out_of_range_error(char **cmd);
 void				option_r(t_struct *info, char *str);
 void				do_builtins(t_struct *info);
 void				free_dlist(t_dlist *node);
+void				go_to_end(t_struct *info);
+void				go_to_end_list(t_struct *info);
+void				do_designator(t_struct *info, char **cmd);
+void				deal_with_dash(t_struct *info, char **cmd);
+void				deal_with_number(t_struct *info, char **cmd);
+void				deal_with_string(t_struct *info, char **cmd);
 int					do_history(t_struct *info, char **cmd);
 int					arg_in_dir(t_lst *node, char *arg);
 int					print_alpha_error(char **arg);
@@ -131,6 +136,9 @@ int					check_for_parenth(char *arg);
 int					do_echo(char **cmd);
 int					check_builtins(t_struct *info);
 int					numeric_error(char **cmd);
+int					check_number(char **cmd);
+int					check_number_bis(char **cmd);
+int					check_alpha(char **cmd);
 char				*split_line(char *line);
 char				*get_home(t_lst *node);
 char				**deal_with_opt(t_struct *info, char **arg);

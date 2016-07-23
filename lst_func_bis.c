@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/21 18:00:13 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/23 17:07:38 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,14 @@ void	push_node_bis(t_dlist **head, t_dlist *new_node)
 		cur = cur->next;
 	cur->next = new_node;
 	new_node->prev = cur;
+}
+
+void	go_to_end_list(t_struct *info)
+{
+	char	*str;
+
+	str = ft_strdup(info->node->str);
+	while (info->node->next)
+		info->node = info->node->next;
+	info->node->str = ft_strdup(str);
 }
