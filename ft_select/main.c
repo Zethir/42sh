@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:49:21 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/19 17:33:34 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/24 18:29:43 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ char	*do_select(char **argv, int id)
 	info = init_struct(argv);
 	if (init_term(info) == -1)
 		return (NULL);
-	tputs(tgetstr("cl", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
 	stock_struct(info, 0);
 	win_size(id);

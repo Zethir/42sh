@@ -6,14 +6,14 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:50:27 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/19 17:15:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/24 18:42:11 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
