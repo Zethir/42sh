@@ -6,12 +6,12 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/23 18:18:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/24 18:20:42 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh21.h"
-
+/*
 void	do_designator(t_struct *info, char **cmd)
 {
 	if (cmd[0][1] == '-')
@@ -29,4 +29,4 @@ void	do_designator(t_struct *info, char **cmd)
 		if (check_alpha(cmd) == 0)
 			deal_with_string(info, cmd);
 	}
-}	
+}*/
