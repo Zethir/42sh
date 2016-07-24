@@ -3,53 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/20 16:55:38 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/05/17 17:57:05 by qdiaz            ###   ########.fr       */
+/*   Created: 2016/05/18 16:23:23 by cboussau          #+#    #+#             */
+/*   Updated: 2016/05/18 18:11:01 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int			ft_myputchar(int c)
+void	free_lst(t_struct *info)
 {
-	return (write(2, &c, 1));
+	t_lst	*ptr;
+
+	ptr = info->node->head;
+	while (ptr)
+	{
+		if (ptr->name)
+			ft_strdel(&ptr->name);
+		if (ptr->save)
+			ft_strdel(&ptr->save);
+		ptr = ptr->next;
+	}
 }
 
-void		screen_clear(void)
+void	left_arrow(t_struct *info, t_lst *ptr)
 {
-	tputs(tgetstr("rc", NULL), 1, ft_myputchar);
-	tputs(tgetstr("cd", NULL), 1, ft_myputchar);
+	size_t	i;
+
+	i = info->nb_item;
+	while (i-- != 0)
+	{
+		if (ptr == info->node->head)
+		{
+			ptr = info->node->tail;
+			if (i >= info->nb_item - info->size_last)
+				i -= info->nb_item - info->size_last;
+			else
+			{
+				i = 0;
+				break ;
+			}
+		}
+		ptr = ptr->prev;
+	}
+	ptr->line = 1;
 }
 
-t_term		*ft_stock(t_term *termi, int i)
+void	right_arrow(t_struct *info, t_lst *ptr)
 {
-	static t_term *tmp = NULL;
+	size_t	i;
 
-	if (i == 0)
-		tmp = termi;
-	return (tmp);
+	i = info->nb_item;
+	while (i-- != 0)
+	{
+		if (ptr == info->node->tail)
+		{
+			ptr = info->node->head;
+			if (i >= info->nb_item - info->size_last)
+				i -= info->nb_item - info->size_last;
+			else
+			{
+				i = 0;
+				break ;
+			}
+		}
+		ptr = ptr->next;
+	}
+	ptr->line = 1;
 }
 
-void		ft_up(t_term *termi)
+void	check_size(t_struct *info)
 {
-	t_dblist	*tmp;
-
-	tmp = termi->dblist;
-	while (tmp->line != 1)
-		tmp = tmp->next;
-	tmp->line = 0;
-	tmp->prev->line = 1;
+	if (info->nb_item >= info->row || info->size_w + 2 >= info->col)
+	{
+		clean_lst(info);
+		ft_putstr_fd("Window is too small", 2);
+	}
+	else
+		print_lst(info);
 }
 
-void		ft_down(t_term *termi)
+void	start_end(t_struct *info)
 {
-	t_dblist	*tmp;
+	t_lst	*ptr;
 
-	tmp = termi->dblist;
-	while (tmp->line != 1)
-		tmp = tmp->next;
-	tmp->line = 0;
-	tmp->next->line = 1;
+	ptr = info->node->head;
+	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 72)
+	{
+		while (ptr->line != 1)
+			ptr = ptr->next;
+		ptr->line = 0;
+		ptr = info->node->head;
+		ptr->line = 1;
+	}
+	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 70)
+	{
+		while (ptr->line != 1)
+			ptr = ptr->next;
+		ptr->line = 0;
+		ptr = info->node->tail;
+		ptr->line = 1;
+	}
 }

@@ -3,101 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   ft_select.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/20 15:32:28 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/07/16 18:56:41 by cboussau         ###   ########.fr       */
+/*   Created: 2016/04/22 18:50:27 by cboussau          #+#    #+#             */
+/*   Updated: 2016/05/19 17:15:36 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
-# include "../libft/libft.h"
-# include <signal.h>
-# include <term.h>
+# include "libft/libft.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
 # include <termios.h>
-# include <termcap.h>
+# include <curses.h>
+# include <term.h>
 # include <sys/ioctl.h>
 
-# define BUFFER *(unsigned int *)buffer
-
-typedef struct		s_dblist
+typedef struct		s_lst
 {
-	char			*value;
-	int				select;
-	int				line;
-	struct s_dblist	*next;
-	struct s_dblist	*prev;
-	int				len;
-}					t_dblist;
+	char			*name;
+	size_t			select;
+	char			*save;
+	size_t			len;
+	size_t			line;
+	int				index;
+	struct s_lst	*prev;
+	struct s_lst	*next;
+}					t_lst;
 
-typedef enum		e_enum
+typedef struct		s_intel
 {
-	LEFT_KEY = 4479771,
-	RIGHT_KEY = 4414235,
-	UP_KEY = 4283163,
-	DOWN_KEY = 4348699,
-	ESC_KEY = 27,
-	SPACE_KEY = 32,
-	DEL_KEY = 127,
-	RET_KEY = 10,
-	SUP_KEY = 2117294875,
-	HOME_KEY = 4741915,
-	END_KEY = 4610843,
-	PAGE_UP_KEY = 2117425947,
-	PAGE_DOWN_KEY = 2117491483,
-	TAB_KEY = 9,
-	CRTL_A_KEY = 1
-}					t_enum;
+	size_t			length;
+	struct s_lst	*tail;
+	struct s_lst	*head;
+}					t_intel;
 
-typedef struct		s_term
+typedef struct		s_struct
 {
+	size_t			size_last;
+	size_t			col;
+	size_t			row;
+	size_t			nb_col;
+	size_t			nb_item;
+	size_t			coeff;
+	size_t			count;
+	size_t			realcol;
+	size_t			len;
+	size_t			delkey;
+	size_t			size_w;
+	char			buff[BUFF_SIZE];
 	struct termios	term;
-	char			*name_term;
-	int				fd;
-	int				nb_col;
-	int				nb_row;
-	int				enter;
-	int				count[2];
-	char			**ret_tab;
-	struct s_term	*first;
-	t_dblist		*dblist;
-}					t_term;
+	struct s_intel	*node;
+}					t_struct;
 
-int					ft_myputchar(int c);
-int					ft_init_termios(t_term *all);
-int					ft_end_termios(t_term *all);
-void				screen_clear(void);
-t_dblist			*lst_init(void);
-t_dblist			*fill_list(char *str);
-void				add_link(t_term *termi, t_dblist *list);
-void				arg_to_list(char **argv, t_term *termi);
-void				count_col(t_term *termi);
-void				ft_print(t_term *termi);
-int					ft_check_size(t_term *termi);
-void				ft_resize(void);
-t_term				*ft_stock(t_term *termi, int i);
-void				ft_goto_begin(t_term *termi);
-void				ft_goto_end(t_term *termi);
-void				ft_space_key(t_term *termi);
-int					ft_delete(t_term *termi);
-void				ft_tab_key(t_term *termi);
-void				ft_up(t_term *termi);
-void				ft_down(t_term *termi);
-void				ft_deselect_all(t_term *termi);
-void				ft_select_all(t_term *termi);
-void				ft_stock_tab(t_term *termi);
-void				ft_return_key(t_term *termi);
-int					ft_key(t_term *termi);
-void				ft_print_enter(t_term *termi);
-int					max_size(t_term *termi);
-int					list_size(t_term *termi);
-int					nb_max_col(t_term *termi, int max);
-int					strlenint(char *str);
-int					ft_op_display(t_term *termi, int i, int max);
-void				ft_signal(void);
-void				ft_left(t_term *termi);
-void				ft_right(t_term *termi);
+t_intel				*init_lst(char **argv);
+t_intel				*add_elem(t_intel *node, char *argv);
+t_struct			*init_struct(char **argv);
+t_struct			*stock_struct(t_struct *info, int i);
+char				*deal_with_term(t_struct *info);
+char				*do_select(char **argv, int id);
+void				push_node(t_lst *node, t_lst **head);
+void				clean_lst(t_struct *info);
+void				print_opt(t_lst *ptr, t_struct *info);
+void				deal_with_arrow(t_struct *info);
+void				deal_with_col(t_struct *info);
+void				longest_word(t_struct *info);
+void				print_lst(t_struct *info);
+void				init_ptr(t_struct *info);
+void				del_elem_from_list(t_struct *info);
+void				left_arrow(t_struct *info, t_lst *ptr);
+void				right_arrow(t_struct *info, t_lst *ptr);
+void				check_size(t_struct *info);
+void				win_size(int id);
+void				ft_signal(int id);
+void				sigcont(int id);
+void				sigtstp(int id);
+void				sigint(int id);
+void				start_end(t_struct *info);
+void				free_lst(t_struct *info);
+int					init_term(t_struct *info);
+int					reset_term(t_struct *info);
 
 #endif

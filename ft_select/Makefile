@@ -3,44 +3,38 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/04/19 11:56:04 by qdiaz             #+#    #+#              #
-#    Updated: 2016/07/16 19:00:17 by cboussau         ###   ########.fr        #
+#    Created: 2016/03/24 14:55:22 by cboussau          #+#    #+#              #
+#    Updated: 2016/05/18 16:25:26 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_select
-SRC = main.c init_term.c tools.c ft_select.c ft_action.c ft_key.c\
-	  ft_print.c ft_size.c list_tools.c tools2.c ft_signal.c\
-	  ft_move.c
-OBJ = $(SRC:.c=.o)
-LIB = ../libft/libft.a
-FLAGS = -Wall -Wextra -Werror -g
+NAME = ft_select 
 
-.SILENT:
+SRC = main.c lst_function.c termios.c termcap.c termcaparrow.c termcaprint.c\
+	  deal_with_size.c signal.c tools.c
+
+OBJ = $(SRC:.c=.o)
+LIB = ./libft/libft.a -ltermcap
+FLAGS = -Wall -Wextra -Werror
 
 $(NAME): $(OBJ)
-	echo "\\033[1;34mGenerating objects... Please wait\\033[0;39m"
-	make -C ../libft
-	echo "\\033[36mcompiling $(NAME)...\\033[0;39m"
-	gcc $(FLAGS) -ltermcap $(OBJ) $(LIB) -o $(NAME)
-	echo "\\033[32m$(NAME) has been created !\\033[0;39m"
+	make -C ./libft
+	gcc $(FLAGS) $(OBJ) $(LIB) -o $(NAME)
 
-all: $(NAME)
+all : $(NAME)
 
 %.o: %.c
 	gcc $(FLAGS) -o $@ -c $<
 
 clean:
 	rm -f $(OBJ)
-	make -C ../libft/ clean
-	echo "\\033[31mobjects files has been removed !\\033[0;39m"
+	make -C libft/ clean
 
 fclean: clean
-	rm -f $(NAME)
-	make fclean -C ../libft
-	echo "\\033[31m$(NAME) has been removed !\\033[0;39m"
+	rm -rf $(NAME)
+	make fclean -C libft
 
 re: fclean $(NAME)
 

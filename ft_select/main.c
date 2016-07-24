@@ -3,45 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/20 15:35:35 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/07/16 18:34:18 by qdiaz            ###   ########.fr       */
+/*   Created: 2016/04/22 18:49:21 by cboussau          #+#    #+#             */
+/*   Updated: 2016/05/19 17:33:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static int		ft_do_select(char **argv, t_term *termi)
+char	*do_select(char **argv, int id)
 {
-	tputs(tgetstr("do", NULL), 1, ft_myputchar);
-	tputs(tgetstr("sc", NULL), 1, ft_myputchar);
-	arg_to_list(argv, termi);
-	count_col(termi);
-	ft_print(termi);
-	ft_check_size(termi);
-	ft_stock(termi, 0);
+	t_struct	*info;
+	char		*str;
+
+	info = init_struct(argv);
+	if (init_term(info) == -1)
+		return (NULL);
+	tputs(tgetstr("cl", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
+	stock_struct(info, 0);
+	win_size(id);
 	while (1)
 	{
-		if (!ft_key(termi))
-			return (0);
+		str = deal_with_term(info);
+		if (str)
+			break ;
 	}
-	return (0);
+	if (reset_term(info) == -1)
+		return (NULL);
+	return (str);
 }
 
-int				main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	t_term		termi;
+	char		*str;
+	int			id;
 
-	(void)argc;
+	id = 0;
 	signal(SIGINT, SIG_IGN);
-	termi.dblist = NULL;
-	ft_signal();
-	if (!ft_init_termios(&termi))
-		return (-1);
+	ft_signal(id);
 	if (argc >= 2)
-		ft_do_select(argv, &termi);
-	if (!ft_end_termios(&termi))
-		return (-1);
+		str = do_select(argv, id);
+	else
+	{
+		ft_putendl_fd("Too few argument to function call", 2);
+		return (1);
+	}
+	if (str)
+	{
+		ft_putendl(str);
+		free(str);
+	}
+	else
+		ft_putendl_fd("String empty, problem with env", 2);
 	return (0);
 }
