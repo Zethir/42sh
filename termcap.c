@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/23 17:07:57 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:54:15 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char		*deal_with_termcap(t_struct *info)
 			break;
 		}
 		if (*info->buff == 9 && info->node->str != NULL)
-			tab_completion(info, info->node->str);
+			tab_completion(info->node->str);
 	}
 	return (info->node->str);
 }

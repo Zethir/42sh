@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/24 19:02:03 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/26 20:25:29 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-int			reset_term(t_struct *info)
+int				reset_sel_term(t_sel_struct *info)
 {
 	if (tcgetattr(0, &(info->term)) == -1)
 		return (-1);
@@ -24,7 +24,7 @@ int			reset_term(t_struct *info)
 	return (0);
 }
 
-int			init_term(t_struct *info)
+int				init_sel_term(t_sel_struct *info)
 {
 	char			*name_term;
 
@@ -43,34 +43,34 @@ int			init_term(t_struct *info)
 	return (0);
 }
 
-t_struct	*stock_struct(t_struct *info, int i)
+t_sel_struct		*stock_sel_struct(t_sel_struct *info, int i)
 {
-	static t_struct *tmp = NULL;
+	static t_sel_struct *tmp = NULL;
 
 	if (i == 0)
 		tmp = info;
 	return (tmp);
 }
 
-t_struct	*init_struct(char **argv)
+t_sel_struct	*init_sel_struct(char **argv)
 {
-	t_struct	*info;
+	t_sel_struct	*info;
 
-	if (!(info = (t_struct *)malloc(sizeof(t_struct))))
+	if (!(info = (t_sel_struct *)malloc(sizeof(t_sel_struct))))
 		return (NULL);
-	info->node = init_lst(argv);
+	info->node = init_sel_lst(argv);
 	info->node->head->line = 1;
 	return (info);
 }
 
-void		win_size(int id)
+void			win_size(int id)
 {
-	t_struct		*info;
-	struct winsize	win;
+	t_sel_struct		*info;
+	struct winsize		win;
 
 	(void)id;
 	info = NULL;
-	info = stock_struct(info, 1);
+	info = stock_sel_struct(info, 1);
 	ioctl(0, TIOCGWINSZ, &win);
 	info->col = win.ws_col;
 	info->row = win.ws_row;

@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 21:11:14 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/24 18:43:05 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/26 20:27:28 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void		clean_lst(t_struct *info)
+void		clean_lst(t_sel_struct *info)
 {
 	tputs(tgetstr("rc", NULL), 0, ft_putchar_int);
 	tputs(tgetstr("cd", NULL), 0, ft_putchar_int);
@@ -22,10 +22,10 @@ void		clean_lst(t_struct *info)
 	info->count = info->node->length;
 }
 
-static char	*join_select(t_struct *info)
+static char	*join_select(t_sel_struct *info)
 {
-	t_lst	*ptr;
-	char	*str;
+	t_sel_lst	*ptr;
+	char		*str;
 
 	ptr = info->node->head;
 	str = ft_strdup("");
@@ -41,11 +41,11 @@ static char	*join_select(t_struct *info)
 	return (str);
 }
 
-static char	*deal_with_input(t_struct *info)
+static char	*deal_with_input(t_sel_struct *info)
 {
 	char	*str;
 
-	deal_with_arrow(info);
+	deal_with_arrow_sel(info);
 	start_end(info);
 	if (*info->buff == 10)
 	{
@@ -58,7 +58,7 @@ static char	*deal_with_input(t_struct *info)
 	{
 		clean_lst(info);
 		free_lst(info);
-		reset_term(info);
+		reset_sel_term(info);
 		exit(-1);
 	}
 	if (info->buff[0] == 127 || (info->buff[0] == 27 && info->buff[1] == 91
@@ -67,9 +67,9 @@ static char	*deal_with_input(t_struct *info)
 	return (NULL);
 }
 
-void		print_lst(t_struct *info)
+void		print_lst(t_sel_struct *info)
 {
-	t_lst	*ptr;
+	t_sel_lst	*ptr;
 
 	ptr = info->node->head;
 	clean_lst(info);
@@ -84,7 +84,7 @@ void		print_lst(t_struct *info)
 	}
 }
 
-char		*deal_with_term(t_struct *info)
+char		*deal_with_term(t_sel_struct *info)
 {
 	char	*str;
 

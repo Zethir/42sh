@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/24 20:12:50 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/18 16:40:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/26 20:30:01 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static void	deal_with_left(t_struct *info, t_lst *ptr)
+static void	deal_with_left_sel(t_sel_struct *info, t_sel_lst *ptr)
 {
 	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 68)
 	{
@@ -29,7 +29,7 @@ static void	deal_with_left(t_struct *info, t_lst *ptr)
 	}
 }
 
-static void	deal_with_right(t_struct *info, t_lst *ptr)
+static void	deal_with_right_sel(t_sel_struct *info, t_sel_lst *ptr)
 {
 	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 67)
 	{
@@ -46,7 +46,7 @@ static void	deal_with_right(t_struct *info, t_lst *ptr)
 	}
 }
 
-static void	deal_with_down(t_struct *info, t_lst *ptr)
+static void	deal_with_down_sel(t_sel_struct *info, t_sel_lst *ptr)
 {
 	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 66)
 	{
@@ -63,7 +63,7 @@ static void	deal_with_down(t_struct *info, t_lst *ptr)
 	}
 }
 
-static void	deal_with_up(t_struct *info, t_lst *ptr)
+static void	deal_with_up_sel(t_sel_struct *info, t_sel_lst *ptr)
 {
 	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 65)
 	{
@@ -80,13 +80,13 @@ static void	deal_with_up(t_struct *info, t_lst *ptr)
 	}
 }
 
-void		deal_with_arrow(t_struct *info)
+void		deal_with_arrow_sel(t_sel_struct *info)
 {
-	t_lst	*ptr;
+	t_sel_lst	*ptr;
 
 	ptr = info->node->head;
-	deal_with_up(info, ptr);
-	deal_with_down(info, ptr);
-	deal_with_left(info, ptr);
-	deal_with_right(info, ptr);
+	deal_with_up_sel(info, ptr);
+	deal_with_down_sel(info, ptr);
+	deal_with_left_sel(info, ptr);
+	deal_with_right_sel(info, ptr);
 }

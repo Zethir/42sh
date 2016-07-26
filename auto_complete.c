@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 15:33:03 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/07/24 18:31:51 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/26 20:51:10 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,23 @@ static int		check(char *str)
 		return (0);
 }
 
-static void		tab_to_select(t_struct *info, char **file_tab, char *str)
+static void		tab_to_select(char **file_tab, char *str)
 {
 	char        	**sel;
 	int				i;
 	int				j;
 	char			**cmd;
+	pid_t			pid;
 
 	i = 0;
 	j = 1;
 	cmd = ft_strsplit_ws(str);
+	pid = fork();
 	sel = (char **)malloc(sizeof(char *));
 	sel[0] = ft_strdup("ft_select");
 	while (file_tab[i])
 	{
-		if (!ft_strncmp(str, file_tab[i], ft_strlen(str)))
+		if (!ft_strncmp(cmd[1], file_tab[i], ft_strlen(cmd[1])))
 		{
 			sel[j] = file_tab[i];
 			j++;
@@ -45,10 +47,12 @@ static void		tab_to_select(t_struct *info, char **file_tab, char *str)
 		i++;
 	}
 	sel[j] = NULL;
-	execve("./ft_select/ft_select", sel, info->env);
+	ft_putchar('\n');
+	exec_select(j, sel);
+	exit(0);
 }
 
-void		tab_completion(t_struct *info, char *str)
+void		tab_completion(char *str)
 {
 	char			*file_names;
 	char			**file_tab;
@@ -65,5 +69,5 @@ void		tab_completion(t_struct *info, char *str)
 	}
 	closedir(dir);
 	file_tab = ft_strsplit(file_names, ' ');
-	tab_to_select(info, file_tab, str);
+	tab_to_select(file_tab, str);
 }

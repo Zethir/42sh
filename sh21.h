@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:44:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/24 18:20:13 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/26 20:26:02 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define BUFF_SIZE 4
 
 # include "libft/libft.h"
+# include "ft_select/ft_select.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -101,7 +102,7 @@ void				sigquit(int id);
 void				deal_with_others(t_struct *info);
 void				deal_with_file(t_struct *info);
 void				add_history(t_struct *info);
-void				tab_completion(t_struct *info, char *str);
+void				tab_completion(char *str);
 void				do_option(t_struct *info, char **cmd);
 void				out_of_range_error(char **cmd);
 void				option_r(t_struct *info, char *str);
@@ -127,8 +128,8 @@ int					do_cd(t_lst *node, char **arg);
 int					get_index(t_lst *node);
 int					ft_strccmp(const char *s1, const char *s2, char c);
 int					check_caract(char *str, char c);
-int					init_term();
-int					reset_term();
+int					init_term(t_struct *info);
+int					reset_term(t_struct *info);
 int					deal_with_pipe(t_struct *info, char *arg);
 int					start_pipe(int pipefds[], int num);
 int					check_for_chevron(t_struct *ptr);

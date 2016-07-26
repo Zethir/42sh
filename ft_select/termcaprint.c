@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/24 22:02:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/24 18:43:16 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/26 17:38:13 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static void	print_standout(t_lst *ptr)
+static void	print_standout(t_sel_lst *ptr)
 {
 	tputs(tgetstr("mr", NULL), 0, ft_putchar_int);
 	ft_putstr_fd("\033[31m", 0);
@@ -23,7 +23,7 @@ static void	print_standout(t_lst *ptr)
 	tputs(tgetstr("me", NULL), 0, ft_putchar_int);
 }
 
-static void	print_underline(t_lst *ptr, t_struct *info)
+static void	print_underline(t_sel_lst *ptr, t_sel_struct *info)
 {
 	tputs(tgetstr("us", NULL), 0, ft_putchar_int);
 	if (info->buff[0] == ' ' && ptr->select == 0)
@@ -47,7 +47,7 @@ static void	print_underline(t_lst *ptr, t_struct *info)
 	tputs(tgetstr("ue", NULL), 0, ft_putchar_int);
 }
 
-void		print_opt(t_lst *ptr, t_struct *info)
+void		print_opt(t_sel_lst *ptr, t_sel_struct *info)
 {
 	if (ptr->line == 1)
 		print_underline(ptr, info);

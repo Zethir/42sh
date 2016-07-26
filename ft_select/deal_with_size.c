@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 18:22:56 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/24 18:39:05 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/26 20:28:11 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void		deal_with_col(t_struct *info)
+void		deal_with_col(t_sel_struct *info)
 {
 	if (info->nb_item == 0)
 	{
@@ -33,9 +33,9 @@ void		deal_with_col(t_struct *info)
 	info->count--;
 }
 
-void		longest_word(t_struct *info)
+void		longest_word(t_sel_struct *info)
 {
-	t_lst	*ptr;
+	t_sel_lst	*ptr;
 
 	ptr = info->node->head;
 	info->size_w = 0;
