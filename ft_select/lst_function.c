@@ -6,15 +6,15 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:58:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/18 18:01:24 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/26 20:24:17 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-static void		delete_elem(t_lst *ptr, t_struct *info)
+static void		delete_elem(t_sel_lst *ptr, t_sel_struct *info)
 {
-	t_lst	*del;
+	t_sel_lst	*del;
 
 	del = ptr;
 	if (del == info->node->tail)
@@ -27,7 +27,7 @@ static void		delete_elem(t_lst *ptr, t_struct *info)
 			clean_lst(info);
 			ft_putendl_fd("There is no elements in this list anymore.", 2);
 			free_lst(info);
-			reset_term(info);
+			reset_sel_term(info);
 			exit(-1);
 		}
 		info->node->head = del->next;
@@ -40,9 +40,9 @@ static void		delete_elem(t_lst *ptr, t_struct *info)
 	info->node->length -= 1;
 }
 
-void			del_elem_from_list(t_struct *info)
+void			del_elem_from_list(t_sel_struct *info)
 {
-	t_lst	*ptr;
+	t_sel_lst	*ptr;
 
 	ptr = info->node->head;
 	while (ptr->line != 1)
@@ -55,11 +55,11 @@ void			del_elem_from_list(t_struct *info)
 	delete_elem(ptr, info);
 }
 
-static t_lst	*init_elem(char *argv)
+static t_sel_lst	*init_elem(char *argv)
 {
-	t_lst *ptr;
+	t_sel_lst *ptr;
 
-	if (!(ptr = (t_lst *)malloc(sizeof(t_lst))))
+	if (!(ptr = (t_sel_lst *)malloc(sizeof(t_sel_lst))))
 		return (NULL);
 	ptr->name = ft_strdup(argv);
 	ptr->select = 0;
@@ -70,9 +70,9 @@ static t_lst	*init_elem(char *argv)
 	return (ptr);
 }
 
-t_intel			*add_elem(t_intel *node, char *argv)
+t_intel			*add_sel_elem(t_intel *node, char *argv)
 {
-	t_lst	*ptr;
+	t_sel_lst	*ptr;
 
 	if (node != NULL)
 	{
@@ -94,7 +94,7 @@ t_intel			*add_elem(t_intel *node, char *argv)
 	return (node);
 }
 
-t_intel			*init_lst(char **argv)
+t_intel			*init_sel_lst(char **argv)
 {
 	t_intel	*node;
 	size_t	i;
@@ -107,7 +107,7 @@ t_intel			*init_lst(char **argv)
 	node->tail = NULL;
 	while (argv[i])
 	{
-		node = add_elem(node, argv[i]);
+		node = add_sel_elem(node, argv[i]);
 		i++;
 	}
 	return (node);

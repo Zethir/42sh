@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:49:21 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/24 20:39:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/26 20:57:50 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 char	*do_select(char **argv, int id)
 {
-	t_struct	*info;
+	t_sel_struct	*info;
 	char		*str;
 	size_t		tmp;
 
-	info = init_struct(argv);
-	if (init_term(info) == -1)
+	info = init_sel_struct(argv);
+	if (init_sel_term(info) == -1)
 		return (NULL);
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
-	stock_struct(info, 0);
+	stock_sel_struct(info, 0);
 	win_size(id);
 	tmp = info->size_last;
 	while (tmp-- > 0)
@@ -34,12 +34,12 @@ char	*do_select(char **argv, int id)
 		if (str)
 			break ;
 	}
-	if (reset_term(info) == -1)
+	if (reset_sel_term(info) == -1)
 		return (NULL);
 	return (str);
 }
 
-int		main(int argc, char **argv)
+int		exec_select(int argc, char **argv)
 {
 	char		*str;
 	int			id;
@@ -47,7 +47,7 @@ int		main(int argc, char **argv)
 
 	id = 0;
 	signal(SIGINT, SIG_IGN);
-	ft_signal(id);
+	ft_signal_sel(id);
 	if (argc >= 2)
 		str = do_select(argv, id);
 	else

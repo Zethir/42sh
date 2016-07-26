@@ -6,7 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2016/07/26 17:54:15 by qdiaz            ###   ########.fr       */
+=======
 /*   Updated: 2016/07/24 20:29:30 by cboussau         ###   ########.fr       */
+>>>>>>> 1cff2edc2eaf1a873005657cbea1178623e57e90
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +108,11 @@ char		*deal_with_termcap(t_struct *info)
 			break;
 		}
 		if (*info->buff == 9 && info->node->str != NULL)
+<<<<<<< HEAD
+			tab_completion(info->node->str);
+=======
 			info->node->str = tab_completion(info, info->node->str);
+>>>>>>> 1cff2edc2eaf1a873005657cbea1178623e57e90
 	}
 	return (info->node->str);
 }

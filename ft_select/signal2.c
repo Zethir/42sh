@@ -6,20 +6,20 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/19 17:16:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/26 20:53:13 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void	sigtstp(int id)
+void	sigtstp_sel(int id)
 {
-	char		cp[2];
-	t_struct	*info;
+	char			cp[2];
+	t_sel_struct	*info;
 
 	(void)id;
 	info = NULL;
-	info = stock_struct(info, 1);
+	info = stock_sel_struct(info, 1);
 	cp[0] = info->term.c_cc[VSUSP];
 	cp[1] = 0;
 	info->term.c_lflag |= (ICANON | ECHO);
@@ -31,25 +31,25 @@ void	sigtstp(int id)
 	ioctl(0, TIOCSTI, cp);
 }
 
-void	sigcont(int id)
+void	sigcont_sel(int id)
 {
-	t_struct	*info;
+	t_sel_struct	*info;
 
 	(void)id;
 	info = NULL;
-	info = stock_struct(info, 1);
-	init_term(info);
-	signal(SIGTSTP, ft_signal);
+	info = stock_sel_struct(info, 1);
+	init_sel_term(info);
+	signal(SIGTSTP, ft_signal_sel);
 	win_size(id);
 }
 
-void	sigint(int id)
+void	sigint_sel(int id)
 {
-	t_struct *info;
+	t_sel_struct *info;
 
 	(void)id;
 	info = NULL;
-	info = stock_struct(info, 1);
+	info = stock_sel_struct(info, 1);
 	tcsetattr(0, TCSANOW, &(info->term));
 	clean_lst(info);
 	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
@@ -57,13 +57,13 @@ void	sigint(int id)
 	exit(0);
 }
 
-void	ft_signal(int id)
+void	ft_signal_sel(int id)
 {
 	(void)id;
 	signal(SIGWINCH, win_size);
-	signal(SIGCONT, sigcont);
-	signal(SIGTSTP, sigtstp);
-	signal(SIGINT, sigint);
-	signal(SIGQUIT, sigint);
-	signal(SIGTERM, sigint);
+	signal(SIGCONT, sigcont_sel);
+	signal(SIGTSTP, sigtstp_sel);
+	signal(SIGINT, sigint_sel);
+	signal(SIGQUIT, sigint_sel);
+	signal(SIGTERM, sigint_sel);
 }

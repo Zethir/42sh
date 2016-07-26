@@ -6,15 +6,15 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 16:23:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/18 18:11:01 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/26 17:39:38 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void	free_lst(t_struct *info)
+void	free_lst(t_sel_struct *info)
 {
-	t_lst	*ptr;
+	t_sel_lst	*ptr;
 
 	ptr = info->node->head;
 	while (ptr)
@@ -27,7 +27,7 @@ void	free_lst(t_struct *info)
 	}
 }
 
-void	left_arrow(t_struct *info, t_lst *ptr)
+void	left_arrow(t_sel_struct *info, t_sel_lst *ptr)
 {
 	size_t	i;
 
@@ -50,7 +50,7 @@ void	left_arrow(t_struct *info, t_lst *ptr)
 	ptr->line = 1;
 }
 
-void	right_arrow(t_struct *info, t_lst *ptr)
+void	right_arrow(t_sel_struct *info, t_sel_lst *ptr)
 {
 	size_t	i;
 
@@ -73,7 +73,7 @@ void	right_arrow(t_struct *info, t_lst *ptr)
 	ptr->line = 1;
 }
 
-void	check_size(t_struct *info)
+void	check_size(t_sel_struct *info)
 {
 	if (info->nb_item >= info->row || info->size_w + 2 >= info->col)
 	{
@@ -84,9 +84,9 @@ void	check_size(t_struct *info)
 		print_lst(info);
 }
 
-void	start_end(t_struct *info)
+void	start_end(t_sel_struct *info)
 {
-	t_lst	*ptr;
+	t_sel_lst	*ptr;
 
 	ptr = info->node->head;
 	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 72)
