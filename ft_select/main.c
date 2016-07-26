@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:49:21 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/24 19:05:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/24 20:39:36 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		main(int argc, char **argv)
 {
 	char		*str;
 	int			id;
+	int			fd;
 
 	id = 0;
 	signal(SIGINT, SIG_IGN);
@@ -56,7 +57,8 @@ int		main(int argc, char **argv)
 	}
 	if (str)
 	{
-		ft_putendl(str);
+		fd = open("select", O_RDWR | O_CREAT, 0644);
+		ft_putendl_fd(str, fd);
 		free(str);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/23 18:07:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/23 18:15:24 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/07/26 18:14:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		check_alpha(char **cmd)
 	i = 1;
 	while (cmd[0][i])
 	{
-		if (cmd[0][i] >= '0' || cmd[0][i] <= '9')
+		if (cmd[0][i] >= '0' && cmd[0][i] <= '9')
 		{
 			ft_putendl_fd("Must choose between number and char", 2);
 			return (-1);
