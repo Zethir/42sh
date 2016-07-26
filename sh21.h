@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:44:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/26 20:26:02 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/26 20:57:16 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,6 @@ void				free_dlist(t_dlist *node);
 void				go_to_end(t_struct *info);
 void				go_to_end_list(t_struct *info);
 void				do_designator(t_struct *info, char **cmd);
-void				deal_with_dash(t_struct *info, char **cmd);
-void				deal_with_number(t_struct *info, char **cmd);
-void				deal_with_string(t_struct *info, char **cmd);
 int					do_history(t_struct *info, char **cmd);
 int					arg_in_dir(t_lst *node, char *arg);
 int					print_alpha_error(char **arg);
@@ -149,5 +146,6 @@ char				**split_path(t_lst *node);
 char				*check_path(char **path, char *arg);
 char				**get_env(t_lst *node);
 char				**save_command(t_struct *ptr);
+char				*tab_completion(t_struct *info, char *str);
 
 #endif

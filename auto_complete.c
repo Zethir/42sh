@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 15:33:03 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/07/26 20:51:10 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/26 20:59:52 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ static int		check(char *str)
 		return (0);
 }
 
-static void		tab_to_select(char **file_tab, char *str)
+static char		*tab_to_select(t_struct *info, char **file_tab, char *str)
 {
 	char        	**sel;
 	int				i;
 	int				j;
 	char			**cmd;
-	pid_t			pid;
+	char			*line;
+	int				fd;
 
 	i = 0;
 	j = 1;
@@ -49,10 +50,13 @@ static void		tab_to_select(char **file_tab, char *str)
 	sel[j] = NULL;
 	ft_putchar('\n');
 	exec_select(j, sel);
-	exit(0);
+	fd = open("select", O_RDWR);
+	while (get_next_line(fd, &line) > 0)
+		str = ft_strjoin(cmd[0], line);
+	return (str);
 }
 
-void		tab_completion(char *str)
+char		*tab_completion(t_struct *info, char *str)
 {
 	char			*file_names;
 	char			**file_tab;
@@ -60,7 +64,7 @@ void		tab_completion(char *str)
 	struct dirent	*ret;
 
 	if (!check(str))
-		return ;
+		return (NULL);
 	dir = opendir(".");
 	while ((ret = readdir(dir)))
 	{
@@ -70,4 +74,6 @@ void		tab_completion(char *str)
 	closedir(dir);
 	file_tab = ft_strsplit(file_names, ' ');
 	tab_to_select(file_tab, str);
+	str = tab_to_select(info, file_tab, str);
+	return (str);
 }

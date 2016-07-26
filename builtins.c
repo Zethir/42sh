@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/24 18:19:45 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/07/26 17:51:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void	do_builtins(t_struct *info)
 		do_echo(info->arg);
 	else if (ft_strcmp(info->arg[0], "history") == 0)
 		do_history(info, info->arg);
-	//else if (ft_strncmp(info->arg[0], "!", 1) == 0)
-		//do_designator(info, info->arg);
+	else if (ft_strncmp(info->arg[0], "!", 1) == 0)
+		do_designator(info, info->arg);
 }
