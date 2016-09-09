@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/17 15:33:31 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/09 16:00:42 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh21.h"
+#include "../sh21.h"
 
 static int		option_dbis2(t_struct *info, int nbr, int fd)
 {

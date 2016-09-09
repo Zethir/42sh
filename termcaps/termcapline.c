@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 22:33:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/31 17:54:47 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/09 16:01:56 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh21.h"
+#include "../sh21.h"
 
 static void	go_to_next_word(t_struct *info)
 {

@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/05/25 18:50:57 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/09 15:59:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh21.h"
+#include "../sh21.h"
 
 static char	**check_arg(t_lst *node, char *arg, char **save)
 {

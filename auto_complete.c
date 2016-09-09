@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 15:33:03 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/07/26 20:59:52 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/08/15 14:59:33 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int		check(char *str)
 		return (0);
 }
 
-static char		*tab_to_select(t_struct *info, char **file_tab, char *str)
+static char		*tab_to_select(char **file_tab, char *str)
 {
 	char        	**sel;
 	int				i;
@@ -35,7 +35,6 @@ static char		*tab_to_select(t_struct *info, char **file_tab, char *str)
 	i = 0;
 	j = 1;
 	cmd = ft_strsplit_ws(str);
-	pid = fork();
 	sel = (char **)malloc(sizeof(char *));
 	sel[0] = ft_strdup("ft_select");
 	while (file_tab[i])
@@ -71,9 +70,10 @@ char		*tab_completion(t_struct *info, char *str)
 		file_names = ft_strjoin(file_names, " "); 
 		file_names = ft_strjoin(file_names, ret->d_name); 
 	}
+	printf("node->str = %s\n", info->node->str);
 	closedir(dir);
 	file_tab = ft_strsplit(file_names, ' ');
 	tab_to_select(file_tab, str);
-	str = tab_to_select(info, file_tab, str);
+	str = tab_to_select(file_tab, str);
 	return (str);
 }

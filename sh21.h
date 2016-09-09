@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 11:44:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/26 20:57:16 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/08/15 14:55:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ void				sigquit(int id);
 void				deal_with_others(t_struct *info);
 void				deal_with_file(t_struct *info);
 void				add_history(t_struct *info);
-void				tab_completion(char *str);
 void				do_option(t_struct *info, char **cmd);
 void				out_of_range_error(char **cmd);
 void				option_r(t_struct *info, char *str);

@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/18 16:38:51 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/16 18:42:08 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/09 16:01:24 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh21.h"
+#include "../sh21.h"
 
 static void	redirection_out(t_struct *ptr, int fd, int i)
 {

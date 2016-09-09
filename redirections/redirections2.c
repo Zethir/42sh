@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 17:31:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/07/16 18:41:01 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/09 16:01:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh21.h"
+#include "../sh21.h"
 
 void		data_series(t_struct *ptr, int i)
 {
