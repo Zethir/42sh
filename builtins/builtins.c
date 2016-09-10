@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/09 15:57:52 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/10 11:57:56 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		check_builtins(t_struct *info)
 		return (1);
 	else if (ft_strncmp(info->arg[0], "!", 1) == 0)
 		return (1);
+	else if (ft_strcmp(info->arg[0], "export") == 0)
+		return (1);
 	return (0);
 }
 
@@ -47,4 +49,6 @@ void	do_builtins(t_struct *info)
 		do_history(info, info->arg);
 	else if (ft_strncmp(info->arg[0], "!", 1) == 0)
 		do_designator(info, info->arg);
+	else if (ft_strcmp(info->arg[0], "export") == 0)
+		do_export(info);
 }

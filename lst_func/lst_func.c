@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/09 16:01:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/10 11:47:00 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_lst	*init_lst(char **env)
 			return (NULL);
 		node->next = NULL;
 		node->line = ft_strdup(*env);
+		node->flag = 0;
 		node->name = ft_strsub(*env, 0, ft_strlen_char(*env, '='));
 		if (ft_strccmp(*env, "USER=", '=') == 0)
 			node->user = ft_strsub(*env, 5, ft_strlen(*env) - 5);

@@ -6,7 +6,7 @@
 #    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/03/24 14:55:22 by cboussau          #+#    #+#              #
-#    Updated: 2016/09/09 16:03:24 by cboussau         ###   ########.fr        #
+#    Updated: 2016/09/10 11:56:27 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC = main.c prompt.c check.c termios.c pipe.c signal.c auto_complete.c free.c\
 		$(BUILTINS)unsetenv.c\
 		$(BUILTINS)exit.c\
 		$(BUILTINS)echo.c\
+		$(BUILTINS)export.c\
 		$(HISTORY)history.c\
 		$(HISTORY)history_option.c\
 		$(HISTORY)history_option2.c\

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 19:39:25 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/09 15:59:32 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/10 13:00:07 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	cmp_list_arg(t_lst *node, char **arg)
 			node = tmp;
 			return (1);
 		}
+		node = node->next;
 	}
 	node = tmp;
 	return (0);
@@ -45,6 +46,7 @@ static void	handle_arg_setenv(t_lst *node, char **arg)
 			new_elem->next = NULL;
 			new_elem->line = ft_strjoin(*arg, "=");
 			new_elem->name = ft_strdup(*arg);
+			new_elem->flag = 0;
 			if (arg[1])
 				new_elem->line = ft_strjoin(new_elem->line, arg[1]);
 			push_node(new_elem, &node);
