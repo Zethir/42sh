@@ -6,31 +6,31 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/23 18:07:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/10 12:36:15 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/12 14:12:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sh21.h"
 
-void	print_identifier_error(t_struct *info)
+void	print_identifier_error(t_struct *info, int i)
 {
 	ft_putstr_fd("42sh: export: ", 2);
-	ft_putstr_fd(info->arg[1], 2);
+	ft_putstr_fd(info->arg[i], 2);
 	ft_putendl_fd(": not a valid identifier", 2);
 }
 
-int		check_wrong_identifier(t_struct *info)
+int		check_wrong_identifier(t_struct *info, int j)
 {
 	int	i;
 
 	i = 0;
-	while (info->arg[1][i])
+	while (info->arg[j][i])
 	{
-		if (info->arg[1][i] < 'A' || info->arg[1][i] > 'Z')
-			if (info->arg[1][i] < 'a' || info->arg[1][i] > 'z')
-				if (info->arg[1][i] != '=')
+		if (info->arg[j][i] < 'A' || info->arg[j][i] > 'Z')
+			if (info->arg[j][i] < 'a' || info->arg[j][i] > 'z')
+				if (info->arg[j][i] != '=')
 				{
-					print_identifier_error(info);
+					print_identifier_error(info, j);
 					return (1);
 				}
 		i++;
