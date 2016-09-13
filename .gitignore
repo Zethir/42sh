@@ -2,3 +2,5 @@
 ./42sh
 ./a.out
 ./obj
+./libft/libft.a
+./libft/obj/
