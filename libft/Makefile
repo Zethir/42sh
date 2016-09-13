@@ -6,7 +6,7 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2016/09/13 14:19:17 by tvallee          ###   ########.fr        #
+#    Updated: 2016/09/13 14:32:07 by tvallee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,9 +59,7 @@ SRC		= $(addprefix libc/, $(LIBC_SRC)) \
 		  $(addprefix ft_getopt/, $(FT_GETOPT_SRC))
 NAME	= libft.a
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -ansi -pedantic -Wshadow -Wno-missing-noreturn\
-		  -Wno-padded -Wno-unreachable-code -Wredundant-decls -g\
-		  -Wmissing-declarations
+CFLAGS	= -Wall -Wextra -Werror -g
 SRC_DIR	= src
 VPATH	= $(SRC_DIR)
 INC		= -I./include
