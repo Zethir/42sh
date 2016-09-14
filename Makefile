@@ -6,7 +6,7 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2016/09/13 14:32:01 by cboussau         ###   ########.fr        #
+#    Updated: 2016/09/14 10:31:01 by tvallee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBC_SRC		= ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 SRC		= $(addprefix libc/, $(LIBC_SRC))
 NAME	= 42sh
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g		  
+CFLAGS	= -Wall -Wextra -Werror -g
 SRC_DIR	= src
 VPATH	= $(SRC_DIR)
 INC		= -I./include
@@ -54,5 +54,8 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+run_dev: $(NAME)
+	@MallocScribble=t ./$(NAME)
 
 .PHONY: all clean fclean re
