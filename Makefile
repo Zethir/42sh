@@ -6,56 +6,45 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2016/09/14 10:31:01 by tvallee          ###   ########.fr        #
+#    Updated: 2016/09/16 13:02:33 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-LIBC_SRC		= ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
-				  ft_isdigit.c ft_isprint.c ft_isspace.c ft_memalloc.c \
-				  ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memdel.c \
-				  ft_memmove.c ft_memset.c ft_strcat.c ft_strchr.c ft_strcmp.c \
-				  ft_strcpy.c ft_strdup.c ft_strlcat.c ft_strlen.c \
-				  ft_strncat.c ft_strncmp.c ft_strncpy.c ft_strndup.c \
-				  ft_strnstr.c ft_strrchr.c ft_strstr.c ft_tolower.c \
-				  ft_toupper.c
-
-SRC		= $(addprefix libc/, $(LIBC_SRC))
 NAME	= 42sh
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
-SRC_DIR	= src
-VPATH	= $(SRC_DIR)
-INC		= -I./include
-OBJ_DIR	= obj
-OBJ		= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
+
+SRC_P 	= ./src/
+HISTORY = $(SRC_P)history/
+LST		= $(SRC_P)lst_func/
+TOOLS	= $(SRC_P)tools/
+SRC		= $(SRC_P)main.c $(SRC_P)prompt.c $(SRC_P)termios.c $(SRC_P)free.c\
+		  $(SRC_P)signal.c\
+		  $(HISTORY)history.c $(HISTORY)history_option.c\
+		  $(HISTORY)history_option2.c $(HISTORY)designator.c\
+		  $(LST)lst_func.c $(LST)lst_func_bis.c\
+		  $(TOOLS)tools.c $(TOOLS)tools2.c $(TOOLS)tools3.c
+
+FLAGS	= -Wall -Wextra -Werror -g
+OBJ 	= $(SRC:.c=.o)
+LIB		= ./libft/libft.a -ltermcap
+FLAGS	= -Wall -Wextra -Werror -g
+
+$(NAME): $(OBJ)
+	make -C ./libft
+	gcc $(FLAGS) $(OBJ) $(LIB) -o $(NAME)
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@echo "Builting library."
-	@make -C libft
-	@echo "Creating an index for archive library."
-	gcc -o $(NAME) $(OBJ)
-
-$(OBJ_DIR)/%.o: %.c
-	@echo "Compiling $<."
-	@$(CC) $(CFLAGS) -c $< $(INC) -o $@
-
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_DIR)/libc
+%.o: %.c
+	gcc $(FLAGS) -o $@ -c $<
 
 clean:
-	@echo "Deleting obj files."
-	@rm -Rf $(OBJ_DIR)
+	rm -f $(OBJ)
+	make fclean -C libft
 
 fclean: clean
-	@echo "Deleting archive library."
-	@rm -f $(NAME)
+	rm -rf ($(NAME)
+	make fclean -C libft
 
-re: fclean all
-
-run_dev: $(NAME)
-	@MallocScribble=t ./$(NAME)
+re: fclean $(NAME)
 
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/08 12:16:16 by tvallee           #+#    #+#             */
-/*   Updated: 2015/10/10 12:14:08 by tvallee          ###   ########.fr       */
+/*   Updated: 2016/09/16 13:24:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int					ft_isspace(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
+int					ft_putchar_int(int c);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
 
