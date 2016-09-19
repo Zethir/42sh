@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strlen_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/30 16:47:59 by cboussau          #+#    #+#             */
-/*   Updated: 2016/04/12 10:53:51 by cboussau         ###   ########.fr       */
+/*   Created: 2016/04/12 11:57:49 by cboussau          #+#    #+#             */
+/*   Updated: 2016/04/18 15:35:46 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int		ft_strlen_char(char *str, char c)
 {
-	char	*new;
+	int		i;
 
-	new = ft_strnew(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (new != NULL)
-	{
-		ft_strcat(new, s1);
-		ft_strcat(new, s2);
-	}
-	return (new);
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	return (i);
 }

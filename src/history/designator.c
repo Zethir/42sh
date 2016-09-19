@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/16 13:08:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/19 15:57:54 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	exec_cmd_add_lst(t_struct *info, char *line)
 		i++;
 	}
 	ft_putchar('\n');
-	deal_with_pipe(info, info->node->str);
+//	deal_with_pipe(info, info->node->str);
 }
 
 static void	deal_with_dash(t_struct *info, char **cmd, int fd)

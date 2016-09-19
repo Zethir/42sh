@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 13:19:59 by tvallee           #+#    #+#             */
-/*   Updated: 2016/09/16 13:26:43 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/19 16:14:08 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/types.h>
+# include <fcntl.h>
 # include <sys/dir.h>
 # include <dirent.h>
 # include <termios.h>
@@ -29,8 +30,8 @@
 # include <sys/ioctl.h>
 # include <signal.h>
 
-# define RED "[31m]"
-# define PURPLE "1[;35m"
+# define RED "[31m"
+# define PURPLE "[1;35m"
 # define GREEN "[32m"
 # define CYAN "[0;36m"
 # define BLUE "[1;34m"
@@ -88,6 +89,20 @@ void				add_elem(t_lst *node, char *arg);
 void				free_list(t_lst *node);
 void				free_dlist(t_dlist *node);
 void				color(char *color, char *str);
+void				print_error_opt(char *arg);
+void				print_error_arg(void);
+void				print_env_error(char *arg);
+void				print_main_error(char *arg);
+void				out_of_range_error(char **cmd);
+void				no_command_error(char *arg);
+void				print_identifier_error(t_struct *info, int i);
+int					print_alpha_error(char **arg);
+int					check_wrong_identifier(t_struct *info, int j);
+int					check_number_bis(char **cmd);
+int					check_number(char **cmd);
+int					check_alpha(char **cmd);
+int					arg_in_dir(t_lst *node, char *arg);
+int					numeric_error(char **cmd);
 int					get_index(t_lst *node);
 int					start_pipe(int pipefds[], int num);
 int					do_history(t_struct *info, char **cmd);

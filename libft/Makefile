@@ -6,7 +6,7 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2016/09/13 14:32:07 by tvallee          ###   ########.fr        #
+#    Updated: 2016/09/19 16:12:21 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBC_SRC		= ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 				  ft_strcpy.c ft_strdup.c ft_strlcat.c ft_strlen.c \
 				  ft_strncat.c ft_strncmp.c ft_strncpy.c ft_strndup.c \
 				  ft_strnstr.c ft_strrchr.c ft_strstr.c ft_tolower.c \
-				  ft_toupper.c
+				  ft_toupper.c ft_putchar_int.c
 
 LIST_SRC		= ft_atabtoistr.c ft_lstadd.c ft_lstdel.c ft_lstdelone.c \
 				  ft_lstiter.c ft_lstlen.c ft_lstnew.c ft_lstnewcopy.c \
@@ -37,7 +37,7 @@ PRINT_SRC		= ft_putchar.c ft_putchar_fd.c ft_putendl.c ft_putendl_fd.c \
 STR_TOOLS_SRC	= ft_strclr.c ft_strdel.c ft_strequ.c ft_striter.c \
 				  ft_striteri.c ft_strjoin.c ft_strmap.c ft_strmapi.c \
 				  ft_strnequ.c ft_strnew.c ft_strsplit.c ft_strsplit_fromtab.c \
-				  ft_strsub.c ft_strtrim.c
+				  ft_strsub.c ft_strtrim.c ft_strlen_char.c ft_strsplit_ws.c
 
 TAB_TOOLS_SRC	= ft_tabfree.c ft_tablen.c ft_tablineadd.c ft_tablinedel.c \
 				  ft_tabtolst.c

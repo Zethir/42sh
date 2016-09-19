@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/16 13:27:16 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/19 16:17:27 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void		start_prog(char **env)
 			info->lst = init_lst(env);
 		get_prompt(info->lst);
 		stock_struct(info, 0);
+		ft_putchar('\n');
 	}
 	if (reset_term(info) == -1)
 		return ;
