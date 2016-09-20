@@ -6,18 +6,18 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/09 16:01:41 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/20 13:07:15 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../sh21.h"
+#include "../../include/termcaps.h"
 
-static void	deal_with_backspace(t_struct *info)
+static void	deal_with_backspace(t_struct *info, char *buff)
 {
 	t_dlist		*node;
 
 	node = info->node;
-	if (*info->buff == 127 && node->i > 0)
+	if (BACK_SPACE && node->i > 0)
 	{
 		node->i--;
 		ft_memmove(node->str + node->i, node->str + node->i + 1,
@@ -28,12 +28,12 @@ static void	deal_with_backspace(t_struct *info)
 	info->node = node;
 }
 
-static void	deal_with_space(t_struct *info)
+static void	deal_with_space(t_struct *info, char *buff)
 {
 	t_dlist		*node;
 
 	node = info->node;
-	if (*info->buff == ' ')
+	if (WHITE_SPACE)
 	{
 		ft_memmove(node->str + node->i + 1, node->str + node->i,
 				ft_strlen(node->str + node->i) + 1);
@@ -46,19 +46,17 @@ static void	deal_with_space(t_struct *info)
 	info->node = node;
 }
 
-static void	deal_with_arrow(t_struct *info)
+static void	deal_with_arrow(t_struct *info, char *buff)
 {
 	t_dlist		*node;
 
 	node = info->node;
-	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 68
-			&& node->i > 0)
+	if (ARROW_LEFT && node->i > 0)
 	{
 		node->i--;
 		tputs(tgetstr("le", NULL), 1, ft_putchar_int);
 	}
-	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 67
-			&& node->str[node->i])
+	if (ARROW_RIGHT && node->str[node->i])
 	{
 		node->i++;
 		tputs(tgetstr("nd", NULL), 1, ft_putchar_int);
@@ -66,19 +64,19 @@ static void	deal_with_arrow(t_struct *info)
 	info->node = node;
 }
 
-static void	deal_with_charac(t_struct *info)
+static void	deal_with_charac(t_struct *info, char *buff)
 {
 	t_dlist		*node;
 
 	node = info->node;
-	if (*info->buff >= '!' && *info->buff <= '~')
+	if (CARACTERE)
 	{
 		ft_memmove(node->str + node->i + 1, node->str + node->i,
 				ft_strlen(node->str + node->i) + 1);
-		node->str[node->i] = *info->buff;
+		node->str[node->i] = buff;
 		node->i++;
 		tputs(tgetstr("im", NULL), 1, ft_putchar_int);
-		write(1, &info->buff[0], 1);
+		write(1, &buff[0], 1);
 		tputs(tgetstr("ei", NULL), 1, ft_putchar_int);
 	}
 	info->node = node;
@@ -87,24 +85,26 @@ static void	deal_with_charac(t_struct *info)
 char		*deal_with_termcap(t_struct *info)
 {
 	int			ret;
+	char		buff[3];
+
 	
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
-	while ((ret = read(0, info->buff, BUFF_SIZE) != -1))
+	while ((ret = read(0, buff, BUFF_SIZE) != -1))
 	{
-		deal_with_charac(info);
-		deal_with_others(info);
-		deal_with_space(info);
-		deal_with_backspace(info);
-		deal_with_arrow(info);
-		go_to_end(info);
-		if (*info->buff == 10 && info->node->str)
+		deal_with_charac(info, buff);
+		deal_with_others(info, buff);
+		deal_with_space(info, buff);
+		deal_with_backspace(info, buff);
+		deal_with_arrow(info, buff);
+		go_to_end(info, buff);
+		if (buff == 10 && info->node->str)
 		{
 			if (info->node->next)
-				go_to_end_list(info);
+				go_to_end_list(info, buff);
 			break;
 		}
-		if (*info->buff == 9 && info->node->str != NULL)
-			info->node->str = tab_completion(info, info->node->str);
+		if (buff == 9 && info->node->str != NULL)
+			info->node->str = tab_completion(info, info->node->str, buff);
 	}
 	return (info->node->str);
 }

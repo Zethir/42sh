@@ -6,16 +6,15 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 00:03:33 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/09 16:01:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/20 13:07:26 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../sh21.h"
+#include "../../include/termcaps.h"
 
-static void	deal_with_down(t_struct *info)
+static void	deal_with_down(t_struct *info, char *buff)
 {
-	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 66 &&
-			info->node->next)
+	if (ARROW_DOWN && info->node->next)
 	{
 		tputs(tgetstr("rc", NULL), 1, ft_putchar_int);
 		info->node->i = ft_strlen(info->node->str);
@@ -28,10 +27,9 @@ static void	deal_with_down(t_struct *info)
 	}
 }
 
-static void	deal_with_up(t_struct *info)
+static void	deal_with_up(t_struct *info, char *buff)
 {
-	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 65
-			&& info->node->prev)
+	if (ARROW_UP && info->node->prev)
 	{
 		tputs(tgetstr("rc", NULL), 1, ft_putchar_int);
 		info->node->i = ft_strlen(info->node->str);
@@ -44,24 +42,23 @@ static void	deal_with_up(t_struct *info)
 	}
 }
 
-void		deal_with_others(t_struct *info)
+void		deal_with_others(t_struct *info, char *buff)
 {
 	t_dlist		*node;
 
 	node = info->node;
-	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 51
-			&& node->str[node->i])
+	if (DELETE && node->str[node->i])
 	{
 		ft_memmove(node->str + node->i, node->str + node->i + 1,
 				ft_strlen(node->str + node->i + 1) + 1);
 		tputs(tgetstr("dc", NULL), 1, ft_putchar_int);
 	}
-	if (info->buff[0] == 4 && info->buff[1] == -1 && info->buff[2] == 127)
+	if (ESCAPE)
 	{
 		ft_putstr("exit\n");
 		exit(-1);
 	}
 	info->node = node;
-	deal_with_up(info);
-	deal_with_down(info);
+	deal_with_up(info, buff);
+	deal_with_down(info, buff);
 }
