@@ -6,12 +6,12 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/20 13:07:44 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/20 13:19:33 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TERMCAP_H
-# define TERMCAP_H
+#ifndef TERMCAPS_H
+# define TERMCAPS_H
 
 # include "sh42.h"
 

@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 13:19:59 by tvallee           #+#    #+#             */
-/*   Updated: 2016/09/20 13:04:38 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/20 13:18:27 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 # include "lexer.h"
-# include "termcap.h"
+# include "termcaps.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
