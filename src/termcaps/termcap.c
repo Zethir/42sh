@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/20 13:07:15 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/20 13:41:37 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ static void	deal_with_charac(t_struct *info, char *buff)
 	t_dlist		*node;
 
 	node = info->node;
-	if (CARACTERE)
+	if (CHARACTERE)
 	{
 		ft_memmove(node->str + node->i + 1, node->str + node->i,
 				ft_strlen(node->str + node->i) + 1);
-		node->str[node->i] = buff;
+		node->str[node->i] = *buff;
 		node->i++;
 		tputs(tgetstr("im", NULL), 1, ft_putchar_int);
 		write(1, &buff[0], 1);
@@ -97,14 +97,12 @@ char		*deal_with_termcap(t_struct *info)
 		deal_with_backspace(info, buff);
 		deal_with_arrow(info, buff);
 		go_to_end(info, buff);
-		if (buff == 10 && info->node->str)
+		if (buff[0] == 10 && info->node->str)
 		{
 			if (info->node->next)
-				go_to_end_list(info, buff);
+				go_to_end_list(info);
 			break;
 		}
-		if (buff == 9 && info->node->str != NULL)
-			info->node->str = tab_completion(info, info->node->str, buff);
 	}
 	return (info->node->str);
 }

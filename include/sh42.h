@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 13:19:59 by tvallee           #+#    #+#             */
-/*   Updated: 2016/09/20 13:18:27 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/20 13:43:36 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void				print_main_error(char *arg);
 void				out_of_range_error(char **cmd);
 void				no_command_error(char *arg);
 void				print_identifier_error(t_struct *info, int i);
+void				deal_with_others(t_struct *info, char *buff);
+void				go_to_end(t_struct *info, char *buff);
 int					print_alpha_error(char **arg);
 int					check_wrong_identifier(t_struct *info, int j);
 int					check_number_bis(char **cmd);
@@ -118,5 +120,6 @@ int					check_for_parenth(char *arg);
 char				*split_line(char *line);
 char				*get_home(t_lst *node);
 char				**malloc_tab(char **arg);
+char				*deal_with_termcap(t_struct *info);
 
 #endif

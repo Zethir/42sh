@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/20 12:03:42 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/20 13:44:21 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void		deal_with_prompt(t_struct *info)
 	if (!lex->line)
 		return;
 	lex->arg = ft_strsplit(lex->line, ';');
-	while (*(lex->arg))
+	while (*lex->arg)
 	{
-		printf("lex->arg = %s\n", *(lex->arg));
+		printf("lex->arg = %s\n", *lex->arg);
 		lex->arg++;
 	}
 	add_history(info);

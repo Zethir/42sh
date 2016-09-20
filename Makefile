@@ -6,7 +6,7 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2016/09/19 16:15:14 by cboussau         ###   ########.fr        #
+#    Updated: 2016/09/20 13:33:53 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,15 @@ HISTORY = $(SRC_P)history/
 LST		= $(SRC_P)lst_func/
 TOOLS	= $(SRC_P)tools/
 ERRORS	= $(SRC_P)errors/
+TERMCAP = $(SRC_P)termcaps/
 SRC		= $(SRC_P)main.c $(SRC_P)prompt.c $(SRC_P)termios.c $(SRC_P)free.c\
 		  $(SRC_P)signal.c\
 		  $(HISTORY)history.c $(HISTORY)history_option.c\
 		  $(HISTORY)history_option2.c $(HISTORY)designator.c\
 		  $(LST)lst_func.c $(LST)lst_func_bis.c\
 		  $(TOOLS)tools.c $(TOOLS)tools2.c $(TOOLS)tools3.c\
-		  $(ERRORS)errors.c $(ERRORS)errors2.c $(ERRORS)errors3.c
+		  $(ERRORS)errors.c $(ERRORS)errors2.c $(ERRORS)errors3.c\
+		  $(TERMCAP)termcap.c $(TERMCAP)termcapbis.c $(TERMCAP)termcapline.c
 
 FLAGS	= -Wall -Wextra -Werror -g
 OBJ 	= $(SRC:.c=.o)
