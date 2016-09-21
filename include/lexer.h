@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 13:34:58 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/21 13:42:13 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_lex
 	struct s_cmd	*cmd;
 }					t_lex;
 
-t_lex				*init_lexer_struct(t_struct *info);
+t_lex				*init_lexer_struct(void);
+void				check_lexer(t_lex *info);
 
 #endif

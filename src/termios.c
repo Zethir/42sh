@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/16 13:08:18 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/21 13:55:37 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/sh42.h"
 
-int			reset_term(t_struct *info)
+int			reset_term(t_env_hist *info)
 {
 	if (tcgetattr(0, &(info->term)) == -1)
 		return (-1);
@@ -22,7 +22,7 @@ int			reset_term(t_struct *info)
 	return (0);
 }
 
-int			init_term(t_struct *info)
+int			init_term(t_env_hist *info)
 {
 	char			*name_term;
 
@@ -40,20 +40,20 @@ int			init_term(t_struct *info)
 	return (0);
 }
 
-t_struct	*stock_struct(t_struct *info, int i)
+t_env_hist	*stock_struct(t_env_hist *info, int i)
 {
-	static t_struct *tmp = NULL;
+	static t_env_hist *tmp = NULL;
 
 	if (i == 0)
 		tmp = info;
 	return (tmp);
 }
 
-t_struct	*init_struct(char **env)
+t_env_hist	*init_struct(char **env)
 {
-	t_struct	*info;
+	t_env_hist	*info;
 
-	if (!(info = (t_struct *)malloc(sizeof(t_struct))))
+	if (!(info = (t_env_hist *)malloc(sizeof(t_env_hist))))
 		return (NULL);
 	info->lst = init_lst(env);
 	if (!(info->node = (t_dlist *)malloc(sizeof(t_dlist))))

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 13:34:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/21 13:54:48 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define PREV_WORD ((buff[0] == 27 && buff[1] == 27 && buff[2] == 91 && buff[3] == 68))
 # define NEXT_WORD ((buff[0] == 27 && buff[1] == 27 && buff[2] == 91 && buff[3] == 67))
 
-void				deal_with_others(t_struct *info, char *buff);
-void				go_to_end(t_struct *info, char *buff);
-char				*deal_with_termcap(t_struct *info);
+void				deal_with_others(t_env_hist *info, char *buff);
+void				go_to_end(t_env_hist *info, char *buff);
+char				*deal_with_termcap(t_env_hist *info);
 
 #endif

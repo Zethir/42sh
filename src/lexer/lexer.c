@@ -6,13 +6,13 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 10:35:01 by tvallee           #+#    #+#             */
-/*   Updated: 2016/09/20 14:57:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/21 13:40:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/lexer.h"
 
-void		check_lexer(t_struct *info)
+void		check_lexer(t_lex *lex)
 {
-	printf("info->lex->line = %s\n", info->lex->line);
+	printf("lex->line = %s\n", lex->line);
 }

@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/20 13:56:32 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/21 13:50:46 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/termcaps.h"
 
-static void	deal_with_backspace(t_struct *info, char *buff)
+static void	deal_with_backspace(t_env_hist *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -28,7 +28,7 @@ static void	deal_with_backspace(t_struct *info, char *buff)
 	info->node = node;
 }
 
-static void	deal_with_space(t_struct *info, char *buff)
+static void	deal_with_space(t_env_hist *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -46,7 +46,7 @@ static void	deal_with_space(t_struct *info, char *buff)
 	info->node = node;
 }
 
-static void	deal_with_arrow(t_struct *info, char *buff)
+static void	deal_with_arrow(t_env_hist *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -64,7 +64,7 @@ static void	deal_with_arrow(t_struct *info, char *buff)
 	info->node = node;
 }
 
-static void	deal_with_charac(t_struct *info, char *buff)
+static void	deal_with_charac(t_env_hist *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -82,7 +82,7 @@ static void	deal_with_charac(t_struct *info, char *buff)
 	info->node = node;
 }
 
-char		*deal_with_termcap(t_struct *info)
+char		*deal_with_termcap(t_env_hist *info)
 {
 	int			ret;
 	char		buff[4];
