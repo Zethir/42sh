@@ -6,10 +6,13 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 10:35:01 by tvallee           #+#    #+#             */
-/*   Updated: 2016/09/14 10:48:23 by tvallee          ###   ########.fr       */
+/*   Updated: 2016/09/20 14:57:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/lexer.h"
 
-
+void		check_lexer(t_struct *info)
+{
+	printf("info->lex->line = %s\n", info->lex->line);
+}

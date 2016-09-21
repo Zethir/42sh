@@ -6,15 +6,14 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/20 12:00:20 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/21 13:34:58 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-# include "../libft/libft.h"
-# include "sh42.h"
+#include "sh42.h"
 
 typedef struct		s_token
 {
@@ -37,5 +36,7 @@ typedef struct		s_lex
 	struct s_token	*token;
 	struct s_cmd	*cmd;
 }					t_lex;
+
+t_lex				*init_lexer_struct(t_struct *info);
 
 #endif

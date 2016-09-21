@@ -6,26 +6,25 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/20 13:44:21 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/21 13:35:16 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sh42.h"
+#include "../include/lexer.h"
+#include "../include/termcaps.h"
 
 static void		deal_with_prompt(t_struct *info)
 {
-	t_lex	*lex;
-
-	lex = (t_lex *)malloc(sizeof(t_lex));
-	lex->line = deal_with_termcap(info);
+	info->lex = init_lexer_struct(info);
+	info->lex->line = deal_with_termcap(info);
 	ft_putchar('\n');
-	if (!lex->line)
+	if (!info->lex->line)
 		return;
-	lex->arg = ft_strsplit(lex->line, ';');
-	while (*lex->arg)
+	info->lex->arg = ft_strsplit(info->lex->line, ';');
+	while (*info->lex->arg)
 	{
-		printf("lex->arg = %s\n", *lex->arg);
-		lex->arg++;
+		check_lexer(info);
+		info->lex->arg++;
 	}
 	add_history(info);
 }

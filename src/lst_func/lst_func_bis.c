@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/16 13:09:31 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/21 13:27:48 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sh42.h"
+#include "../../include/lexer.h"
 
 t_dlist	*create_node(void)
 {
@@ -49,4 +49,20 @@ void	go_to_end_list(t_struct *info)
 	while (info->node->next)
 		info->node = info->node->next;
 	info->node->str = ft_strdup(str);
+}
+
+t_lex	*init_lexer_struct(t_struct *info)
+{
+	info->lex = (t_lex *)malloc(sizeof(t_lex));
+	info->lex->line = ft_strdup("");
+	info->lex->arg = NULL;
+	info->lex->token = (t_token *)malloc(sizeof(t_token));
+	info->lex->cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	info->lex->token->next = NULL;
+	info->lex->cmd->next = NULL;
+	info->lex->cmd->str = ft_strdup("");
+	info->lex->cmd->index = 0;
+	info->lex->token->name = ft_strdup("");
+	info->lex->token->value = 0;
+	return (info->lex);
 }

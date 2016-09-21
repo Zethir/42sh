@@ -6,16 +6,13 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 13:19:59 by tvallee           #+#    #+#             */
-/*   Updated: 2016/09/20 13:43:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/21 13:34:42 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH42_H
 # define SH42_H
 
-# include "../libft/libft.h"
-# include "lexer.h"
-# include "termcaps.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -31,6 +28,7 @@
 # include <term.h>
 # include <sys/ioctl.h>
 # include <signal.h>
+# include "../libft/libft.h"
 
 # define RED "[31m"
 # define PURPLE "[1;35m"
@@ -60,6 +58,7 @@ typedef struct		s_dlist
 typedef struct		s_struct
 {
 	pid_t			pid;
+	struct s_lex	*lex;
 	struct s_dlist	*node;
 	struct s_lst	*lst;
 	struct termios	term;
@@ -98,8 +97,7 @@ void				print_main_error(char *arg);
 void				out_of_range_error(char **cmd);
 void				no_command_error(char *arg);
 void				print_identifier_error(t_struct *info, int i);
-void				deal_with_others(t_struct *info, char *buff);
-void				go_to_end(t_struct *info, char *buff);
+void				check_lexer(t_struct *info);
 int					print_alpha_error(char **arg);
 int					check_wrong_identifier(t_struct *info, int j);
 int					check_number_bis(char **cmd);
@@ -120,6 +118,5 @@ int					check_for_parenth(char *arg);
 char				*split_line(char *line);
 char				*get_home(t_lst *node);
 char				**malloc_tab(char **arg);
-char				*deal_with_termcap(t_struct *info);
 
 #endif

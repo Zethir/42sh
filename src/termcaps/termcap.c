@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/20 13:41:37 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/20 13:56:32 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	deal_with_charac(t_struct *info, char *buff)
 char		*deal_with_termcap(t_struct *info)
 {
 	int			ret;
-	char		buff[3];
+	char		buff[4];
 
 	
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);

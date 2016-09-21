@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 17:42:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/04/14 19:01:20 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/21 13:31:15 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ int					ft_isspace(int c);
 void				ft_reverse(char *s);
 size_t				ft_nbrlen(int n);
 void				ft_swap(int *a, int *b);
-int					ft_tablen(char **tab);
+int					ft_tablen(char **tableau);
 int					get_next_line(int const fd, char **line);
 char				**ft_strsplit_ws(char const *s);
-void				ft_print_tab(char **tab);
+void				ft_print_tab(char **tableau);
 int					ft_strlen_char(char *str, char c);
 int					ft_putchar_int(int c);
 
