@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 13:42:40 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/21 14:03:07 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	push_node_bis(t_dlist **head, t_dlist *new_node)
 	new_node->prev = cur;
 }
 
-void	go_to_end_list(t_struct *info)
+void	go_to_end_list(t_env_hist *info)
 {
 	char	*str;
 

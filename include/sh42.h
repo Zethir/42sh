@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 13:19:59 by tvallee           #+#    #+#             */
-/*   Updated: 2016/09/21 13:54:16 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/21 14:01:39 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct		s_dlist
 
 typedef struct		s_env_hist
 {
+	pid_t			*pid;
 	struct s_dlist	*node;
 	struct s_lst	*lst;
 	struct termios	term;
