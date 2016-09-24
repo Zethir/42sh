@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 17:00:25 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/22 17:12:39 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/24 15:03:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			add_cmd(t_cmd *cmd, char *new_cmd, int index)
 	if (!(new_elem = (t_cmd *)malloc(sizeof(t_cmd))))
 		return ;
 	new_elem->next = NULL;
-	new_elem->name = ft_strdup(new_cmd);
-	new_elem->value = index;
-	push_token(new_elem, &cmd);
+	new_elem->str = ft_strdup(new_cmd);
+	new_elem->index = index;
+	push_cmd(new_elem, &cmd);
 }
