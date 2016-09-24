@@ -6,14 +6,14 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 13:42:13 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:13:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-#include "sh42.h"
+#include <sh42.h>
 
 typedef struct		s_token
 {

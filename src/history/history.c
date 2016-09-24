@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 13:48:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:22:51 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sh42.h"
+#include <sh42.h>
 
 static void	history_option(t_env_hist *info, char **cmd, int fd)
 {

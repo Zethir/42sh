@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 14:03:07 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:24:12 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include <lexer.h>
 
 t_dlist	*create_node(void)
 {

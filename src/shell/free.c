@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/16 13:07:45 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:24:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sh42.h"
+#include <sh42.h>
 
 void	free_list(t_lst *node)
 {

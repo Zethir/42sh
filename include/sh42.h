@@ -6,7 +6,7 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 13:19:59 by tvallee           #+#    #+#             */
-/*   Updated: 2016/09/21 14:01:39 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:14:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <term.h>
 # include <sys/ioctl.h>
 # include <signal.h>
-# include "../libft/libft.h"
+# include <libft.h>
 
 # define RED "[31m"
 # define PURPLE "[1;35m"

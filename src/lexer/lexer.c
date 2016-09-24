@@ -6,11 +6,11 @@
 /*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 10:35:01 by tvallee           #+#    #+#             */
-/*   Updated: 2016/09/21 13:40:28 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:23:37 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include <lexer.h>
 
 void		check_lexer(t_lex *lex)
 {

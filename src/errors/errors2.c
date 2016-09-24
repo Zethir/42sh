@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 18:35:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/19 16:03:52 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:15:10 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sh42.h"
+#include <sh42.h>
 
 int	 numeric_error(char **cmd)
 {

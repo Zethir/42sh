@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 12:52:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/16 13:09:40 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:27:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sh42.h"
+#include <sh42.h>
 
 void	color(char *color, char *str)
 {

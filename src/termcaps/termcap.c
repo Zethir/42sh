@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 13:50:46 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:25:43 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/termcaps.h"
+#include <termcaps.h>
 
 static void	deal_with_backspace(t_env_hist *info, char *buff)
 {

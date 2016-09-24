@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 15:11:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 13:49:55 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:23:18 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sh42.h"
+#include <sh42.h>
 
 void		add_to_file(t_env_hist *info, char *str)
 {

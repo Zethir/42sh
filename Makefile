@@ -3,53 +3,46 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
+#    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2016/09/20 15:53:18 by cboussau         ###   ########.fr        #
+#    Created: 2016/09/24 13:35:55 by cboussau          #+#    #+#              #
+#    Updated: 2016/09/24 13:37:26 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= 42sh
+NAME = 42sh
 
-SRC_P 	= ./src/
-HISTORY = $(SRC_P)history/
-LST		= $(SRC_P)lst_func/
-TOOLS	= $(SRC_P)tools/
-ERRORS	= $(SRC_P)errors/
-TERMCAP = $(SRC_P)termcaps/
-LEXER	= $(SRC_P)lexer/
-SRC		= $(SRC_P)main.c $(SRC_P)prompt.c $(SRC_P)termios.c $(SRC_P)free.c\
-		  $(SRC_P)signal.c\
-		  $(HISTORY)history.c $(HISTORY)history_option.c\
-		  $(HISTORY)history_option2.c $(HISTORY)designator.c\
-		  $(LST)lst_func.c $(LST)lst_func_bis.c\
-		  $(TOOLS)tools.c $(TOOLS)tools2.c $(TOOLS)tools3.c\
-		  $(ERRORS)errors.c $(ERRORS)errors2.c $(ERRORS)errors3.c\
-		  $(TERMCAP)termcap.c $(TERMCAP)termcapbis.c $(TERMCAP)termcapline.c\
-		  $(LEXER)lexer.c
+C_DIR =	src
+C_DIRS = $(shell find $(C_DIR) -type d -follow -print)
+C_FILES = $(shell find $(C_DIRS) -type f -follow -print | grep "\.c")
 
-FLAGS	= -Wall -Wextra -Werror
-OBJ 	= $(SRC:.c=.o)
-LIB		= ./libft/libft.a -ltermcap
+O_DIR =	.tmp/obj
+O_DIRS = $(C_DIRS:$(C_DIR)%=$(O_DIR)%)
+O_FILES = $(C_FILES:$(C_DIR)%.c=$(O_DIR)%.o)
 
-$(NAME): $(OBJ)
-	make -C ./libft
-	gcc $(FLAGS) $(OBJ) $(LIB) -o $(NAME)
+FLAGS = -Wall -Wextra -Werror
+INCLUDES = -Iinclude -Ilibft/include
+LIB = -Llibft -lft -ltermcap
 
 all: $(NAME)
 
-%.o: %.c
-	gcc $(FLAGS) -o $@ -c $<
+$(NAME): $(O_FILES)
+	make -C libft
+	gcc $(FLAGS) $^ $(LIB) $(SRCI) -o $@
+
+$(O_DIR)%.o: $(C_DIR)%.c
+	@mkdir -p $(O_DIRS) $(O_DIR)
+	gcc $(FLAGS) $(INCLUDES) -o $@ -c $<
 
 clean:
-	rm -f $(OBJ)
-	make fclean -C libft
+	@make clean -C libft
+	@rm -rf $(O_DIR)
 
 fclean: clean
-	rm -rf $(NAME)
-	make fclean -C libft
+	@make fclean -C libft
+	@rm $(NAME) || true
+	@rm -rf .tmp/
 
-re: fclean $(NAME)
+re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: clean all fclean re

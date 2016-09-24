@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 13:49:28 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:23:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sh42.h"
+#include <sh42.h>
 
 static int		option_dbis2(t_env_hist *info, int nbr, int fd)
 {

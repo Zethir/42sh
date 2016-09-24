@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 00:03:33 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 13:51:14 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 16:42:51 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/termcaps.h"
+#include <termcaps.h>
 
 static void	deal_with_down(t_env_hist *info, char *buff)
 {

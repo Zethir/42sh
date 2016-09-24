@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 17:48:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/16 13:07:52 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:25:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sh42.h"
+#include <sh42.h>
 
 static void	deal_with_prompt_path(int i, char *buff)
 {
