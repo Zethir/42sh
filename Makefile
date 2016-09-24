@@ -6,7 +6,7 @@
 #    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/24 14:53:02 by cboussau          #+#    #+#              #
-#    Updated: 2016/09/24 14:53:48 by cboussau         ###   ########.fr        #
+#    Updated: 2016/09/24 15:00:39 by qdiaz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,24 +24,26 @@ FLAGS = -Wall -Wextra -Werror
 INCLUDES = -Iinclude -Ilibft/include
 LIB = -Llibft -lft -ltermcap
 
+.SILENT:
+
 all: $(NAME)
 
 $(NAME): $(O_FILES)
 		make -C libft
-			gcc $(FLAGS) $^ $(LIB) $(SRCI) -o $@
+		gcc $(FLAGS) $^ $(LIB) $(SRCI) -o $@
 
 $(O_DIR)%.o: $(C_DIR)%.c
 		@mkdir -p $(O_DIRS) $(O_DIR)
-			gcc $(FLAGS) $(INCLUDES) -o $@ -c $<
+		gcc $(FLAGS) $(INCLUDES) -o $@ -c $<
 
 clean:
 		@make clean -C libft
-			@rm -rf $(O_DIR)
+		@rm -rf $(O_DIR)
 
 fclean: clean
 		@make fclean -C libft
-			@rm $(NAME) || true
-				@rm -rf .tmp/
+		@rm $(NAME) || true
+		@rm -rf .tmp/
 
 re: fclean all
 

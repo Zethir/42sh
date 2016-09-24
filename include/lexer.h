@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/24 14:48:18 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/24 14:58:42 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ t_lex				*init_lexer_struct(void);
 void				add_token(t_token *t, char *new_token, int val);
 void				check_lexer(t_lex *info);
 void				is_redir(t_lex *lex);
-int					is_token(t_lex *lex);
+void				is_token(t_lex *lex);
 
 #endif
