@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 13:42:13 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 17:20:36 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 # define LEXER_H
 
 #include "sh42.h"
+
+/*
+ * token :
+ *
+ * && = 1;
+ * || = 2;
+ * | = 3;
+ * >> = 4;
+ * << = 5;
+ * < = 6;
+ * > = 7;
+ * 
+ * */
+
 
 typedef struct		s_token
 {
@@ -38,6 +52,9 @@ typedef struct		s_lex
 }					t_lex;
 
 t_lex				*init_lexer_struct(void);
+void				add_token(t_token *t, char *new_token, int val);
 void				check_lexer(t_lex *info);
+void				is_redir(t_lex *lex);
+int					is_token(t_lex *lex);
 
 #endif

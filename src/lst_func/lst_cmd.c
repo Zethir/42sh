@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   lst_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/24 14:41:03 by qdiaz            ###   ########.fr       */
+/*   Created: 2016/09/22 17:00:25 by qdiaz             #+#    #+#             */
+/*   Updated: 2016/09/22 17:12:39 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/lexer.h"
 
-void		check_lexer(t_lex *lex)
+static void    push_cmd(t_cmd *node, t_cmd **head)
 {
-	int		head;
-	int		tail;
+	t_cmd   *tmp;
 
-	head = 0;
-	tail = 0;
-	is_token(lex);
-	lex->token = lex->token->next;
-	while (lex->line[head])
+	if (*head == NULL)
 	{
-		if ()
-		{
-						
-		}
-		head++;
+		*head = node;
+		return ;
 	}
-	//while (lex->token)
-	//{
-	//	printf("lex->token->name = %s, value = %d\n", lex->token->name, lex->token->value);
-	//	lex->token = lex->token->next;
-	//}
+	else
+		tmp = *head;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = node;
+}
+
+void			add_cmd(t_cmd *cmd, char *new_cmd, int index)
+{
+	t_cmd *new_elem;
+
+	if (!(new_elem = (t_cmd *)malloc(sizeof(t_cmd))))
+		return ;
+	new_elem->next = NULL;
+	new_elem->name = ft_strdup(new_cmd);
+	new_elem->value = index;
+	push_token(new_elem, &cmd);
 }
