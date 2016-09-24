@@ -6,7 +6,7 @@
 #    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/24 14:53:02 by cboussau          #+#    #+#              #
-#    Updated: 2016/09/24 15:00:39 by qdiaz            ###   ########.fr        #
+#    Updated: 2016/09/24 15:20:53 by qdiaz            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,21 +29,26 @@ LIB = -Llibft -lft -ltermcap
 all: $(NAME)
 
 $(NAME): $(O_FILES)
+		echo "\\033[1;34mCompiling LIBFT...\\033[0;39m"
 		make -C libft
-		gcc $(FLAGS) $^ $(LIB) $(SRCI) -o $@
+		gcc $(FLAGS) $^ $(LIB) -o $@
+		echo "\\033[32m$(NAME) has been created !\\033[0;39m"
 
 $(O_DIR)%.o: $(C_DIR)%.c
-		@mkdir -p $(O_DIRS) $(O_DIR)
+		mkdir -p $(O_DIRS) $(O_DIR)
 		gcc $(FLAGS) $(INCLUDES) -o $@ -c $<
+		echo "\\033[1;34mGenerating objects... Please wait\\033[0;39m"
 
 clean:
-		@make clean -C libft
-		@rm -rf $(O_DIR)
+		make clean -C libft
+		rm -rf $(O_DIR)
+		echo "\\033[31mobjects files has been removed !\\033[0;39m"
 
 fclean: clean
-		@make fclean -C libft
-		@rm $(NAME) || true
-		@rm -rf .tmp/
+		make fclean -C libft
+		rm $(NAME) || true
+		rm -rf .tmp/
+		echo "\\033[31m$(NAME) has been removed !\\033[0;39m"
 
 re: fclean all
 

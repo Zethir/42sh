@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/24 15:08:43 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/24 15:16:34 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void		check_lexer(t_lex *lex)
 
 	/*head = 0;
 	tail = 0;
-	is_token(lex);
 	while (lex->line[head])
 	{
 		if ()
@@ -28,6 +27,7 @@ void		check_lexer(t_lex *lex)
 		}
 		head++;
 	}*/
+	is_token(lex);
 	lex->token = lex->token->next;
 	while (lex->token)
 	{
