@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 14:00:27 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:25:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sh42.h"
+#include <sh42.h>
 
 void	sigtstp(int id)
 {

@@ -6,14 +6,14 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 13:54:48 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:14:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TERMCAPS_H
 # define TERMCAPS_H
 
-# include "sh42.h"
+# include <sh42.h>
 
 # define ARROW_LEFT ((buff[0] == 27 && buff[1] == 91 && buff[2] == 68))
 # define ARROW_RIGHT ((buff[0] == 27 && buff[1] == 91 && buff[2] == 67))

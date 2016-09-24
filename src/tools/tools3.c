@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/17 00:06:48 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/16 13:09:58 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:27:31 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sh42.h"
+#include <sh42.h>
 
 int		start_pipe(int pipefds[], int num)
 {

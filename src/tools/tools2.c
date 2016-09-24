@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 17:06:02 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/16 13:09:48 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:27:21 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sh42.h"
+#include <sh42.h>
 
 int		check_caract(char *str, char c)
 {

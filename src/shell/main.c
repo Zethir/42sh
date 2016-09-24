@@ -6,12 +6,12 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 17:37:42 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/24 14:45:45 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/lexer.h"
-#include "../include/termcaps.h"
+#include <lexer.h>
+#include <termcaps.h>
 
 static void		deal_with_prompt(t_env_hist *info)
 {

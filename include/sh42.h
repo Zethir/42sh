@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh42.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/14 13:19:59 by tvallee           #+#    #+#             */
-/*   Updated: 2016/09/21 16:18:02 by qdiaz            ###   ########.fr       */
+/*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
+/*   Updated: 2016/09/24 14:47:28 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <term.h>
 # include <sys/ioctl.h>
 # include <signal.h>
-# include "../libft/libft.h"
+# include <libft.h>
 
 # define RED "[31m"
 # define PURPLE "[1;35m"
