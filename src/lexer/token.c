@@ -6,45 +6,66 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:57:33 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/24 14:58:39 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/26 17:17:44 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include <lexer.h>
 
-static int		is_and(char *line)
+static int		is_and(t_lex *lex, int i)
 {
-	if (*line == '&' && *(line + 1) == '&' && *(line - 1) != '&')
-		return (1);
-	return (0);
-}
-
-static int		is_or(char *line)
-{
-	if (*line == '|' && *(line + 1) == '|')
-		return (2);
-	return (0);
-}
-
-static int		is_pipe(char *line)
-{
-	if (*line == '|' && *(line - 1) != '|')
-		return (3);
-	return (0);
-}
-
-void			is_token(t_lex *lex)
-{
-	while (*lex->line)
+	if (lex->line[i] == '&')
 	{
-		if ((is_and(lex->line)))
+		i++;
+		if (lex->line[i] == '|' || lex->line[i] == '<')
+			return (-1);
+		else if (lex->line[i] == '&')
+		{
+			i++;
+			if (lex->line[i] == '|' || lex->line[i] == '&' ||
+					lex->line[i] == '<')
+				return (-1);
 			add_token(lex->token, "&&", 1);
-		else if ((is_or(lex->line)))
-			add_token(lex->token, "||", 2);
-		else if ((is_pipe(lex->line)))
-			add_token(lex->token, "|", 3);
-		else 
-			is_redir(lex);
-		lex->line++;
+			return (i);
+		}
 	}
+	return (0);
+}
+
+static int		is_or(t_lex *lex, int i)
+{
+	if (lex->line[i] == '|')
+	{
+		i++;
+		if (lex->line[i] == '>' || lex->line[i] == '<' || lex->line[i] == '&')
+			return (-1);
+		else if (lex->line[i] == '|')
+		{
+			i++;
+			if (lex->line[i] == '>' || lex->line[i] == '<' ||
+					lex->line[i] == '&' || lex->line[i] == '|')
+				return (-1);
+			add_token(lex->token, "||", 2);
+			return (i);
+		}
+		add_token(lex->token, "|", 3);
+		return (i);
+	}
+	return (0);
+}
+
+int				is_token(t_lex *lex, int i)
+{
+	int		j;
+
+	j = is_and(lex, i);
+	if (j > 0 || j < 0)
+		return (j);
+	j = is_or(lex, i);
+	if (j > 0 || j < 0)
+		return (j);
+	j = is_redir(lex,i);
+	if (j > 0 || j < 0)
+		return (j);
+	return (j);
 }

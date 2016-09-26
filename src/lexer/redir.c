@@ -6,91 +6,111 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:45:29 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/22 17:20:36 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/26 16:19:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include <lexer.h>
 
-static void		is_replace(t_lex *lex)
+static int		is_replace(t_lex *lex, int i)
 {
-	if (*lex->line == '>' && *(lex->line - 1) != '>' &&
-			*(lex->line - 1) != '1' && *(lex->line - 1) != '&' &&
-			*(lex->line - 1) != '2' && *(lex->line + 1) != '&')
-		add_token(lex->token, ">", 12);
-	else if (*lex->line == '>' && *(lex->line - 1) == '1')
-		add_token(lex->token, "1>", 13);
-	else if (*lex->line == '>' && *(lex->line - 1) == '&')
-		add_token(lex->token, "&>", 14);
-	else if (*lex->line == '>' && *(lex->line - 1) == '2' &&
-			*(lex->line + 1) != '&')
-		add_token(lex->token, "2>", 15);
-	else if (*lex->line == '>' && *(lex->line - 1) != '>' &&
-			*(lex->line - 1) != '1' && *(lex->line - 1) != '2' &&
-			*(lex->line - 1) != '&' && *(lex->line + 1) == '&' &&
-			*(lex->line + 2) != '-')
-		add_token(lex->token, ">&", 16);
-	else if (*lex->line == '>' && *(lex->line - 1) == '2' &&
-			*(lex->line + 1) == '&')
-		add_token(lex->token, "2>&", 17);
-	else if (*lex->line == '>' && *(lex->line - 1) != '>' &&
-			*(lex->line - 1) != '1' && *(lex->line - 1) != '2' &&
-			*(lex->line - 1) != '&' && *(lex->line + 1) == '&')
-		add_token(lex->token, ">&-", 18);
-	else
-		return ;
+	i++;
+	if (lex->line[i] == '|')
+		return (-1);
+	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
+	{
+		add_token(lex->token, ">&-", 8);
+		return (i + 2);
+	}
+	if (lex->line[i] == '&')
+	{
+		i++;
+		while (ft_isdigit(lex->line[i]))
+			i++;
+		add_token(lex->token, ">&", 9);
+		return (i);
+	}
+	add_token(lex->token, ">", 7);
+	return (i);
 }
 
-static void		is_in(t_lex *lex)
+static int		is_in(t_lex *lex, int i)
 {
-	if (*lex->line == '<' && *(lex->line - 1) != '<' &&
-			*(lex->line + 1) != '1' && *(lex->line + 1) != '&')
-		add_token(lex->token, "<", 9);
-	else if (*lex->line == '<' && *(lex->line + 1) == '1' &&
-			*(lex->line - 1) != '<')
-		add_token(lex->token, "<1", 10);
-	else if (*lex->line == '<' && *(lex->line + 1) == '&' &&
-			*(lex->line - 1) != '<')
-		add_token(lex->token, "<&", 11);
+	i++;
+	if (lex->line[i] == '|')
+		return (-1);
+	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
+	{
+		add_token(lex->token, "<&-", 14);
+		return (i + 2);
+	}
+	if (lex->line[i] == '&')
+	{
+		i++;
+		while (ft_isdigit(lex->line[i]))
+			i++;
+		add_token(lex->token, "<&", 15);
+		return (i);
+	}
+	add_token(lex->token, "<", 13);
+	return (i);
 }
 
-static void		is_add(t_lex *lex)
+static int		is_add(t_lex *lex, int i)
 {
-	if (*lex->line == '>' && *(lex->line + 1) == '>' &&
-			(*(lex->line - 1) != '1' && *(lex->line - 1) != '2'))
-		add_token(lex->token, ">>", 4);
-	else if (*lex->line == '>' && *(lex->line + 1) == '>' &&
-			*(lex->line - 1) == '1')
-		add_token(lex->token, "1>>", 5);
-	else if (*lex->line == '>' && *(lex->line + 1) == '>' &&
-			*(lex->line - 1) == '2')
-		add_token(lex->token, "2>>", 6);
-	else
-		return ;
+	i += 2;
+	if (lex->line[i] == '>' || lex->line[i] == '<' || lex->line[i] == '|')
+		return (-1);
+	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
+	{
+		add_token(lex->token, ">>&-", 5);
+		return (i + 2);
+	}
+	if (lex->line[i] == '&')
+	{
+		i++;
+		while (ft_isdigit(lex->line[i]))
+			i++;
+		add_token(lex->token, ">>&", 6);
+		return (i);
+	}
+	add_token(lex->token, ">>", 4);
+	return (i);
 }
 
-static void		is_heredoc(t_lex *lex)
+static int		is_heredoc(t_lex *lex, int i)
 {
-	if (*lex->line == '<' && *(lex->line + 1) == '<' &&
-			*(lex->line + 2) != '1')
-		add_token(lex->token, "<<", 7);
-	else if (*lex->line == '<' && *(lex->line + 1) == '<' &&
-			*(lex->line + 2) == '1')
-		add_token(lex->token, "<<1", 8);
-	else
-		return ;
+	i += 2;
+	if (lex->line[i] == '>' || lex->line[i] == '<' || lex->line[i] == '|')
+		return (-1);
+	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
+	{
+		add_token(lex->token, "<<&-", 11);
+		return (i + 2);
+	}
+	if (lex->line[i] == '&')
+	{
+		i++;
+		while (ft_isdigit(lex->line[i]))
+			i++;
+		add_token(lex->token, "<<&", 12);
+		return (i);
+	}
+	add_token(lex->token, "<<", 10);
+	return (i);
 }
 
-void			is_redir(t_lex *lex)
+int				is_redir(t_lex *lex, int i)
 {
-	if (*lex->line == '>' && *(lex->line + 1) == '>')
-		is_add(lex);
-	else if (*lex->line == '<' && *(lex->line + 1) == '<')
-		is_heredoc(lex);
-	else if (*lex->line == '<' && *(lex->line - 1) != '<')
-		is_in(lex);
-	else if (*lex->line == '>' && *(lex->line - 1) != '>')
-		is_replace(lex);
+	if (lex->line[i] == '>' && lex->line[i + 1] == '>')
+		i = is_add(lex, i);
+	else if (lex->line[i] == '<' && lex->line[i + 1] == '<')
+		i = is_heredoc(lex, i);
+	else if (lex->line[i] == '<' && lex->line[i - 1] != '<')
+		i = is_in(lex, i);
+	else if (lex->line[i] == '>' && lex->line[i - 1] != '>')
+		i = is_replace(lex, i);
 	else
-		return ;
+		return (0);
+	return (i);
 }
