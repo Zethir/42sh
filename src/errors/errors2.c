@@ -6,15 +6,15 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 18:35:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/22 14:15:10 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/27 17:12:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <errors.h>
 
-int	 numeric_error(char **cmd)
+int		numeric_error(char **cmd)
 {
-	int	i;
+	int				i;
 
 	i = 0;
 	while (cmd[1][i])

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 17:42:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/21 13:31:15 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/27 15:52:32 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
 char				*ft_strnjoin(char const *s1, char const *s2, size_t len);
 char				*ft_itoa_base(int value, int base);
+char				*ft_chardup(const char c);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));

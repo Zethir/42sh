@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/22 14:22:34 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/27 17:09:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <errors.h>
 
 static void	exec_cmd_add_lst(t_env_hist *info, char *line)
 {
@@ -30,7 +30,7 @@ static void	exec_cmd_add_lst(t_env_hist *info, char *line)
 		i++;
 	}
 	ft_putchar('\n');
-//	deal_with_pipe(info, info->node->str);
+	/*deal_with_pipe(info, info->node->str);*/
 }
 
 static void	deal_with_dash(t_env_hist *info, char **cmd, int fd)
@@ -82,7 +82,7 @@ static void	deal_with_string(t_env_hist *info, char **cmd)
 {
 	t_dlist	*dlist;
 	char	*line;
-	
+
 	dlist = info->node;
 	while (info->node->prev)
 	{
@@ -91,7 +91,7 @@ static void	deal_with_string(t_env_hist *info, char **cmd)
 			line = ft_strdup(info->node->str);
 			info->node = dlist;
 			exec_cmd_add_lst(info, line);
-			break;
+			break ;
 		}
 		info->node = info->node->prev;
 	}

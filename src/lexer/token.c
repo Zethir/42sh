@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:57:33 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/26 17:17:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/27 17:11:53 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int				is_token(t_lex *lex, int i)
 	j = is_or(lex, i);
 	if (j > 0 || j < 0)
 		return (j);
-	j = is_redir(lex,i);
+	j = is_redir(lex, i);
 	if (j > 0 || j < 0)
 		return (j);
 	return (j);

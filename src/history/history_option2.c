@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 15:11:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/22 14:23:18 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/27 17:07:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		add_to_file(t_env_hist *info, char *str)
 void		option_r(t_env_hist *info, char *str)
 {
 	int		fd;
-	char 	*line;
+	char	*line;
 
 	if ((fd = open(str, O_RDWR | O_CREAT, 0644)) == -1)
 	{

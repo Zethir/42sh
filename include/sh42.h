@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/24 14:47:28 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/27 16:49:18 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,20 +89,6 @@ void				add_elem(t_lst *node, char *arg);
 void				free_list(t_lst *node);
 void				free_dlist(t_dlist *node);
 void				color(char *color, char *str);
-void				print_error_opt(char *arg);
-void				print_error_arg(void);
-void				print_env_error(char *arg);
-void				print_main_error(char *arg);
-void				out_of_range_error(char **cmd);
-void				no_command_error(char *arg);
-void				print_identifier_error(t_env_hist *info, int i);
-int					print_alpha_error(char **arg);
-int					check_wrong_identifier(t_env_hist *info, int j);
-int					check_number_bis(char **cmd);
-int					check_number(char **cmd);
-int					check_alpha(char **cmd);
-int					arg_in_dir(t_lst *node, char *arg);
-int					numeric_error(char **cmd);
 int					get_index(t_lst *node);
 int					start_pipe(int pipefds[], int num);
 int					do_history(t_env_hist *info, char **cmd);

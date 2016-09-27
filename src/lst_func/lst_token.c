@@ -6,15 +6,15 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 15:27:34 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/22 11:59:17 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/27 17:09:44 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/lexer.h"
 
-static void    push_token(t_token *node, t_token **head)
+static void		push_token(t_token *node, t_token **head)
 {
-	t_token   *tmp;
+	t_token		*tmp;
 
 	if (*head == NULL)
 	{
@@ -30,7 +30,7 @@ static void    push_token(t_token *node, t_token **head)
 
 void			add_token(t_token *t, char *new_token, int val)
 {
-	t_token *new_elem;
+	t_token		*new_elem;
 
 	if (!(new_elem = (t_token *)malloc(sizeof(t_token))))
 		return ;
