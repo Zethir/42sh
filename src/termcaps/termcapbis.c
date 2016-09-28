@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 00:03:33 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/22 16:42:51 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/27 17:13:52 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	deal_with_up(t_env_hist *info, char *buff)
 		info->node = info->node->prev;
 		ft_putstr(info->node->str);
 		info->node->i = ft_strlen(info->node->str);
-		tputs(tgoto(tgetstr("ch", NULL), 0, info->node->i + 3), 1, 
+		tputs(tgoto(tgetstr("ch", NULL), 0, info->node->i + 3), 1,
 				ft_putchar_int);
 	}
 }

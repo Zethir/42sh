@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/24 15:07:33 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/27 16:42:46 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ t_lex	*init_lexer_struct(void)
 	lex->cmd->index = 0;
 	lex->token->name = NULL;
 	lex->token->value = 0;
+	lex->hd = 0;
+	lex->tl = 0;
 	return (lex);
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/24 14:45:45 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/27 17:07:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		deal_with_prompt(t_env_hist *info)
 	lex->line = deal_with_termcap(info);
 	ft_putchar('\n');
 	if (!lex->line)
-		return;
+		return ;
 	lex->arg = ft_strsplit(lex->line, ';');
 	while (*lex->arg)
 	{
