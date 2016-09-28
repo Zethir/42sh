@@ -6,11 +6,11 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 17:00:25 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/24 15:08:02 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/26 14:35:32 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include <lexer.h>
 
 static void    push_cmd(t_cmd *node, t_cmd **head)
 {
