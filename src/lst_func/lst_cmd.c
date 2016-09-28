@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 17:00:25 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/27 17:34:23 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/28 13:45:58 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void			add_cmd(t_cmd *cmd, char *new_cmd, int index)
 	i = 0;
 	if (!(new_elem = (t_cmd *)malloc(sizeof(t_cmd))))
 		return ;
-	printf("%s\n", new_cmd);
 	while (new_cmd[i])
 		i++;
 	if (ft_isdigit(new_cmd[i - 1]))

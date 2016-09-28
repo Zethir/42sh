@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/27 17:43:27 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/28 13:45:40 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		check_lexer(t_lex *lex)
 			print_parse_error(lex);
 			return ;
 		}
-		if (!lex->line[lex->hd + 1])
+		if (!lex->line[lex->hd + 1] && i == 0)
 			add_cmd(lex->cmd, ft_strsub(lex->line, lex->tl, lex->hd + 1), j);
 		if (i > 0)
 		{

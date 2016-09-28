@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:57:33 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/27 17:11:53 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/28 13:53:45 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int		is_and(t_lex *lex, int i)
 	if (lex->line[i] == '&')
 	{
 		i++;
-		if (lex->line[i] == '|' || lex->line[i] == '<')
+		if (lex->line[i] == '|' || lex->line[i] == '<' || lex->line[i] == '>')
 			return (-1);
 		else if (lex->line[i] == '&')
 		{
