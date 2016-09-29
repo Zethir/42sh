@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/28 12:31:00 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/28 16:23:29 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ typedef struct		s_token
 {
 	char			*name;
 	int				value;
-	int				fd_in;
-	int				fd_out;
 	struct s_token	*next;
 }					t_token;
 
