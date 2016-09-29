@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/27 16:49:18 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/29 13:52:14 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct		s_dlist
 
 typedef struct		s_env_hist
 {
-	pid_t			*pid;
+	pid_t			pid;
 	struct s_dlist	*node;
 	struct s_lst	*lst;
 	struct termios	term;
