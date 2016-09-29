@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:45:29 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/29 13:54:32 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/29 16:20:19 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_replace(t_lex *lex, char *str, int i)
 	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
 	{
 		str = ft_strjoin(str, "&-");
-		add_token(lex, str, 8);
+		add_token(lex, str, 6);
 		return (i + 2);
 	}
 	if (lex->line[i] == '&')
@@ -32,7 +32,7 @@ static int	is_replace(t_lex *lex, char *str, int i)
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		i++;
 	}
-	add_token(lex, str, 7);
+	add_token(lex, str, 5);
 	return (i);
 }
 
@@ -46,7 +46,7 @@ static int	is_in(t_lex *lex, char *str, int i)
 	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
 	{
 		str = ft_strjoin(str, "&-");
-		add_token(lex, str, 14);
+		add_token(lex, str, 10);
 		return (i + 2);
 	}
 	if (lex->line[i] == '&')
@@ -56,7 +56,7 @@ static int	is_in(t_lex *lex, char *str, int i)
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		i++;
 	}
-	add_token(lex, str, 13);
+	add_token(lex, str, 9);
 	return (i);
 }
 
@@ -67,12 +67,6 @@ static int	is_add(t_lex *lex, char *str, int i)
 	i += 2;
 	if (lex->line[i] == '>' || lex->line[i] == '<' || lex->line[i] == '|')
 		return (-1);
-	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
-	{
-		str = ft_strjoin(str, "&-");
-		add_token(lex, str, 5);
-		return (i + 2);
-	}
 	if (lex->line[i] == '&')
 		return (is_add_bis(lex, str, i));
 	if (ft_isdigit(lex->line[i]))
@@ -89,22 +83,10 @@ static int	is_heredoc(t_lex *lex, char *str, int i)
 	if (ft_isdigit(lex->line[i - 1]))
 		str = ft_strjoin(ft_chardup(lex->line[i - 1]), str);
 	i += 2;
-	if (lex->line[i] == '>' || lex->line[i] == '<' || lex->line[i] == '|')
+	if (lex->line[i] == '>' || lex->line[i] == '<' || lex->line[i] == '|' ||
+			lex->line[i] == '&')
 		return (-1);
-	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
-	{
-		str = ft_strjoin(str, "&-");
-		add_token(lex, str, 11);
-		return (i + 2);
-	}
-	if (lex->line[i] == '&')
-		return (is_heredoc_bis(lex, str, i));
-	if (ft_isdigit(lex->line[i]))
-	{
-		str = ft_strjoin(str, ft_chardup(lex->line[i]));
-		i++;
-	}
-	add_token(lex, str, 10);
+	add_token(lex, str, 8);
 	return (i);
 }
 
