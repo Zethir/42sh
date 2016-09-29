@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/28 12:31:00 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/28 15:25:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct		s_lex
 }					t_lex;
 
 t_lex				*init_lexer_struct(void);
-void				add_token(t_token *t, char *new_token, int val);
+void				add_token(t_lex *lex, char *new_token, int val);
 void				add_cmd(t_cmd *cmd, char *new_cmd, int index);
 void				check_lexer(t_lex *info);
 int					is_redir(t_lex *lex, int i);

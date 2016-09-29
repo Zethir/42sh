@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/28 15:00:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/28 15:29:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 void		temp_print_lst(t_lex *lex)
 {
-	lex->token = lex->token->next;
-	lex->cmd = lex->cmd->next;
 	while (lex->token)
 	{
 		printf("lex->token->name = %s, value = %d\n", lex->token->name,
