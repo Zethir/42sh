@@ -6,17 +6,19 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 15:27:34 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/28 15:38:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/29 14:21:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lexer.h"
+#include <lexer.h>
 
 static void		push_token(t_token *node, t_token **head)
 {
 	t_token		*tmp;
+	t_token		*tmp2;
 
-	if (*head == NULL)
+	tmp2 = *head;
+	if (tmp2->name == NULL)
 	{
 		*head = node;
 		return ;

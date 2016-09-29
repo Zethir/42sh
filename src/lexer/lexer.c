@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/28 15:29:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/29 14:22:04 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		temp_print_lst(t_lex *lex)
 	}
 	while (lex->cmd)
 	{
-		printf("lex->token->str = %s, index = %d\n", lex->cmd->str,
+		printf("lex->cmd->cmd = %s, index = %d\n", lex->cmd->argv[0],
 				lex->cmd->index);
 		lex->cmd = lex->cmd->next;
 	}
@@ -45,11 +45,10 @@ void		check_lexer(t_lex *lex)
 			return ;
 		}
 		if (!lex->line[lex->hd + 1] && i == 0)
-			add_cmd(lex->cmd, ft_strsub(lex->line, lex->tl, lex->hd + 1), j);
+			add_cmd(lex, ft_strsub(lex->line, lex->tl, lex->hd + 1), j);
 		if (i > 0)
 		{
-			add_cmd(lex->cmd, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
-					j);
+			add_cmd(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), j);
 			j++;
 			lex->hd = i;
 			lex->tl = lex->hd;

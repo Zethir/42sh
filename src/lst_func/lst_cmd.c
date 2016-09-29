@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 17:00:25 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/28 14:59:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/29 14:20:44 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 static void		push_cmd(t_cmd *node, t_cmd **head)
 {
 	t_cmd	*tmp;
+	t_cmd	*tmp2;
 
-	if (*head == NULL)
+	tmp2 = *head;
+	if (tmp2->argv == NULL)
 	{
 		*head = node;
 		return ;
@@ -28,7 +30,7 @@ static void		push_cmd(t_cmd *node, t_cmd **head)
 	tmp->next = node;
 }
 
-void			add_cmd(t_cmd *cmd, char *new_cmd, int index)
+void			add_cmd(t_lex *lex, char *new_cmd, int index)
 {
 	t_cmd	*new_elem;
 	int		i;
@@ -41,7 +43,7 @@ void			add_cmd(t_cmd *cmd, char *new_cmd, int index)
 	if (ft_isdigit(new_cmd[i - 1]))
 		new_cmd = ft_strsub(new_cmd, 0, i - 1);
 	new_elem->next = NULL;
-	new_elem->str = ft_strdup(new_cmd);
+	new_elem->argv = ft_strsplit_ws(new_cmd);
 	new_elem->index = index;
-	push_cmd(new_elem, &cmd);
+	push_cmd(new_elem, &lex->cmd);
 }

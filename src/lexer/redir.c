@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:45:29 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/28 14:02:18 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/29 13:54:32 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_replace(t_lex *lex, char *str, int i)
 	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
 	{
 		str = ft_strjoin(str, "&-");
-		add_token(lex->token, str, 8);
+		add_token(lex, str, 8);
 		return (i + 2);
 	}
 	if (lex->line[i] == '&')
@@ -32,7 +32,7 @@ static int	is_replace(t_lex *lex, char *str, int i)
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		i++;
 	}
-	add_token(lex->token, str, 7);
+	add_token(lex, str, 7);
 	return (i);
 }
 
@@ -46,7 +46,7 @@ static int	is_in(t_lex *lex, char *str, int i)
 	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
 	{
 		str = ft_strjoin(str, "&-");
-		add_token(lex->token, str, 14);
+		add_token(lex, str, 14);
 		return (i + 2);
 	}
 	if (lex->line[i] == '&')
@@ -56,7 +56,7 @@ static int	is_in(t_lex *lex, char *str, int i)
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		i++;
 	}
-	add_token(lex->token, str, 13);
+	add_token(lex, str, 13);
 	return (i);
 }
 
@@ -70,7 +70,7 @@ static int	is_add(t_lex *lex, char *str, int i)
 	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
 	{
 		str = ft_strjoin(str, "&-");
-		add_token(lex->token, str, 5);
+		add_token(lex, str, 5);
 		return (i + 2);
 	}
 	if (lex->line[i] == '&')
@@ -80,7 +80,7 @@ static int	is_add(t_lex *lex, char *str, int i)
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		i++;
 	}
-	add_token(lex->token, str, 4);
+	add_token(lex, str, 4);
 	return (i);
 }
 
@@ -94,7 +94,7 @@ static int	is_heredoc(t_lex *lex, char *str, int i)
 	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
 	{
 		str = ft_strjoin(str, "&-");
-		add_token(lex->token, str, 11);
+		add_token(lex, str, 11);
 		return (i + 2);
 	}
 	if (lex->line[i] == '&')
@@ -104,7 +104,7 @@ static int	is_heredoc(t_lex *lex, char *str, int i)
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		i++;
 	}
-	add_token(lex->token, str, 10);
+	add_token(lex, str, 10);
 	return (i);
 }
 
