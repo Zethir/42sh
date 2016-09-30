@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/29 17:41:27 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 16:04:54 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEXER_H
 
 # include <sh42.h>
+# include <parser.h>
 
 typedef struct		s_token
 {
@@ -37,6 +38,7 @@ typedef struct		s_lex
 	int				tl;
 	struct s_token	*token;
 	struct s_cmd	*cmd;
+	struct s_parse	*parse;
 }					t_lex;
 
 t_lex				*init_lexer_struct(void);

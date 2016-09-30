@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:20:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 16:03:05 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 16:05:22 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct		s_parse
 	char			**env;
 	char			*bin_path;
 	pid_t			pid;
-	int				nb_pipe;
+	int				bl;
 }					t_parse;
 
 int			get_index(t_lst *node);
