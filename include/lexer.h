@@ -6,14 +6,12 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:16:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:40:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
-
-# include <sh42.h>
 
 typedef struct			s_token
 {
@@ -50,5 +48,8 @@ int					is_in_bis(t_lex *lex, char *str, int i);
 int					is_replace_bis(t_lex *lex, char *str, int i);
 int					is_heredoc_bis(t_lex *lex, char *str, int i);
 int					list_browser(t_lex *lex);
+int					deal_with_env(t_lex *lex, char **arg);
+int					do_builtins(t_lex *lex);
+void				print_parse_error(t_lex *lex);
 
 #endif

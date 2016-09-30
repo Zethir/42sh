@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/30 17:15:42 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:41:16 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,15 @@ void				color(char *color, char *str);
 void				deal_with_others(t_hub *info, char *buff);
 void				go_to_end(t_hub *info, char *buff);
 void				exec_cmd(t_hub *info);
+void				print_identifier_error(t_hub *info, int i);
+void				print_env(t_lst *node);
+void				restore_env(t_lst *node, char **save);
+void				do_export(t_hub *info);
+int					do_cd(t_lst *node, char **arg);
+int					do_setenv(t_lst *node, char **arg);
+int					do_unsetenv(t_lst *node, char **arg);
+int					arg_in_dir(t_lst *node, char *arg);
+int					check_wrong_identifier(t_hub *info, int j);
 int					init_parse(t_hub *info);
 int					get_index(t_lst *node);
 int					get_index(t_lst *node);
@@ -115,5 +124,6 @@ char				*split_line(char *line);
 char				*get_home(t_lst *node);
 char				**malloc_tab(char **arg);
 char				*deal_with_termcap(t_hub *info);
+char				**deal_with_opt(t_hub *info, char **arg);
 
 #endif
