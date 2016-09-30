@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/30 16:58:06 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:15:42 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,9 @@ void				free_dlist(t_dlist *node);
 void				color(char *color, char *str);
 void				deal_with_others(t_hub *info, char *buff);
 void				go_to_end(t_hub *info, char *buff);
+void				exec_cmd(t_hub *info);
+int					init_parse(t_hub *info);
+int					get_index(t_lst *node);
 int					get_index(t_lst *node);
 int					start_pipe(int pipefds[], int num);
 int					do_history(t_hub *info, char **cmd);

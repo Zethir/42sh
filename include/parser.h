@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:20:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 16:31:04 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:16:13 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ typedef struct		s_parse
 	pid_t			pid;
 	int				bl;
 }					t_parse;
-
-int			get_index(t_lst *node);
-int			list_browser(t_lex *lex);
-int			init_parse(t_lex *lex, t_env_hist *env_hist);
-void		exec_cmd(t_lex *lex);
 
 
 #endif

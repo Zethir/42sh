@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 16:59:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:16:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ int					is_add_bis(t_lex *lex, char *str, int i);
 int					is_in_bis(t_lex *lex, char *str, int i);
 int					is_replace_bis(t_lex *lex, char *str, int i);
 int					is_heredoc_bis(t_lex *lex, char *str, int i);
+int					list_browser(t_lex *lex);
 
 #endif
