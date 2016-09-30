@@ -6,11 +6,12 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 19:39:25 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/29 15:56:25 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 16:34:33 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <builtins.h>
+#include <errors.h>
 
 static int	cmp_list_arg(t_lst *node, char **arg)
 {

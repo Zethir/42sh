@@ -6,16 +6,16 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 15:37:22 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 16:53:38 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
 
-void	parse_cmd(lex)
+void	parse_cmd(t_env_hist *info)
 {
-	if (lex->token->value = 0)
-		exec_cmd(lex);
+	if (info->lex->token->value = 0)
+		exec_cmd(info);
 	/*else if (lex->token->value == 1)
 		exec_and(lex);
 	else if (lex->token->value == 2)

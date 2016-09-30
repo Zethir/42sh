@@ -6,14 +6,12 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/22 14:14:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 16:47:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TERMCAPS_H
 # define TERMCAPS_H
-
-# include <sh42.h>
 
 # define ARROW_LEFT ((buff[0] == 27 && buff[1] == 91 && buff[2] == 68))
 # define ARROW_RIGHT ((buff[0] == 27 && buff[1] == 91 && buff[2] == 67))
@@ -29,8 +27,5 @@
 # define PREV_WORD ((buff[0] == 27 && buff[1] == 27 && buff[2] == 91 && buff[3] == 68))
 # define NEXT_WORD ((buff[0] == 27 && buff[1] == 27 && buff[2] == 91 && buff[3] == 67))
 
-void				deal_with_others(t_env_hist *info, char *buff);
-void				go_to_end(t_env_hist *info, char *buff);
-char				*deal_with_termcap(t_env_hist *info);
 
 #endif

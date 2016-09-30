@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:01:38 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/30 16:02:58 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 17:05:07 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,45 +83,48 @@ static char        **split_path(t_lst *node)
 	return (path);
 }
 
-static void deal_with_path(t_parse *parse, char **path)
+static void deal_with_path(t_hub *info, char **path)
 {
+	t_lex	*lex;
 	int     i;
 	int     j;
 
 	i = 0;
 	j = 0;
-	lex->parse->right_path = (char **)malloc(sizeof(char *) * list_browser(lex));
-	if (!lex->parse->right_path)
+	lex = info->lex;
+	info->parse->right_path = (char **)malloc(sizeof(char *) * list_browser(lex));
+	if (!info->parse->right_path)
 		return ;
 	while (lex->cmd)
 	{
 		if (path && *lex->cmd->argv && lex->cmd->env)
 		{
-			lex->parse->right_path[i] = check_path(path, *lex->cmd->argv);
-			if (lex->parse->right_path[i])
+			info->parse->right_path[i] = check_path(path, *lex->cmd->argv);
+			if (info->parse->right_path[i])
 			{
-				lex->parse->right_path[i] = ft_strjoin(lex->parse->right_path[i], "/");
-				lex->parse->bin_path = ft_strjoin(lex->parse->right_path[i], *lex->cmd->argv);
+				info->parse->right_path[i] = ft_strjoin(info->parse->right_path[i], "/");
+				info->parse->bin_path = ft_strjoin(info->parse->right_path[i], *lex->cmd->argv);
 			}
 			else
-				lex->parse->right_path[i] = ft_strdup("");
+				info->parse->right_path[i] = ft_strdup("");
 		}
-		else if (*lex->cmd->argv && lex->parse->env)
-			lex->parse->right_path[i] = ft_strdup("");
+		else if (*lex->cmd->argv && info->parse->env)
+			info->parse->right_path[i] = ft_strdup("");
 		j++;
 		i++;
 		lex->cmd = lex->cmd->next;
 	}
 }
 
-int         init_parse(t_lex *lex, t_env_hist *env_hist)
+int         init_parse(t_hub *info)
 {
 	char        **path;
 
-	lex->parse->env = get_env(env_hist->lst);
+	info->parse = (t_parse *)malloc(sizeof(t_parse));
+	info->parse->env = get_env(info->lst);
 	if (!(path = (char **)malloc(sizeof(char *) * 7)))
 		return (-1);
-	path = split_path(env_hist->lst);
-	deal_with_path(lex, path);
+	path = split_path(info->lst);
+	deal_with_path(info, path);
 	return (-1);
 
