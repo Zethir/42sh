@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/29 17:41:27 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 16:46:17 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtins.h>
+#include <sh42.h>
 
 int		check_builtins(char *cmd)
 {

@@ -6,11 +6,11 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 17:00:25 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/29 14:20:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 16:51:48 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lexer.h>
+#include <sh42.h>
 
 static void		push_cmd(t_cmd *node, t_cmd **head)
 {

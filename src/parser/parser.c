@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 15:37:22 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 16:52:53 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parser.h>
+#include <sh42.h>
 
 void	parse_cmd(lex)
 {

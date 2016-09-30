@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/27 17:14:25 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:06:50 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <termcaps.h>
+#include <sh42.h>
 
-static void	deal_with_backspace(t_env_hist *info, char *buff)
+static void	deal_with_backspace(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -28,7 +28,7 @@ static void	deal_with_backspace(t_env_hist *info, char *buff)
 	info->node = node;
 }
 
-static void	deal_with_space(t_env_hist *info, char *buff)
+static void	deal_with_space(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -46,7 +46,7 @@ static void	deal_with_space(t_env_hist *info, char *buff)
 	info->node = node;
 }
 
-static void	deal_with_arrow(t_env_hist *info, char *buff)
+static void	deal_with_arrow(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -64,7 +64,7 @@ static void	deal_with_arrow(t_env_hist *info, char *buff)
 	info->node = node;
 }
 
-static void	deal_with_charac(t_env_hist *info, char *buff)
+static void	deal_with_charac(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -82,7 +82,7 @@ static void	deal_with_charac(t_env_hist *info, char *buff)
 	info->node = node;
 }
 
-char		*deal_with_termcap(t_env_hist *info)
+char		*deal_with_termcap(t_hub *info)
 {
 	int			ret;
 	char		buff[4];

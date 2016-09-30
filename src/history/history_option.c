@@ -6,14 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/27 16:46:37 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:01:52 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
-#include <errors.h>
 
-static int		option_dbis2(t_env_hist *info, int nbr, int fd)
+static int		option_dbis2(t_hub *info, int nbr, int fd)
 {
 	t_dlist	*dlst;
 	int		i;
@@ -42,7 +41,7 @@ static int		option_dbis2(t_env_hist *info, int nbr, int fd)
 	return (nbr);
 }
 
-static void		option_dbis(t_env_hist *info, char **cmd, char *str)
+static void		option_dbis(t_hub *info, char **cmd, char *str)
 {
 	char	*pathb;
 	int		fd;
@@ -67,7 +66,7 @@ static void		option_dbis(t_env_hist *info, char **cmd, char *str)
 	}
 }
 
-static void		option_d(t_env_hist *info, char **cmd, char *str)
+static void		option_d(t_hub *info, char **cmd, char *str)
 {
 	int		i;
 
@@ -84,7 +83,7 @@ static void		option_d(t_env_hist *info, char **cmd, char *str)
 	option_dbis(info, cmd, str);
 }
 
-void			do_option(t_env_hist *info, char **cmd)
+void			do_option(t_hub *info, char **cmd)
 {
 	int		fd;
 	char	*str;

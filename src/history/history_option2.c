@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 15:11:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/27 17:07:06 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:02:38 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-void		add_to_file(t_env_hist *info, char *str)
+void		add_to_file(t_hub *info, char *str)
 {
 	t_dlist	*dlst;
 	char	*pathb;
@@ -41,7 +41,7 @@ void		add_to_file(t_env_hist *info, char *str)
 	rename(pathb, str);
 }
 
-void		option_r(t_env_hist *info, char *str)
+void		option_r(t_hub *info, char *str)
 {
 	int		fd;
 	char	*line;

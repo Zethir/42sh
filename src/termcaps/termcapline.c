@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 22:33:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/22 14:26:10 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:07:12 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <termcaps.h>
+#include <sh42.h>
 
-static void	go_to_next_word(t_env_hist *info, char *buff)
+static void	go_to_next_word(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -33,7 +33,7 @@ static void	go_to_next_word(t_env_hist *info, char *buff)
 	info->node = node;
 }
 
-static void	go_to_previous_word(t_env_hist *info, char *buff)
+static void	go_to_previous_word(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -54,7 +54,7 @@ static void	go_to_previous_word(t_env_hist *info, char *buff)
 	info->node = node;
 }
 
-static void	go_to_start_of_line(t_env_hist *info, char *buff)
+static void	go_to_start_of_line(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -70,7 +70,7 @@ static void	go_to_start_of_line(t_env_hist *info, char *buff)
 	info->node = node;
 }
 
-void		go_to_end(t_env_hist *info, char *buff)
+void		go_to_end(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 

@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/27 16:49:42 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:02:15 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errors.h>
+#include <sh42.h>
 
-static void	history_option(t_env_hist *info, char **cmd, int fd)
+static void	history_option(t_hub *info, char **cmd, int fd)
 {
 	t_dlist	*dlist;
 	int		nbr;
@@ -39,7 +39,7 @@ static void	history_option(t_env_hist *info, char **cmd, int fd)
 	}
 }
 
-int			do_history(t_env_hist *info, char **cmd)
+int			do_history(t_hub *info, char **cmd)
 {
 	int		fd;
 	char	*str;
@@ -67,7 +67,7 @@ int			do_history(t_env_hist *info, char **cmd)
 	return (-1);
 }
 
-void		add_history(t_env_hist *info)
+void		add_history(t_hub *info)
 {
 	char	*buf;
 	int		fd;
@@ -108,7 +108,7 @@ char		*split_line(char *line)
 	return (&line[i]);
 }
 
-void		deal_with_file(t_env_hist *info)
+void		deal_with_file(t_hub *info)
 {
 	int		fd;
 	char	*line;

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/22 14:25:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:05:39 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	sigtstp(int id)
 {
 	char		cp[2];
-	t_env_hist	*info;
+	t_hub	*info;
 
 	(void)id;
 	info = NULL;
@@ -30,7 +30,7 @@ void	sigtstp(int id)
 
 void	sigcont(int id)
 {
-	t_env_hist	*info;
+	t_hub	*info;
 
 	(void)id;
 	info = NULL;
@@ -43,7 +43,7 @@ void	sigcont(int id)
 
 void	sigint(int id)
 {
-	t_env_hist	*info;
+	t_hub	*info;
 
 	(void)id;
 	info = NULL;
@@ -57,7 +57,7 @@ void	sigint(int id)
 
 void	sigquit(int id)
 {
-	t_env_hist *info;
+	t_hub *info;
 
 	(void)id;
 	info = NULL;
