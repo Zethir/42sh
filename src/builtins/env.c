@@ -6,13 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 16:33:48 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:12:31 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <builtins.h>
-#include <parser.h>
-#include <errors.h>
+#include <sh42.h>
 
 void		print_env(t_lst *node)
 {

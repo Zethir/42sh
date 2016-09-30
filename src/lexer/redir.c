@@ -6,11 +6,11 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:45:29 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/29 16:20:19 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 16:51:22 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lexer.h>
+#include <sh42.h>
 
 static int	is_replace(t_lex *lex, char *str, int i)
 {

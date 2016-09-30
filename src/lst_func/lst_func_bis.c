@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/29 14:20:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:04:33 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lexer.h>
+#include <sh42.h>
 
 t_dlist	*create_node(void)
 {
@@ -41,7 +41,7 @@ void	push_node_bis(t_dlist **head, t_dlist *new_node)
 	new_node->prev = cur;
 }
 
-void	go_to_end_list(t_env_hist *info)
+void	go_to_end_list(t_hub *info)
 {
 	char	*str;
 

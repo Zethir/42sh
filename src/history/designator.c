@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/27 17:09:11 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:01:30 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errors.h>
+#include <sh42.h>
 
-static void	exec_cmd_add_lst(t_env_hist *info, char *line)
+static void	exec_cmd_add_lst(t_hub *info, char *line)
 {
 	char	**tabl;
 	int		i;
@@ -33,7 +33,7 @@ static void	exec_cmd_add_lst(t_env_hist *info, char *line)
 	/*deal_with_pipe(info, info->node->str);*/
 }
 
-static void	deal_with_dash(t_env_hist *info, char **cmd, int fd)
+static void	deal_with_dash(t_hub *info, char **cmd, int fd)
 {
 	int		i;
 	t_dlist	*dlist;
@@ -60,7 +60,7 @@ static void	deal_with_dash(t_env_hist *info, char **cmd, int fd)
 	}
 }
 
-static void	deal_with_number(t_env_hist *info, char **cmd, int fd)
+static void	deal_with_number(t_hub *info, char **cmd, int fd)
 {
 	char	*line;
 	int		i;
@@ -78,7 +78,7 @@ static void	deal_with_number(t_env_hist *info, char **cmd, int fd)
 	}
 }
 
-static void	deal_with_string(t_env_hist *info, char **cmd)
+static void	deal_with_string(t_hub *info, char **cmd)
 {
 	t_dlist	*dlist;
 	char	*line;
@@ -98,7 +98,7 @@ static void	deal_with_string(t_env_hist *info, char **cmd)
 	info->node = dlist;
 }
 
-void	do_designator(t_env_hist *info, char **cmd)
+void	do_designator(t_hub *info, char **cmd)
 {
 	int		fd;
 	char	*str;

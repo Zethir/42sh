@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 00:03:33 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/27 17:13:52 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:07:03 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <termcaps.h>
+#include <sh42.h>
 
-static void	deal_with_down(t_env_hist *info, char *buff)
+static void	deal_with_down(t_hub *info, char *buff)
 {
 	if (ARROW_DOWN && info->node->next)
 	{
@@ -27,7 +27,7 @@ static void	deal_with_down(t_env_hist *info, char *buff)
 	}
 }
 
-static void	deal_with_up(t_env_hist *info, char *buff)
+static void	deal_with_up(t_hub *info, char *buff)
 {
 	if (ARROW_UP && info->node->prev)
 	{
@@ -42,7 +42,7 @@ static void	deal_with_up(t_env_hist *info, char *buff)
 	}
 }
 
-void		deal_with_others(t_env_hist *info, char *buff)
+void		deal_with_others(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 

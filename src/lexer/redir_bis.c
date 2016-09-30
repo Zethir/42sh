@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 17:17:24 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/29 16:20:56 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 16:51:28 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lexer.h>
+#include <sh42.h>
 
 int		is_replace_bis(t_lex *lex, char *str, int i)
 {

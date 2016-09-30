@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 16:53:38 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:10:23 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <parser.h>
+#include <sh42.h>
 
-void	parse_cmd(t_env_hist *info)
+void	parse_cmd(t_hub *info)
 {
 	if (info->lex->token->value = 0)
 		exec_cmd(info);

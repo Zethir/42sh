@@ -6,11 +6,11 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 15:27:34 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/29 14:21:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 16:52:32 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lexer.h>
+#include <sh42.h>
 
 static void		push_token(t_token *node, t_token **head)
 {

@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:35:40 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/27 16:37:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 16:49:35 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errors.h>
+#include <sh42.h>
 
 void	print_parse_error(t_lex *lex)
 {

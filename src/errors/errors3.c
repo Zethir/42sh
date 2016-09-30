@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/23 18:07:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/27 16:45:19 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 16:49:28 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errors.h>
+#include <sh42.h>
 
 /*void	print_identifier_error(t_struct *info, int i)
 {

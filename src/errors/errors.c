@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 17:27:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/27 16:45:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 16:49:13 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <errors.h>
+#include <sh42.h>
 
 void	print_error_opt(char *arg)
 {
