@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 13:21:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 15:36:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 18:39:51 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
 
-void	exec_pipe(t_lex *lex)
+/*void	exec_pipe(t_lex *lex)
 {
 	int		pipefd[2];
 
@@ -55,4 +55,4 @@ void	exec_pipe(t_lex *lex)
 		exec_pipe(lex);
 	else
 		parse_cmd(lex);
-}
+}*/

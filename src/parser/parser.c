@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:10:23 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 18:39:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	parse_cmd(t_hub *info)
 {
-	if (info->lex->token->value = 0)
+	if (info->lex->token->value == 0)
 		exec_cmd(info);
 	/*else if (lex->token->value == 1)
 		exec_and(lex);

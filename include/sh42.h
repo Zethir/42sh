@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/30 17:54:23 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 18:40:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,10 @@ typedef struct		s_dlist
 
 typedef struct		s_hub
 {
-	pid_t			pid;
 	struct s_dlist	*node;
 	struct s_lst	*lst;
-	struct lexer	*lex;
-	struct parse	*parse;
+	struct s_lex	*lex;
+	struct s_parse	*parse;
 	struct termios	term;
 }					t_hub;
 
@@ -90,15 +89,15 @@ void				free_dlist(t_dlist *node);
 void				deal_with_others(t_hub *info, char *buff);
 void				go_to_end(t_hub *info, char *buff);
 void				exec_cmd(t_hub *info);
-void				print_identifier_error(t_hub *info, int i);
 void				print_env(t_lst *node);
 void				restore_env(t_lst *node, char **save);
 void				do_export(t_hub *info);
+void				do_builtins(t_hub *info);
+void				parse_cmd(t_hub *info);
 int					do_cd(t_lst *node, char **arg);
 int					do_setenv(t_lst *node, char **arg);
 int					do_unsetenv(t_lst *node, char **arg);
 int					arg_in_dir(t_lst *node, char *arg);
-int					check_wrong_identifier(t_hub *info, int j);
 int					init_parse(t_hub *info);
 int					get_index(t_lst *node);
 int					get_index(t_lst *node);
@@ -107,6 +106,7 @@ int					get_intel(t_lst *node, char *str);
 int					check_lst(t_lst *node);
 int					reset_term(t_hub *info);
 int					init_term(t_hub *info);
+int					deal_with_env(t_hub *info, char **arg);
 char				*get_home(t_lst *node);
 char				*deal_with_termcap(t_hub *info);
 char				**deal_with_opt(t_hub *info, char **arg);

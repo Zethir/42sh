@@ -6,13 +6,13 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/30 16:51:07 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 18:49:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-void		temp_print_lst(t_lex *lex)
+/*void		temp_print_lst(t_lex *lex)
 {
 	while (lex->token)
 	{
@@ -26,7 +26,7 @@ void		temp_print_lst(t_lex *lex)
 				lex->cmd->index);
 		lex->cmd = lex->cmd->next;
 	}
-}
+}*/
 
 void		check_lexer(t_lex *lex)
 {
@@ -55,5 +55,5 @@ void		check_lexer(t_lex *lex)
 		else
 			lex->hd++;
 	}
-	temp_print_lst(lex);
+	//temp_print_lst(lex);
 }

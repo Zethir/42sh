@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:05:48 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 18:50:10 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-static void		deal_with_prompt(t_env_hist *info)
+static void		deal_with_prompt(t_hub *info)
 {
 	info->lex->line = deal_with_termcap(info);
 	ft_putchar('\n');
@@ -24,14 +24,14 @@ static void		deal_with_prompt(t_env_hist *info)
 		check_lexer(info->lex);
 		init_parse(info);
 		parse_cmd(info);
-		lex->arg++;
+		info->lex->arg++;
 	}
 	add_history(info);
 }
 
 static void		start_prog(char **env)
 {
-	t_env_hist	*info;
+	t_hub	*info;
 
 	info = init_struct(env);
 	while (1)

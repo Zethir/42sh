@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:01:38 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/30 17:10:48 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 18:53:20 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static char        **split_path(t_lst *node)
 
 static void deal_with_path(t_hub *info, char **path)
 {
+	t_cmd	*cmd;
 	t_lex	*lex;
 	int     i;
 	int     j;
@@ -92,27 +93,28 @@ static void deal_with_path(t_hub *info, char **path)
 	i = 0;
 	j = 0;
 	lex = info->lex;
+	cmd = lex->cmd;
 	info->parse->right_path = (char **)malloc(sizeof(char *) * list_browser(lex));
 	if (!info->parse->right_path)
 		return ;
-	while (lex->cmd)
+	while (cmd)
 	{
-		if (path && *lex->cmd->argv && lex->cmd->env)
+		if (path && *cmd->argv && info->parse->env)
 		{
-			info->parse->right_path[i] = check_path(path, *lex->cmd->argv);
+			info->parse->right_path[i] = check_path(path, *cmd->argv);
 			if (info->parse->right_path[i])
 			{
 				info->parse->right_path[i] = ft_strjoin(info->parse->right_path[i], "/");
-				info->parse->bin_path = ft_strjoin(info->parse->right_path[i], *lex->cmd->argv);
+				info->parse->bin_path = ft_strjoin(info->parse->right_path[i], *cmd->argv);
 			}
 			else
 				info->parse->right_path[i] = ft_strdup("");
 		}
-		else if (*lex->cmd->argv && info->parse->env)
+		else if (*cmd->argv && info->parse->env)
 			info->parse->right_path[i] = ft_strdup("");
 		j++;
 		i++;
-		lex->cmd = lex->cmd->next;
+		cmd = cmd->next;
 	}
 }
 
@@ -127,4 +129,4 @@ int         init_parse(t_hub *info)
 	path = split_path(info->lst);
 	deal_with_path(info, path);
 	return (-1);
-
+}

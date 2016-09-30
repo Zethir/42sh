@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:12:50 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 18:48:16 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		check_builtins(char *cmd)
 		return (0);
 }
 
-void	do_builtins(t_lex *lex)
+void	do_builtins(t_hub *info)
 {
+	printf("info->lex->cmd->argv[0] = %s\n", info->lex->cmd->argv[0]);
 }

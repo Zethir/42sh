@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/10 11:45:51 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 18:07:04 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 18:28:56 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void	do_export(t_hub *info)
 				print_identifier_error(lex, i);
 				return ;
 			}
-			if (check_local_variable(lex, lex->info->lst, i) == 0)
-				add_to_list(lex, info->lst, i);
+			if (check_local_variable(lex, info->lst, i) == 0)
+				add_to_list(info, info->lst, i);
 			i++;
 		}
 	}

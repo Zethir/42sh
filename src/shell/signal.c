@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:05:39 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 18:41:07 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	sigint(int id)
 	(void)id;
 	info = NULL;
 	info = stock_struct(info, 1);
-	if (info->pid != 0)
+	if (info->parse->pid != 0)
 	{
 		ft_putchar('\n');
 		get_prompt(info->lst);

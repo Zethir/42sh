@@ -6,37 +6,39 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/23 18:07:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 16:49:28 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 18:22:55 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-/*void	print_identifier_error(t_struct *info, int i)
+void	print_identifier_error(t_lex *lex, int i)
 {
 	ft_putstr_fd("42sh: export: ", 2);
-	ft_putstr_fd(info->arg[i], 2);
+	ft_putstr_fd(lex->cmd->argv[i], 2);
 	ft_putendl_fd(": not a valid identifier", 2);
 }
 
-int		check_wrong_identifier(t_struct *info, int j)
+int		check_wrong_identifier(t_lex *lex, int j)
 {
-	int	i;
+	t_cmd	*cmd;
+	int		i;
 
 	i = 0;
-	while (info->arg[j][i])
+	cmd = lex->cmd;
+	while (cmd->argv[j][i])
 	{
-		if (info->arg[j][i] < 'A' || info->arg[j][i] > 'Z')
-			if (info->arg[j][i] < 'a' || info->arg[j][i] > 'z')
-				if (info->arg[j][i] != '=')
+		if (cmd->argv[j][i] < 'A' || cmd->argv[j][i] > 'Z')
+			if (cmd->argv[j][i] < 'a' || cmd->argv[j][i] > 'z')
+				if (cmd->argv[j][i] != '=')
 				{
-					print_identifier_error(info, j);
+					print_identifier_error(lex, j);
 					return (1);
 				}
 		i++;
 	}
 	return (0);
-}*/
+}
 
 int		check_number_bis(char **cmd)
 {

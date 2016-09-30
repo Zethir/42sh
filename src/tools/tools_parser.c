@@ -6,35 +6,19 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:50:42 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/30 16:54:40 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 18:44:45 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-int     get_index(t_lst *node)
-{
-	t_lst   *tmp;
-	int     i;
-
-	i = 0;
-	tmp = node;
-	while (node)
-	{
-		i++;
-		node = node->next;
-	}
-	node = tmp;
-	return (i);
-}
-
 int		list_browser(t_lex *lex)
 {
-	t_lex 	*tmp;
+	t_cmd 	*tmp;
 	int		i;
 	
-	tmp = lex;
 	i = 0;
+	tmp = lex->cmd;
 	while (tmp)
 	{
 		i++;
