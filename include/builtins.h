@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/29 13:36:57 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/29 14:01:44 by qdiaz            ###   ########.fr       */
+/*   Created: 2016/09/29 15:46:22 by qdiaz             #+#    #+#             */
+/*   Updated: 2016/09/29 17:41:27 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-# include <sh42.h>
+# include <lexer.h>
 
-int			check_builtins(t_lex *lex);
+int			check_builtins(char *cmd);
 int			do_cd(t_lst *node, char **arg);
 int			do_echo(char **cmd);
 int			deal_with_env(t_env_hist *info, char **arg);

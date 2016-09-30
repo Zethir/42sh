@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/10 13:26:56 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/29 15:54:52 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../sh21.h"
+#include <builtins.h>
 
 void		print_env(t_lst *node)
 {

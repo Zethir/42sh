@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 16:11:24 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/09 15:59:18 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/29 15:55:40 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../sh21.h"
+#include <builtins.h>
 
 static int	deal_with_int(char **arg)
 {

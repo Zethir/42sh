@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 13:41:53 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/09 15:58:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/29 15:54:18 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../sh21.h"
+#include <builtins.h>
 
 static void		go_to_root(t_lst *node)
 {
