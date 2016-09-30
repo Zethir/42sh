@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/27 17:07:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/29 15:30:10 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void		deal_with_prompt(t_env_hist *info)
 	while (*lex->arg)
 	{
 		check_lexer(lex);
+		parse_cmd(lex);
 		lex->arg++;
 	}
 	add_history(info);
