@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:20:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/29 16:48:46 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 14:12:23 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct		s_parse
 	char			**right_path;
 	char			**env;
 	pid_t			pid;
-	int				nb_pipe;
+	int				bl;
 }					t_parse;
 
 #endif
