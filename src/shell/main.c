@@ -6,27 +6,24 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/29 15:30:10 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/09/30 17:05:48 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lexer.h>
-#include <termcaps.h>
+#include <sh42.h>
 
 static void		deal_with_prompt(t_env_hist *info)
 {
-	t_lex	*lex;
-
-	lex = init_lexer_struct();
-	lex->line = deal_with_termcap(info);
+	info->lex->line = deal_with_termcap(info);
 	ft_putchar('\n');
-	if (!lex->line)
+	if (!info->lex->line)
 		return ;
-	lex->arg = ft_strsplit(lex->line, ';');
-	while (*lex->arg)
+	info->lex->arg = ft_strsplit(info->lex->line, ';');
+	while (*info->lex->arg)
 	{
-		check_lexer(lex);
-		parse_cmd(lex);
+		check_lexer(info->lex);
+		init_parse(info);
+		parse_cmd(info);
 		lex->arg++;
 	}
 	add_history(info);

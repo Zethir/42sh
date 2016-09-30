@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:06:25 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/09/30 17:08:41 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_hub	*init_struct(char **env)
 	if (!(info->node = (t_dlist *)malloc(sizeof(t_dlist))))
 		return (NULL);
 	info->node = create_node();
+	info->lex = init_lexer_struct();
 	deal_with_file(info);
 	if (init_term(info) == -1)
 		return (NULL);
