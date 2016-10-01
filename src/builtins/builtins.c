@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/01 15:43:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/01 17:10:50 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,28 @@ int		check_builtins(char *cmd)
 
 void	do_builtins(t_hub *info)
 {
-	printf("info->lex->cmd->argv[0] = %s\n", info->lex->cmd->argv[0]);
+	char *cmd;
+
+	cmd = info->lex->cmd->argv[0];
+	printf("info->lex->cmd->argv = %s\n", cmd);
+	if (ft_strcmp(cmd, "env") == 0)
+		deal_with_env(info, info->lex->cmd->argv);
+	else if (ft_strcmp(cmd, "setenv") == 0)
+		do_setenv(info->lst, info->lex->cmd->argv);
+	else if (ft_strcmp(cmd, "unsetenv") == 0)
+		do_unsetenv(info->lst, info->lex->cmd->argv);
+	else if (ft_strcmp(cmd, "cd") == 0)
+		do_cd(info->lst, info->lex->cmd->argv);
+	else if (ft_strcmp(cmd, "echo") == 0)
+		do_echo(info->lex->cmd->argv);
+	else if (ft_strcmp(cmd, "history") == 0)
+		do_history(info, info->lex->cmd->argv);
+	else if (ft_strncmp(cmd, "!", 1) == 0)
+		do_designator(info, info->lex->cmd->argv);
+	else if (ft_strcmp(cmd, "exit") == 0)
+		do_exit(info->lex->cmd->argv);
+	else if (ft_strcmp(cmd, "export") == 0)
+		do_export(info);
+	else
+		return ;
 }
