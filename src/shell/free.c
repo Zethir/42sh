@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/01 16:02:51 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/01 16:37:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,12 @@ void	free_lex(t_lex *lex)
 
 void	free_parse(t_parse *parse)
 {
-	ft_strdel(parse->right_path);
-	ft_strdel(parse->env);
-	ft_strdel(&parse->bin_path);
+	if (parse->right_path)
+		ft_strdel(parse->right_path);
+	if (parse->env)
+		ft_strdel(parse->env);
+	if (parse->bin_path)
+		ft_strdel(&parse->bin_path);
 	parse->pid = 0;
 	parse->bl = 0;
 	free(parse);
