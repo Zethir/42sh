@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:01:38 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/30 18:53:20 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/01 16:40:04 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int         init_parse(t_hub *info)
 
 	info->parse = (t_parse *)malloc(sizeof(t_parse));
 	info->parse->env = get_env(info->lst);
+	info->parse->bin_path = ft_strdup("");
 	if (!(path = (char **)malloc(sizeof(char *) * 7)))
 		return (-1);
 	path = split_path(info->lst);
