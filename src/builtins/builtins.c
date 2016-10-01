@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 18:48:16 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/01 15:43:36 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int		check_builtins(char *cmd)
 	else if (ft_strncmp(cmd, "!", 1) == 0)
 		return (1);
 	else if (ft_strcmp(cmd, "export") == 0)
+		return (1);
+	else if (ft_strcmp(cmd, "exit") == 0)
 		return (1);
 	else
 		return (0);

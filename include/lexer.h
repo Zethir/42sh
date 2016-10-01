@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 18:23:43 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/01 15:59:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,15 @@ typedef struct			s_lex
 }						t_lex;
 
 t_lex				*init_lexer_struct(void);
+t_cmd				*init_cmd_struct(void);
+t_token				*init_token_struct(void);
 void				add_token(t_lex *lex, char *new_token, int val);
 void				add_cmd(t_lex *lex, char *new_cmd, int index);
 void				check_lexer(t_lex *info);
+void				print_identifier_error(t_lex *lex, int i);
+void				print_parse_error(t_lex *lex);
+void				free_lex(t_lex *lex);
+void				free_struct_lex(t_lex *lex);
 int					is_redir(t_lex *lex, int i);
 int					is_token(t_lex *lex, int i);
 int					is_add_bis(t_lex *lex, char *str, int i);
@@ -49,7 +55,5 @@ int					is_replace_bis(t_lex *lex, char *str, int i);
 int					is_heredoc_bis(t_lex *lex, char *str, int i);
 int					check_wrong_identifier(t_lex *lex, int j);
 int					list_browser(t_lex *lex);
-void				print_identifier_error(t_lex *lex, int i);
-void				print_parse_error(t_lex *lex);
 
 #endif

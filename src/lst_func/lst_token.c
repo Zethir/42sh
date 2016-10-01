@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 15:27:34 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/30 16:52:32 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/01 15:33:18 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,15 @@ void			add_token(t_lex *lex, char *new_token, int val)
 	new_elem->name = ft_strdup(new_token);
 	new_elem->value = val;
 	push_token(new_elem, &lex->token);
+}
+
+t_token		*init_token_struct(void)
+{
+	t_token *token;
+
+	token = (t_token *)malloc(sizeof(t_token));
+	token->next = NULL;
+	token->name = NULL;
+	token->value = 0;
+	return (token);
 }

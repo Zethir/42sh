@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 16:53:07 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/01 16:02:51 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,47 @@ void	free_dlist(t_dlist *node)
 	}
 	free(node);
 	node = NULL;
+}
+
+void	free_struct_lex(t_lex *lex)
+{
+	while (lex->cmd)
+	{
+		if (lex->cmd->argv)
+			ft_strdel(lex->cmd->argv);
+		lex->cmd->index = 0;
+		lex->cmd = lex->cmd->next;
+	}
+	free(lex->cmd);
+	lex->cmd = NULL;
+	while (lex->token)
+	{
+		if (lex->token->name)
+			ft_strdel(&lex->token->name);
+		lex->token->value = 0;
+		lex->token = lex->token->next;
+	}
+	free(lex->token);
+	lex->token = NULL;
+}
+
+void	free_lex(t_lex *lex)
+{
+	ft_strdel(&lex->line);
+	ft_strdel(lex->arg);
+	lex->hd = 0;
+	lex->tl = 0;
+	free(lex);
+	lex = NULL;
+}
+
+void	free_parse(t_parse *parse)
+{
+	ft_strdel(parse->right_path);
+	ft_strdel(parse->env);
+	ft_strdel(&parse->bin_path);
+	parse->pid = 0;
+	parse->bl = 0;
+	free(parse);
+	parse = NULL;
 }

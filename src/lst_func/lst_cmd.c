@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 17:00:25 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/30 16:51:48 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/01 15:33:31 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,15 @@ void			add_cmd(t_lex *lex, char *new_cmd, int index)
 	new_elem->argv = ft_strsplit_ws(new_cmd);
 	new_elem->index = index;
 	push_cmd(new_elem, &lex->cmd);
+}
+
+t_cmd			*init_cmd_struct(void)
+{
+	t_cmd	*cmd;
+
+	cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	cmd->next = NULL;
+	cmd->argv = NULL;
+	cmd->index = 0;
+	return (cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:20:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 18:43:05 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/01 13:49:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ typedef struct		s_parse
 	int				bl;
 }					t_parse;
 
+void	free_parse(t_parse *parse);
 
 #endif

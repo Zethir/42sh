@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 18:50:10 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/01 16:05:40 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void		deal_with_prompt(t_hub *info)
 {
+	info->lex = init_lexer_struct();
 	info->lex->line = deal_with_termcap(info);
 	ft_putchar('\n');
 	if (!info->lex->line)
@@ -21,11 +22,16 @@ static void		deal_with_prompt(t_hub *info)
 	info->lex->arg = ft_strsplit(info->lex->line, ';');
 	while (*info->lex->arg)
 	{
+		info->lex->cmd = init_cmd_struct();
+		info->lex->token = init_token_struct();
 		check_lexer(info->lex);
 		init_parse(info);
 		parse_cmd(info);
+		free_struct_lex(info->lex);
+		free_parse(info->parse);
 		info->lex->arg++;
 	}
+	free_lex(info->lex);
 	add_history(info);
 }
 
