@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 18:39:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/03 20:48:08 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	parse_cmd(t_hub *info)
 {
 	if (info->lex->token->value == 0)
 		exec_cmd(info);
-	/*else if (lex->token->value == 1)
+	/*else if (info->lex->token->value == 3)
+		exec_pipe(info);
+	else if (lex->token->value == 1)
 		exec_and(lex);
 	else if (lex->token->value == 2)
 		exec_or(lex);
-	else if (lex->token->value == 3)
-		exec_pipe(lex);
 	else if (lex->token->value == 4)
 		exec_radd(lex);
 	else if (lex->token->value == 5)

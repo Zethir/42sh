@@ -6,33 +6,33 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/23 18:07:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 18:22:55 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/04 15:55:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-void	print_identifier_error(t_lex *lex, int i)
+void	print_identifier_error(t_hub *info, int i)
 {
 	ft_putstr_fd("42sh: export: ", 2);
-	ft_putstr_fd(lex->cmd->argv[i], 2);
+	ft_putstr_fd(info->parse->argv[i], 2);
 	ft_putendl_fd(": not a valid identifier", 2);
 }
 
-int		check_wrong_identifier(t_lex *lex, int j)
+int		check_wrong_identifier(t_hub *info, int j)
 {
-	t_cmd	*cmd;
+	t_parse	*parse;
 	int		i;
 
 	i = 0;
-	cmd = lex->cmd;
-	while (cmd->argv[j][i])
+	parse = info->parse;
+	while (parse->argv[j][i])
 	{
-		if (cmd->argv[j][i] < 'A' || cmd->argv[j][i] > 'Z')
-			if (cmd->argv[j][i] < 'a' || cmd->argv[j][i] > 'z')
-				if (cmd->argv[j][i] != '=')
+		if (parse->argv[j][i] < 'A' || parse->argv[j][i] > 'Z')
+			if (parse->argv[j][i] < 'a' || parse->argv[j][i] > 'z')
+				if (parse->argv[j][i] != '=')
 				{
-					print_identifier_error(lex, j);
+					print_identifier_error(info, j);
 					return (1);
 				}
 		i++;

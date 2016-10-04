@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/01 17:12:58 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/04 15:38:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,23 @@ void	do_builtins(t_hub *info)
 {
 	char *cmd;
 
-	cmd = info->lex->cmd->argv[0];
-	printf("info->lex->cmd->argv = %s\n", cmd);
+	cmd = info->parse->argv[0];
 	if (ft_strcmp(cmd, "env") == 0)
-		deal_with_env(info, info->lex->cmd->argv);
+		deal_with_env(info, info->parse->argv);
 	else if (ft_strcmp(cmd, "setenv") == 0)
-		do_setenv(info->lst, info->lex->cmd->argv);
+		do_setenv(info->lst, info->parse->argv);
 	else if (ft_strcmp(cmd, "unsetenv") == 0)
-		do_unsetenv(info->lst, info->lex->cmd->argv);
+		do_unsetenv(info->lst, info->parse->argv);
 	else if (ft_strcmp(cmd, "cd") == 0)
-		do_cd(info->lst, info->lex->cmd->argv);
+		do_cd(info->lst, info->parse->argv);
 	else if (ft_strcmp(cmd, "echo") == 0)
-		do_echo(info->lex->cmd->argv);
+		do_echo(info->parse->argv);
 	else if (ft_strcmp(cmd, "history") == 0)
-		do_history(info, info->lex->cmd->argv);
+		do_history(info, info->parse->argv);
 	else if (ft_strncmp(cmd, "!", 1) == 0)
-		do_designator(info, info->lex->cmd->argv);
+		do_designator(info, info->parse->argv);
 	else if (ft_strcmp(cmd, "exit") == 0)
-		do_exit(info->lex->cmd->argv);
+		do_exit(info->parse->argv);
 	else if (ft_strcmp(cmd, "export") == 0)
 		do_export(info);
 	else

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/10 11:45:51 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 18:28:56 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/04 15:52:27 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,22 @@ static void	print_local(t_lst *node)
 	node = tmp;
 }
 
-static int	check_local_variable(t_lex *lex, t_lst *node, int i)
+static int	check_local_variable(t_hub *info, int i)
 {
 	t_lst	*tmp;
 
-	tmp = node;
-	while (node)
+	tmp = info->lst;
+	while (info->lst)
 	{
-		if (ft_strncmp(lex->cmd->argv[i], node->name, ft_strlen(node->name)) == 0
-				&& node->flag == 1)
+		if (ft_strncmp(info->parse->argv[i], info->lst->name,
+					ft_strlen(info->lst->name)) == 0 && info->lst->flag == 1)
 		{	
-			node->line = lex->cmd->argv[i];
+			info->lst->line = info->parse->argv[i];
 			return (1);
 		}
-		node = node->next;
+		info->lst = info->lst->next;
 	}
-	node = tmp;
+	info->lst = tmp;
 	return (0);
 }
 
@@ -57,12 +57,12 @@ static void	add_to_list(t_hub *info, t_lst *node, int j)
 	int		i;
 
 	lex = info->lex;
-	i = ft_strlen_char(lex->cmd->argv[j], '=');
+	i = ft_strlen_char(info->parse->argv[j], '=');
 	new_elem = (t_lst *)malloc(sizeof(t_lst));
 	new_elem->next = NULL;
-	new_elem->line = ft_strdup(lex->cmd->argv[j]);
+	new_elem->line = ft_strdup(info->parse->argv[j]);
 	new_elem->name = (char *)malloc(sizeof(i) + 1);
-	ft_strncpy(new_elem->name, lex->cmd->argv[j], i);
+	ft_strncpy(new_elem->name, info->parse->argv[j], i);
 	new_elem->flag = 1;
 	push_node(new_elem, &node);
 }
@@ -74,18 +74,18 @@ void	do_export(t_hub *info)
 
 	i = 1;
 	lex  = info->lex;
-	if (lex->cmd->argv[1])
+	if (info->parse->argv[1])
 	{
-		while (lex->cmd->argv[i])
+		while (info->parse->argv[i])
 		{
-			if (check_wrong_identifier(lex, i) == 1)
+			if (check_wrong_identifier(info, i) == 1)
 				return ;
-			else if (lex->cmd->argv[i][0] == '=')
+			else if (info->parse->argv[i][0] == '=')
 			{
-				print_identifier_error(lex, i);
+				print_identifier_error(info, i);
 				return ;
 			}
-			if (check_local_variable(lex, info->lst, i) == 0)
+			if (check_local_variable(info, i) == 0)
 				add_to_list(info, info->lst, i);
 			i++;
 		}

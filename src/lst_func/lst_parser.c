@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:01:38 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/01 16:40:04 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/04 16:03:45 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,37 +85,22 @@ static char        **split_path(t_lst *node)
 
 static void deal_with_path(t_hub *info, char **path)
 {
-	t_cmd	*cmd;
 	t_lex	*lex;
-	int     i;
-	int     j;
 
-	i = 0;
-	j = 0;
 	lex = info->lex;
-	cmd = lex->cmd;
-	info->parse->right_path = (char **)malloc(sizeof(char *) * list_browser(lex));
-	if (!info->parse->right_path)
-		return ;
-	while (cmd)
+	if (path && *info->parse->argv && info->parse->env)
 	{
-		if (path && *cmd->argv && info->parse->env)
+		info->parse->right_path = check_path(path, *info->parse->argv);
+		if (info->parse->right_path)
 		{
-			info->parse->right_path[i] = check_path(path, *cmd->argv);
-			if (info->parse->right_path[i])
-			{
-				info->parse->right_path[i] = ft_strjoin(info->parse->right_path[i], "/");
-				info->parse->bin_path = ft_strjoin(info->parse->right_path[i], *cmd->argv);
-			}
-			else
-				info->parse->right_path[i] = ft_strdup("");
+			info->parse->right_path = ft_strjoin(info->parse->right_path, "/");
+			info->parse->right_path = ft_strjoin(info->parse->right_path, *info->parse->argv);
 		}
-		else if (*cmd->argv && info->parse->env)
-			info->parse->right_path[i] = ft_strdup("");
-		j++;
-		i++;
-		cmd = cmd->next;
+		else
+			info->parse->right_path = ft_strdup("");
 	}
+	else if (*info->parse->argv && info->parse->env)
+		info->parse->right_path = ft_strdup("");
 }
 
 int         init_parse(t_hub *info)
@@ -124,7 +109,7 @@ int         init_parse(t_hub *info)
 
 	info->parse = (t_parse *)malloc(sizeof(t_parse));
 	info->parse->env = get_env(info->lst);
-	info->parse->bin_path = ft_strdup("");
+	info->parse->argv = ft_strsplit_ws(info->lex->token->name);
 	if (!(path = (char **)malloc(sizeof(char *) * 7)))
 		return (-1);
 	path = split_path(info->lst);

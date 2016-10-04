@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/09/30 18:40:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/04 15:56:47 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@ void				restore_env(t_lst *node, char **save);
 void				do_export(t_hub *info);
 void				do_builtins(t_hub *info);
 void				parse_cmd(t_hub *info);
+void				exec_pipe(t_hub *info);
+void				print_identifier_error(t_hub *info, int i);
+int					check_wrong_identifier(t_hub *info, int j);
 int					do_cd(t_lst *node, char **arg);
 int					do_setenv(t_lst *node, char **arg);
 int					do_unsetenv(t_lst *node, char **arg);

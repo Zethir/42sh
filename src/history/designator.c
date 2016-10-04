@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/01 17:20:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/04 15:41:44 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	exec_cmd_add_lst(t_hub *info, char *line)
 		i++;
 	}
 	ft_putchar('\n');
-	info->lex->cmd->argv[0] = ft_strdup(info->node->str);
+	info->parse->argv[0] = ft_strdup(info->node->str);
 	init_parse(info);
 	exec_cmd(info);
 }

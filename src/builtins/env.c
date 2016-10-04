@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:45:57 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/03 16:30:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void		print_env(t_lst *node)
 		if (!node->line)
 			node = node->next;
 		else if (node->flag == 0)
+		{
 			ft_putendl(node->line);
-		node = node->next;
+			node = node->next;
+		}
 	}
 	node = tmp;
 }

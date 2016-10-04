@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/01 16:36:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/04 16:04:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,13 @@ static void		deal_with_prompt(t_hub *info)
 	ft_putchar('\n');
 	if (!info->lex->line)
 		return ;
-	info->lex->arg = ft_strsplit(info->lex->line, ';');
-	while (*info->lex->arg)
-	{
-		info->lex->cmd = init_cmd_struct();
-		info->lex->token = init_token_struct();
-		check_lexer(info->lex);
-		init_parse(info);
-		parse_cmd(info);
-		free_struct_lex(info->lex);
-		free_parse(info->parse);
-		info->lex->arg++;
-	}
-	free_lex(info->lex);
+	info->lex->token = init_token_struct();
+	check_lexer(info->lex);
+	parse_cmd(info);
+	free_struct_lex(info->lex);
+	free_parse(info->parse);
 	add_history(info);
+	free_lex(info->lex);
 }
 
 static void		start_prog(char **env)
