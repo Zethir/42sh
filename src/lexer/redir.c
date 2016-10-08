@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:45:29 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/08 17:36:12 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/08 17:47:26 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_replace(t_lex *lex, char *str, int i)
 	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
 	{
 		str = ft_strjoin(str, "&-");
-		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
+		add_process(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
 				str, 7);
 		return (i + 2);
 	}
@@ -33,7 +33,7 @@ static int	is_replace(t_lex *lex, char *str, int i)
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		i++;
 	}
-	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
+	add_process(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
 			str, 6);
 	return (i);
 }
@@ -48,7 +48,7 @@ static int	is_in(t_lex *lex, char *str, int i)
 	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
 	{
 		str = ft_strjoin(str, "&-");
-		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
+		add_process(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
 				str, 11);
 		return (i + 2);
 	}
@@ -59,7 +59,7 @@ static int	is_in(t_lex *lex, char *str, int i)
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		i++;
 	}
-	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
+	add_process(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
 			str, 10);
 	return (i);
 }
@@ -79,7 +79,7 @@ static int	is_add(t_lex *lex, char *str, int i)
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		i++;
 	}
-	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
+	add_process(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
 			str, 4);
 	return (i);
 }
@@ -92,7 +92,7 @@ static int	is_heredoc(t_lex *lex, char *str, int i)
 	if (lex->line[i] == '>' || lex->line[i] == '<' || lex->line[i] == '|' ||
 			lex->line[i] == '&' || lex->line[i] == ';')
 		return (-1);
-	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
+	add_process(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
 			str, 9);
 	return (i);
 }

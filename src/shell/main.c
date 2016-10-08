@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/08 14:13:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/08 17:42:27 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		deal_with_prompt(t_hub *info)
 	ft_putchar('\n');
 	if (!info->lex->line)
 		return ;
-	info->lex->token = init_token_struct();
+	info->lex->process = init_process_struct();
 	check_lexer(info->lex);
 	parse_cmd(info);
 	free_struct_lex(info->lex);
