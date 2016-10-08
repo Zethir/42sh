@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/08 14:01:15 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/08 15:11:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct		s_dlist
 
 typedef struct		s_hub
 {
-	int				outfd;
 	struct s_dlist	*node;
 	struct s_lst	*lst;
 	struct s_lex	*lex;

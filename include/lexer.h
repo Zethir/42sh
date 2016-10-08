@@ -6,19 +6,38 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/04 18:52:32 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/08 17:32:21 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-typedef struct			s_token
+typedef enum			e_token
 {
-	char				*name;
-	int					value;
-	struct s_token		*next;
+	AND,
+	OR,
+	PIPE,
+	R_ADD,
+	R_ADD_FD,
+	R_OUT,
+	R_OUT_FD_CLOSE,
+	R_OUT_FD,
+	HEREDOC,
+	R_IN,
+	R_IN_FD_CLOSE,
+	R_IN_FD,
+	SEPARATOR
 }						t_token;
+
+typedef struct			s_process
+{
+	char				*cmd;
+	char				*token;
+	int					stdio[3];
+	int					token_value;
+	struct s_token		*next;
+}						t_process;
 
 typedef struct			s_lex
 {
