@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 17:17:24 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/08 17:29:51 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/08 17:37:00 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		is_replace_bis(t_lex *lex, char *str, int i)
 	{
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
-				str, 7);
+				str, 8);
 		i++;
 		return (i);
 	}
@@ -35,7 +35,8 @@ int		is_in_bis(t_lex *lex, char *str, int i)
 	if (ft_isdigit(lex->line[i]))
 	{
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
-		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), str, 11);
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
+				str, 12);
 		i++;
 		return (i);
 	}
@@ -50,7 +51,8 @@ int		is_add_bis(t_lex *lex, char *str, int i)
 	if (ft_isdigit(lex->line[i]))
 	{
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
-		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), str, 6);
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
+				str, 5);
 		i++;
 		return (i);
 	}
