@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:45:29 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/03 20:30:55 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/04 18:18:40 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	is_replace(t_lex *lex, char *str, int i)
 	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
 	{
 		str = ft_strjoin(str, "&-");
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 		add_token(lex, str, 6);
 		return (i + 2);
 	}
@@ -32,6 +33,7 @@ static int	is_replace(t_lex *lex, char *str, int i)
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		i++;
 	}
+	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 	add_token(lex, str, 5);
 	return (i);
 }
@@ -46,6 +48,7 @@ static int	is_in(t_lex *lex, char *str, int i)
 	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
 	{
 		str = ft_strjoin(str, "&-");
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 		add_token(lex, str, 10);
 		return (i + 2);
 	}
@@ -56,6 +59,7 @@ static int	is_in(t_lex *lex, char *str, int i)
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		i++;
 	}
+	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 	add_token(lex, str, 9);
 	return (i);
 }
@@ -74,6 +78,7 @@ static int	is_add(t_lex *lex, char *str, int i)
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
 		i++;
 	}
+	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 	add_token(lex, str, 4);
 	return (i);
 }
@@ -86,6 +91,7 @@ static int	is_heredoc(t_lex *lex, char *str, int i)
 	if (lex->line[i] == '>' || lex->line[i] == '<' || lex->line[i] == '|' ||
 			lex->line[i] == '&' || lex->line[i] == ';')
 		return (-1);
+	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 	add_token(lex, str, 8);
 	return (i);
 }

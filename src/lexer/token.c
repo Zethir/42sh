@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:57:33 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/03 21:12:38 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/04 18:24:01 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int		is_and(t_lex *lex, int i)
 			if (lex->line[i] == '|' || lex->line[i] == '&' ||
 					lex->line[i] == '<' || lex->line[i] == ';' )
 				return (-1);
+			add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 			add_token(lex, "&&", 1);
 			return (i);
 		}
@@ -48,9 +49,11 @@ static int		is_or(t_lex *lex, int i)
 					lex->line[i] == '&' || lex->line[i] == '|' ||
 					lex->line[i] == ';')
 				return (-1);
+			add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 			add_token(lex, "||", 2);
 			return (i);
 		}
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 		add_token(lex, "|", 3);
 		return (i);
 	}
@@ -65,6 +68,7 @@ static int		is_separator(t_lex *lex, int i)
 		if (lex->line[i] == '>' || lex->line[i] == '<' || lex->line[i] == '&'
 				|| lex->line[i] == '|')
 			return (-1);
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 		add_token(lex, ";", 12);
 		return (i);
 	}
@@ -80,9 +84,7 @@ int				is_token(t_lex *lex, int i)
 		return (j);
 	j = is_or(lex, i);
 	if (j > 0 || j < 0)
-	{
 		return (j);
-	}
 	j = is_redir(lex, i);
 	if (j > 0 || j < 0)
 		return (j);

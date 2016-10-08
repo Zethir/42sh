@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 17:17:24 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/03 20:21:10 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/04 18:19:16 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		is_replace_bis(t_lex *lex, char *str, int i)
 	if (ft_isdigit(lex->line[i]))
 	{
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 		add_token(lex, str, 7);
 		i++;
 		return (i);
@@ -34,6 +35,7 @@ int		is_in_bis(t_lex *lex, char *str, int i)
 	if (ft_isdigit(lex->line[i]))
 	{
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 		add_token(lex, str, 11);
 		i++;
 		return (i);
@@ -49,6 +51,7 @@ int		is_add_bis(t_lex *lex, char *str, int i)
 	if (ft_isdigit(lex->line[i]))
 	{
 		str = ft_strjoin(str, ft_chardup(lex->line[i]));
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 0);
 		add_token(lex, str, 6);
 		i++;
 		return (i);
