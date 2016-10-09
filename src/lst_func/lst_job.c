@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:22:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/09 18:38:58 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/09 21:55:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ void	create_process(t_job *job, t_token *token, int stdio[3])
 void	push_job(t_job *node, t_job **head)
 {
 	t_job	*tmp;
-	t_job	*tmp2;
 
-	tmp2 = *head;
-	if (tmp2->linker == 0)
+	if (*head == NULL)
 	{
 		*head = node;
 		return ;
@@ -68,6 +66,7 @@ void	create_job(t_job *job, t_token *token)
 
 	if (!(new_job = (t_job *)malloc(sizeof(t_job))))
 		return ;
+	new_job->next = NULL;
 	new_job->process = job->process;
 	new_job->linker = token->token_value;
 	push_job(new_job, &job);

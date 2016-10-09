@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:27:10 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/09 18:53:22 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/09 21:10:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ static int		*input_redir(char *filename, int *stdio)
 
 t_token 		*hub_redir(t_job *job, t_token *token)
 {
+	t_token	*tmp;
 	int		*stdio;
 
 	stdio = (int *)malloc(sizeof(int) * 3);
+	tmp = token;
 	while (token)
 	{
 		if (token->token_value == R_ADD ||
@@ -70,7 +72,7 @@ t_token 		*hub_redir(t_job *job, t_token *token)
 			stdio = input_redir(token->next->cmd, stdio);
 		else
 		{
-			create_process(job, token, stdio);
+			create_process(job, tmp, stdio);
 			break;
 		}
 		token = token->next;

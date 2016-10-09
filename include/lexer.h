@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/09 17:11:05 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/09 21:00:21 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 
 typedef enum			e_token_type
 {
-	AND,
-	OR,
-	PIPE,
-	R_ADD,
-	R_ADD_FD,
-	R_TRUNC,
-	R_TRUNC_FD_CLOSE,
-	R_TRUNC_FD,
-	HEREDOC,
-	R_IN,
-	R_IN_FD_CLOSE,
-	R_IN_FD,
-	SEPARATOR
+	AND = 1,
+	OR = 2,
+	PIPE = 3,
+	R_ADD = 4,
+	R_ADD_FD = 5,
+	R_TRUNC = 6,
+	R_TRUNC_FD_CLOSE = 7,
+	R_TRUNC_FD = 8,
+	HEREDOC = 9,
+	R_IN = 10,
+	R_IN_FD_CLOSE = 11,
+	R_IN_FD = 12,
+	SEPARATOR = 13
 }						t_token_type;
 
 typedef struct			s_token

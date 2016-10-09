@@ -6,11 +6,25 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/09 18:39:18 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/09 21:55:14 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
+
+static void	print_job_process(t_job *job)
+{
+	while (job)
+	{
+		while (job->process)
+		{
+			printf("process->cmd = %s\n", job->process->cmd);
+			job->process = job->process->next;
+		}
+		printf("linker = %d\n", job->linker);
+		job = job->next;
+	}
+}
 
 void	parse_cmd(t_hub *info)
 {
@@ -39,4 +53,5 @@ void	parse_cmd(t_hub *info)
 		token = token->next;
 	}
 	info->job = job;
+	print_job_process(job);
 }
