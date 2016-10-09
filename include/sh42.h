@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/08 15:11:41 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/09 18:37:12 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct		s_hub
 	struct s_dlist	*node;
 	struct s_lst	*lst;
 	struct s_lex	*lex;
+	struct s_job	*job;
 	struct s_parse	*parse;
 	struct termios	term;
 }					t_hub;
@@ -73,6 +74,8 @@ t_lst				*delete_elem(t_lst *node);
 t_dlist				*create_node(void);
 t_hub				*stock_struct(t_hub *info, int i);
 t_hub				*init_struct(char **env);
+void				create_job(t_job *job, t_token *token);
+void				create_process(t_job *job, t_token *token, int stdio[3]);
 void				push_node(t_lst *node, t_lst **head);
 void				push_node_bis(t_dlist **head, t_dlist *new_node);
 void				go_to_end_list(t_hub *info);

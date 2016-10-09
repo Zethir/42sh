@@ -6,14 +6,14 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/08 18:54:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/09 17:11:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-typedef enum			e_token
+typedef enum			e_token_type
 {
 	AND,
 	OR,
@@ -28,28 +28,27 @@ typedef enum			e_token
 	R_IN_FD_CLOSE,
 	R_IN_FD,
 	SEPARATOR
-}						t_token;
+}						t_token_type;
 
-typedef struct			s_process
+typedef struct			s_token
 {
 	char				*cmd;
 	char				*token;
-	int					stdio[3];
 	int					token_value;
-	struct s_process	*next;
-}						t_process;
+	struct s_token		*next;
+}						t_token;
 
 typedef struct			s_lex
 {
 	char				*line;
 	int					hd;
 	int					tl;
-	struct s_process	*process;
+	struct s_token		*token;
 }						t_lex;
 
 t_lex				*init_lexer_struct(void);
-t_process			*init_process_struct(void);
-void				add_process(t_lex *lex, char *cmd, char *new_token, int val);
+t_token				*init_token_struct(void);
+void				add_token(t_lex *lex, char *cmd, char *new_token, int val);
 void				check_lexer(t_lex *info);
 void				print_parse_error(t_lex *lex);
 void				free_lex(t_lex *lex);
