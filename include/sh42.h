@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/09 18:37:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/09 18:47:33 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_lst				*delete_elem(t_lst *node);
 t_dlist				*create_node(void);
 t_hub				*stock_struct(t_hub *info, int i);
 t_hub				*init_struct(char **env);
+t_token				*hub_redir(t_job *job, t_token *token);
 void				create_job(t_job *job, t_token *token);
 void				create_process(t_job *job, t_token *token, int stdio[3]);
 void				push_node(t_lst *node, t_lst **head);
