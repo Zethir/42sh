@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 15:22:42 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 16:34:54 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	print_job_process(t_job *job)
 {
 	while (job)
 	{
+		if (job->linker == 0)
+			job = job->next;
 		while (job->process)
 		{
 			printf("process->cmd = %s\n", job->process->cmd);
@@ -47,6 +49,7 @@ void	parse_cmd(t_hub *info)
 		{
 			create_process(job, token, stdio);
 			create_job(job, token);
+			job->process = NULL;
 		}
 		else
 			token = hub_redir(job, token);
