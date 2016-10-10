@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:27:10 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/10 16:26:14 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 17:17:31 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int		*truncate_redir(char *filename, int *stdio)
 {
 	int		fd;
 
+	filename = ft_wipespace(filename);
 	if ((fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0666)) == -1)
 		fd = 1;
 	stdio[0] = 0;
@@ -28,6 +29,7 @@ static int		*append_redir(char *filename, int *stdio)
 {
 	int		fd;
 
+	filename = ft_wipespace(filename);
 	if ((fd = open(filename, O_CREAT | O_WRONLY | O_APPEND, 0666)) == -1)
 		fd = 1;
 	stdio[0] = 0;
@@ -40,6 +42,7 @@ static int		*input_redir(char *filename, int *stdio)
 {
 	int		fd;
 
+	filename = ft_wipespace(filename);
 	if ((fd = open(filename, O_RDONLY)) == -1)
 	{
 		ft_putstr("42sh: No such file: ");
@@ -61,14 +64,14 @@ t_token 		*hub_redir(t_job *job, t_token *token)
 	tmp = token;
 	while (token)
 	{
-		if (token->token_value == R_ADD ||
-				token->token_value == R_ADD_FD)
+		if (token->next && (token->token_value == R_ADD ||
+				token->token_value == R_ADD_FD))
 			stdio = append_redir(token->next->cmd, stdio);
-		else if (token->token_value == R_TRUNC ||
-				token->token_value == R_TRUNC_FD)
+		else if (token->next && (token->token_value == R_TRUNC ||
+				token->token_value == R_TRUNC_FD))
 			stdio = truncate_redir(token->next->cmd, stdio);
-		else if (token->token_value == R_IN ||
-				token->token_value == R_IN_FD)
+		else if (token->next && (token->token_value == R_IN ||
+				token->token_value == R_IN_FD))
 			stdio = input_redir(token->next->cmd, stdio);
 		else
 		{
