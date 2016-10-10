@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 15:30:56 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/10 18:33:18 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void		deal_with_prompt(t_hub *info)
 	check_lexer(info->lex);
 	parse_cmd(info);
 	free_struct_lex(info->lex);
-	//free_parse(info->parse);
 	add_history(info);
 	free_lex(info->lex);
 }

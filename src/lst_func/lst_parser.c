@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:01:38 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/09 17:11:40 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 17:59:21 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ static char        **split_path(t_lst *node)
 
 static void deal_with_path(t_hub *info, char **path)
 {
-	t_lex	*lex;
-
-	lex = info->lex;
 	if (path && *info->parse->argv && info->parse->env)
 	{
 		info->parse->right_path = check_path(path, *info->parse->argv);
@@ -109,7 +106,7 @@ int         init_parse(t_hub *info)
 
 	info->parse = (t_parse *)malloc(sizeof(t_parse));
 	info->parse->env = get_env(info->lst);
-	info->parse->argv = ft_strsplit_ws(info->lex->token->cmd);
+	info->parse->argv = ft_strsplit_ws(process->cmd);
 	if (!(path = (char **)malloc(sizeof(char *) * 7)))
 		return (-1);
 	path = split_path(info->lst);

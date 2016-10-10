@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/10 16:25:53 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 17:53:55 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ typedef struct		s_hub
 	struct s_lst	*lst;
 	struct s_lex	*lex;
 	struct s_job	*job;
-	struct s_parse	*parse;
 	struct termios	term;
+	struct s_parse	*parse;
 }					t_hub;
 
 t_lst				*init_lst(char **env);
