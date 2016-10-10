@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 13:41:53 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 16:46:42 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/10 18:20:50 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,5 @@ int				do_cd(t_lst *node, char **arg)
 	}
 	if (*arg)
 		deal_with_cd_arg(*arg);
-	return (-1);
+	return (0);
 }
