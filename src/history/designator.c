@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/04 15:41:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 18:37:07 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void	deal_with_string(t_hub *info, char **cmd)
 	info->node = dlist;
 }
 
-void	do_designator(t_hub *info, char **cmd)
+int		do_designator(t_hub *info, char **cmd)
 {
 	int		fd;
 	char	*str;
@@ -109,7 +109,7 @@ void	do_designator(t_hub *info, char **cmd)
 	if ((fd = open(str, O_RDONLY)) == -1)
 	{
 		perror("history");
-		exit(-1);
+		return (-1);
 	}
 	if (cmd[0][1] == '-')
 	{
@@ -127,4 +127,5 @@ void	do_designator(t_hub *info, char **cmd)
 			deal_with_string(info, cmd);
 	}
 	close(fd);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/10 11:45:51 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/04 15:52:27 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 18:40:12 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	add_to_list(t_hub *info, t_lst *node, int j)
 	push_node(new_elem, &node);
 }
 
-void	do_export(t_hub *info)
+int		do_export(t_hub *info)
 {
 	t_lex *lex;
 	int		i;
@@ -79,11 +79,11 @@ void	do_export(t_hub *info)
 		while (info->parse->argv[i])
 		{
 			if (check_wrong_identifier(info, i) == 1)
-				return ;
+				return (-1);
 			else if (info->parse->argv[i][0] == '=')
 			{
 				print_identifier_error(info, i);
-				return ;
+				return (-1);
 			}
 			if (check_local_variable(info, i) == 0)
 				add_to_list(info, info->lst, i);
@@ -92,4 +92,5 @@ void	do_export(t_hub *info)
 	}
 	else
 		print_local(info->lst);
+	return (0);
 }

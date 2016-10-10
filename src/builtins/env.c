@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/03 16:30:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 18:24:00 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,5 @@ int			deal_with_env(t_hub *info, char **arg)
 	}
 	else
 		print_env(info->lst);
-	return (-1);
+	return (0);
 }

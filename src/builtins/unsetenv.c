@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 17:12:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 16:48:17 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/10 18:26:59 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int			do_unsetenv(t_lst *node, char **arg)
 	arg++;
 	tmp = node;
 	if (!*arg)
+	{
 		ft_putendl_fd("unsetenv: Too few arguments.", 2);
+		return (-1);
+	}
 	else
 	{
 		while (*arg)
@@ -34,5 +37,5 @@ int			do_unsetenv(t_lst *node, char **arg)
 			arg++;
 		}
 	}
-	return (-1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/03 15:47:55 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 18:38:08 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			do_history(t_hub *info, char **cmd)
 	if ((fd = open(str, O_RDONLY)) == -1)
 	{
 		perror("history");
-		exit(-1);
+		return (-1);
 	}
 	if (!cmd[1])
 	{
@@ -64,7 +64,7 @@ int			do_history(t_hub *info, char **cmd)
 			history_option(info, cmd, fd);
 	}
 	close(fd);
-	return (-1);
+	return (0);
 }
 
 void		add_history(t_hub *info)
