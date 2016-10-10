@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 17:42:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 18:10:14 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 16:53:14 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int					ft_strccmp(const char *s1, const char *s2, char c);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int value, int base);
 char				*ft_chardup(const char c);
+char				*ft_wipespace(char *str);
 size_t				ft_nbrlen(int n);
 
 #endif
