@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 18:33:45 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 18:43:10 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@
 	}
 }*/
 
-void	exec_process(t_hub *info, t_process *process, int *iofile)
+static void	exec_process(t_hub *info, t_process *process, int *iofile)
 {
-	init_parse(info);
+	init_parse(info, process);
 	if (check_builtin(info->parse->argv[0]))
 	{
 		process->stdio[0] = iofile[0];
@@ -48,7 +48,7 @@ void	exec_process(t_hub *info, t_process *process, int *iofile)
 	free(info->parse);
 }
 
-void	launch_process(t_hub *info, t_job *job)
+static void	launch_process(t_hub *info, t_job *job)
 {
 	t_process	*process;
 	int			iofile[2];

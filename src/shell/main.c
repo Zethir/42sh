@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 18:33:18 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 18:40:44 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void		deal_with_prompt(t_hub *info)
 	info->lex->token = init_token_struct();
 	check_lexer(info->lex);
 	parse_cmd(info);
+	exec_job(info);
 	free_struct_lex(info->lex);
 	add_history(info);
 	free_lex(info->lex);

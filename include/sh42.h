@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/10 17:53:55 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 18:45:20 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ t_dlist				*create_node(void);
 t_hub				*stock_struct(t_hub *info, int i);
 t_hub				*init_struct(char **env);
 t_token				*hub_redir(t_job *job, t_token *token);
+void				launch_builtin(t_hub *info, t_process *process);
+void				launch_bin(t_hub *info, t_process *process);
+void				exec_job(t_hub *info);
 void				create_job(t_job *job, t_token *token);
 void				create_process(t_job *job, t_token *token, int stdio[3]);
 void				push_node(t_lst *node, t_lst **head);
@@ -100,12 +103,12 @@ void				do_builtins(t_hub *info);
 void				parse_cmd(t_hub *info);
 void				exec_pipe(t_hub *info);
 void				print_identifier_error(t_hub *info, int i);
+void				init_parse(t_hub *info, t_process *process);
 int					check_wrong_identifier(t_hub *info, int j);
 int					do_cd(t_lst *node, char **arg);
 int					do_setenv(t_lst *node, char **arg);
 int					do_unsetenv(t_lst *node, char **arg);
 int					arg_in_dir(t_lst *node, char *arg);
-int					init_parse(t_hub *info);
 int					get_index(t_lst *node);
 int					get_index(t_lst *node);
 int					do_history(t_hub *info, char **cmd);
