@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 18:43:10 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 19:09:12 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,24 @@
 	}
 }*/
 
+static int	job_success(t_job *job)
+{
+	t_process *process;
+
+	process = job->process;
+	while (process)
+	{
+		if (process->completed == 0)
+			return (0);
+		process = process->next;
+	}
+	return (1);
+}
+
 static void	exec_process(t_hub *info, t_process *process, int *iofile)
 {
 	init_parse(info, process);
-	if (check_builtin(info->parse->argv[0]))
+	if (check_builtins(info->parse->argv[0]))
 	{
 		process->stdio[0] = iofile[0];
 		process->stdio[1] = iofile[1];
@@ -46,6 +60,10 @@ static void	exec_process(t_hub *info, t_process *process, int *iofile)
 		launch_bin(info, process);
 	}
 	free(info->parse);
+	if (iofile[0] != 0)
+		close(iofile[0]);
+	if (iofile[1] != 1)
+		close(iofile[1]);
 }
 
 static void	launch_process(t_hub *info, t_job *job)
@@ -56,19 +74,20 @@ static void	launch_process(t_hub *info, t_job *job)
 
 	process = job->process;
 	iofile[0] = 0;
-	while (process)
+	while (job->process)
 	{
-		if (process->next)
+		if (job->process->next)
 		{
 			pipe(pipefd);
 			iofile[1] = pipefd[1];
 		}
 		else
 			iofile[1] = 1;
-		exec_process(info, process, iofile);
+		exec_process(info, job->process, iofile);
 		iofile[0] = pipefd[0];
-		process = process->next;
+		job->process = job->process->next;
 	}
+	job->process = process;
 }
 
 void	exec_job(t_hub *info)
@@ -81,7 +100,7 @@ void	exec_job(t_hub *info)
 		if (job->linker == 0)
 			job = job->next;
 		launch_process(info, job);
-		if (!job_sucess(job) && job->linker == AND)
+		if (!job_success(job) && job->linker == AND)
 		{
 			while (job->next && job->next->linker == AND)
 				job = job->next;

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 18:40:35 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/10 19:04:47 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		do_builtins(t_hub *info)
 	char *cmd;
 
 	cmd = info->parse->argv[0];
-	if (ft_strcmp(cmd, "env") == 0)
+/*	if (ft_strcmp(cmd, "env") == 0)
 		return (deal_with_env(info, info->parse->argv));
 	else if (ft_strcmp(cmd, "setenv") == 0)
 		return (do_setenv(info->lst, info->parse->argv));
@@ -59,5 +59,7 @@ int		do_builtins(t_hub *info)
 		return (do_exit(info->parse->argv));
 	else if (ft_strcmp(cmd, "export") == 0)
 		return (do_export(info));
-	return (-1);
+	return (-1);*/
+	printf("info->parse->argv[0] = %s\n", info->parse->argv[0]);
+	return (0);
 }

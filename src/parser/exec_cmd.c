@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 18:32:15 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 18:58:22 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,13 @@ void		launch_bin(t_hub *info, t_process *process)
 	if (info->parse->pid == 0)
 	{
 		get_new_stdio(process);
-		execve(info->parse->right_path, info->parse->argv, info->parse->env);
-		ft_putstr("42sh: command not found: ");
-		ft_putendl(p->argv[0]);
-		exit(1);
+		if (execve(info->parse->right_path, info->parse->argv, info->parse->env) < 0)
+		{
+			ft_putstr("42sh: command not found: ");
+			ft_putendl(info->parse->argv[0]);
+			exit(1);
+		}
+		else
+			process->completed = 1;
 	}
 }
