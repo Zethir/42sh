@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:22:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 16:33:43 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 18:19:51 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	create_process(t_job *job, t_token *token, int stdio[3])
 	new_elem->stdio[0] = stdio[0];
 	new_elem->stdio[1] = stdio[1];
 	new_elem->stdio[2] = stdio[2];
+	new_elem->completed = 0;
 	new_elem->cmd = ft_strdup(token->cmd);
 	push_process(new_elem, &job->process);
 }

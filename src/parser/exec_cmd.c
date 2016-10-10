@@ -6,26 +6,52 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/08 15:32:54 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 18:32:15 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-void	exec_cmd(t_hub *info)
+static void	get_new_stdio(t_process *process)
 {
-	init_parse(info);
-	if (check_builtins(info->parse->argv[0]) == 1)
-		do_builtins(info);
-	else if ((info->parse->pid = fork()) == 0)
+	if (process->stdio[0] != 0)
+		dup2(process->stdio[0], 0);
+	if (process->stdio[1] != 1)
+		dup2(process->stdio[1], 1);
+	if (process->stdio[2] != 2)
+		dup2(process->stdio[2], 2);
+/*	if (.dead_end)
+		close(0);
+	if (s[1].dead_end)
+		close(1);
+	if (s[2].dead_end)
+		close(2);*/
+}
+
+void		launch_builtin(t_hub *info, t_process *process)
+{
+	int		save_stdio[3];
+	int		ret;
+
+	save_stdio[0] = dup(0);
+	save_stdio[1] = dup(1);
+	save_stdio[2] = dup(2);
+	get_new_stdio(process);
+	if ((ret = do_builtins(info)) == 0)
+		process->completed = 1;
+	dup2(save_stdio[0], 0);
+	dup2(save_stdio[1], 1);
+	dup2(save_stdio[2], 2);
+}
+
+void		launch_bin(t_hub *info, t_process *process)
+{
+	if (info->parse->pid == 0)
 	{
-		if (execve(info->parse->right_path, info->parse->argv, info->parse->env) < 0)
-		{
-			no_command_error(info->parse->argv[0]);
-			exit (-1);
-		}
+		get_new_stdio(process);
+		execve(info->parse->right_path, info->parse->argv, info->parse->env);
+		ft_putstr("42sh: command not found: ");
+		ft_putendl(p->argv[0]);
+		exit(1);
 	}
-	else if (info->parse->pid < 0)
-		exit (-1);
-	wait(0);
 }

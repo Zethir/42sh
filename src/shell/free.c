@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/09 20:39:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 18:08:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	free_parse(t_parse *parse)
 	if (parse->argv)
 		ft_strdel(parse->argv);
 	parse->pid = 0;
-	parse->bl = 0;
 	free(parse);
 	parse = NULL;
 }
