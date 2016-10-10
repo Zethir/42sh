@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/10 17:53:55 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/10 18:43:43 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void				deal_with_file(t_hub *info);
 void				do_option(t_hub *info, char **cmd);
 void				add_to_file(t_hub *info, char *str);
 void				option_r(t_hub *info, char *str);
-void				do_designator(t_hub *info, char **cmd);
 void				get_prompt(t_lst *node);
 void				add_elem(t_lst *node, char *arg);
 void				free_list(t_lst *node);
@@ -95,11 +94,12 @@ void				go_to_end(t_hub *info, char *buff);
 void				exec_cmd(t_hub *info);
 void				print_env(t_lst *node);
 void				restore_env(t_lst *node, char **save);
-void				do_export(t_hub *info);
-void				do_builtins(t_hub *info);
 void				parse_cmd(t_hub *info);
 void				exec_pipe(t_hub *info);
 void				print_identifier_error(t_hub *info, int i);
+int					do_designator(t_hub *info, char **cmd);
+int					do_export(t_hub *info);
+int					do_builtins(t_hub *info);
 int					check_wrong_identifier(t_hub *info, int j);
 int					do_cd(t_lst *node, char **arg);
 int					do_setenv(t_lst *node, char **arg);
