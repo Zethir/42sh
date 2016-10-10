@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 17:15:22 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/10 17:17:50 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	print_job_process(t_job *job)
 {
 	while (job)
 	{
+		if (job->linker == 0)
+			job = job->next;
 		while (job->process)
 		{
 			printf("process->cmd = %s\n", job->process->cmd);

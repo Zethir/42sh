@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:22:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 16:52:21 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/10 17:18:20 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	create_job(t_job *job, t_token *token)
 	if (!(new_job = (t_job *)malloc(sizeof(t_job))))
 		return ;
 	new_job->next = NULL;
-	new_job->process = job->process;
 	new_job->linker = token->token_value;
+	new_job->process = job->process;
 	push_job(new_job, &job);
 }
 
