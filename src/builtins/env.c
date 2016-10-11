@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:34:26 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/11 18:51:22 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	*cmp_line(t_hub *info, char **arg, char *save)
 		if (check_caract(*arg, '=') == 1)
 			add_elem(info->lst, *arg);
 		else if (check_caract(*arg, '=') != 1)
-			exec_enc(info, *arg);
+			exec_env(info, *arg);
 		else
 			print_error_opt(*arg);
 	}
