@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 17:35:13 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/11 18:13:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	exec_process(t_hub *info, t_process *process, int *iofile)
 	}
 	else if ((info->parse->pid = fork()) == 0)
 	{
-		if (iofile != 0)
+		if (iofile[0] != 0)
 			process->stdio[0] = iofile[0];
 		if (iofile[1] != 1)
 			process->stdio[1] = iofile[1];
@@ -64,6 +64,7 @@ static void	exec_process(t_hub *info, t_process *process, int *iofile)
 		close(iofile[0]);
 	if (iofile[1] != 1)
 		close(iofile[1]);
+	wait(0);
 }
 
 static void	launch_process(t_hub *info, t_job *job)
@@ -100,14 +101,14 @@ void	exec_job(t_hub *info)
 		if (job->linker == 0)
 			job = job->next;
 		launch_process(info, job);
-		if (!job_success(job) && job->linker == AND)
+		if (job_success(job) == 1 && job->linker == AND)
 		{
-			while (job->next && job->next->linker == AND)
+			while (job->next && job->linker == AND)
 				job = job->next;
 		}
-		else if (job_success(job) && job->linker == OR)
+		else if (job_success(job) == 0 && job->linker == OR)
 		{
-			while (job->next && job->next->linker == OR)
+			while (job->next && job->linker == OR)
 				job = job->next;
 		}
 		job = job->next;
@@ -122,6 +123,8 @@ void	parse_cmd(t_hub *info)
 	token = info->lex->token;
 	info->job = init_job();
 	job = info->job;
+	if (!(info->stdio = (int *)malloc(sizeof(int) * 3)))
+		return (NULL);
 	info->stdio[0] = 0;
 	info->stdio[1] = 1;
 	info->stdio[1] = 2;
