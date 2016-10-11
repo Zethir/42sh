@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 18:58:22 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/11 18:21:12 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void	get_new_stdio(t_process *process)
 		dup2(process->stdio[1], 1);
 	if (process->stdio[2] != 2)
 		dup2(process->stdio[2], 2);
-/*	if (.dead_end)
+	/*	if (.dead_end)
 		close(0);
-	if (s[1].dead_end)
+		if (s[1].dead_end)
 		close(1);
-	if (s[2].dead_end)
+		if (s[2].dead_end)
 		close(2);*/
 }
 
@@ -46,16 +46,26 @@ void		launch_builtin(t_hub *info, t_process *process)
 
 void		launch_bin(t_hub *info, t_process *process)
 {
-	if (info->parse->pid == 0)
+	get_new_stdio(process);
+	if (execve(info->parse->right_path, info->parse->argv, info->parse->env) < 0)
 	{
-		get_new_stdio(process);
-		if (execve(info->parse->right_path, info->parse->argv, info->parse->env) < 0)
-		{
-			ft_putstr("42sh: command not found: ");
-			ft_putendl(info->parse->argv[0]);
-			exit(1);
-		}
-		else
-			process->completed = 1;
+		ft_putstr("42sh: command not found: ");
+		ft_putendl(info->parse->argv[0]);
+		exit(1);
+	}
+	else
+		process->completed = 1;
+}
+
+void		exec_env(t_hub *info, char *arg)
+{
+	init_parse(info, arg);
+	if (check_builtins(arg))
+		do_builtins(info);
+	else if (execve(info->parse->right_path, info->parse->argv, info->parse->env) < 0)
+	{
+		ft_putstr("42sh: command not found: ");
+		ft_putendl(info->parse->argv[0]);
+		return ;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 17:34:43 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/11 18:21:45 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ static int	check_i_opt(t_hub *info, char **arg)
 		}
 		delete_env(info->lst);
 		arg++;
-		info->job->process = *arg;
-		exec_process(info, info->job->process, info->stdio);
+		exec_env(info, *arg);
 		return (0);
 	}
 	else
@@ -90,8 +89,7 @@ static int	check_u_opt(t_hub *info, char **arg, char **save)
 			print_error_opt(*arg);
 		arg++;
 		if (*arg)
-			printf("hello\n");
-		//	exec_cmd(info);
+			exec_env(info, *arg);
 		else
 			print_env(info->lst);
 		return (0);
