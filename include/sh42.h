@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/10 18:48:05 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/11 17:23:20 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct		s_dlist
 
 typedef struct		s_hub
 {
+	int				*stdio;
 	struct s_dlist	*node;
 	struct s_lst	*lst;
 	struct s_lex	*lex;
@@ -74,7 +75,7 @@ t_lst				*delete_elem(t_lst *node);
 t_dlist				*create_node(void);
 t_hub				*stock_struct(t_hub *info, int i);
 t_hub				*init_struct(char **env);
-t_token				*hub_redir(t_job *job, t_token *token);
+t_token				*hub_redir(t_hub *info, t_token *token);
 void				launch_builtin(t_hub *info, t_process *process);
 void				launch_bin(t_hub *info, t_process *process);
 void				exec_job(t_hub *info);

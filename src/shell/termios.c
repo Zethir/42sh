@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/08 15:11:33 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/11 17:26:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ t_hub	*init_struct(char **env)
 
 	if (!(info = (t_hub *)malloc(sizeof(t_hub))))
 		return (NULL);
+	if (!(info->stdio = (int *)malloc(sizeof(int) * 3)))
+		return (NULL);
+	info->stdio[0] = 0;
+	info->stdio[1] = 1;
+	info->stdio[2] = 2;
 	info->lst = init_lst(env);
 	if (!(info->node = (t_dlist *)malloc(sizeof(t_dlist))))
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 19:09:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/11 17:35:13 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,30 +118,30 @@ void	parse_cmd(t_hub *info)
 {
 	t_job		*job;
 	t_token		*token;
-	int			stdio[3];
 
 	token = info->lex->token;
 	info->job = init_job();
 	job = info->job;
-	stdio[0] = 0;
-	stdio[1] = 1;
-	stdio[2] = 2;
+	info->stdio[0] = 0;
+	info->stdio[1] = 1;
+	info->stdio[1] = 2;
 	while (token)
 	{
 		if (token->token_value == PIPE)
 		{
-			create_process(job, token, stdio);
+			create_process(job, token, info->stdio);
+			token = token->next;
 		}
 		else if (token->token_value == AND || token->token_value == OR ||
 				token->token_value == SEPARATOR)
 		{
-			create_process(job, token, stdio);
+			create_process(job, token, info->stdio);
 			create_job(job, token);
 			job->process = NULL;
+			token = token->next;
 		}
 		else
-			token = hub_redir(job, token);
-		token = token->next;
+			token = hub_redir(info, token);
 	}
 	info->job = job;
 //	print_job_process(job);
