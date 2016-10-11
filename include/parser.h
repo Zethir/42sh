@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:20:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 17:53:45 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/11 18:16:23 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct			s_job
 }						t_job;
 
 t_job	*init_job(void);
+void	free_job(t_job *job);
 void	free_parse(t_parse *parse);
 void	push_process(t_process *node, t_process **head);
 void	push_job(t_job *node, t_job **head);
