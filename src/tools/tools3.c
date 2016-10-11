@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/17 00:06:48 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/22 14:27:31 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/11 18:48:56 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,9 @@ char	*get_home(t_lst *node)
 		node = node->next;
 	}
 	return (str);
+}
+
+void	join_env(char **arg)
+{
+	printf("arg = %s\n", *arg);
 }

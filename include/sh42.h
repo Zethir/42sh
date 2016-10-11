@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/11 18:16:10 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/11 18:50:26 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ t_dlist				*create_node(void);
 t_hub				*stock_struct(t_hub *info, int i);
 t_hub				*init_struct(char **env);
 t_token				*hub_redir(t_hub *info, t_token *token);
-void				exec_env(t_hub *info, char *arg);
+void				join_env(char **arg);
+void				exec_env(t_hub *info, char **arg);
 void				exec_process(t_hub *info, t_process *process, int *iofile);
 void				launch_builtin(t_hub *info, t_process *process);
 void				launch_bin(t_hub *info, t_process *process);

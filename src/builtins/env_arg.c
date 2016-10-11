@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:21:45 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/11 18:54:10 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,11 @@ static void	delete_env(t_lst *node)
 
 static int	check_i_opt(t_hub *info, char **arg)
 {
-	int i;
-
-	i = 0;
-	if (arg[i][0] == '-' && arg[i][1] == 'i' && !arg[i][2] && arg[i + 1])
+	if (arg[0][0] == '-' && arg[0][1] == 'i' && !arg[0][2] && arg[1])
 	{
-		while (arg[i])
-			i++;
-		if (i > 3)
-		{
-			ft_putendl_fd("env: Too many arguments.", 2);
-			return (0);
-		}
 		delete_env(info->lst);
 		arg++;
-		exec_env(info, *arg);
+		exec_env(info, arg);
 		return (0);
 	}
 	else
@@ -71,25 +61,15 @@ static int	check_i_opt(t_hub *info, char **arg)
 
 static int	check_u_opt(t_hub *info, char **arg, char **save)
 {
-	int i;
-
-	i = 0;
-	if (arg[i][0] == '-' && arg[i][1] == 'u' && !arg[i][2] && arg[i + 1])
+	if (arg[0][0] == '-' && arg[0][1] == 'u' && !arg[0][2] && arg[1])
 	{
-		while (arg[i])
-			i++;
-		if (i > 3)
-		{
-			ft_putendl_fd("env: Too many arguments.", 2);
-			return (0);
-		}
 		arg++;
 		save = check_arg(info->lst, *arg, save);
 		if (!save || !(*save))
 			print_error_opt(*arg);
 		arg++;
 		if (*arg)
-			exec_env(info, *arg);
+			exec_env(info, arg);
 		else
 			print_env(info->lst);
 		return (0);
