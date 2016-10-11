@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:20:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:16:23 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/11 18:46:27 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct			s_parse
 typedef struct			s_process
 {
 	char				*cmd;
-	int					stdio[3];
+	int					*stdio;
 	char				aggr;
 	int					completed;
 	struct s_process	*next;

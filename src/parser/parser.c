@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:13:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/11 18:48:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,10 @@ void	parse_cmd(t_hub *info)
 	info->job = init_job();
 	job = info->job;
 	if (!(info->stdio = (int *)malloc(sizeof(int) * 3)))
-		return (NULL);
+		return ;
 	info->stdio[0] = 0;
 	info->stdio[1] = 1;
-	info->stdio[1] = 2;
+	info->stdio[2] = 2;
 	while (token)
 	{
 		if (token->token_value == PIPE)
