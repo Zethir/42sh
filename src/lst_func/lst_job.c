@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:22:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 18:34:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/11 18:48:54 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	create_process(t_job *job, t_token *token, int stdio[3])
 	if (!(new_elem = (t_process *)malloc(sizeof(t_process))))
 		return ;
 	new_elem->next = NULL;
+	if (!(new_elem->stdio = (int *)malloc(sizeof(int) * 3)))
+		return ;
 	new_elem->stdio[0] = stdio[0];
 	new_elem->stdio[1] = stdio[1];
 	new_elem->stdio[2] = stdio[2];
