@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:36:11 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/11 18:49:15 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,10 @@ void		launch_bin(t_hub *info, t_process *process)
 		process->completed = 1;
 }
 
-void		exec_env(t_hub *info, char *arg)
+void		exec_env(t_hub *info, char **arg)
 {
 	init_parse(info, arg);
+	join_env(arg);
 	if (check_builtins(arg))
 		do_builtins(info);
 	else if (execve(info->parse->right_path, info->parse->argv, info->parse->env) < 0)
