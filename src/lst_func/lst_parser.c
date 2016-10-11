@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 14:01:38 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/10 18:44:53 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/11 18:03:55 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ static void deal_with_path(t_hub *info, char **path)
 		info->parse->right_path = ft_strdup("");
 }
 
-void         init_parse(t_hub *info, t_process *process)
+void         init_parse(t_hub *info, char *cmd)
 {
 	char        **path;
 
 	info->parse = (t_parse *)malloc(sizeof(t_parse));
 	info->parse->env = get_env(info->lst);
-	info->parse->argv = ft_strsplit_ws(process->cmd);
+	info->parse->argv = ft_strsplit_ws(cmd);
 	if (!(path = (char **)malloc(sizeof(char *) * 7)))
 		return ;
 	path = split_path(info->lst);
