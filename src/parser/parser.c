@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 19:09:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/11 15:09:57 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	exec_process(t_hub *info, t_process *process, int *iofile)
 		close(iofile[0]);
 	if (iofile[1] != 1)
 		close(iofile[1]);
+	wait(0);
 }
 
 static void	launch_process(t_hub *info, t_job *job)
