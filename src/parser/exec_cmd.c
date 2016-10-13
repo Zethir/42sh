@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 19:03:05 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/13 15:21:21 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void		launch_bin(t_hub *info, t_process *process)
 		ft_putendl(info->parse->argv[0]);
 		exit(1);
 	}
-	else
-		process->completed = 1;
 }
 
 void		exec_env(t_hub *info, char **arg)
@@ -72,4 +70,16 @@ void		exec_env(t_hub *info, char **arg)
 			exit(1);
 		}
 	}
+}
+
+void		wait_for_process(t_process *process)
+{
+	int		status;
+
+	status = 0;
+	wait(&status);
+	if (WIFEXITED(status))
+		process->completed = 1;
+	if (WIFSIGNALED(status))
+		process->completed = 1;
 }
