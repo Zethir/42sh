@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 16:32:13 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/13 16:44:49 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void		print_env(t_lst *node)
 	t_lst *tmp;
 
 	tmp = node;
-	printf("toto\n");
 	while (node)
 	{
 		if (!node->line)

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:38:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 13:38:53 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/13 18:15:57 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,16 @@ static void deal_with_path(t_hub *info, char **path)
 			info->parse->right_path = ft_strjoin(info->parse->right_path, *info->parse->argv);
 		}
 		else
+		{
 			info->parse->right_path = ft_strdup("");
+			info->parse->right_path = ft_strjoin(info->parse->right_path, *info->parse->argv);
+		}
 	}
 	else if (*info->parse->argv && info->parse->env)
+	{
 		info->parse->right_path = ft_strdup("");
+		info->parse->right_path = ft_strjoin(info->parse->right_path, *info->parse->argv);
+	}
 }
 
 void         init_parse(t_hub *info, char *cmd)

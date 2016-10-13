@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 16:30:57 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/13 18:16:00 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,7 @@ static int	check_u_opt(t_hub *info, char **arg, char **save)
 		if (*arg)
 			exec_env(info, arg);
 		else
-		{
-			printf("hello 3\n");
 			print_env(info->lst);
-		}
 		return (0);
 	}
 	else

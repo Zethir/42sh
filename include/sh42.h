@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/13 16:38:53 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/13 16:45:16 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ t_hub				*stock_struct(t_hub *info, int i);
 t_hub				*init_struct(char **env);
 t_token				*hub_redir(t_hub *info, t_token *token);
 void				init_stdio(t_hub *info);
-void				join_env(char **arg);
 void				exec_env(t_hub *info, char **arg);
 void				exec_process(t_hub *info, t_process *process, int *iofile);
 void				launch_builtin(t_hub *info, t_process *process);
