@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 19:03:05 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/13 14:23:24 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		launch_bin(t_hub *info, t_process *process)
 
 void		exec_env(t_hub *info, char **arg)
 {
-	join_env(arg);
+	*arg = join_env(arg);
 	init_parse(info, *arg);
 	if (check_builtins(*arg))
 		do_builtins(info);
