@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 15:24:31 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/13 16:38:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,13 @@ void		exec_env(t_hub *info, char **arg)
 void		wait_for_process(t_process *process)
 {
 	int		status;
-
+	
 	status = 0;
 	wait(&status);
-	if (WIFEXITED(status))
+	if (WIFEXITED(status) && status == 0)
 		process->completed = 1;
+	if (WIFEXITED(status) && status != 0)
+		process->completed = 0;
 	if (WIFSIGNALED(status))
 		process->completed = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 15:22:34 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/13 16:21:52 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void		exec_process(t_hub *info, t_process *process, int *iofile)
 		launch_bin(info, process);
 	}
 	wait_for_process(process);
-	printf("process->completed = %d\n", process->completed);
 	free(info->parse);
 	if (iofile[0] != 0)
 		close(iofile[0]);
@@ -108,22 +107,20 @@ void	parse_cmd(t_hub *info)
 	token = info->lex->token;
 	info->job = init_job();
 	job = info->job;
-	if (!(info->stdio = (int *)malloc(sizeof(int) * 3)))
-		return ;
-	info->stdio[0] = 0;
-	info->stdio[1] = 1;
-	info->stdio[2] = 2;
+	init_stdio(info);
 	while (token)
 	{
 		if (token->token_value == PIPE)
 		{
 			create_process(job, token, info->stdio);
+			init_stdio(info);
 			token = token->next;
 		}
 		else if (token->token_value == AND || token->token_value == OR ||
 				token->token_value == SEPARATOR)
 		{
 			create_process(job, token, info->stdio);
+			init_stdio(info);
 			create_job(job, token);
 			job->process = NULL;
 			token = token->next;

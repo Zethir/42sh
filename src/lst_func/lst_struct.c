@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:17:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:18:00 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/13 16:19:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,13 @@ t_hub	*init_struct(char **env)
 	if (init_term(info) == -1)
 		return (NULL);
 	return (info);
+}
+
+void	init_stdio(t_hub *info)
+{
+	if (!(info->stdio = (int *)malloc(sizeof(int) * 3)))
+		return ;
+	info->stdio[0] = 0;
+	info->stdio[1] = 1;
+	info->stdio[2] = 2;
 }
