@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/13 16:21:19 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/13 16:38:53 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ int					deal_with_env(t_hub *info, char **arg);
 char				*get_home(t_lst *node);
 char				*deal_with_termcap(t_hub *info);
 char				**deal_with_opt(t_hub *info, char **arg);
+char				*join_env(char **arg);
 
 #endif

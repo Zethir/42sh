@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:57:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/13 14:25:34 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ static char	*cmp_line(t_hub *info, char **arg, char *save)
 		if (check_caract(*arg, '=') == 1)
 			add_elem(info->lst, *arg);
 		else if (check_caract(*arg, '=') != 1)
+		{
 			exec_env(info, arg);
+			save = "lol";
+		}
 		else
 			print_error_opt(*arg);
 	}
@@ -71,6 +74,11 @@ static char	**deal_with_arg(t_hub *info, char **arg)
 	while (*arg)
 	{
 		save[i] = cmp_line(info, arg, save[i]);
+		if (ft_strcmp(save[i], "lol") == 0)
+		{
+			save[i] = NULL;
+			break;
+		}
 		if (!save[i] && *arg && check_caract(*arg, '=') == 1)
 			save[i] = ft_strdup("");
 		if ((!save[i] || ft_strlen(save[i]) == 0)
