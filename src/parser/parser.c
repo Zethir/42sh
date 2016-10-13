@@ -6,27 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:50:28 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/13 15:22:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
-
-/*static void	print_job_process(t_job *job)
-{
-	while (job)
-	{
-		if (job->linker == 0)
-			job = job->next;
-		while (job->process)
-		{
-			printf("process->cmd = %s\n", job->process->cmd);
-			job->process = job->process->next;
-		}
-		printf("linker = %d\n", job->linker);
-		job = job->next;
-	}
-}*/
 
 static int	job_success(t_job *job)
 {
@@ -59,12 +43,13 @@ void		exec_process(t_hub *info, t_process *process, int *iofile)
 			process->stdio[1] = iofile[1];
 		launch_bin(info, process);
 	}
+	wait_for_process(process);
+	printf("process->completed = %d\n", process->completed);
 	free(info->parse);
 	if (iofile[0] != 0)
 		close(iofile[0]);
 	if (iofile[1] != 1)
 		close(iofile[1]);
-	wait(0);
 }
 
 static void	launch_process(t_hub *info, t_job *job)
@@ -101,12 +86,12 @@ void	exec_job(t_hub *info)
 		if (job->linker == 0)
 			job = job->next;
 		launch_process(info, job);
-		if (job_success(job) == 1 && job->linker == AND)
+		if (!job_success(job) && job->linker == AND)
 		{
 			while (job->next && job->linker == AND)
 				job = job->next;
 		}
-		else if (job_success(job) == 0 && job->linker == OR)
+		else if (job_success(job) && job->linker == OR)
 		{
 			while (job->next && job->linker == OR)
 				job = job->next;
@@ -147,5 +132,4 @@ void	parse_cmd(t_hub *info)
 			token = hub_redir(info, token);
 	}
 	info->job = job;
-//	print_job_process(job);
 }
