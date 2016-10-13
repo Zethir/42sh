@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 14:25:34 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/13 16:32:13 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void		print_env(t_lst *node)
 	t_lst *tmp;
 
 	tmp = node;
+	printf("toto\n");
 	while (node)
 	{
 		if (!node->line)
@@ -97,18 +98,22 @@ static char	**deal_with_arg(t_hub *info, char **arg)
 void		restore_env(t_lst *node, char **save)
 {
 	t_lst	*tmp;
+	int		i;
 
 	tmp = node;
-	while (*save && *save[0])
+	i = 0;
+	while (save[i])
 	{
 		while (node)
 		{
-			if (ft_strncmp(node->name, *save, ft_strlen(node->name)) == 0)
-				node->line = ft_strdup(*save);
+			if (ft_strncmp(node->name, save[i], ft_strlen(node->name)) == 0)
+			{
+				node->line = ft_strdup(save[i]);
+			}
 			node = node->next;
 		}
 		node = tmp;
-		save++;
+		i++;
 	}
 }
 

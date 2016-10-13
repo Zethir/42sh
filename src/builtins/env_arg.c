@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 13:50:43 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/13 16:30:57 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ char		**deal_with_opt(t_hub *info, char **arg)
 {
 	char	**save;
 
-	save = (char **)malloc(sizeof(char *) * 1);
-	if (!save)
+	if (!(save = (char **)malloc(sizeof(char *) * 2)))
 		return (NULL);
+	save[1] = NULL;
 	if (check_u_opt(info, arg, save) == 1)
 	{
 		if (check_i_opt(info, arg) == 1)
