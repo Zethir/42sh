@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:49:15 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/11 19:03:05 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,17 @@ void		launch_bin(t_hub *info, t_process *process)
 
 void		exec_env(t_hub *info, char **arg)
 {
-	init_parse(info, arg);
 	join_env(arg);
-	if (check_builtins(arg))
+	init_parse(info, *arg);
+	if (check_builtins(*arg))
 		do_builtins(info);
-	else if (execve(info->parse->right_path, info->parse->argv, info->parse->env) < 0)
+	else if ((info->parse->pid = fork()) == 0)
 	{
-		ft_putstr("42sh: command not found: ");
-		ft_putendl(info->parse->argv[0]);
-		return ;
+		if (execve(info->parse->right_path, info->parse->argv, info->parse->env) < 0)
+		{
+			ft_putstr("42sh: command not found: ");
+			ft_putendl(info->parse->argv[0]);
+			exit(1);
+		}
 	}
 }

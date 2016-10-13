@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/17 00:06:48 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:48:56 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/13 13:40:12 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,15 @@ char	*get_home(t_lst *node)
 
 void	join_env(char **arg)
 {
-	printf("arg = %s\n", *arg);
+	char *res;
+
+	res = NULL;
+	printf("hello\n");
+	printf("arg[0] = %s\n", arg[0]);
+	if (arg[1])
+	{
+		res = ft_strjoin(arg[0], " ");
+		res = ft_strjoin(res, arg[1]);
+		printf("res = %s\n", res);
+	}
 }
