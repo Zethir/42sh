@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/13 16:45:16 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/14 20:52:47 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct		s_dlist
 typedef struct		s_hub
 {
 	int				*stdio;
+	int				closefd;
 	struct s_dlist	*node;
 	struct s_lst	*lst;
 	struct s_lex	*lex;
@@ -77,25 +78,24 @@ t_hub				*stock_struct(t_hub *info, int i);
 t_hub				*init_struct(char **env);
 t_token				*hub_redir(t_hub *info, t_token *token);
 void				init_stdio(t_hub *info);
-void				exec_env(t_hub *info, char **arg);
+void				exec_env(t_hub *info, char *arg);
 void				exec_process(t_hub *info, t_process *process, int *iofile);
 void				launch_builtin(t_hub *info, t_process *process);
 void				launch_bin(t_hub *info, t_process *process);
-void				exec_job(t_hub *info);
 void				create_job(t_job *job, t_token *token);
-void				create_process(t_job *job, t_token *token, int stdio[3]);
+void				create_process(t_job *job, t_token *token, t_hub *info);
 void				push_node(t_lst *node, t_lst **head);
 void				push_node_bis(t_dlist **head, t_dlist *new_node);
 void				go_to_end_list(t_hub *info);
 void				add_history(t_hub *info);
 void				deal_with_file(t_hub *info);
 void				do_option(t_hub *info, char **cmd);
-void				add_to_file(t_hub *info, char *str);
-void				option_r(t_hub *info, char *str);
+void				option_r(t_hub *info);
 void				get_prompt(t_lst *node);
 void				add_elem(t_lst *node, char *arg);
 void				free_list(t_lst *node);
 void				free_dlist(t_dlist *node);
+void				free_hub(t_hub *info);
 void				deal_with_others(t_hub *info, char *buff);
 void				go_to_end(t_hub *info, char *buff);
 void				exec_cmd(t_hub *info);
@@ -105,6 +105,8 @@ void				parse_cmd(t_hub *info);
 void				exec_pipe(t_hub *info);
 void				print_identifier_error(t_hub *info, int i);
 void				init_parse(t_hub *info, char *cmd);
+void				in_fd_close(void);
+int					out_fd_close(t_hub *inf, t_token *token, t_token *tmp);
 int					do_designator(t_hub *info, char **cmd);
 int					do_export(t_hub *info);
 int					do_builtins(t_hub *info);

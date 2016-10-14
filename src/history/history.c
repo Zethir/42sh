@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 18:38:08 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/14 17:46:53 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,9 @@ static void	history_option(t_hub *info, char **cmd, int fd)
 int			do_history(t_hub *info, char **cmd)
 {
 	int		fd;
-	char	*str;
 	char	*line;
 
-	str = get_home(info->lst);
-	if ((fd = open(str, O_RDONLY)) == -1)
+	if ((fd = open("/tmp/history", O_RDONLY)) == -1)
 	{
 		perror("history");
 		return (-1);
@@ -75,11 +73,10 @@ void		add_history(t_hub *info)
 	char	*str;
 
 	i = 0;
-	str = get_home(info->lst);
-	if ((fd = open(str, O_CREAT | O_RDWR | O_APPEND, 0644)) == -1)
+	if ((fd = open("/tmp/history", O_CREAT | O_RDWR | O_APPEND, 0644)) == -1)
 	{
 		perror("history");
-		exit(-1);
+		return ;	
 	}
 	while (get_next_line(fd, &buf) > 0)
 		i++;
@@ -112,13 +109,11 @@ void		deal_with_file(t_hub *info)
 {
 	int		fd;
 	char	*line;
-	char	*str;
 
-	str = get_home(info->lst);
-	if ((fd = open(str, O_RDWR | O_CREAT, 0644)) == -1)
+	if ((fd = open("/tmp/history", O_RDWR | O_CREAT, 0644)) == -1)
 	{
 		perror("history");
-		exit(-1);
+		return ;
 	}
 	while (1)
 	{

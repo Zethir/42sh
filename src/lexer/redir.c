@@ -6,122 +6,100 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:45:29 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/09 17:12:13 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/14 19:49:16 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-static int	is_replace(t_lex *lex, char *str, int i)
+static int	is_replace(t_lex *lex, int i)
 {
-	if (ft_isdigit(lex->line[i - 1]))
-		str = ft_strjoin(ft_chardup(lex->line[i - 1]), str);
+	get_first_fd(lex, i);
 	i++;
 	if (lex->line[i] == '|' || lex->line[i] == ';')
 		return (-1);
 	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
 	{
-		str = ft_strjoin(str, "&-");
-		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
-				str, 7);
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 7);
 		return (i + 2);
 	}
 	if (lex->line[i] == '&')
-		return (is_replace_bis(lex, str, i));
-	if (ft_isdigit(lex->line[i]))
 	{
-		str = ft_strjoin(str, ft_chardup(lex->line[i]));
-		i++;
+		i = get_second_fd(lex, i + 1);
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 8);
+		return (i);
 	}
-	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
-			str, 6);
+	i = get_second_fd(lex, i);
+	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 6);
 	return (i);
 }
 
-static int	is_in(t_lex *lex, char *str, int i)
+static int	is_in(t_lex *lex, int i)
 {
-	if (ft_isdigit(lex->line[i - 1]))
-		str = ft_strjoin(ft_chardup(lex->line[i - 1]), str);
+	get_first_fd(lex, i);
 	i++;
 	if (lex->line[i] == '|' || lex->line[i] == ';')
 		return (-1);
 	if (lex->line[i] == '&' && lex->line[i + 1] == '-')
 	{
-		str = ft_strjoin(str, "&-");
-		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
-				str, 11);
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 11);
 		return (i + 2);
 	}
 	if (lex->line[i] == '&')
-		return (is_in_bis(lex, str, i));
-	if (ft_isdigit(lex->line[i]))
 	{
-		str = ft_strjoin(str, ft_chardup(lex->line[i]));
-		i++;
+		i = get_second_fd(lex, i + 1);
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 12);
+		return (i);
 	}
-	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
-			str, 10);
+	i = get_second_fd(lex, i);
+	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 10);
 	return (i);
 }
 
-static int	is_add(t_lex *lex, char *str, int i)
+static int	is_add(t_lex *lex, int i)
 {
-	if (ft_isdigit(lex->line[i - 1]))
-		str = ft_strjoin(ft_chardup(lex->line[i - 1]), str);
+	get_first_fd(lex, i);
 	i += 2;
 	if (lex->line[i] == '<' || lex->line[i] == '|' || lex->line[i] == ';' ||
 			lex->line[i] == '>')
 		return (-1);
 	if (lex->line[i] == '&')
-		return (is_add_bis(lex, str, i));
-	if (ft_isdigit(lex->line[i]))
 	{
-		str = ft_strjoin(str, ft_chardup(lex->line[i]));
-		i++;
+		i = get_second_fd(lex, i + 1);
+		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 5);
+		return (i);
 	}
-	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
-			str, 4);
+	i = get_second_fd(lex, i);
+	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 4);
 	return (i);
 }
 
-static int	is_heredoc(t_lex *lex, char *str, int i)
+static int	is_heredoc(t_lex *lex, int i)
 {
-	if (ft_isdigit(lex->line[i - 1]))
-		str = ft_strjoin(ft_chardup(lex->line[i - 1]), str);
 	i += 2;
 	if (lex->line[i] == '>' || lex->line[i] == '<' || lex->line[i] == '|' ||
 			lex->line[i] == '&' || lex->line[i] == ';')
 		return (-1);
-	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
-			str, 9);
+	add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 9);
 	return (i);
 }
 
 int			is_redir(t_lex *lex, int i)
 {
-	char	*str;
-
 	if (lex->line[i] == '>' && lex->line[i + 1] == '>')
-	{
-		str = ft_strdup(">>");
-		i = is_add(lex, str, i);
-	}
+		i = is_add(lex, i);
 	else if (lex->line[i] == '<' && lex->line[i + 1] == '<')
-	{
-		str = ft_strdup("<<");
-		i = is_heredoc(lex, str, i);
-	}
+		i = is_heredoc(lex, i);
 	else if (lex->line[i] == '<' && lex->line[i - 1] != '<')
-	{
-		str = ft_strdup("<");
-		i = is_in(lex, str, i);
-	}
+		i = is_in(lex, i);
 	else if (lex->line[i] == '>' && lex->line[i - 1] != '>')
-	{
-		str = ft_strdup(">");
-		i = is_replace(lex, str, i);
-	}
+		i = is_replace(lex, i);
 	else
 		return (0);
+	if (lex->fd[0] != -1 || lex->fd[1] != -1)
+	{
+		lex->fd[0] = -1;
+		lex->fd[0] = -1;
+	}
 	return (i);
 }

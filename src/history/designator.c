@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 19:06:57 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/14 17:45:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static void	exec_cmd_add_lst(t_hub *info, char *line)
 		i++;
 	}
 	ft_putchar('\n');
-//	init_parse(info, info->job->process);
-//	exec_cmd(info);
+	exec_env(info, info->node->str);
 }
 
 static void	deal_with_dash(t_hub *info, char **cmd, int fd)
@@ -102,10 +101,8 @@ static void	deal_with_string(t_hub *info, char **cmd)
 int		do_designator(t_hub *info, char **cmd)
 {
 	int		fd;
-	char	*str;
 
-	str = get_home(info->lst);
-	if ((fd = open(str, O_RDONLY)) == -1)
+	if ((fd = open("/tmp/history", O_RDONLY)) == -1)
 	{
 		perror("history");
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 16:21:52 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/14 21:07:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	launch_process(t_hub *info, t_job *job)
 	job->process = process;
 }
 
-void	exec_job(t_hub *info)
+static void	exec_job(t_hub *info)
 {
 	t_job	*job;
 
@@ -97,6 +97,7 @@ void	exec_job(t_hub *info)
 		}
 		job = job->next;
 	}
+	free_job(info->job);
 }
 
 void	parse_cmd(t_hub *info)
@@ -112,14 +113,14 @@ void	parse_cmd(t_hub *info)
 	{
 		if (token->token_value == PIPE)
 		{
-			create_process(job, token, info->stdio);
+			create_process(job, token, info);
 			init_stdio(info);
 			token = token->next;
 		}
 		else if (token->token_value == AND || token->token_value == OR ||
 				token->token_value == SEPARATOR)
 		{
-			create_process(job, token, info->stdio);
+			create_process(job, token, info);
 			init_stdio(info);
 			create_job(job, token);
 			job->process = NULL;
@@ -129,4 +130,5 @@ void	parse_cmd(t_hub *info)
 			token = hub_redir(info, token);
 	}
 	info->job = job;
+	exec_job(info);
 }

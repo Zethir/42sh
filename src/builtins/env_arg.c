@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 18:16:00 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/14 17:15:46 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ static void	delete_env(t_lst *node)
 
 static int	check_i_opt(t_hub *info, char **arg)
 {
+	char	*cmd;
+
 	if (arg[0][0] == '-' && arg[0][1] == 'i' && !arg[0][2] && arg[1])
 	{
 		delete_env(info->lst);
 		arg++;
-		printf("hello 2\n");
-		exec_env(info, arg);
+		cmd = join_env(arg);
+		exec_env(info, cmd);
 		return (0);
 	}
 	else
@@ -62,6 +64,8 @@ static int	check_i_opt(t_hub *info, char **arg)
 
 static int	check_u_opt(t_hub *info, char **arg, char **save)
 {
+	char	*cmd;
+
 	if (arg[0][0] == '-' && arg[0][1] == 'u' && !arg[0][2] && arg[1])
 	{
 		arg++;
@@ -70,7 +74,10 @@ static int	check_u_opt(t_hub *info, char **arg, char **save)
 			print_error_opt(*arg);
 		arg++;
 		if (*arg)
-			exec_env(info, arg);
+		{
+			cmd = join_env(arg);
+			exec_env(info, cmd);
+		}
 		else
 			print_env(info->lst);
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:22:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 16:17:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/14 18:36:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	push_process(t_process *node, t_process **head)
 	tmp->next = node;
 }
 
-void	create_process(t_job *job, t_token *token, int stdio[3])
+void	create_process(t_job *job, t_token *token, t_hub *info)
 {
 	t_process	*new_elem;
 
@@ -39,9 +39,10 @@ void	create_process(t_job *job, t_token *token, int stdio[3])
 	new_elem->next = NULL;
 	if (!(new_elem->stdio = (int *)malloc(sizeof(int) * 3)))
 		return ;
-	new_elem->stdio[0] = stdio[0];
-	new_elem->stdio[1] = stdio[1];
-	new_elem->stdio[2] = stdio[2];
+	new_elem->stdio[0] = info->stdio[0];
+	new_elem->stdio[1] = info->stdio[1];
+	new_elem->stdio[2] = info->stdio[2];
+	new_elem->closefd = info->closefd;
 	new_elem->completed = 0;
 	new_elem->cmd = ft_strdup(token->cmd);
 	push_process(new_elem, &job->process);

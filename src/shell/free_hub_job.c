@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_job.c                                         :+:      :+:    :+:   */
+/*   free_hub_job.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/11 18:07:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:49:18 by cboussau         ###   ########.fr       */
+/*   Created: 2016/10/14 15:35:47 by cboussau          #+#    #+#             */
+/*   Updated: 2016/10/14 16:56:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,21 @@ void	free_job(t_job *job)
 	}
 	free(job);
 	job = NULL;
+}
+
+void	free_hub(t_hub *info)
+{
+	while (info->node)
+	{
+		if (info->node->str)
+			ft_strdel(&info->node->str);
+		info->node->i = 0;
+		info->node = info->node->next;
+	}
+	free(info->node);
+	info->node = NULL;
+	if (info->stdio)
+		free(info->stdio);
+	free(info);
+	info = NULL;
 }

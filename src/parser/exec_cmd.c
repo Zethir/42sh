@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 18:16:03 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/14 20:47:57 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,8 @@ static void	get_new_stdio(t_process *process)
 		dup2(process->stdio[1], 1);
 	if (process->stdio[2] != 2)
 		dup2(process->stdio[2], 2);
-	/*	if (.dead_end)
-		close(0);
-		if (s[1].dead_end)
-		close(1);
-		if (s[2].dead_end)
-		close(2);*/
+	if (process->closefd != -1)
+		close(process->closefd);
 }
 
 void		launch_builtin(t_hub *info, t_process *process)
@@ -55,11 +51,10 @@ void		launch_bin(t_hub *info, t_process *process)
 	}
 }
 
-void		exec_env(t_hub *info, char **arg)
+void		exec_env(t_hub *info, char *arg)
 {
-	*arg = join_env(arg);
-	init_parse(info, *arg);
-	if (check_builtins(*arg))
+	init_parse(info, arg);
+	if (check_builtins(arg))
 		do_builtins(info);
 	else if ((info->parse->pid = fork()) == 0)
 	{
@@ -70,6 +65,7 @@ void		exec_env(t_hub *info, char **arg)
 			exit(1);
 		}
 	}
+	wait(0);
 }
 
 void		wait_for_process(t_process *process)

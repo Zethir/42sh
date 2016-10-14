@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:01:52 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/14 17:46:32 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,23 @@ static int		option_dbis2(t_hub *info, int nbr, int fd)
 	return (nbr);
 }
 
-static void		option_dbis(t_hub *info, char **cmd, char *str)
+static void		option_dbis(t_hub *info, char **cmd)
 {
 	char	*pathb;
 	int		fd;
 	int		nbr;
 
-	pathb = get_home(info->lst);
-	pathb = ft_strjoin(pathb, "bis");
+	pathb = ft_strjoin("/tmp/history", "bis");
 	nbr = ft_atoi(cmd[2]);
 	nbr -= 1;
 	if ((fd = open(pathb, O_RDWR | O_CREAT, 0644)) == -1)
 	{
 		perror("history");
-		exit(-1);
+		return ;
 	}
 	nbr = option_dbis2(info, nbr, fd);
-	unlink(str);
-	rename(pathb, str);
+	unlink("/tmp/history");
+	rename(pathb, "/tmp/history");
 	if (nbr > 0)
 	{
 		out_of_range_error(cmd);
@@ -66,7 +65,7 @@ static void		option_dbis(t_hub *info, char **cmd, char *str)
 	}
 }
 
-static void		option_d(t_hub *info, char **cmd, char *str)
+static void		option_d(t_hub *info, char **cmd)
 {
 	int		i;
 
@@ -80,29 +79,27 @@ static void		option_d(t_hub *info, char **cmd, char *str)
 		}
 		i++;
 	}
-	option_dbis(info, cmd, str);
+	option_dbis(info, cmd);
 }
 
 void			do_option(t_hub *info, char **cmd)
 {
 	int		fd;
-	char	*str;
 
-	str = get_home(info->lst);
 	if (ft_strcmp(cmd[1], "-c") == 0)
 	{
-		if ((fd = open(str, O_WRONLY | O_TRUNC, 0644)) == -1)
+		if ((fd = open("/tmp/history", O_WRONLY | O_TRUNC, 0644)) == -1)
 		{
 			perror("history");
-			exit(-1);
+			return ;
 		}
 	}
 	else if (ft_strcmp(cmd[1], "-d") == 0)
-		option_d(info, cmd, str);
+		option_d(info, cmd);
 	else if (ft_strcmp(cmd[1], "-r") == 0)
 	{
 		if (!cmd[2])
-			option_r(info, str);
+			option_r(info);
 		else
 			ft_putendl_fd("Option [-r] doesn't need any arguments", 2);
 	}

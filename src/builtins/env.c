@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 16:44:49 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/14 17:16:50 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		print_env(t_lst *node)
 static char	*cmp_line(t_hub *info, char **arg, char *save)
 {
 	t_lst	*tmp;
+	char	*cmd;
 
 	tmp = info->lst;
 	while (info->lst)
@@ -53,7 +54,8 @@ static char	*cmp_line(t_hub *info, char **arg, char *save)
 			add_elem(info->lst, *arg);
 		else if (check_caract(*arg, '=') != 1)
 		{
-			exec_env(info, arg);
+			cmd = join_env(arg);
+			exec_env(info, cmd);
 			save = "lol";
 		}
 		else

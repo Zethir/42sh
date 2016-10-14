@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:06:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/14 18:19:24 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ static void		deal_with_prompt(t_hub *info)
 	info->lex->token = init_token_struct();
 	check_lexer(info->lex);
 	parse_cmd(info);
-	exec_job(info);
 	add_history(info);
-	free_struct_lex(info->lex);
-	free_lex(info->lex);
-	free_job(info->job);
+	push_node_bis(&info->node, create_node());
+	info->node = info->node->next;
 }
 
 static void		start_prog(char **env)
@@ -41,13 +39,14 @@ static void		start_prog(char **env)
 		get_prompt(info->lst);
 		stock_struct(info, 0);
 		deal_with_prompt(info);
-		push_node_bis(&info->node, create_node());
-		info->node = info->node->next;
+		free_struct_lex(info->lex);
 	}
+	free_lex(info->lex);
 	if (reset_term(info) == -1)
 		return ;
 	if (info->lst)
 		free_list(info->lst);
+	free_hub(info);
 }
 
 int				main(int argc, char **argv, char **env)

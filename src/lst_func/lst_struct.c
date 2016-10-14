@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:17:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 16:19:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/14 20:09:14 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ void	init_stdio(t_hub *info)
 	info->stdio[0] = 0;
 	info->stdio[1] = 1;
 	info->stdio[2] = 2;
+	info->closefd = -1;
 }

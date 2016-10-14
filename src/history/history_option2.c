@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 15:11:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:02:38 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/14 17:41:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-void		add_to_file(t_hub *info, char *str)
+static void		add_to_file(t_hub *info)
 {
 	t_dlist	*dlst;
 	char	*pathb;
@@ -21,7 +21,7 @@ void		add_to_file(t_hub *info, char *str)
 
 	i = 1;
 	dlst = info->node;
-	pathb = ft_strjoin(str, "bis");
+	pathb = ft_strjoin("/tmp/history", "bis");
 	if ((fd = open(pathb, O_RDWR | O_CREAT, 0644)) == -1)
 	{
 		perror("history");
@@ -37,16 +37,16 @@ void		add_to_file(t_hub *info, char *str)
 		i++;
 	}
 	info->node = dlst;
-	unlink(str);
-	rename(pathb, str);
+	unlink("/tmp/history");
+	rename(pathb, "/tmp/history");
 }
 
-void		option_r(t_hub *info, char *str)
+void		option_r(t_hub *info)
 {
 	int		fd;
 	char	*line;
 
-	if ((fd = open(str, O_RDWR | O_CREAT, 0644)) == -1)
+	if ((fd = open("/tmp/history", O_RDWR | O_CREAT, 0644)) == -1)
 	{
 		perror("history");
 		exit(-1);
@@ -58,6 +58,6 @@ void		option_r(t_hub *info, char *str)
 		push_node_bis(&info->node, create_node());
 		info->node = info->node->next;
 	}
-	add_to_file(info, str);
+	add_to_file(info);
 	close(fd);
 }

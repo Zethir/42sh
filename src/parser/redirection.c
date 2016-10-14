@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:27:10 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/11 17:22:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/14 21:07:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,22 @@ static void		input_redir(t_hub *info, char *filename)
 	info->stdio[2] = 2;
 }
 
+static int		hub_redir_bis(t_hub *info, t_token *token)
+{
+	if (token->next && (token->token_value == R_ADD ||
+				token->token_value == R_ADD_FD))
+		append_redir(info, token->next->cmd);
+	else if (token->next && (token->token_value == R_TRUNC ||
+				token->token_value == R_TRUNC_FD))
+		truncate_redir(info, token->next->cmd);
+	else if (token->next && (token->token_value == R_IN ||
+				token->token_value == R_IN_FD))
+		input_redir(info, token->next->cmd);
+	else
+		return (-1);
+	return (0);
+}
+
 t_token 		*hub_redir(t_hub *info, t_token *token)
 {
 	t_token	*tmp;
@@ -59,16 +75,14 @@ t_token 		*hub_redir(t_hub *info, t_token *token)
 	tmp = token;
 	while (token)
 	{
-		if (token->next && (token->token_value == R_ADD ||
-				token->token_value == R_ADD_FD))
-			append_redir(info, token->next->cmd);
-		else if (token->next && (token->token_value == R_TRUNC ||
-				token->token_value == R_TRUNC_FD))
-			truncate_redir(info, token->next->cmd);
-		else if (token->next && (token->token_value == R_IN ||
-				token->token_value == R_IN_FD))
-			input_redir(info, token->next->cmd);
-		else
+		if (token->token_value == R_TRUNC_FD_CLOSE)
+		{	
+			if (out_fd_close(info, token, tmp) == 0)
+				break;
+		}
+		else if (token->token_value == R_IN_FD_CLOSE)
+			in_fd_close();
+		else if (hub_redir_bis(info, token) == -1) 
 		{
 			token->cmd = ft_strdup(tmp->cmd);
 			break;

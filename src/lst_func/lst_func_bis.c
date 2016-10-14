@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/08 14:52:22 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/14 19:22:45 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,12 @@ t_lex	*init_lexer_struct(void)
 
 	if (!(lex = (t_lex *)malloc(sizeof(t_lex))))
 		return (NULL);
+	if (!(lex->fd = (int *)malloc(sizeof(int) * 2)))
+		return (NULL);
 	lex->line = ft_strdup("");
 	lex->hd = 0;
 	lex->tl = 0;
+	lex->fd[0] = -1;
+	lex->fd[1] = -1;
 	return (lex);
 }
