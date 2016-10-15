@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/15 17:04:11 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/15 17:25:19 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,9 @@ void				parse_cmd(t_hub *info);
 void				exec_pipe(t_hub *info);
 void				print_identifier_error(t_hub *info, int i);
 void				init_parse(t_hub *info, char *cmd);
-void				in_fd_close(void);
 int					check_lexer(t_hub *info, t_lex *lex);
 int					out_fd_close(t_hub *info, t_token *token, t_token *tmp);
+int					in_fd_close(t_hub *info, t_token *token, t_token *tmp);
 int					do_designator(t_hub *info, char **cmd);
 int					do_export(t_hub *info);
 int					do_builtins(t_hub *info);

@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:45:29 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/15 16:09:06 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/15 17:48:10 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int	is_replace(t_lex *lex, int i)
 			return (-1);
 		return (i);
 	}
-	i = get_second_fd(lex, i);
 	if (add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 6) < 0)
 		return (-1);
 	return (i);
@@ -81,7 +80,6 @@ static int	is_add(t_lex *lex, int i)
 			return (-1);
 		return (i);
 	}
-	i = get_second_fd(lex, i);
 	if (add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 4) < 0)
 		return (-1);
 	return (i);

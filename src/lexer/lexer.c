@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/15 16:59:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/15 17:22:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int		check_lexer(t_hub *info, t_lex *lex)
 		else
 			lex->hd++;
 		if ((!lex->line[lex->hd] || !lex->line[lex->hd + 1]) && i != 0 &&
-				lex->token->token_value != 13 &&
-				lex->token->token_value != 11 && lex->token->token_value != 7)
+				lex->token->token_value != 13)
 			get_missing_cmd(info, lex);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 18:29:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/15 17:04:54 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/15 17:24:39 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,17 @@ int		out_fd_close(t_hub *info, t_token *token, t_token *tmp)
 		return (0);
 }
 
-void		in_fd_close(void)
+int		in_fd_close(t_hub *info, t_token *token, t_token *tmp)
 {
-	printf("hello\n");
+	if (token->fd[0] != -1)
+		info->closefd = token->fd[0];
+	else
+		info->closefd = 0;
+	if (token->next)
+	{
+		tmp->cmd = ft_strjoin(tmp->cmd, token->next->cmd);
+		return (1);
+	}
+	else
+		return (0);
 }
