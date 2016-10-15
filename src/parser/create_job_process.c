@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aggregator.c                                       :+:      :+:    :+:   */
+/*   create_job_process.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/14 18:29:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/15 17:04:54 by cboussau         ###   ########.fr       */
+/*   Created: 2016/10/15 14:41:34 by cboussau          #+#    #+#             */
+/*   Updated: 2016/10/15 15:55:38 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-int		out_fd_close(t_hub *info, t_token *token, t_token *tmp)
+void	token_linker(t_hub *info, t_job *job, t_token *token)
 {
-	if (token->fd[0] != -1)
-		info->closefd = token->fd[0];
-	else
-		info->closefd = 1;
-	if (token->next)
-	{
-		tmp->cmd = ft_strjoin(tmp->cmd, token->next->cmd);
-		return (1);
-	}
-	else
-		return (0);
+	create_process(job, token, info);
+	init_stdio(info);
+	create_job(job, token);
+	job->process = NULL;
 }
 
-void		in_fd_close(void)
+void	token_pipe(t_hub *info, t_job *job, t_token *token)
 {
-	printf("hello\n");
+	create_process(job, token, info);
+	init_stdio(info);
+}
+
+void	get_missing_cmd(t_hub *info, t_lex *lex)
+{
+	ft_putstr("cmd||filename> ");
+	lex->line = deal_with_termcap(info);
+	ft_putchar('\n');
 }

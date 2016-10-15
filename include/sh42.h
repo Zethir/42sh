@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/14 20:52:47 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/15 17:04:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ t_dlist				*create_node(void);
 t_hub				*stock_struct(t_hub *info, int i);
 t_hub				*init_struct(char **env);
 t_token				*hub_redir(t_hub *info, t_token *token);
+void				get_missing_cmd(t_hub *info, t_lex *lex);
+void				token_linker(t_hub *info, t_job *job, t_token *token);
+void				token_pipe(t_hub *info, t_job *job, t_token *token);
 void				init_stdio(t_hub *info);
 void				exec_env(t_hub *info, char *arg);
 void				exec_process(t_hub *info, t_process *process, int *iofile);
@@ -106,7 +109,8 @@ void				exec_pipe(t_hub *info);
 void				print_identifier_error(t_hub *info, int i);
 void				init_parse(t_hub *info, char *cmd);
 void				in_fd_close(void);
-int					out_fd_close(t_hub *inf, t_token *token, t_token *tmp);
+int					check_lexer(t_hub *info, t_lex *lex);
+int					out_fd_close(t_hub *info, t_token *token, t_token *tmp);
 int					do_designator(t_hub *info, char **cmd);
 int					do_export(t_hub *info);
 int					do_builtins(t_hub *info);

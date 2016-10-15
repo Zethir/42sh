@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/14 21:07:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/15 17:03:10 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,17 +113,13 @@ void	parse_cmd(t_hub *info)
 	{
 		if (token->token_value == PIPE)
 		{
-			create_process(job, token, info);
-			init_stdio(info);
+			token_pipe(info, job, token);
 			token = token->next;
 		}
 		else if (token->token_value == AND || token->token_value == OR ||
 				token->token_value == SEPARATOR)
 		{
-			create_process(job, token, info);
-			init_stdio(info);
-			create_job(job, token);
-			job->process = NULL;
+			token_linker(info, job, token);
 			token = token->next;
 		}
 		else

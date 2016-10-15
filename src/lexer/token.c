@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:57:33 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/14 19:50:46 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/15 16:38:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ static int		is_and(t_lex *lex, int i)
 			if (lex->line[i] == '|' || lex->line[i] == '&' ||
 					lex->line[i] == '<' || lex->line[i] == ';' )
 				return (-1);
-			add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 1);
+			if (add_token(lex, ft_strsub(lex->line,
+							lex->tl, lex->hd - lex->tl), 1) < 0)
+				return (-1);
 			return (i);
 		}
 	}
@@ -48,10 +50,14 @@ static int		is_or(t_lex *lex, int i)
 					lex->line[i] == '&' || lex->line[i] == '|' ||
 					lex->line[i] == ';')
 				return (-1);
-			add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 2);
+			if (add_token(lex, ft_strsub(lex->line,
+							lex->tl, lex->hd - lex->tl), 2) < 0)
+				return (-1);
 			return (i);
 		}
-		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 3);
+		if (add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
+					3) < 0)
+			return (-1);
 		return (i);
 	}
 	return (0);
@@ -65,7 +71,9 @@ static int		is_separator(t_lex *lex, int i)
 		if (lex->line[i] == '>' || lex->line[i] == '<' || lex->line[i] == '&'
 				|| lex->line[i] == '|')
 			return (-1);
-		add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 13);
+		if (add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl),
+				13) < 0)
+			return (-1);
 		return (i);
 	}
 	return (0);
