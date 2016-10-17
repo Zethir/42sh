@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:17:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/14 20:09:14 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/17 15:07:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ t_hub	*init_struct(char **env)
 		return (NULL);
 	info->node = create_node();
 	deal_with_file(info);
+	if (!(info->prompt = (t_prompt *)malloc(sizeof(t_prompt))))
+		return (NULL);
+	info->prompt->copy_mode = 0;	
+	info->prompt->cursor_start = 0;	
+	info->prompt->cursor_end = 0;
+	info->prompt->copy_str = ft_strdup("");
 	if (init_term(info) == -1)
 		return (NULL);
 	return (info);

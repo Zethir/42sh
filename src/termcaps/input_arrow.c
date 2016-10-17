@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 00:03:33 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:07:03 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/17 16:38:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-static void	deal_with_down(t_hub *info, char *buff)
+void	deal_with_down(t_hub *info, char *buff)
 {
 	if (ARROW_DOWN && info->node->next)
 	{
@@ -27,7 +27,7 @@ static void	deal_with_down(t_hub *info, char *buff)
 	}
 }
 
-static void	deal_with_up(t_hub *info, char *buff)
+void	deal_with_up(t_hub *info, char *buff)
 {
 	if (ARROW_UP && info->node->prev)
 	{
@@ -42,23 +42,20 @@ static void	deal_with_up(t_hub *info, char *buff)
 	}
 }
 
-void		deal_with_others(t_hub *info, char *buff)
+void	deal_with_arrow(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
 	node = info->node;
-	if (DELETE && node->str[node->i])
+	if (ARROW_LEFT && node->i > 0)
 	{
-		ft_memmove(node->str + node->i, node->str + node->i + 1,
-				ft_strlen(node->str + node->i + 1) + 1);
-		tputs(tgetstr("dc", NULL), 1, ft_putchar_int);
+		node->i--;
+		tputs(tgetstr("le", NULL), 1, ft_putchar_int);
 	}
-	if (ESCAPE)
+	if (ARROW_RIGHT && node->str[node->i])
 	{
-		ft_putstr("exit\n");
-		exit(-1);
+		node->i++;
+		tputs(tgetstr("nd", NULL), 1, ft_putchar_int);
 	}
 	info->node = node;
-	deal_with_up(info, buff);
-	deal_with_down(info, buff);
 }

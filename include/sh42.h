@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/15 17:25:19 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/17 17:16:29 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct		s_hub
 	struct s_lex	*lex;
 	struct s_job	*job;
 	struct termios	term;
+	struct s_prompt	*prompt;
 	struct s_parse	*parse;
 }					t_hub;
 
@@ -99,7 +100,6 @@ void				add_elem(t_lst *node, char *arg);
 void				free_list(t_lst *node);
 void				free_dlist(t_dlist *node);
 void				free_hub(t_hub *info);
-void				deal_with_others(t_hub *info, char *buff);
 void				go_to_end(t_hub *info, char *buff);
 void				exec_cmd(t_hub *info);
 void				print_env(t_lst *node);
@@ -108,6 +108,21 @@ void				parse_cmd(t_hub *info);
 void				exec_pipe(t_hub *info);
 void				print_identifier_error(t_hub *info, int i);
 void				init_parse(t_hub *info, char *cmd);
+void				deal_with_charac(t_hub *info, char *buff);
+void				deal_with_space(t_hub *info, char *buff);
+void				deal_with_backspace(t_hub *info, char *buff);
+void				deal_with_delete(t_hub *info, char *buff);
+void				deal_with_arrow(t_hub *info, char *buff);
+void				deal_with_up(t_hub *info, char *buff);
+void				deal_with_down(t_hub *info, char *buff);
+void				start_copy_mode(t_hub *info, char *buff);
+void				copy_string(t_hub *info, char *buff);
+void				cut_string(t_hub *info, char *buff);
+void				paste_string(t_hub *info, char *buff);
+void				go_to_start_of_line(t_hub *info, char *buff);
+void				go_to_end(t_hub *info, char *buff);
+void				go_to_previous_word(t_hub *info, char *buff);
+void				go_to_next_word(t_hub *info, char *buff);
 int					check_lexer(t_hub *info, t_lex *lex);
 int					out_fd_close(t_hub *info, t_token *token, t_token *tmp);
 int					in_fd_close(t_hub *info, t_token *token, t_token *tmp);

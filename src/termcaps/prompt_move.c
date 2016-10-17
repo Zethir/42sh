@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 22:33:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:07:12 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/17 16:40:26 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-static void	go_to_next_word(t_hub *info, char *buff)
+void	go_to_next_word(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -33,7 +33,7 @@ static void	go_to_next_word(t_hub *info, char *buff)
 	info->node = node;
 }
 
-static void	go_to_previous_word(t_hub *info, char *buff)
+void	go_to_previous_word(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -54,7 +54,7 @@ static void	go_to_previous_word(t_hub *info, char *buff)
 	info->node = node;
 }
 
-static void	go_to_start_of_line(t_hub *info, char *buff)
+void	go_to_start_of_line(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -70,7 +70,7 @@ static void	go_to_start_of_line(t_hub *info, char *buff)
 	info->node = node;
 }
 
-void		go_to_end(t_hub *info, char *buff)
+void	go_to_end(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
@@ -84,7 +84,4 @@ void		go_to_end(t_hub *info, char *buff)
 		}
 	}
 	info->node = node;
-	go_to_start_of_line(info, buff);
-	go_to_previous_word(info, buff);
-	go_to_next_word(info, buff);
 }

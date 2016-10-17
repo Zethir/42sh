@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:36:31 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/17 17:36:24 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@
 # define HOME ((buff[0] == 27 && buff[1] == 91 && buff[2] == 72))
 # define PREV_WORD ((buff[0] == 27 && buff[1] == 27 && buff[2] == 91 && buff[3] == 68))
 # define NEXT_WORD ((buff[0] == 27 && buff[1] == 27 && buff[2] == 91 && buff[3] == 67))
+# define COPY_MODE ((buff[0] == -30 && buff[1] == -120 && buff[2] == -102))
+# define COPY_STRING ((buff[0] == -62 && buff[1] == -91))
+# define PASTE_STRING ((buff[0] == -49 && buff[1] == -128))
+# define CUT_STRING ((buff[0] == -30 && buff[1] == -120 && buff[2] == -126))
 
+typedef struct	s_prompt
+{
+	int			copy_mode;
+	int			cursor_start;
+	int			cursor_end;
+	char		*copy_str;
+}				t_prompt;
 
 #endif
