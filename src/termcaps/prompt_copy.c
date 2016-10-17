@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:37:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/17 17:46:06 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/17 18:46:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,18 @@ void	cut_string(t_hub *info, char *buff)
 		prompt->copy_str = ft_strsub(node->str, prompt->cursor_start,
 				prompt->cursor_end - prompt->cursor_start + 1);
 		len = ft_strlen(prompt->copy_str);
-		ft_memmove(node->str + node->i, node->str + node->i + len,
-				ft_strlen(node->str + node->i + 1) + len);
 		while (len > 0 && node->i >= 0)
 		{
 			tputs(tgetstr("dc", NULL), 1, ft_putchar_int);
+			if (node->i > 0)
 			tputs(tgetstr("le", NULL), 1, ft_putchar_int);
 			node->i--;
 			len--;
 		}
-
+		node->i++;
+		len = ft_strlen(prompt->copy_str);
+		ft_memmove(node->str + node->i, node->str + node->i + len,
+				ft_strlen(node->str + node->i + 1) + len);
 	}
 	info->node = node;
 	info->prompt = prompt;
