@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 00:03:33 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/17 16:38:05 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/17 19:52:32 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,54 @@ void	deal_with_up(t_hub *info, char *buff)
 	}
 }
 
-void	deal_with_arrow(t_hub *info, char *buff)
+void	deal_with_left(t_hub *info, char *buff)
 {
 	t_dlist		*node;
 
 	node = info->node;
 	if (ARROW_LEFT && node->i > 0)
 	{
-		node->i--;
+
+		if (info->prompt->copy_mode == 1 && node->i > info->prompt->cursor_start)
+		{
+			tputs(tgetstr("me", NULL), 1, ft_putchar_int);
+			write(1, &node->str[node->i], 1);
+			tputs(tgetstr("le", NULL), 1, ft_putchar_int);
+		}
+		else if (info->prompt->copy_mode == 1)
+		{
+			tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
+			write(1, &node->str[node->i], 1);
+			tputs(tgetstr("me", NULL), 1, ft_putchar_int);
+			tputs(tgetstr("le", NULL), 1, ft_putchar_int);
+		}
 		tputs(tgetstr("le", NULL), 1, ft_putchar_int);
+		node->i--;
 	}
+	info->node = node;
+}
+
+void	deal_with_right(t_hub *info, char *buff)
+{
+	t_dlist		*node;
+
+	node = info->node;
 	if (ARROW_RIGHT && node->str[node->i])
 	{
+		if (info->prompt->copy_mode == 1 && node->i >= info->prompt->cursor_start)
+		{
+			tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
+			write(1, &node->str[node->i], 1);
+			tputs(tgetstr("me", NULL), 1, ft_putchar_int);
+		}
+		else if (info->prompt->copy_mode == 1)
+		{
+			tputs(tgetstr("me", NULL), 1, ft_putchar_int);
+			write(1, &node->str[node->i], 1);
+		}
+		else
+			tputs(tgetstr("nd", NULL), 1, ft_putchar_int);
 		node->i++;
-		tputs(tgetstr("nd", NULL), 1, ft_putchar_int);
 	}
 	info->node = node;
 }

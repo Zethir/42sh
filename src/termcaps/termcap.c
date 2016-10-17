@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/17 17:36:31 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/17 19:44:35 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void	prompt_hub(t_hub *info, char *buff)
 	deal_with_space(info, buff);
 	deal_with_backspace(info, buff);
 	deal_with_delete(info, buff);
-	deal_with_arrow(info, buff);
+	deal_with_left(info, buff);
+	deal_with_right(info, buff);
 	deal_with_up(info, buff);
 	deal_with_down(info, buff);
 	go_to_start_of_line(info, buff);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:37:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/17 18:46:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/17 19:36:36 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	paste_string(t_hub *info, char *buff)
 		ft_memmove(node->str + node->i + len, node->str + node->i,
 				ft_strlen(node->str + node->i) + len);
 		tputs(tgetstr("im", NULL), 1, ft_putchar_int);
+		tputs(tgetstr("me", NULL), 1, ft_putchar_int);
 		while (prompt->copy_str[i])
 		{
 			ft_putchar(prompt->copy_str[i]);

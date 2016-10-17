@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/17 17:16:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/17 19:38:44 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ void				deal_with_charac(t_hub *info, char *buff);
 void				deal_with_space(t_hub *info, char *buff);
 void				deal_with_backspace(t_hub *info, char *buff);
 void				deal_with_delete(t_hub *info, char *buff);
-void				deal_with_arrow(t_hub *info, char *buff);
+void				deal_with_left(t_hub *info, char *buff);
+void				deal_with_right(t_hub *info, char *buff);
 void				deal_with_up(t_hub *info, char *buff);
 void				deal_with_down(t_hub *info, char *buff);
 void				start_copy_mode(t_hub *info, char *buff);
