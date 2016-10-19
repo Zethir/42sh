@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 16:28:53 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/18 18:18:06 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/19 16:25:39 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,65 +14,61 @@
 
 void		deal_with_delete(t_hub *info, char *buff)
 {
-	t_dlist		*node;
+	t_prompt 	*prompt;
 
-	node = info->node;
-	if (DELETE && node->str[node->i])
+	prompt = info->prompt;
+	if (DELETE && prompt->cmd[prompt->i])
 	{
-		ft_memmove(node->str + node->i, node->str + node->i + 1,
-				ft_strlen(node->str + node->i + 1) + 1);
-		prompt_print(info);
+		ft_memmove(prompt->cmd + prompt->i, prompt->cmd + prompt->i + 1,
+				ft_strlen(prompt->cmd + prompt->i + 1) + 1);
+		prompt_print(info, buff);
 	}
-	if (ESCAPE)
-	{
-		ft_putstr("exit\n");
-		exit(-1);
-	}
+	info->prompt = prompt;
 }
 
 void	deal_with_backspace(t_hub *info, char *buff)
 {
-	t_dlist		*node;
+	t_prompt 	*prompt;
 
-	node = info->node;
-	if (BACK_SPACE && node->i > 0)
+	prompt = info->prompt;
+	if (BACK_SPACE && prompt->i > 0)
 	{
-		node->i--;
-		ft_memmove(node->str + node->i, node->str + node->i + 1,
-				ft_strlen(node->str + node->i + 1) + 1);
-		prompt_print(info);
+		prompt->i--;
+		ft_memmove(prompt->cmd + prompt->i, prompt->cmd + prompt->i + 1,
+				ft_strlen(prompt->cmd + prompt->i + 1) + 1);
+		prompt_print(info, buff);
 	}
-	info->node = node;
+	info->prompt = prompt;
 }
 
 void	deal_with_space(t_hub *info, char *buff)
 {
-	t_dlist		*node;
+	t_prompt 	*prompt;
 
-	node = info->node;
+	prompt = info->prompt;
 	if (WHITE_SPACE)
 	{
-		ft_memmove(node->str + node->i + 1, node->str + node->i,
-			ft_strlen(node->str + node->i) + 1);
-		node->str[node->i] = ' ';
-		node->i++;
-		prompt_print(info);
+		ft_memmove(prompt->cmd + prompt->i + 1, prompt->cmd + prompt->i,
+			ft_strlen(prompt->cmd + prompt->i) + 1);
+		prompt->cmd[prompt->i] = ' ';
+		prompt->i++;
+		prompt_print(info, buff);
 	}
-	info->node = node;
+	info->prompt = prompt;
 }
 
 void		deal_with_charac(t_hub *info, char *buff)
 {
-	t_dlist		*node;
+	t_prompt 	*prompt;
 
-	node = info->node;
+	prompt = info->prompt;
 	if (CHARACTERE)
 	{
-		ft_memmove(node->str + node->i + 1, node->str + node->i,
-				ft_strlen(node->str + node->i) + 1);
-		node->str[node->i] = *buff;
-		node->i++;
-		prompt_print(info);
+		ft_memmove(prompt->cmd + prompt->i + 1, prompt->cmd + prompt->i,
+				ft_strlen(prompt->cmd + prompt->i) + 1);
+		prompt->cmd[prompt->i] = *buff;
+		prompt->i++;
+		prompt_print(info, buff);
 	}
-	info->node = node;
+	info->prompt = prompt;
 }

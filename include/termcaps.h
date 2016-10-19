@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/18 18:18:26 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/19 16:22:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,14 @@
 
 typedef struct	s_prompt
 {
+	char		*cmd;
+	int			i;
 	int			copy_mode;
 	int			cursor_start;
 	int			cursor_end;
 	char		*copy_str;
 }				t_prompt;
+
+t_prompt	*init_prompt();
 
 #endif

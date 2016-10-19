@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:17:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/18 18:18:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/19 16:23:04 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@ t_hub	*stock_struct(t_hub *info, int i)
 		tmp = info;
 	return (tmp);
 }
+t_prompt	*init_prompt()
+{
+	t_prompt *prompt;
+
+	if (!(prompt = (t_prompt *)malloc(sizeof(t_prompt))))
+		return (NULL);
+	if (!(prompt->cmd = (char *)malloc(sizeof(char) * 10000)))
+		return (NULL);
+	ft_bzero(prompt->cmd, 10000);
+	prompt->i = 0;
+	prompt->copy_mode = 0;	
+	prompt->cursor_start = 0;	
+	prompt->cursor_end = 0;
+	prompt->copy_str = ft_strdup("");
+	return (prompt);
+}
 
 t_hub	*init_struct(char **env)
 {
@@ -32,12 +48,6 @@ t_hub	*init_struct(char **env)
 		return (NULL);
 	info->node = create_node();
 	deal_with_file(info);
-	if (!(info->prompt = (t_prompt *)malloc(sizeof(t_prompt))))
-		return (NULL);
-	info->prompt->copy_mode = 0;	
-	info->prompt->cursor_start = 0;	
-	info->prompt->cursor_end = 0;
-	info->prompt->copy_str = ft_strdup("");
 	if (init_term(info) == -1)
 		return (NULL);
 	return (info);

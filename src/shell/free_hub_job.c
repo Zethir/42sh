@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:35:47 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/14 16:56:05 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/19 16:27:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	free_hub(t_hub *info)
 	{
 		if (info->node->str)
 			ft_strdel(&info->node->str);
-		info->node->i = 0;
 		info->node = info->node->next;
 	}
 	free(info->node);

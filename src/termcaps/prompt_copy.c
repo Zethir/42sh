@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:37:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/18 19:37:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/19 16:13:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	start_copy_mode(t_hub *info, char *buff)
 		prompt->copy_mode = 0;
 	else if (COPY_MODE)
 	{
-		prompt->cursor_start = info->node->i;
-		prompt->cursor_end = info->node->i;
+		prompt->cursor_start = info->prompt->i;
+		prompt->cursor_end = info->prompt->i;
 		prompt->copy_mode = 1;
 	}
 	info->prompt = prompt;
@@ -38,7 +38,7 @@ void	copy_string(t_hub *info, char *buff)
 	if (COPY_STRING && prompt->copy_mode == 1)
 	{
 		prompt->copy_mode = 0;
-		prompt->copy_str = ft_strsub(node->str, prompt->cursor_start,
+		prompt->copy_str = ft_strsub(prompt->cmd, prompt->cursor_start,
 				prompt->cursor_end - prompt->cursor_start + 1);
 		prompt->cursor_start = 0;
 		prompt->cursor_end = 0;
@@ -54,23 +54,23 @@ void	cut_string(t_hub *info, char *buff)
 	if (CUT_STRING && info->prompt->copy_mode == 1)
 	{
 		info->prompt->copy_mode = 0;
-		info->prompt->copy_str = ft_strsub(info->node->str,
+		info->prompt->copy_str = ft_strsub(info->prompt->cmd,
 				info->prompt->cursor_start, info->prompt->cursor_end -
 				info->prompt->cursor_start + 1);
 		len = ft_strlen(info->prompt->copy_str);
-		while (len > 0 && info->node->i >= 0)
+		while (len > 0 && info->prompt->i >= 0)
 		{
 			len --;
-			info->node->i--;
+			info->prompt->i--;
 		}
-		info->node->i++;
+		info->prompt->i++;
 		len = ft_strlen(info->prompt->copy_str);
-		ft_memmove(info->node->str + info->node->i, info->node->str +
-				info->node->i + len, ft_strlen(info->node->str + info->node->i
+		ft_memmove(info->prompt->cmd + info->prompt->i, info->prompt->cmd +
+				info->prompt->i + len, ft_strlen(info->prompt->cmd + info->prompt->i
 					+ 1) + len);
 		info->prompt->cursor_start = 0;
 		info->prompt->cursor_end = 0;
-		prompt_print(info);
+		prompt_print(info, buff);
 	}
 }
 
@@ -83,17 +83,17 @@ void	paste_string(t_hub *info, char *buff)
 	if (PASTE_STRING && info->prompt->copy_str && info->prompt->copy_mode == 0)
 	{
 		len = ft_strlen(info->prompt->copy_str);
-		if (len + info->node->i <= 300)
+		if (len + info->prompt->i <= 10000)
 		{
-			ft_memmove(info->node->str + info->node->i + len, info->node->str +
-					info->node->i, ft_strlen(info->node->str + info->node->i) + len);
+			ft_memmove(info->prompt->cmd + info->prompt->i + len, info->prompt->cmd +
+					info->prompt->i, ft_strlen(info->prompt->cmd + info->prompt->i) + len);
 			while (info->prompt->copy_str[i])
 			{
-				info->node->str[info->node->i] = info->prompt->copy_str[i];
-				info->node->i++;
+				info->prompt->cmd[info->prompt->i] = info->prompt->copy_str[i];
+				info->prompt->i++;
 				i++;
 			}
-			prompt_print(info);
+			prompt_print(info, buff);
 		}
 	}
 }
