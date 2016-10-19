@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:17:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/19 16:23:04 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/19 18:22:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_hub	*stock_struct(t_hub *info, int i)
 t_prompt	*init_prompt()
 {
 	t_prompt *prompt;
+	struct winsize	win;
 
 	if (!(prompt = (t_prompt *)malloc(sizeof(t_prompt))))
 		return (NULL);
@@ -34,6 +35,8 @@ t_prompt	*init_prompt()
 	prompt->cursor_start = 0;	
 	prompt->cursor_end = 0;
 	prompt->copy_str = ft_strdup("");
+	ioctl(0, TIOCGWINSZ, &win);
+	prompt->win_size = win.ws_col;
 	return (prompt);
 }
 

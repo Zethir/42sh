@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 17:48:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/22 14:25:03 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/19 18:45:25 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	deal_with_prompt_path(int i, char *buff)
 	{
 		str = ft_strchr(buff, '/');
 		color(PURPLE, str);
+		ft_putchar('\n');
 		color(RESET, "");
 	}
 }
@@ -99,6 +100,4 @@ void		get_prompt(t_lst *node)
 	color(RESET, "");
 	prompt_name(node);
 	prompt_path(node);
-	color(RED, " \n$> ");
-	color(RESET, "");
 }

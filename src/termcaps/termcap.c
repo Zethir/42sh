@@ -6,20 +6,45 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/19 16:29:42 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/19 19:07:21 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
+static void	reset_prompt(t_hub *info)
+{
+	size_t	i;
+	size_t	j;
+
+	j = 4;
+	i = 0;
+	tputs(tgetstr("vi", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+	while (i < ft_strlen(info->prompt->cmd))
+	{
+		if (j >= info->prompt->win_size)
+		{
+			tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+			tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+			j = 0;
+		}
+		j++;
+		i++;
+	}
+	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
+	color(RED, "$> ");
+	color(RESET, "");
+}
+
 void		prompt_print(t_hub *info, char *buff)
 {
 	int		i;
+	size_t	j;
 
 	i = 0;
-	tputs(tgetstr("vi", NULL), 1, ft_putchar_int);
-	tputs(tgetstr("rc", NULL), 1, ft_putchar_int);
-	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
+	reset_prompt(info);
+	j = 4;
 	while (info->prompt->cmd[i])
 	{
 		tputs(tgetstr("me", NULL), 1, ft_putchar_int);
@@ -29,6 +54,13 @@ void		prompt_print(t_hub *info, char *buff)
 				i <= info->prompt->cursor_end)
 			tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
 		ft_putchar(info->prompt->cmd[i]);
+		j++;
+		if (j >= info->prompt->win_size)
+		{
+			ft_putendl("");
+			tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+			j = 0;
+		}	
 		i++;
 	}
 	if (i == info->prompt->i && buff[0] != 10)
