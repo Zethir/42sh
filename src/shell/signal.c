@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 18:41:07 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/20 17:01:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	sigcont(int id)
 	init_term(info);
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 	get_prompt(info->lst);
+	color(RED, "$> ");
+	color(RESET, "");
 	signal(SIGTSTP, ft_signal);
 }
 
@@ -48,11 +50,10 @@ void	sigint(int id)
 	(void)id;
 	info = NULL;
 	info = stock_struct(info, 1);
-	if (info->parse->pid != 0)
-	{
-		ft_putchar('\n');
-		get_prompt(info->lst);
-	}
+	ft_putchar('\n');
+	get_prompt(info->lst);
+	color(RED, "$> ");
+	color(RESET, "");
 }
 
 void	sigquit(int id)
@@ -71,6 +72,7 @@ void	sigquit(int id)
 void	ft_signal(int id)
 {
 	(void)id;
+	signal(SIGWINCH, win_size);
 	signal(SIGCONT, sigcont);
 	signal(SIGTSTP, sigtstp);
 	signal(SIGINT, sigint);

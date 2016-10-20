@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:38:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/19 15:03:16 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/20 17:12:33 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void				sigquit(int id);
 void				sigint(int id);
 void				sigcont(int id);
 void				sigtstp(int id);
+void				win_size(int id);
 void				close_pipefds(int pipefds[], int num);
 void				wait_for_child(int num);
 void				color(char *color, char *str);

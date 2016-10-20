@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/14 19:54:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:37:23 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,20 @@ void	free_dlist(t_dlist *node)
 
 void	free_struct_lex(t_lex *lex)
 {
-	while (lex->token)
+	if (lex->line)
 	{
-		if (lex->token->cmd)
-			ft_strdel(&lex->token->cmd);
-		if (lex->token->fd)
-			free(lex->token->fd);
-		lex->token->token_value = 0;
-		lex->token = lex->token->next;
+		while (lex->token)
+		{
+			if (lex->token->cmd)
+				ft_strdel(&lex->token->cmd);
+			if (lex->token->fd)
+				free(lex->token->fd);
+			lex->token->token_value = 0;
+			lex->token = lex->token->next;
+		}
+		free(lex->token);
+		lex->token = NULL;
 	}
-	free(lex->token);
-	lex->token = NULL;
 }
 
 void	free_lex(t_lex *lex)
