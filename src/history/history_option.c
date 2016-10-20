@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/14 17:46:32 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/20 19:03:57 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,12 @@ void			do_option(t_hub *info, char **cmd)
 		}
 	}
 	else if (ft_strcmp(cmd[1], "-d") == 0)
-		option_d(info, cmd);
+	{
+		if (!cmd[2])
+			ft_putendl_fd("Need entry number to execute", 2);
+		else
+			option_d(info, cmd);
+	}
 	else if (ft_strcmp(cmd[1], "-r") == 0)
 	{
 		if (!cmd[2])
