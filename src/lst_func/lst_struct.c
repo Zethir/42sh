@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:17:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/19 18:22:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:00:54 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ t_hub	*init_struct(char **env)
 		return (NULL);
 	info->node = create_node();
 	deal_with_file(info);
-	if (init_term(info) == -1)
-		return (NULL);
+//	if (init_term(info) == -1)
+//		return (NULL);
 	return (info);
 }
 

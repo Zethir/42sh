@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 16:39:14 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:02:24 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void		start_prog(char **env)
 	info = init_struct(env);
 	while (1)
 	{
+		if (init_term(info) == -1)
+			return ;
 		if (check_lst(info->lst) == 0)
 			info->lst = init_lst(env);
 		get_prompt(info->lst);
