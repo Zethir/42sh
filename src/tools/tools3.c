@@ -6,51 +6,25 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/17 00:06:48 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 14:23:11 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/20 17:14:20 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-int		start_pipe(int pipefds[], int num)
+void	win_size(int id)
 {
-	int		i;
+	t_hub	*info;
+	char	*str;
+	struct winsize win;
 
-	i = 0;
-	while (i < num)
-	{
-		if (pipe(pipefds + (i * 2)) < 0)
-		{
-			perror("couldn't pipe");
-			return (-1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-void	close_pipefds(int pipefds[], int num)
-{
-	int		i;
-
-	i = 0;
-	while (i < 2 * num)
-	{
-		close(pipefds[i]);
-		i++;
-	}
-}
-
-void	wait_for_child(int num)
-{
-	int		i;
-
-	i = 0;
-	while (i < num + 1)
-	{
-		wait(0);
-		i++;
-	}
+	(void)id;
+	info = NULL;
+	str = ft_strdup("");
+	info = stock_struct(info, 1);
+	ioctl(0, TIOCGWINSZ, &win);
+	info->prompt->win_size = win.ws_col;
+	prompt_print(info, str);
 }
 
 char	*get_home(t_lst *node)

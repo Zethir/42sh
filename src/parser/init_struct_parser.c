@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:38:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 18:15:57 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/20 16:46:27 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void         init_parse(t_hub *info, char *cmd)
 {
 	char        **path;
 
-	info->parse = (t_parse *)malloc(sizeof(t_parse));
+info->parse = (t_parse *)malloc(sizeof(t_parse));
 	info->parse->env = get_env(info->lst);
 	info->parse->argv = ft_strsplit_ws(cmd);
 	if (!(path = (char **)malloc(sizeof(char *) * 7)))

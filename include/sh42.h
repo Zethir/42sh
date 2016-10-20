@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/20 14:37:16 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/20 16:26:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ t_dlist				*create_node(void);
 t_hub				*stock_struct(t_hub *info, int i);
 t_hub				*init_struct(char **env);
 t_token				*hub_redir(t_hub *info, t_token *token);
+void				go_down_line(t_hub *info, char *buff);
+void				go_up_line(t_hub *info, char *buff);
 void				prompt_print(t_hub *info, char *buff);
 void				get_missing_cmd(t_hub *info, t_lex *lex);
 void				token_linker(t_hub *info, t_job *job, t_token *token);
