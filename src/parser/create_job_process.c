@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/15 14:41:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/19 16:07:27 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:05:53 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	token_pipe(t_hub *info, t_job *job, t_token *token)
 
 void	get_missing_cmd(t_hub *info, t_lex *lex)
 {
-	ft_putstr("cmd||filename> ");
 	lex->line = ft_strjoin(info->node->str, " ");
 	lex->line = ft_strjoin(lex->line, deal_with_termcap(info));
 	ft_putchar('\n');
