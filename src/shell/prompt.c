@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 17:48:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/19 18:45:25 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:00:59 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	prompt_name(t_lst *node)
 	t_lst	*tmp;
 
 	tmp = node;
+	//printf("prompt_name\n");
 	while (node)
 	{
 		if (ft_strcmp(node->name, "USER") == 0)
