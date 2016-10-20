@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 15:27:34 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/15 16:14:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:27:54 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,26 @@ static void		push_token(t_token *node, t_token **head)
 	tmp->next = node;
 }
 
+static char	*clean_cmd(char *cmd)
+{
+	char	**str;
+	char	*res;
+	int		i;
+
+	str = ft_strsplit_ws(cmd);
+	if (!str[0])
+		return (NULL);
+	res = str[0];
+	i = 1;
+	while (str[i])
+	{
+		res = ft_strjoin(res, " ");
+		res = ft_strjoin(res, str[i]);
+		i++;
+	}
+	return (res);
+}
+
 int			add_token(t_lex *lex, char *cmd, int val)
 {
 	t_token		*new_elem;
@@ -39,7 +59,8 @@ int			add_token(t_lex *lex, char *cmd, int val)
 	if (!(new_elem->fd = (int *)malloc(sizeof(int) * 2)))
 		return (-1);
 	new_elem->next = NULL;
-	if (!cmd[0])
+	cmd = clean_cmd(cmd);
+	if (!cmd)
 		return (-1);
 	new_elem->cmd = ft_strdup(cmd);
 	new_elem->token_value = val;

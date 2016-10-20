@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/15 17:22:41 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:12:32 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int		check_lexer(t_hub *info, t_lex *lex)
 			return (-1);
 		}
 		if (!lex->line[lex->hd + 1] && i == 0)
-			add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd + 1), 13);
+			if (add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd + 1), 13) == -1)
+				return (-1);
 		if (i > 0 && lex->hd > 0)
 		{
 			lex->hd = i;

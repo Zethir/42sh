@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 18:02:24 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/20 18:16:15 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ static void		deal_with_prompt(t_hub *info)
 	if (!info->lex->line)
 		return ;
 	info->lex->token = init_token_struct();
-	if (check_lexer(info, info->lex) == 0)
-	{
-		parse_cmd(info);
-		add_history(info);
-	}
+	if (check_lexer(info, info->lex) == -1)
+		return ;
+	parse_cmd(info);
+	add_history(info);
 	push_node_bis(&info->node, create_node());
 	info->node = info->node->next;
 }
