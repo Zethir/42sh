@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:27:10 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/19 16:31:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:32:04 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void		heredoc(t_hub *info, char *code)
 	code = ft_wipespace(code);
 	while (ft_strcmp(line, code))
 	{
-		ft_putstr("heredoc>> ");
 		line = deal_with_termcap(info);
 		if (line && ft_strcmp(line, code))
 		{

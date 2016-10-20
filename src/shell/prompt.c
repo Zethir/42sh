@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 17:48:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 18:00:59 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/20 18:56:18 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void	deal_with_prompt_path(int i, char *buff)
 	{
 		str = ft_strchr(buff, '/');
 		color(PURPLE, str);
-		ft_putchar('\n');
 		color(RESET, "");
 	}
+	ft_putchar('\n');
 }
 
 static void	prompt_name(t_lst *node)
@@ -42,7 +42,6 @@ static void	prompt_name(t_lst *node)
 	t_lst	*tmp;
 
 	tmp = node;
-	//printf("prompt_name\n");
 	while (node)
 	{
 		if (ft_strcmp(node->name, "USER") == 0)
@@ -69,7 +68,7 @@ static int	cmp_pwd_home(t_lst *node, char *buff)
 		{
 			if (ft_strcmp(node->home, buff) == 0)
 				return (1);
-			else if (ft_strncmp(node->home, buff, 20) == 0)
+			else if (ft_strncmp(node->home, buff, ft_strlen(node->home)) == 0)
 			{
 				i = ft_strlen(node->home);
 				return (i);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 13:41:53 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 18:01:02 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/20 18:35:54 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ static void		go_to_root(t_lst *node)
 	{
 		if (ft_strcmp(node->name, "HOME") == 0)
 		{
-			//printf("node->name = %s\n", node->name);
 			node->home = ft_strchr(node->home, '/');
-			//printf("node->home = %s\n", node->home);
 			chdir(node->home);
 			return ;
 		}
