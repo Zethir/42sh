@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/19 15:19:05 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/20 14:37:16 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct		s_lst
 typedef struct		s_dlist
 {
 	char			*str;
-	int				i;
 	struct s_dlist	*prev;
 	struct s_dlist	*next;
 }					t_dlist;
@@ -78,7 +77,7 @@ t_dlist				*create_node(void);
 t_hub				*stock_struct(t_hub *info, int i);
 t_hub				*init_struct(char **env);
 t_token				*hub_redir(t_hub *info, t_token *token);
-void				prompt_print(t_hub *info);
+void				prompt_print(t_hub *info, char *buff);
 void				get_missing_cmd(t_hub *info, t_lex *lex);
 void				token_linker(t_hub *info, t_job *job, t_token *token);
 void				token_pipe(t_hub *info, t_job *job, t_token *token);

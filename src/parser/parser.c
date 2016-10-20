@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/15 17:31:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:34:29 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void		exec_process(t_hub *info, t_process *process, int *iofile)
 	init_parse(info, process->cmd);
 	if (check_builtins(info->parse->argv[0]))
 	{
-		process->stdio[0] = iofile[0];
-		process->stdio[1] = iofile[1];
+		if (iofile[0] != 0)
+			process->stdio[0] = iofile[0];
+		if (iofile[1] != 1)
+			process->stdio[1] = iofile[1];
 		launch_builtin(info, process);
 	}
 	else if ((info->parse->pid = fork()) == 0)
