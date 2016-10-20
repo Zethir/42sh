@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/18 17:13:41 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/19 15:19:05 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void				go_to_start_of_line(t_hub *info, char *buff);
 void				go_to_end(t_hub *info, char *buff);
 void				go_to_previous_word(t_hub *info, char *buff);
 void				go_to_next_word(t_hub *info, char *buff);
+int					do_exit(t_hub *info, char **arg);
 int					check_lexer(t_hub *info, t_lex *lex);
 int					out_fd_close(t_hub *info, t_token *token, t_token *tmp);
 int					in_fd_close(t_hub *info, t_token *token, t_token *tmp);

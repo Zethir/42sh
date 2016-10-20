@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/13 18:15:54 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/19 15:03:46 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		do_builtins(t_hub *info)
 	else if (ft_strncmp(cmd, "!", 1) == 0) // -> A revoir
 		return (do_designator(info, info->parse->argv));
 	else if (ft_strcmp(cmd, "exit") == 0) // -> OK
-		return (do_exit(info->parse->argv));
+		return (do_exit(info, info->parse->argv));
 	else if (ft_strcmp(cmd, "export") == 0) // A revoir
 		return (do_export(info));
 	return (-1);

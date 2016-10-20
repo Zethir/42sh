@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/11 18:18:11 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/19 16:14:29 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int			reset_term(t_hub *info)
 {
+	stock_struct(info, 1);
+	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
 	if (tcgetattr(0, &(info->term)) == -1)
 		return (-1);
 	info->term.c_lflag |= (ICANON | ECHO);

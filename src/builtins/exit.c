@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 16:11:24 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 18:26:05 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/19 16:36:37 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,17 @@ static int	deal_with_int(char **arg)
 	return (0);
 }
 
-int			do_exit(char **arg)
+int			do_exit(t_hub *info, char **arg)
 {
 	int		i;
 
 	i = 0;
 	arg++;
 	if (!*arg)
+	{
+		reset_term(info);
 		exit(-1);
+	}
 	while (arg[i])
 		i++;
 	if (i > 1)
@@ -47,9 +50,13 @@ int			do_exit(char **arg)
 	if (*arg[0] >= '0' && *arg[0] <= '9')
 	{
 		if (deal_with_int(arg) == 0)
+		{
+			reset_term(info);
 			exit(-1);
+		}
 		else
 			return (-1);
 	}
+	reset_term(info);
 	exit(-1);
 }

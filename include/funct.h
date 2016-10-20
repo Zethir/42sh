@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:38:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/30 17:50:21 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/19 15:03:16 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int					start_pipe(int pipefds[], int num);
 int					check_builtins(char *cmd);
 int					do_echo(char **cmd);
 int					check_caract(char *str, char c);
-int					do_exit(char **arg);
 int					check_for_parenth(char *arg);
 char				*split_line(char *line);
 char				**malloc_tab(char **arg);
