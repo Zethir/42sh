@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/14 17:45:41 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 19:44:31 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	exec_cmd_add_lst(t_hub *info, char *line)
 		i++;
 	}
 	ft_putchar('\n');
-	exec_env(info, info->node->str);
+	tabl = get_env(info->lst);
+	exec_env(info, info->node->str, tabl);
 }
 
 static void	deal_with_dash(t_hub *info, char **cmd, int fd)

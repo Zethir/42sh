@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 19:25:07 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 20:00:32 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ void		print_env(t_lst *node)
 	node = tmp;
 }
 
-static int	cmp_line(t_hub *info, char **arg, char **env_cpy)
+static int	cmp_line(char **arg, char **env_cpy)
 {
-	char	*cmd;
 	int		i;
 
 	i = 0;
@@ -50,14 +49,16 @@ static int	cmp_line(t_hub *info, char **arg, char **env_cpy)
 
 static void	deal_with_arg(t_hub *info, char **arg, char **env_cpy)
 {
+	char	*cmd;
+
 	while (*arg)
 	{
-		if (cmp_line(info, arg, save[i]) == 0)
+		if (cmp_line(arg, env_cpy) == 0)
 		{
 			if (check_caract(*arg, '=') != 1)
 			{
 				cmd = join_env(arg);
-				exec_env(info, cmd);
+				exec_env(info, cmd, env_cpy);
 				return ;
 			}
 			else if (check_caract(*arg, '=') == 1)
@@ -77,9 +78,9 @@ int			deal_with_env(t_hub *info, char **arg)
 	if (*arg)
 	{
 		if (*arg[0] == '-')
-			deal_with_opt(info, arg);
+			deal_with_opt(info, arg, env_cpy);
 		else
-			deal_with_arg(info, arg);
+			deal_with_arg(info, arg, env_cpy);
 		free(env_cpy);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 17:06:02 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 19:20:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 20:00:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,14 @@ t_lst	*delete_elem(t_lst *node)
 char	**add_elem(char **tabl, char *arg)
 {
 	char	**res;
+	int		size_tab;
 
-	if (!(res = (char **)malloc(char *) * (ft_tablen(tabl) + 2)))
+	size_tab = ft_tablen(tabl);
+	if (!(res = (char **)malloc(sizeof(char *) * (size_tab + 1))))
 		return (NULL);
-	res[ft_tablen(tabl) + 1] = arg;
-	res[ft_tablen(tabl) + 2] = NULL;
-	free(tabl);
+	res = tabl;
+	res[size_tab] = arg;
+	res[size_tab + 1] = NULL;
 	return (res);
 }
 

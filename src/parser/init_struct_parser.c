@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:38:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 18:21:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 19:40:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char        *check_path(char **path, char *arg)
 	return (NULL);
 }
 
-static char        **get_env(t_lst *node)
+char        **get_env(t_lst *node)
 {
 	t_lst   *tmp;
 	char    **env;

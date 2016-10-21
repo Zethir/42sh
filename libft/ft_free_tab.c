@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_tab.c                                     :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/20 15:41:09 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 20:23:14 by cboussau         ###   ########.fr       */
+/*   Created: 2016/10/21 20:01:01 by cboussau          #+#    #+#             */
+/*   Updated: 2016/10/21 20:02:29 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_print_tab(char **tab)
+void	ft_free_tab(char **tabl)
 {
-	int i;
-
-	i = 0;
-	while (tab[i])
+	while (*tabl)
 	{
-		if (tab[i][0])
-			ft_putendl(tab[i]);
-		i++;
+		free(*tabl);
+		tabl++;
 	}
+	free(tabl);
+	tabl = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/21 19:22:38 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 19:40:21 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void				go_to_start_of_line(t_hub *info, char *buff);
 void				go_to_end(t_hub *info, char *buff);
 void				go_to_previous_word(t_hub *info, char *buff);
 void				go_to_next_word(t_hub *info, char *buff);
+void				deal_with_opt(t_hub *info, char **arg, char **env_cpy);
 int					input_redir(t_hub *info, t_token *token, char *filename);
 int					trunc_in_fd(t_hub *info, t_token *token, t_token *tmp);
 int					do_exit(t_hub *info, char **arg);
@@ -152,7 +153,7 @@ int					init_term(t_hub *info);
 int					deal_with_env(t_hub *info, char **arg);
 char				*get_home(t_lst *node);
 char				*deal_with_termcap(t_hub *info);
-char				**deal_with_opt(t_hub *info, char **arg);
 char				*join_env(char **arg);
+char				**get_env(t_lst *lst);
 
 #endif
