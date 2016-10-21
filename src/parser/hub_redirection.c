@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 15:48:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 15:50:25 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 23:21:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_token 		*hub_redir(t_hub *info, t_token *token)
 			if (input_redir(info, token, token->next->cmd) == -1)
 				return (NULL);
 		}	
-		else if (hub_trunc_add_heredoc(info, token) == -1) 
+		else if (hub_trunc_add_heredoc(info, token) == -1 && !token->next) 
 		{
 			token->cmd = ft_strdup(tmp->cmd);
 			break;

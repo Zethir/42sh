@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 20:57:55 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 22:56:43 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void		deal_with_inhib(t_hub *info)
 	char	*tmp;
 
 	tmp = ft_strdup("");
+	if (!info->lex->line)
+		return;
 	while (check_for_parenth(info->lex->line) != 0)
 	{
 		ft_putchar('\n');

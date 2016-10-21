@@ -6,18 +6,24 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 19:44:31 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 22:48:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-static void	exec_cmd_add_lst(t_hub *info, char *line)
+static void	exec_cmd_add_lst(t_hub *info, char **cmd, char *line)
 {
 	char	**tabl;
 	int		i;
 
 	i = 0;
+	while (*cmd)
+	{
+		line = ft_strjoin(line, " ");
+		line = ft_strjoin(line, *cmd);
+		cmd++;
+	}
 	tabl = ft_strsplit_ws(line);
 	info->node->str = ft_strdup("");
 	while (tabl[i])
@@ -55,7 +61,8 @@ static void	deal_with_dash(t_hub *info, char **cmd, int fd)
 		{
 			while (*line != ' ')
 				line++;
-			exec_cmd_add_lst(info, line);
+			cmd++;
+			exec_cmd_add_lst(info, cmd, line);
 		}
 		i--;
 	}
@@ -73,7 +80,8 @@ static void	deal_with_number(t_hub *info, char **cmd, int fd)
 		{
 			while (*line != ' ')
 				line++;
-			exec_cmd_add_lst(info, line);
+			cmd++;
+			exec_cmd_add_lst(info, cmd, line);
 		}
 		i--;
 	}
@@ -90,8 +98,9 @@ static void	deal_with_string(t_hub *info, char **cmd)
 		if (ft_strncmp(info->node->str, &cmd[0][1], ft_strlen(&cmd[0][1])) == 0)
 		{
 			line = ft_strdup(info->node->str);
+			cmd++;
 			info->node = dlist;
-			exec_cmd_add_lst(info, line);
+			exec_cmd_add_lst(info, cmd, line);
 			break ;
 		}
 		info->node = info->node->prev;

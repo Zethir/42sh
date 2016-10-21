@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/19 15:03:46 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/21 22:50:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,21 @@ int		do_builtins(t_hub *info)
 	cmd = info->parse->argv[0];
 	if (ft_strcmp(cmd, "env") == 0)
 		return (deal_with_env(info, info->parse->argv));
-	else if (ft_strcmp(cmd, "setenv") == 0) // -> OK
+	else if (ft_strcmp(cmd, "setenv") == 0)
 		return (do_setenv(info->lst, info->parse->argv));
-	else if (ft_strcmp(cmd, "unsetenv") == 0) // -> OK
+	else if (ft_strcmp(cmd, "unsetenv") == 0)
 		return (do_unsetenv(info->lst, info->parse->argv));
-	else if (ft_strcmp(cmd, "cd") == 0) // -> OK
+	else if (ft_strcmp(cmd, "cd") == 0)
 		return (do_cd(info->lst, info->parse->argv));
-	else if (ft_strcmp(cmd, "echo") == 0) // -> OK
+	else if (ft_strcmp(cmd, "echo") == 0)
 		return (do_echo(info->parse->argv));
-	else if (ft_strcmp(cmd, "history") == 0) // -> A revoir
+	else if (ft_strcmp(cmd, "history") == 0)
 		return (do_history(info, info->parse->argv));
-	else if (ft_strncmp(cmd, "!", 1) == 0) // -> A revoir
+	else if (ft_strncmp(cmd, "!", 1) == 0)
 		return (do_designator(info, info->parse->argv));
-	else if (ft_strcmp(cmd, "exit") == 0) // -> OK
+	else if (ft_strcmp(cmd, "exit") == 0)
 		return (do_exit(info, info->parse->argv));
-	else if (ft_strcmp(cmd, "export") == 0) // A revoir
+	else if (ft_strcmp(cmd, "export") == 0)
 		return (do_export(info));
 	return (-1);
 }
