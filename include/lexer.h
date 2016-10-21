@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/15 16:03:13 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 13:49:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef enum			e_token_type
 	OR = 2,
 	PIPE = 3,
 	R_ADD = 4,
-	R_ADD_FD = 5,
 	R_TRUNC = 6,
 	R_TRUNC_FD_CLOSE = 7,
 	R_TRUNC_FD = 8,

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 19:08:45 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 19:26:01 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,16 @@ static char	**check_arg(t_lst *node, char *arg, char **save)
 	return (NULL);
 }
 
-static void	delete_env(t_lst *node)
-{
-	t_lst *tmp;
-
-	tmp = node;
-	while (node)
-	{
-		if (node->line)
-			ft_strdel(&node->line);
-		node = node->next;
-	}
-	node = tmp;
-}
-
 static int	check_i_opt(t_hub *info, char **arg)
 {
 	char	*cmd;
 
 	if (arg[0][0] == '-' && arg[0][1] == 'i' && !arg[0][2] && arg[1])
 	{
-		delete_env(info->lst);
 		arg++;
 		cmd = join_env(arg);
+		init_parse(info, cmd);
+		info->parse->env = NULL;
 		exec_env(info, cmd);
 		return (0);
 	}
@@ -76,6 +63,7 @@ static int	check_u_opt(t_hub *info, char **arg, char **save)
 		if (*arg)
 		{
 			cmd = join_env(arg);
+			init_parse(info, cmd);
 			exec_env(info, cmd);
 		}
 		else
@@ -88,11 +76,6 @@ static int	check_u_opt(t_hub *info, char **arg, char **save)
 
 char		**deal_with_opt(t_hub *info, char **arg)
 {
-	char	**save;
-
-	if (!(save = (char **)malloc(sizeof(char *) * 2)))
-		return (NULL);
-	save[1] = NULL;
 	if (check_u_opt(info, arg, save) == 1)
 	{
 		if (check_i_opt(info, arg) == 1)

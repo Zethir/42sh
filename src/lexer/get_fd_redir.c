@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 19:10:54 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/14 19:45:32 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 14:11:53 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ int		get_second_fd(t_lex *lex, int i)
 		return (j);		
 	}
 	else
-		return (i);
+		return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:38:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 17:12:33 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 19:22:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int					check_caract(char *str, char c);
 int					check_for_parenth(char *arg);
 char				*split_line(char *line);
 char				**malloc_tab(char **arg);
+char				**add_elem(char **tabl, char *arg);
 
 #endif

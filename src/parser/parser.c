@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 14:34:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 15:32:50 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,10 @@ void	parse_cmd(t_hub *info)
 			token = token->next;
 		}
 		else
-			token = hub_redir(info, token);
+		{
+			if ((token = hub_redir(info, token)) == NULL)
+				return;
+		}
 	}
 	info->job = job;
 	exec_job(info);
