@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 17:08:02 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 16:25:31 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:35:14 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,4 @@ void	go_up_line(t_hub *info, char *buff)
 		info->prompt->i = info->prompt->i - info->prompt->win_size;
 		prompt_print(info, buff);
 	}
-
 }

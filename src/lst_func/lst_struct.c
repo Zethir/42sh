@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:17:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 18:00:54 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 11:57:11 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-t_hub	*stock_struct(t_hub *info, int i)
+t_hub		*stock_struct(t_hub *info, int i)
 {
 	static t_hub *tmp = NULL;
 
@@ -20,9 +20,10 @@ t_hub	*stock_struct(t_hub *info, int i)
 		tmp = info;
 	return (tmp);
 }
-t_prompt	*init_prompt()
+
+t_prompt	*init_prompt(void)
 {
-	t_prompt *prompt;
+	t_prompt		*prompt;
 	struct winsize	win;
 
 	if (!(prompt = (t_prompt *)malloc(sizeof(t_prompt))))
@@ -31,8 +32,8 @@ t_prompt	*init_prompt()
 		return (NULL);
 	ft_bzero(prompt->cmd, 10000);
 	prompt->i = 0;
-	prompt->copy_mode = 0;	
-	prompt->cursor_start = 0;	
+	prompt->copy_mode = 0;
+	prompt->cursor_start = 0;
 	prompt->cursor_end = 0;
 	prompt->copy_str = ft_strdup("");
 	ioctl(0, TIOCGWINSZ, &win);
@@ -40,7 +41,7 @@ t_prompt	*init_prompt()
 	return (prompt);
 }
 
-t_hub	*init_struct(char **env)
+t_hub		*init_struct(char **env)
 {
 	t_hub	*info;
 
@@ -51,12 +52,10 @@ t_hub	*init_struct(char **env)
 		return (NULL);
 	info->node = create_node();
 	deal_with_file(info);
-//	if (init_term(info) == -1)
-//		return (NULL);
 	return (info);
 }
 
-void	init_stdio(t_hub *info)
+void		init_stdio(t_hub *info)
 {
 	if (!(info->stdio = (int *)malloc(sizeof(int) * 3)))
 		return ;

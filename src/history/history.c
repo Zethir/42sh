@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/14 17:46:53 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:59:07 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			do_history(t_hub *info, char **cmd)
 
 	if ((fd = open("/tmp/history", O_RDONLY)) == -1)
 	{
-		perror("history");
+		ft_putendl_fd("history : No such file or directory", 2);
 		return (-1);
 	}
 	if (!cmd[1])
@@ -75,8 +75,8 @@ void		add_history(t_hub *info)
 	i = 0;
 	if ((fd = open("/tmp/history", O_CREAT | O_RDWR | O_APPEND, 0644)) == -1)
 	{
-		perror("history");
-		return ;	
+		ft_putendl_fd("history : No such file or directory", 2);
+		return ;
 	}
 	while (get_next_line(fd, &buf) > 0)
 		i++;
@@ -112,7 +112,7 @@ void		deal_with_file(t_hub *info)
 
 	if ((fd = open("/tmp/history", O_RDWR | O_CREAT, 0644)) == -1)
 	{
-		perror("history");
+		ft_putendl_fd("history : No such file or directory", 2);
 		return ;
 	}
 	while (1)

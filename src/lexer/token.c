@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:57:33 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/15 16:38:34 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:54:50 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int		is_and(t_lex *lex, int i)
 		{
 			i++;
 			if (lex->line[i] == '|' || lex->line[i] == '&' ||
-					lex->line[i] == '<' || lex->line[i] == ';' )
+					lex->line[i] == '<' || lex->line[i] == ';')
 				return (-1);
 			if (add_token(lex, ft_strsub(lex->line,
 							lex->tl, lex->hd - lex->tl), 1) < 0)

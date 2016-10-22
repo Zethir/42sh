@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/22 13:45:29 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/21 14:12:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:53:16 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static int	is_replace(t_lex *lex, int i)
 	if (lex->line[i] == '&')
 	{
 		i = get_second_fd(lex, i + 1);
-		if (add_token(lex, ft_strsub(lex->line, lex->tl, lex->hd - lex->tl), 8) < 0)
+		if (add_token(lex, ft_strsub(lex->line,
+						lex->tl, lex->hd - lex->tl), 8) < 0)
 			return (-1);
 		return (i);
 	}

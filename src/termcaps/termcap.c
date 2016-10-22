@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 18:06:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:30:05 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		prompt_print(t_hub *info, char *buff)
 			ft_putendl("");
 			tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 			j = 0;
-		}	
+		}
 		i++;
 	}
 	if (i == info->prompt->i && buff[0] != 10)

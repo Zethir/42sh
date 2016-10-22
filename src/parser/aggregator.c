@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 18:29:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 23:16:06 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:52:30 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ int		trunc_in_fd(t_hub *info, t_token *token, t_token *tmp)
 	{
 		token->token_value = 13;
 		return (0);
-	}	
+	}
 }

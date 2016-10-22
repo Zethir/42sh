@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 15:49:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 15:52:16 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:47:33 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-void		truncate_redir(t_hub *info, t_token *token, char *filename)
+void			truncate_redir(t_hub *info, t_token *token, char *filename)
 {
 	int		fd;
 
@@ -27,7 +27,7 @@ void		truncate_redir(t_hub *info, t_token *token, char *filename)
 		info->stdio[2] = fd;
 }
 
-void		append_redir(t_hub *info, t_token *token, char *filename)
+void			append_redir(t_hub *info, t_token *token, char *filename)
 {
 	int		fd;
 
@@ -42,7 +42,7 @@ void		append_redir(t_hub *info, t_token *token, char *filename)
 		info->stdio[2] = fd;
 }
 
-int		input_redir(t_hub *info, t_token *token, char *filename)
+int				input_redir(t_hub *info, t_token *token, char *filename)
 {
 	int		fd;
 
@@ -62,7 +62,7 @@ int		input_redir(t_hub *info, t_token *token, char *filename)
 	return (0);
 }
 
-void		heredoc(t_hub *info, char *code)
+void			heredoc(t_hub *info, char *code)
 {
 	int		pipefd[2];
 	char	*line;

@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:22:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/14 18:36:06 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:57:46 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-void	push_process(t_process *node, t_process **head)
+void		push_process(t_process *node, t_process **head)
 {
 	t_process	*tmp;
 
@@ -30,7 +30,7 @@ void	push_process(t_process *node, t_process **head)
 	tmp->next = node;
 }
 
-void	create_process(t_job *job, t_token *token, t_hub *info)
+void		create_process(t_job *job, t_token *token, t_hub *info)
 {
 	t_process	*new_elem;
 
@@ -48,7 +48,7 @@ void	create_process(t_job *job, t_token *token, t_hub *info)
 	push_process(new_elem, &job->process);
 }
 
-void	push_job(t_job *node, t_job **head)
+void		push_job(t_job *node, t_job **head)
 {
 	t_job	*tmp;
 
@@ -64,7 +64,7 @@ void	push_job(t_job *node, t_job **head)
 	tmp->next = node;
 }
 
-void	create_job(t_job *job, t_token *token)
+void		create_job(t_job *job, t_token *token)
 {
 	t_job	*new_job;
 

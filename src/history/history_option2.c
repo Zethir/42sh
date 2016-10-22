@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 15:11:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 22:27:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:28:42 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		add_to_file(t_hub *info)
 	pathb = ft_strjoin("/tmp/history", "bis");
 	if ((fd = open(pathb, O_RDWR | O_CREAT, 0644)) == -1)
 	{
-		perror("history");
+		ft_putendl_fd("history : No such file or directory", 2);
 		exit(-1);
 	}
 	while (info->node->prev)
@@ -41,14 +41,14 @@ static void		add_to_file(t_hub *info)
 	rename(pathb, "/tmp/history");
 }
 
-void		option_r(t_hub *info)
+void			option_r(t_hub *info)
 {
 	int		fd;
 	char	*line;
 
 	if ((fd = open("/tmp/history", O_RDWR | O_CREAT, 0644)) == -1)
 	{
-		perror("history");
+		ft_putendl_fd("history : No such file or directory", 2);
 		exit(-1);
 	}
 	while (get_next_line(fd, &line) > 0)

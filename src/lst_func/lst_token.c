@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 15:27:34 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/21 22:54:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:54:20 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		push_token(t_token *node, t_token **head)
 	tmp->next = node;
 }
 
-static char	*clean_cmd(char *cmd)
+static char		*clean_cmd(char *cmd)
 {
 	char	**str;
 	char	*res;
@@ -50,10 +50,10 @@ static char	*clean_cmd(char *cmd)
 	return (res);
 }
 
-int			add_token(t_lex *lex, char *cmd, int val)
+int				add_token(t_lex *lex, char *cmd, int val)
 {
 	t_token		*new_elem;
-	
+
 	if (!(new_elem = (t_token *)malloc(sizeof(t_token))))
 		return (-1);
 	if (!(new_elem->fd = (int *)malloc(sizeof(int) * 2)))
@@ -70,7 +70,7 @@ int			add_token(t_lex *lex, char *cmd, int val)
 	return (0);
 }
 
-t_token		*init_token_struct(void)
+t_token			*init_token_struct(void)
 {
 	t_token *token;
 

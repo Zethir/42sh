@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 19:10:54 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 14:11:53 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:29:26 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		get_second_fd(t_lex *lex, int i)
 	if (j != i)
 	{
 		lex->fd[1] = ft_atoi(ft_strsub(lex->line, i, j - i));
-		return (j);		
+		return (j);
 	}
 	else
 		return (-1);

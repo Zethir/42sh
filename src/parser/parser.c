@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 23:30:34 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:47:09 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-static int	job_success(t_job *job)
+static int		job_success(t_job *job)
 {
 	t_process *process;
 
@@ -26,7 +26,7 @@ static int	job_success(t_job *job)
 	return (1);
 }
 
-void		exec_process(t_hub *info, t_process *process, int *iofile)
+void			exec_process(t_hub *info, t_process *process, int *iofile)
 {
 	init_parse(info, process->cmd);
 	if (check_builtins(info->parse->argv[0]))
@@ -53,7 +53,7 @@ void		exec_process(t_hub *info, t_process *process, int *iofile)
 		close(iofile[1]);
 }
 
-static void	launch_process(t_hub *info, t_job *job)
+static void		launch_process(t_hub *info, t_job *job)
 {
 	t_process	*process;
 	int			iofile[2];
@@ -77,7 +77,7 @@ static void	launch_process(t_hub *info, t_job *job)
 	job->process = process;
 }
 
-static void	exec_job(t_hub *info)
+static void		exec_job(t_hub *info)
 {
 	t_job	*job;
 
@@ -102,7 +102,7 @@ static void	exec_job(t_hub *info)
 	free_job(info->job);
 }
 
-void	parse_cmd(t_hub *info)
+void			parse_cmd(t_hub *info)
 {
 	t_job		*job;
 	t_token		*token;
@@ -127,7 +127,7 @@ void	parse_cmd(t_hub *info)
 		else
 		{
 			if ((token = hub_redir(info, token)) == NULL)
-				return;
+				return ;
 		}
 	}
 	info->job = job;

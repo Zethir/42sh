@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 19:03:57 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:26:20 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void		option_dbis(t_hub *info, char **cmd)
 	nbr -= 1;
 	if ((fd = open(pathb, O_RDWR | O_CREAT, 0644)) == -1)
 	{
-		perror("history");
+		ft_putendl_fd("history : No such file or directory", 2);
 		return ;
 	}
 	nbr = option_dbis2(info, nbr, fd);
@@ -90,7 +90,7 @@ void			do_option(t_hub *info, char **cmd)
 	{
 		if ((fd = open("/tmp/history", O_WRONLY | O_TRUNC, 0644)) == -1)
 		{
-			perror("history");
+			ft_putendl_fd("history : No such file or directory", 2);
 			return ;
 		}
 	}

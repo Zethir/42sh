@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 22:48:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:58:31 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-static void	exec_cmd_add_lst(t_hub *info, char **cmd, char *line)
+static void		exec_cmd_add_lst(t_hub *info, char **cmd, char *line)
 {
 	char	**tabl;
 	int		i;
@@ -40,7 +40,7 @@ static void	exec_cmd_add_lst(t_hub *info, char **cmd, char *line)
 	exec_env(info, info->node->str, tabl);
 }
 
-static void	deal_with_dash(t_hub *info, char **cmd, int fd)
+static void		deal_with_dash(t_hub *info, char **cmd, int fd)
 {
 	int		i;
 	t_dlist	*dlist;
@@ -68,7 +68,7 @@ static void	deal_with_dash(t_hub *info, char **cmd, int fd)
 	}
 }
 
-static void	deal_with_number(t_hub *info, char **cmd, int fd)
+static void		deal_with_number(t_hub *info, char **cmd, int fd)
 {
 	char	*line;
 	int		i;
@@ -87,7 +87,7 @@ static void	deal_with_number(t_hub *info, char **cmd, int fd)
 	}
 }
 
-static void	deal_with_string(t_hub *info, char **cmd)
+static void		deal_with_string(t_hub *info, char **cmd)
 {
 	t_dlist	*dlist;
 	char	*line;
@@ -108,13 +108,13 @@ static void	deal_with_string(t_hub *info, char **cmd)
 	info->node = dlist;
 }
 
-int		do_designator(t_hub *info, char **cmd)
+int				do_designator(t_hub *info, char **cmd)
 {
 	int		fd;
 
 	if ((fd = open("/tmp/history", O_RDONLY)) == -1)
 	{
-		perror("history");
+		ft_putendl_fd("history : No such file or directory", 2);
 		return (-1);
 	}
 	if (cmd[0][1] == '-')

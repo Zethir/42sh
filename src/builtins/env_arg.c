@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 10:10:15 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 11:28:08 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	check_u_opt(t_hub *info, char **arg, char **env_cpy)
 
 void		deal_with_opt(t_hub *info, char **arg, char **env_cpy)
 {
-	if (check_u_opt(info, arg, env_cpy) ==  1 &&
+	if (check_u_opt(info, arg, env_cpy) == 1 &&
 			check_i_opt(info, arg, env_cpy) == 1)
 	{
 		if (!arg[1] && !arg[0][2] && (arg[0][1] == 'u' || arg[0][1] == 'i'))

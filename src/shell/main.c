@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 22:56:43 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:41:33 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static void		deal_with_inhib(t_hub *info)
 
 	tmp = ft_strdup("");
 	if (!info->lex->line)
-		return;
+		return ;
 	while (check_for_parenth(info->lex->line) != 0)
 	{
 		ft_putchar('\n');
 		tmp = deal_with_termcap(info);
-		info->lex->line =  ft_strjoin(info->lex->line, tmp);
+		info->lex->line = ft_strjoin(info->lex->line, tmp);
 	}
-	free (tmp);
+	free(tmp);
 }
 
 static void		deal_with_prompt(t_hub *info)

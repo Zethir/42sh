@@ -6,15 +6,15 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 16:28:53 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 14:45:24 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:35:46 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-void		deal_with_delete(t_hub *info, char *buff)
+void	deal_with_delete(t_hub *info, char *buff)
 {
-	t_prompt 	*prompt;
+	t_prompt	*prompt;
 
 	prompt = info->prompt;
 	if (DELETE && prompt->cmd[prompt->i])
@@ -28,7 +28,7 @@ void		deal_with_delete(t_hub *info, char *buff)
 
 void	deal_with_backspace(t_hub *info, char *buff)
 {
-	t_prompt 	*prompt;
+	t_prompt	*prompt;
 
 	prompt = info->prompt;
 	if (BACK_SPACE && prompt->i > 0)
@@ -43,7 +43,7 @@ void	deal_with_backspace(t_hub *info, char *buff)
 
 void	deal_with_space(t_hub *info, char *buff)
 {
-	t_prompt 	*prompt;
+	t_prompt	*prompt;
 
 	prompt = info->prompt;
 	if (WHITE_SPACE)
@@ -57,9 +57,9 @@ void	deal_with_space(t_hub *info, char *buff)
 	info->prompt = prompt;
 }
 
-void		deal_with_charac(t_hub *info, char *buff)
+void	deal_with_charac(t_hub *info, char *buff)
 {
-	t_prompt 	*prompt;
+	t_prompt	*prompt;
 
 	prompt = info->prompt;
 	if (CHARACTERE)

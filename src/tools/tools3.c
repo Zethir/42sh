@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/17 00:06:48 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 17:14:20 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:34:08 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	win_size(int id)
 {
-	t_hub	*info;
-	char	*str;
-	struct winsize win;
+	t_hub			*info;
+	char			*str;
+	struct winsize	win;
 
 	(void)id;
 	info = NULL;
@@ -46,7 +46,7 @@ char	*get_home(t_lst *node)
 
 char	*join_env(char **arg)
 {
-	char 	*res;
+	char	*res;
 	int		i;
 
 	res = arg[0];

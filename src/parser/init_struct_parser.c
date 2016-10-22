@@ -6,16 +6,16 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:38:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 19:40:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:51:53 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-static char        *check_path(char **path, char *arg)
+static char		*check_path(char **path, char *arg)
 {
-	DIR             *dir;
-	struct dirent   *ret;
+	DIR				*dir;
+	struct dirent	*ret;
 
 	while (*path)
 	{
@@ -36,11 +36,11 @@ static char        *check_path(char **path, char *arg)
 	return (NULL);
 }
 
-char        **get_env(t_lst *node)
+char			**get_env(t_lst *node)
 {
-	t_lst   *tmp;
-	char    **env;
-	int     i;
+	t_lst	*tmp;
+	char	**env;
+	int		i;
 
 	tmp = node;
 	i = get_index(node);
@@ -62,10 +62,10 @@ char        **get_env(t_lst *node)
 	return (env);
 }
 
-static char        **split_path(t_lst *node)
+static char		**split_path(t_lst *node)
 {
-	t_lst           *tmp;
-	char            **path;
+	t_lst	*tmp;
+	char	**path;
 
 	tmp = node;
 	while (node)
@@ -83,7 +83,7 @@ static char        **split_path(t_lst *node)
 	return (path);
 }
 
-static void deal_with_path(t_hub *info, char **path)
+static void		deal_with_path(t_hub *info, char **path)
 {
 	if (path && *info->parse->argv && info->parse->env)
 	{
@@ -91,24 +91,27 @@ static void deal_with_path(t_hub *info, char **path)
 		if (info->parse->right_path)
 		{
 			info->parse->right_path = ft_strjoin(info->parse->right_path, "/");
-			info->parse->right_path = ft_strjoin(info->parse->right_path, *info->parse->argv);
+			info->parse->right_path = ft_strjoin(info->parse->right_path,
+					*info->parse->argv);
 		}
 		else
 		{
 			info->parse->right_path = ft_strdup("");
-			info->parse->right_path = ft_strjoin(info->parse->right_path, *info->parse->argv);
+			info->parse->right_path = ft_strjoin(info->parse->right_path,
+					*info->parse->argv);
 		}
 	}
 	else if (*info->parse->argv && info->parse->env)
 	{
 		info->parse->right_path = ft_strdup("");
-		info->parse->right_path = ft_strjoin(info->parse->right_path, *info->parse->argv);
+		info->parse->right_path = ft_strjoin(info->parse->right_path,
+				*info->parse->argv);
 	}
 }
 
-void         init_parse(t_hub *info, char *cmd)
+void			init_parse(t_hub *info, char *cmd)
 {
-	char        **path;
+	char	**path;
 
 	info->parse = (t_parse *)malloc(sizeof(t_parse));
 	info->parse->env = get_env(info->lst);

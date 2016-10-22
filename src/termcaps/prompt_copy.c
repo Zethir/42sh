@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:37:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/19 16:13:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 11:33:12 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,15 @@ void	cut_string(t_hub *info, char *buff)
 		len = ft_strlen(info->prompt->copy_str);
 		while (len > 0 && info->prompt->i >= 0)
 		{
-			len --;
+			len--;
 			info->prompt->i--;
 		}
 		info->prompt->i++;
 		len = ft_strlen(info->prompt->copy_str);
 		ft_memmove(info->prompt->cmd + info->prompt->i, info->prompt->cmd +
-				info->prompt->i + len, ft_strlen(info->prompt->cmd + info->prompt->i
-					+ 1) + len);
+				info->prompt->i + len,
+					ft_strlen(info->prompt->cmd + info->prompt->i
+						+ 1) + len);
 		info->prompt->cursor_start = 0;
 		info->prompt->cursor_end = 0;
 		prompt_print(info, buff);
@@ -85,8 +86,10 @@ void	paste_string(t_hub *info, char *buff)
 		len = ft_strlen(info->prompt->copy_str);
 		if (len + info->prompt->i <= 10000)
 		{
-			ft_memmove(info->prompt->cmd + info->prompt->i + len, info->prompt->cmd +
-					info->prompt->i, ft_strlen(info->prompt->cmd + info->prompt->i) + len);
+			ft_memmove(info->prompt->cmd +
+					info->prompt->i + len, info->prompt->cmd +
+					info->prompt->i,
+					ft_strlen(info->prompt->cmd + info->prompt->i) + len);
 			while (info->prompt->copy_str[i])
 			{
 				info->prompt->cmd[info->prompt->i] = info->prompt->copy_str[i];
