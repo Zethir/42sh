@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/10 11:45:51 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 12:05:22 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 14:40:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ static void	print_local(t_lst *node)
 		{
 			ft_putstr("export ");
 			ft_putendl(node->line);
+			node = node->next;
 		}
-		node = node->next;
+		else
+			node = node->next;
 	}
 	node = tmp;
 }

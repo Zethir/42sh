@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 12:03:15 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 14:30:20 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		check_builtins(char *cmd)
 		return (1);
 	else if (ft_strchr(cmd, '=') != NULL)
 		return (1);
+	else if (ft_strcmp(cmd, "unset") == 0)
+		return (1);
 	else
 		return (0);
 }
@@ -48,7 +50,7 @@ int		do_builtins(t_hub *info)
 	else if (ft_strcmp(cmd, "setenv") == 0)
 		return (do_setenv(info->lst, info->parse->argv));
 	else if (ft_strcmp(cmd, "unsetenv") == 0)
-		return (do_unsetenv(info->lst, info->parse->argv));
+		return (do_unsetenv(info->lst, info->parse->argv, 0));
 	else if (ft_strcmp(cmd, "cd") == 0)
 		return (do_cd(info->lst, info->parse->argv));
 	else if (ft_strcmp(cmd, "echo") == 0)
@@ -63,5 +65,7 @@ int		do_builtins(t_hub *info)
 		return (do_export(info));
 	else if (ft_strchr(cmd, '=') != NULL)
 		return (create_new_variable(info));
+	else if (ft_strcmp(cmd, "unset") == 0)
+		return (do_unsetenv(info->lst, info->parse->argv, 1));
 	return (-1);
 }

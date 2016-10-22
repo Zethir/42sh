@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/22 12:13:58 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 14:30:51 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int					do_builtins(t_hub *info);
 int					check_wrong_identifier(t_hub *info, int j);
 int					do_cd(t_lst *node, char **arg);
 int					do_setenv(t_lst *node, char **arg);
-int					do_unsetenv(t_lst *node, char **arg);
+int					do_unsetenv(t_lst *node, char **arg, int flag);
 int					arg_in_dir(t_lst *node, char *arg);
 int					get_index(t_lst *node);
 int					get_index(t_lst *node);
