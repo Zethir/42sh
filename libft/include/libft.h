@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 17:42:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 20:17:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 18:48:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
-
 
 size_t				ft_strlen(const char *s);
 size_t				ft_strclen(char *str, char c);

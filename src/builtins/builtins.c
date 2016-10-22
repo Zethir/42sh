@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 14:30:20 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 18:45:51 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-int		check_builtins(char *cmd)
+int			check_builtins(char *cmd)
 {
 	if (ft_strcmp(cmd, "env") == 0)
 		return (1);
@@ -40,7 +40,25 @@ int		check_builtins(char *cmd)
 		return (0);
 }
 
-int		do_builtins(t_hub *info)
+static int	do_builtins_bis(t_hub *info, char *cmd)
+{
+	if (ft_strcmp(cmd, "history") == 0)
+		return (do_history(info, info->parse->argv));
+	else if (ft_strncmp(cmd, "!", 1) == 0)
+		return (do_designator(info, info->parse->argv));
+	else if (ft_strcmp(cmd, "exit") == 0)
+		return (do_exit(info, info->parse->argv));
+	else if (ft_strcmp(cmd, "export") == 0)
+		return (do_export(info));
+	else if (ft_strchr(cmd, '=') != NULL)
+		return (create_new_variable(info));
+	else if (ft_strcmp(cmd, "unset") == 0)
+		return (do_unsetenv(info->lst, info->parse->argv, 1));
+	else
+		return (-1);
+}
+
+int			do_builtins(t_hub *info)
 {
 	char *cmd;
 
@@ -55,17 +73,6 @@ int		do_builtins(t_hub *info)
 		return (do_cd(info->lst, info->parse->argv));
 	else if (ft_strcmp(cmd, "echo") == 0)
 		return (do_echo(info->parse->argv));
-	else if (ft_strcmp(cmd, "history") == 0)
-		return (do_history(info, info->parse->argv));
-	else if (ft_strncmp(cmd, "!", 1) == 0)
-		return (do_designator(info, info->parse->argv));
-	else if (ft_strcmp(cmd, "exit") == 0)
-		return (do_exit(info, info->parse->argv));
-	else if (ft_strcmp(cmd, "export") == 0)
-		return (do_export(info));
-	else if (ft_strchr(cmd, '=') != NULL)
-		return (create_new_variable(info));
-	else if (ft_strcmp(cmd, "unset") == 0)
-		return (do_unsetenv(info->lst, info->parse->argv, 1));
-	return (-1);
+	else
+		return (do_builtins_bis(info, cmd));
 }
