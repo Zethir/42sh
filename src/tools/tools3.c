@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/17 00:06:48 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 11:34:08 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 17:56:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	win_size(int id)
 	ioctl(0, TIOCGWINSZ, &win);
 	info->prompt->win_size = win.ws_col;
 	prompt_print(info, str);
+	free(str);
 }
 
 char	*get_home(t_lst *node)

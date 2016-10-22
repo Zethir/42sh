@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 11:47:09 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 17:44:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void			exec_process(t_hub *info, t_process *process, int *iofile)
 		launch_bin(info, process);
 	}
 	wait_for_process(process);
-	free(info->parse);
+	free_parse(&info->parse);
 	if (iofile[0] != 0)
 		close(iofile[0]);
 	if (iofile[1] != 1)

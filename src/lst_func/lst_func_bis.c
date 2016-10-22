@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/19 16:22:39 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 17:38:52 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	go_to_end_list(t_hub *info)
 	while (info->node->next)
 		info->node = info->node->next;
 	info->node->str = ft_strdup(str);
+	free(str);
 }
 
 t_lex	*init_lexer_struct(void)
