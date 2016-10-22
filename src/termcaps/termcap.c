@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 17:17:05 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 18:59:19 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,16 @@ static void	reset_prompt(t_hub *info)
 	color(RESET, "");
 }
 
+static void	print_cursor(t_hub *info, char *buff, int i)
+{
+	if (i == info->prompt->i && buff[0] != 10)
+	{
+		tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
+		ft_putchar(' ');
+	}
+	tputs(tgetstr("me", NULL), 1, ft_putchar_int);
+}
+
 void		prompt_print(t_hub *info, char *buff)
 {
 	int		i;
@@ -63,12 +73,7 @@ void		prompt_print(t_hub *info, char *buff)
 		}
 		i++;
 	}
-	if (i == info->prompt->i && buff[0] != 10)
-	{
-		tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
-		ft_putchar(' ');
-	}
-	tputs(tgetstr("me", NULL), 1, ft_putchar_int);
+	print_cursor(info, buff, i);
 }
 
 static void	prompt_hub(t_hub *info, char *buff)

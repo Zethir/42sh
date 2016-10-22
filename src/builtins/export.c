@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/10 11:45:51 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 17:34:55 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 18:37:25 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-static void	print_local(t_lst *node)
+static void		print_local(t_lst *node)
 {
 	t_lst *tmp;
 
@@ -33,7 +33,7 @@ static void	print_local(t_lst *node)
 	node = tmp;
 }
 
-int		check_local_variable(t_hub *info, int i, int flag)
+int				check_local_variable(t_hub *info, int i, int flag)
 {
 	t_lst	*tmp;
 
@@ -54,7 +54,7 @@ int		check_local_variable(t_hub *info, int i, int flag)
 	return (0);
 }
 
-void	add_to_list(t_hub *info, t_lst *node, int j, int flag)
+void			add_to_list(t_hub *info, t_lst *node, int j, int flag)
 {
 	t_lex	*lex;
 	t_lst	*new_elem;
@@ -71,7 +71,26 @@ void	add_to_list(t_hub *info, t_lst *node, int j, int flag)
 	push_node(new_elem, &node);
 }
 
-int		do_export(t_hub *info)
+static int		export_arg(t_hub *info, int i)
+{
+	if (check_wrong_identifier(info, i) == 1)
+		return (-1);
+	else if (info->parse->argv[i][0] == '=')
+	{
+		print_identifier_error(info, i);
+		return (-1);
+	}
+	if (check_local_variable(info, i, 1) == 0)
+	{
+		if (check_local_variable(info, i, 2) == 0)
+			add_to_list(info, info->lst, i, 1);
+		else
+			export_new_variable(info, i);
+	}
+	return (0);
+}
+
+int				do_export(t_hub *info)
 {
 	int		i;
 
@@ -80,20 +99,8 @@ int		do_export(t_hub *info)
 	{
 		while (info->parse->argv[i])
 		{
-			if (check_wrong_identifier(info, i) == 1)
+			if (export_arg(info, i) == -1)
 				return (-1);
-			else if (info->parse->argv[i][0] == '=')
-			{
-				print_identifier_error(info, i);
-				return (-1);
-			}
-			if (check_local_variable(info, i, 1) == 0)
-			{
-				if (check_local_variable(info, i, 2) == 0)
-					add_to_list(info, info->lst, i, 1);
-				else
-					export_new_variable(info, i);
-			}
 			i++;
 		}
 	}

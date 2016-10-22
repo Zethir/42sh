@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 17:44:34 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 18:54:20 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void		launch_process(t_hub *info, t_job *job)
 	job->process = process;
 }
 
-static void		exec_job(t_hub *info)
+void			exec_job(t_hub *info)
 {
 	t_job	*job;
 
@@ -108,9 +108,7 @@ void			parse_cmd(t_hub *info)
 	t_token		*token;
 
 	token = info->lex->token;
-	info->job = init_job();
 	job = info->job;
-	init_stdio(info);
 	while (token)
 	{
 		if (token->token_value == PIPE)
@@ -131,5 +129,4 @@ void			parse_cmd(t_hub *info)
 		}
 	}
 	info->job = job;
-	exec_job(info);
 }

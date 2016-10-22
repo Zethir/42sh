@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/22 16:46:11 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 18:59:19 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_dlist				*create_node(void);
 t_hub				*stock_struct(t_hub *info, int i);
 t_hub				*init_struct(char **env);
 t_token				*hub_redir(t_hub *info, t_token *token);
+void				exec_job(t_hub *info);
 void				truncate_redir(t_hub *info, t_token *token, char *filename);
 void				append_redir(t_hub *info, t_token *token, char *filename);
 void				heredoc(t_hub *info, char *code);
