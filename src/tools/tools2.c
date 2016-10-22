@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 17:06:02 by cboussau          #+#    #+#             */
-/*   Updated: 2016/09/22 14:27:21 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 20:00:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,18 @@ t_lst	*delete_elem(t_lst *node)
 	return (node);
 }
 
-void	add_elem(t_lst *node, char *arg)
+char	**add_elem(char **tabl, char *arg)
 {
-	t_lst	*new_elem;
+	char	**res;
+	int		size_tab;
 
-	new_elem = (t_lst *)malloc(sizeof(t_lst));
-	new_elem->next = NULL;
-	new_elem->line = ft_strdup(arg);
-	new_elem->name = ft_strsub(arg, 0, ft_strlen_char(arg, '='));
-	push_node(new_elem, &node);
+	size_tab = ft_tablen(tabl);
+	if (!(res = (char **)malloc(sizeof(char *) * (size_tab + 1))))
+		return (NULL);
+	res = tabl;
+	res[size_tab] = arg;
+	res[size_tab + 1] = NULL;
+	return (res);
 }
 
 char	**malloc_tab(char **arg)
@@ -73,5 +76,6 @@ char	**malloc_tab(char **arg)
 	save = (char **)malloc(sizeof(char *) * i + 1);
 	if (!save)
 		return (NULL);
+	save[i + 1] = NULL;
 	return (save);
 }

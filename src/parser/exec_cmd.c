@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/14 20:47:57 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 20:36:31 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		launch_builtin(t_hub *info, t_process *process)
 void		launch_bin(t_hub *info, t_process *process)
 {
 	get_new_stdio(process);
+	reset_term(info);
 	if (execve(info->parse->right_path, info->parse->argv, info->parse->env) < 0)
 	{
 		ft_putstr("42sh: command not found: ");
@@ -51,14 +52,15 @@ void		launch_bin(t_hub *info, t_process *process)
 	}
 }
 
-void		exec_env(t_hub *info, char *arg)
+void		exec_env(t_hub *info, char *arg, char **env_cpy)
 {
 	init_parse(info, arg);
 	if (check_builtins(arg))
 		do_builtins(info);
 	else if ((info->parse->pid = fork()) == 0)
 	{
-		if (execve(info->parse->right_path, info->parse->argv, info->parse->env) < 0)
+		reset_term(info);
+		if (execve(info->parse->right_path, info->parse->argv, env_cpy) < 0)
 		{
 			ft_putstr("42sh: command not found: ");
 			ft_putendl(info->parse->argv[0]);

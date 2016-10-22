@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_tab.c                                     :+:      :+:    :+:   */
+/*   ft_strclen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/20 15:41:09 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 20:23:14 by cboussau         ###   ########.fr       */
+/*   Created: 2016/10/21 20:15:39 by cboussau          #+#    #+#             */
+/*   Updated: 2016/10/21 20:17:22 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_print_tab(char **tab)
+size_t		ft_strclen(char *str, char c)
 {
-	int i;
+	size_t	i;
 
 	i = 0;
-	while (tab[i])
-	{
-		if (tab[i][0])
-			ft_putendl(tab[i]);
+	while (str[i] && str[i] != c)
 		i++;
-	}
+	return (i - 1);
 }

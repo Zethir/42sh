@@ -6,95 +6,76 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 19:26:35 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 10:10:15 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-static char	*check_arg(t_lst *node, char *arg, char *save)
+static int	check_arg(char **env_cpy, char *arg)
 {
-	t_lst	*tmp;
+	int		i;
 
-	tmp = node;
-	while (node)
+	i = 0;
+	while (env_cpy[i])
 	{
-		if (ft_strcmp(node->name, arg) == 0)
+		if (ft_strncmp(env_cpy[i], arg, ft_strclen(env_cpy[i], '=')) == 0)
 		{
-			save = ft_strdup(node->line);
-			node->line = NULL;
-			node = tmp;
-			return (save);
+			env_cpy[i] = ft_strdup("");
+			return (1);
 		}
-		node = node->next;
+		i++;
 	}
-	node = tmp;
-	return (NULL);
+	return (0);
 }
 
-static void	delete_env(t_lst *node)
-{
-	t_lst *tmp;
-
-	tmp = node;
-	while (node)
-	{
-		if (node->line)
-			ft_strdel(&node->line);
-		node = node->next;
-	}
-	node = tmp;
-}
-
-static int	check_i_opt(t_hub *info, char **arg)
+static int	check_i_opt(t_hub *info, char **arg, char **env_cpy)
 {
 	char	*cmd;
 
 	if (arg[0][0] == '-' && arg[0][1] == 'i' && !arg[0][2] && arg[1])
 	{
-		delete_env(info->lst);
 		arg++;
 		cmd = join_env(arg);
-		exec_env(info, cmd);
+		env_cpy = NULL;
+		exec_env(info, cmd, env_cpy);
 		return (0);
 	}
 	else
 		return (1);
 }
 
-static int	check_u_opt(t_hub *info, char **arg, char **save)
+static int	check_u_opt(t_hub *info, char **arg, char **env_cpy)
 {
 	char	*cmd;
 
 	if (arg[0][0] == '-' && arg[0][1] == 'u' && !arg[0][2] && arg[1])
 	{
 		arg++;
-		*save = check_arg(info->lst, *arg, *save);
-		if (!save || !*save)
+		if (check_arg(env_cpy, *arg) == 0)
 			print_error_opt(*arg);
 		arg++;
 		if (*arg)
 		{
 			cmd = join_env(arg);
-			exec_env(info, cmd);
+			exec_env(info, cmd, env_cpy);
 		}
 		else
-			print_env(info->lst);
+			ft_print_tab(env_cpy);
 		return (0);
 	}
 	else
 		return (1);
 }
 
-char		*deal_with_opt(t_hub *info, char **arg, char *save)
+void		deal_with_opt(t_hub *info, char **arg, char **env_cpy)
 {
-	if ((check_u_opt(info, arg, &save)) == 1 && (check_i_opt(info, arg)) == 1)
+	if (check_u_opt(info, arg, env_cpy) ==  1 &&
+			check_i_opt(info, arg, env_cpy) == 1)
 	{
 		if (!arg[1] && !arg[0][2] && (arg[0][1] == 'u' || arg[0][1] == 'i'))
 			print_error_arg();
 		else
 			print_main_error(&*arg[0]);
-		return (NULL);
 	}
-	return (save);
 }

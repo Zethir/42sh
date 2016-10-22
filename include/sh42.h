@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/21 18:07:42 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 10:11:00 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ t_dlist				*create_node(void);
 t_hub				*stock_struct(t_hub *info, int i);
 t_hub				*init_struct(char **env);
 t_token				*hub_redir(t_hub *info, t_token *token);
+void				truncate_redir(t_hub *info, t_token *token, char *filename);
+void				append_redir(t_hub *info, t_token *token, char *filename);
+void				heredoc(t_hub *info, char *code);
 void				go_down_line(t_hub *info, char *buff);
 void				go_up_line(t_hub *info, char *buff);
 void				prompt_print(t_hub *info, char *buff);
@@ -84,7 +87,7 @@ void				get_missing_cmd(t_hub *info, t_lex *lex);
 void				token_linker(t_hub *info, t_job *job, t_token *token);
 void				token_pipe(t_hub *info, t_job *job, t_token *token);
 void				init_stdio(t_hub *info);
-void				exec_env(t_hub *info, char *arg);
+void				exec_env(t_hub *info, char *arg, char **env_cpy);
 void				exec_process(t_hub *info, t_process *process, int *iofile);
 void				launch_builtin(t_hub *info, t_process *process);
 void				launch_bin(t_hub *info, t_process *process);
@@ -98,7 +101,6 @@ void				deal_with_file(t_hub *info);
 void				do_option(t_hub *info, char **cmd);
 void				option_r(t_hub *info);
 void				get_prompt(t_lst *node);
-void				add_elem(t_lst *node, char *arg);
 void				free_list(t_lst *node);
 void				free_dlist(t_dlist *node);
 void				free_hub(t_hub *info);
@@ -126,6 +128,9 @@ void				go_to_start_of_line(t_hub *info, char *buff);
 void				go_to_end(t_hub *info, char *buff);
 void				go_to_previous_word(t_hub *info, char *buff);
 void				go_to_next_word(t_hub *info, char *buff);
+void				deal_with_opt(t_hub *info, char **arg, char **env_cpy);
+int					input_redir(t_hub *info, t_token *token, char *filename);
+int					trunc_in_fd(t_hub *info, t_token *token, t_token *tmp);
 int					do_exit(t_hub *info, char **arg);
 int					check_lexer(t_hub *info, t_lex *lex);
 int					out_fd_close(t_hub *info, t_token *token, t_token *tmp);
@@ -150,5 +155,6 @@ char				*deal_with_opt(t_hub *info, char **arg, char *save);
 char				*get_home(t_lst *node);
 char				*deal_with_termcap(t_hub *info);
 char				*join_env(char **arg);
+char				**get_env(t_lst *lst);
 
 #endif

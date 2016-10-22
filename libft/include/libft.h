@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 17:42:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/10 16:53:14 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/21 20:17:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+
 size_t				ft_strlen(const char *s);
+size_t				ft_strclen(char *str, char c);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 char				*ft_strcpy(char *dst, const char *src);
 char				*ft_strdup(const char *s1);
@@ -77,6 +79,7 @@ void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
+void				ft_free_tab(char **tabl);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void				ft_reverse(char *s);

@@ -6,7 +6,7 @@
 #    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/23 17:41:56 by cboussau          #+#    #+#              #
-#    Updated: 2016/10/10 17:15:24 by qdiaz            ###   ########.fr        #
+#    Updated: 2016/10/21 20:18:16 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c\
 	   ft_lstnew.c ft_lstmap.c ft_nbrlen.c ft_itoa_base.c ft_swap.c\
 	   ft_tablen.c get_next_line.c ft_strsplit_ws.c ft_print_tab.c\
 	   ft_strlen_char.c ft_putchar_int.c ft_chardup.c ft_strccmp.c\
-	   ft_wipespace.c
+	   ft_wipespace.c ft_free_tab.c ft_strclen.c
 
 OBJS = $(SRCS:.c=.o)
 INCLUDE = ./include/

@@ -6,16 +6,33 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 18:16:15 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 22:56:43 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
+static void		deal_with_inhib(t_hub *info)
+{
+	char	*tmp;
+
+	tmp = ft_strdup("");
+	if (!info->lex->line)
+		return;
+	while (check_for_parenth(info->lex->line) != 0)
+	{
+		ft_putchar('\n');
+		tmp = deal_with_termcap(info);
+		info->lex->line =  ft_strjoin(info->lex->line, tmp);
+	}
+	free (tmp);
+}
+
 static void		deal_with_prompt(t_hub *info)
 {
 	info->lex = init_lexer_struct();
 	info->lex->line = deal_with_termcap(info);
+	deal_with_inhib(info);
 	ft_putchar('\n');
 	if (!info->lex->line)
 		return ;
