@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/19 18:20:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 16:46:50 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_prompt
 	size_t		win_size;
 }				t_prompt;
 
-t_prompt	*init_prompt();
+t_prompt		*init_prompt();
+void			free_prompt(t_prompt **info);
 
 #endif

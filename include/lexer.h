@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 13:49:03 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 16:50:01 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ typedef struct			s_lex
 t_lex					*init_lexer_struct(void);
 t_token					*init_token_struct(void);
 void					print_parse_error(t_lex *lex);
-void					free_struct_lex(t_lex *lex);
-void					free_lex(t_lex *lex);
+void					free_struct_lex(t_lex **lex);
+void					free_lex(t_lex **lex);
 void					get_first_fd(t_lex *lex, int i);
 int						add_token(t_lex *lex, char *cmd, int val);
 int						get_second_fd(t_lex *lex, int i);

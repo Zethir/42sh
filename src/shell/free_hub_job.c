@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:35:47 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/19 16:27:34 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 17:05:07 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,22 @@ void	free_hub(t_hub *info)
 		free(info->stdio);
 	free(info);
 	info = NULL;
+}
+
+void	free_prompt(t_prompt **prompt)
+{
+	t_prompt *tmp;
+
+	tmp = *prompt;
+	if (tmp->cmd)
+		free(tmp->cmd);
+	tmp->i = 0;
+	tmp->copy_mode = 0;
+	tmp->cursor_start = 0;
+	tmp->cursor_end = 0;
+	if (tmp->copy_str)
+		free(tmp->copy_str);
+	tmp->win_size = 0;
+	free(tmp);
+	tmp = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 00:03:33 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/19 16:28:32 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 17:12:42 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	deal_with_down(t_hub *info, char *buff)
 	if (ARROW_DOWN && info->node->next)
 	{
 		info->node = info->node->next;
-		info->prompt->cmd = info->node->str;
+		info->prompt->cmd = ft_strdup(info->node->str);
 		info->prompt->i = ft_strlen(info->prompt->cmd);
 		prompt_print(info, buff);
 	}
@@ -28,7 +28,7 @@ void	deal_with_up(t_hub *info, char *buff)
 	if (ARROW_UP && info->node->prev)
 	{
 		info->node = info->node->prev;
-		info->prompt->cmd = info->node->str;
+		info->prompt->cmd = ft_strdup(info->node->str);
 		info->prompt->i = ft_strlen(info->prompt->cmd);
 		prompt_print(info, buff);
 	}

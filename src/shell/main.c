@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 11:41:33 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 17:17:33 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ static void		start_prog(char **env)
 		get_prompt(info->lst);
 		stock_struct(info, 0);
 		deal_with_prompt(info);
-		free_struct_lex(info->lex);
+		free_struct_lex(&info->lex);
 	}
-	free_lex(info->lex);
+	free_prompt(&info->prompt);
+	free_lex(&info->lex);
 	if (reset_term(info) == -1)
 		return ;
 	if (info->lst)
