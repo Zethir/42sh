@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 19:10:26 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 19:26:33 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,14 @@ int			deal_with_env(t_hub *info, char **arg)
 	char	**save;
 
 	arg++;
+	if (!(save = (char **)malloc(sizeof(char *) * 2)))
+		return (-1);
+	save[0] = NULL;
+	save[1] = NULL;
 	if (*arg)
 	{
 		if (*arg[0] == '-')
-			save = deal_with_opt(info, arg);
+			*save = deal_with_opt(info, arg, *save);
 		else
 			save = deal_with_arg(info, arg);
 		if (!save || !*save)

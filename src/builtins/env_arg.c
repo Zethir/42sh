@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 19:08:45 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 19:26:35 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sh42.h>
 
-static char	**check_arg(t_lst *node, char *arg, char **save)
+static char	*check_arg(t_lst *node, char *arg, char *save)
 {
 	t_lst	*tmp;
 
@@ -21,7 +21,7 @@ static char	**check_arg(t_lst *node, char *arg, char **save)
 	{
 		if (ft_strcmp(node->name, arg) == 0)
 		{
-			*save = ft_strdup(node->line);
+			save = ft_strdup(node->line);
 			node->line = NULL;
 			node = tmp;
 			return (save);
@@ -69,8 +69,8 @@ static int	check_u_opt(t_hub *info, char **arg, char **save)
 	if (arg[0][0] == '-' && arg[0][1] == 'u' && !arg[0][2] && arg[1])
 	{
 		arg++;
-		save = check_arg(info->lst, *arg, save);
-		if (!save || !(*save))
+		*save = check_arg(info->lst, *arg, *save);
+		if (!save || !*save)
 			print_error_opt(*arg);
 		arg++;
 		if (*arg)
@@ -86,25 +86,15 @@ static int	check_u_opt(t_hub *info, char **arg, char **save)
 		return (1);
 }
 
-char		**deal_with_opt(t_hub *info, char **arg)
+char		*deal_with_opt(t_hub *info, char **arg, char *save)
 {
-	char	**save;
-
-	if (!(save = (char **)malloc(sizeof(char *) * 2)))
-		return (NULL);
-	save[1] = NULL;
-	if (check_u_opt(info, arg, save) == 1)
+	if ((check_u_opt(info, arg, &save)) == 1 && (check_i_opt(info, arg)) == 1)
 	{
-		if (check_i_opt(info, arg) == 1)
-		{
-			if (!arg[1] && !arg[0][2] && (arg[0][1] == 'u' || arg[0][1] == 'i'))
-				print_error_arg();
-			else
-				print_main_error(&*arg[0]);
-			return (NULL);
-		}
+		if (!arg[1] && !arg[0][2] && (arg[0][1] == 'u' || arg[0][1] == 'i'))
+			print_error_arg();
 		else
-			return (NULL);
+			print_main_error(&*arg[0]);
+		return (NULL);
 	}
 	return (save);
 }

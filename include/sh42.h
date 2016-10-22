@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/20 16:26:05 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/21 18:07:42 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,9 +146,9 @@ int					check_lst(t_lst *node);
 int					reset_term(t_hub *info);
 int					init_term(t_hub *info);
 int					deal_with_env(t_hub *info, char **arg);
+char				*deal_with_opt(t_hub *info, char **arg, char *save);
 char				*get_home(t_lst *node);
 char				*deal_with_termcap(t_hub *info);
-char				**deal_with_opt(t_hub *info, char **arg);
 char				*join_env(char **arg);
 
 #endif
