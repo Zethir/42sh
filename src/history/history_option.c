@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 11:26:20 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 18:00:50 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,13 @@ static void		option_dbis(t_hub *info, char **cmd)
 	if ((fd = open(pathb, O_RDWR | O_CREAT, 0644)) == -1)
 	{
 		ft_putendl_fd("history : No such file or directory", 2);
+		free(pathb);
 		return ;
 	}
 	nbr = option_dbis2(info, nbr, fd);
 	unlink("/tmp/history");
 	rename(pathb, "/tmp/history");
+	free(pathb);
 	if (nbr > 0)
 	{
 		out_of_range_error(cmd);

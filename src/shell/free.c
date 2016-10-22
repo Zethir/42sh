@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 16:49:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 17:38:53 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ void	free_lex(t_lex **head)
 	t_lex	*lex;
 
 	lex = *head;
-	ft_strdel(&lex->line);
+	if (lex->line)
+		ft_strdel(&lex->line);
 	lex->hd = 0;
 	lex->tl = 0;
+	if (lex->fd)
+		free(lex->fd);
 	free(lex);
 	lex = NULL;
 }

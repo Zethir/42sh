@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 11:59:07 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 17:57:51 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void		add_history(t_hub *info)
 	str = ft_strjoin(ft_itoa(i), " ");
 	str = ft_strjoin(str, info->node->str);
 	ft_putendl_fd(str, fd);
+	free(str);
 	close(fd);
 }
 

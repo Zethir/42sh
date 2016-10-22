@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 15:27:34 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/22 11:54:20 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 18:13:08 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static char		*clean_cmd(char *cmd)
 		res = ft_strjoin(res, str[i]);
 		i++;
 	}
+	if (str)
+		ft_strdel(str);
 	return (res);
 }
 
