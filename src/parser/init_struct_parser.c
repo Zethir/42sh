@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:38:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 16:03:52 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 18:12:42 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,5 @@ void			init_parse(t_hub *info, char *cmd)
 		return ;
 	path = split_path(info->lst);
 	deal_with_path(info, path);
+	ft_strdel(path);
 }

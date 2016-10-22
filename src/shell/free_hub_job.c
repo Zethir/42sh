@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:35:47 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 17:05:07 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/22 17:49:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,20 @@ void	free_prompt(t_prompt **prompt)
 	tmp->win_size = 0;
 	free(tmp);
 	tmp = NULL;
+}
+
+void	free_parse(t_parse **head)
+{
+	t_parse *parse;
+
+	parse = *head;
+	if (parse->argv)
+		ft_strdel(parse->argv);
+	if (parse->right_path)
+		free(parse->right_path);
+	if (parse->env)
+		ft_strdel(parse->env);
+	parse->pid = 0;
+	free(parse);
+	parse = NULL;
 }

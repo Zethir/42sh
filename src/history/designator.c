@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 11:58:31 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/22 18:11:45 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void		exec_cmd_add_lst(t_hub *info, char **cmd, char *line)
 	ft_putchar('\n');
 	tabl = get_env(info->lst);
 	exec_env(info, info->node->str, tabl);
+	ft_strdel(tabl);
 }
 
 static void		deal_with_dash(t_hub *info, char **cmd, int fd)
@@ -66,6 +67,7 @@ static void		deal_with_dash(t_hub *info, char **cmd, int fd)
 		}
 		i--;
 	}
+	free(line);
 }
 
 static void		deal_with_number(t_hub *info, char **cmd, int fd)
@@ -85,6 +87,7 @@ static void		deal_with_number(t_hub *info, char **cmd, int fd)
 		}
 		i--;
 	}
+	free(line);
 }
 
 static void		deal_with_string(t_hub *info, char **cmd)
@@ -93,6 +96,7 @@ static void		deal_with_string(t_hub *info, char **cmd)
 	char	*line;
 
 	dlist = info->node;
+	line = NULL;
 	while (info->node->prev)
 	{
 		if (ft_strncmp(info->node->str, &cmd[0][1], ft_strlen(&cmd[0][1])) == 0)
@@ -105,6 +109,7 @@ static void		deal_with_string(t_hub *info, char **cmd)
 		}
 		info->node = info->node->prev;
 	}
+	free(line);
 	info->node = dlist;
 }
 
