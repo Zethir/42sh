@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 17:57:51 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/23 12:10:50 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	history_option(t_hub *info, char **cmd, int fd)
 		i++;
 	}
 	info->node = dlist;
-	nbr = i - nbr;
+	nbr = i - 1 - nbr;
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (nbr < 0)
