@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 18:35:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 10:29:25 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/23 11:37:46 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		numeric_error(char **cmd)
 	{
 		if (cmd[1][i] < '0' || cmd[1][i] > '9')
 		{
-			ft_putstr_fd("21sh: history: ", 2);
+			ft_putstr_fd("42sh: history: ", 2);
 			ft_putstr_fd(cmd[1], 2);
 			ft_putendl_fd(": numeric argument required", 2);
 			return (1);
@@ -33,7 +33,7 @@ int		numeric_error(char **cmd)
 
 void	out_of_range_error(char **cmd)
 {
-	ft_putstr_fd("21sh: history: ", 2);
+	ft_putstr_fd("42sh: history: ", 2);
 	ft_putstr_fd(cmd[2], 2);
 	ft_putendl_fd(": history position out of range", 2);
 }

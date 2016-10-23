@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 15:49:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 10:30:16 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/23 11:39:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				input_redir(t_hub *info, t_token *token, char *filename)
 	filename = ft_wipespace(filename);
 	if ((fd = open(filename, O_RDONLY)) == -1)
 	{
-		ft_putstr("21sh: No such file: ");
+		ft_putstr("42sh: No such file: ");
 		ft_putendl(filename);
 		return (-1);
 	}

@@ -6,11 +6,11 @@
 #    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/24 14:53:02 by cboussau          #+#    #+#              #
-#    Updated: 2016/10/23 10:28:49 by cboussau         ###   ########.fr        #
+#    Updated: 2016/10/23 11:37:12 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 21sh
+NAME = 42sh
 
 C_DIR =	src
 C_DIRS = $(shell find $(C_DIR) -type d -follow -print)
