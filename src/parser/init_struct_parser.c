@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:38:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 10:20:37 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/23 11:47:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,17 @@ static char		**split_path(t_lst *node)
 		if (ft_strcmp(node->name, "PATH") == 0)
 		{
 			if (node->line)
+			{
 				path = ft_strsplit(&node->line[5], ':');
+				return (path);
+			}
 			else
 				return (NULL);
 		}
 		node = node->next;
 	}
 	node = tmp;
-	return (path);
+	return (NULL);
 }
 
 static void		deal_with_path(t_hub *info, char **path)
@@ -120,5 +123,6 @@ void			init_parse(t_hub *info, char *cmd)
 		return ;
 	path = split_path(info->lst);
 	deal_with_path(info, path);
-	ft_strdel(path);
+	if (path)
+		ft_strdel(path);
 }

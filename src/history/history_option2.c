@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 15:11:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 12:11:47 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/23 12:13:51 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,18 @@ static void		add_to_file_bis(t_hub *info, int fd)
 
 	i = 1;
 	dlst = info->node;
-	while (info->node->prev)
-		info->node = info->node->prev;
-	while (info->node)
+	while (dlst->prev)
+		dlst = dlst->prev;
+	while (dlst)
 	{
-		ft_putendl_fd(ft_strjoin(ft_strjoin(ft_itoa(i), " "),
-					info->node->str), fd);
-		info->node = info->node->next;
+		if (dlst->str)
+		{
+			ft_putendl_fd(ft_strjoin(ft_strjoin(ft_itoa(i), " "),
+						dlst->str), fd);
+		}
+		dlst = dlst->next;
 		i++;
 	}
-	info->node = dlst;
 }
 
 static void		add_to_file(t_hub *info)
@@ -53,7 +55,9 @@ void			option_r(t_hub *info)
 {
 	int		fd;
 	char	*line;
+	char	*str;
 
+	str = ft_strdup(info->node->str);
 	if ((fd = open("/tmp/history", O_RDWR | O_CREAT, 0644)) == -1)
 	{
 		ft_putendl_fd("history : No such file or directory", 2);
@@ -66,6 +70,8 @@ void			option_r(t_hub *info)
 		push_node_bis(&info->node, create_node());
 		info->node = info->node->next;
 	}
+	info->node->str = ft_strdup(str);
 	add_to_file(info);
 	close(fd);
+	free(str);
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 18:00:50 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/23 11:55:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		option_dbis2(t_hub *info, int nbr, int fd)
 		if (nbr != 0)
 		{
 			ft_putendl_fd(ft_strjoin(ft_strjoin(ft_itoa(i), " "),
-					info->node->str), fd);
+						info->node->str), fd);
 			i++;
 		}
 		if (nbr == 0)
@@ -84,18 +84,26 @@ static void		option_d(t_hub *info, char **cmd)
 	option_dbis(info, cmd);
 }
 
-void			do_option(t_hub *info, char **cmd)
+static void		option_c(t_hub *info)
 {
 	int		fd;
+	char	*str;
 
-	if (ft_strcmp(cmd[1], "-c") == 0)
+	if ((fd = open("/tmp/history", O_WRONLY | O_TRUNC, 0644)) == -1)
 	{
-		if ((fd = open("/tmp/history", O_WRONLY | O_TRUNC, 0644)) == -1)
-		{
-			ft_putendl_fd("history : No such file or directory", 2);
-			return ;
-		}
+		ft_putendl_fd("history : No such file or directory", 2);
+		return ;
 	}
+	str = ft_strdup(info->node->str);
+	info->node = create_node();
+	info->node->str = ft_strdup(str);
+	free(str);
+}
+
+void			do_option(t_hub *info, char **cmd)
+{
+	if (ft_strcmp(cmd[1], "-c") == 0)
+		option_c(info);
 	else if (ft_strcmp(cmd[1], "-d") == 0)
 	{
 		if (!cmd[2])
