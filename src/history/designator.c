@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 18:11:45 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/23 12:56:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int				do_designator(t_hub *info, char **cmd)
 		if (check_number(cmd) == 0)
 			deal_with_number(info, cmd, fd);
 	}
-	else
+	else if (cmd[0][1])
 	{
 		if (check_alpha(cmd) == 0)
 			deal_with_string(info, cmd);
