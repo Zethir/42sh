@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/23 18:07:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/04 15:55:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/23 10:29:38 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_identifier_error(t_hub *info, int i)
 {
-	ft_putstr_fd("42sh: export: ", 2);
+	ft_putstr_fd("21sh: export: ", 2);
 	ft_putstr_fd(info->parse->argv[i], 2);
 	ft_putendl_fd(": not a valid identifier", 2);
 }
