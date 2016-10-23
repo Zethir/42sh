@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/22 18:59:19 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/23 09:58:20 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ int					do_history(t_hub *info, char **cmd);
 int					get_intel(t_lst *node, char *str);
 int					check_lst(t_lst *node);
 int					reset_term(t_hub *info);
+int					reset_term_no_free(t_hub *info);
 int					init_term(t_hub *info);
 int					deal_with_env(t_hub *info, char **arg);
 int					create_new_variable(t_hub *info);

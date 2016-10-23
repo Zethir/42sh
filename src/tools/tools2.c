@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 17:06:02 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 17:46:47 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/23 10:22:20 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	**add_elem(char **tabl, char *arg)
 	int		size_tab;
 
 	size_tab = ft_tablen(tabl);
-	if (!(res = (char **)malloc(sizeof(char *) * (size_tab + 1))))
+	if (!(res = (char **)malloc(sizeof(char *) * size_tab + 1)))
 		return (NULL);
 	res = tabl;
 	res[size_tab] = arg;
@@ -73,7 +73,7 @@ char	**malloc_tab(char **arg)
 	i = 0;
 	while (arg[i])
 		i++;
-	save = (char **)malloc(sizeof(char *) * (i + 1));
+	save = (char **)malloc(sizeof(char *) * i + 1);
 	if (!save)
 		return (NULL);
 	save[i + 1] = NULL;

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 18:59:19 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/23 10:10:08 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ char		*deal_with_termcap(t_hub *info)
 			if (info->node->next)
 				go_to_end_list(info);
 			if (info->prompt->cmd[0])
-				info->node->str = info->prompt->cmd;
+				info->node->str = ft_strdup(info->prompt->cmd);
 			else
 				return (NULL);
 			break ;

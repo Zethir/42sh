@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 18:17:04 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/23 10:10:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_dlist	*create_node(void)
 
 	if (!(node = (t_dlist *)malloc(sizeof(t_dlist))))
 		return (NULL);
-	node->str = ft_strdup("");
+	node->str = NULL;
 	node->prev = NULL;
 	node->next = NULL;
 	return (node);

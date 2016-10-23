@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 18:16:40 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/23 10:09:10 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	free_list(t_lst *node)
 	while (node)
 	{
 		if (node->line)
-			ft_strdel(&node->line);
+			free(node->line);
 		if (node->name)
-			ft_strdel(&node->name);
+			free(node->name);
 		node = node->next;
 	}
 	free(node);
@@ -31,7 +31,7 @@ void	free_dlist(t_dlist *node)
 	while (node)
 	{
 		if (node->str)
-			ft_strdel(&node->str);
+			free(node->str);
 		node = node->next;
 	}
 	free(node);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:38:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 18:25:15 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/23 10:20:37 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char			**get_env(t_lst *node)
 
 	tmp = node;
 	i = get_index(node);
-	env = (char **)malloc(sizeof(char *) * (i + 1));
+	env = (char **)malloc(sizeof(char *) * i + 1);
 	i = 0;
 	while (node)
 	{

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:35:47 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 17:49:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/23 10:14:29 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,6 @@ void	free_job(t_job *job)
 
 void	free_hub(t_hub *info)
 {
-	while (info->node)
-	{
-		if (info->node->str)
-			ft_strdel(&info->node->str);
-		info->node = info->node->next;
-	}
-	free(info->node);
-	info->node = NULL;
 	if (info->stdio)
 		free(info->stdio);
 	free(info);
@@ -57,8 +49,6 @@ void	free_prompt(t_prompt **prompt)
 	t_prompt *tmp;
 
 	tmp = *prompt;
-	if (tmp->cmd)
-		free(tmp->cmd);
 	tmp->i = 0;
 	tmp->copy_mode = 0;
 	tmp->cursor_start = 0;
