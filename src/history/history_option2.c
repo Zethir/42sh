@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 15:11:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 12:13:51 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/23 12:43:58 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void			option_r(t_hub *info)
 		push_node_bis(&info->node, create_node());
 		info->node = info->node->next;
 	}
-	info->node->str = ft_strdup(str);
 	add_to_file(info);
+	info->node->str = ft_strdup(str);
 	close(fd);
 	free(str);
 }
