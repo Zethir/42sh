@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 17:11:47 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 19:19:33 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		deal_with_prompt(t_shell *sh)
 	t_lex	*lex;
 
 	lex = init_lexer_struct();
-	ft_strcpy(lex->line, deal_with_termcap(sh));
+	lex->line = ft_strdup(deal_with_termcap(sh));
 	deal_with_inhib(sh, lex);
 	ft_putchar('\n');
 	if (!lex->line)
