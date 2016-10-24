@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 15:49:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 11:39:03 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:49:57 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <lexer.h>
 
-void			truncate_redir(t_hub *info, t_token *token, char *filename)
+void			truncate_redir(t_shell *sh, t_token *token, char *filename)
 {
 	int		fd;
 
@@ -20,14 +20,14 @@ void			truncate_redir(t_hub *info, t_token *token, char *filename)
 	if ((fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0666)) == -1)
 		fd = 1;
 	if (token->fd[0] == 0)
-		info->stdio[0] = fd;
+		sh->stdio[0] = fd;
 	if (token->fd[0] == 1 || token->fd[0] == -1)
-		info->stdio[1] = fd;
+		sh->stdio[1] = fd;
 	if (token->fd[0] == 2)
-		info->stdio[2] = fd;
+		sh->stdio[2] = fd;
 }
 
-void			append_redir(t_hub *info, t_token *token, char *filename)
+void			append_redir(t_shell *sh, t_token *token, char *filename)
 {
 	int		fd;
 
@@ -35,14 +35,14 @@ void			append_redir(t_hub *info, t_token *token, char *filename)
 	if ((fd = open(filename, O_CREAT | O_WRONLY | O_APPEND, 0666)) == -1)
 		fd = 1;
 	if (token->fd[0] == 0)
-		info->stdio[0] = fd;
+		sh->stdio[0] = fd;
 	if (token->fd[0] == 1 || token->fd[0] == -1)
-		info->stdio[1] = fd;
+		sh->stdio[1] = fd;
 	if (token->fd[0] == 2)
-		info->stdio[2] = fd;
+		sh->stdio[2] = fd;
 }
 
-int				input_redir(t_hub *info, t_token *token, char *filename)
+int				input_redir(t_shell *sh, t_token *token, char *filename)
 {
 	int		fd;
 
@@ -54,15 +54,15 @@ int				input_redir(t_hub *info, t_token *token, char *filename)
 		return (-1);
 	}
 	if (token->fd[0] == 0 || token->fd[0] == -1)
-		info->stdio[0] = fd;
+		sh->stdio[0] = fd;
 	if (token->fd[0] == 1)
-		info->stdio[1] = fd;
+		sh->stdio[1] = fd;
 	if (token->fd[0] == 2)
-		info->stdio[2] = fd;
+		sh->stdio[2] = fd;
 	return (0);
 }
 
-void			heredoc(t_hub *info, char *code)
+void			heredoc(t_shell *sh, char *code)
 {
 	int		pipefd[2];
 	char	*line;
@@ -72,7 +72,7 @@ void			heredoc(t_hub *info, char *code)
 	code = ft_wipespace(code);
 	while (ft_strcmp(line, code))
 	{
-		line = deal_with_termcap(info);
+		line = deal_with_termcap(sh);
 		if (line && ft_strcmp(line, code))
 		{
 			ft_putendl_fd(line, pipefd[1]);
@@ -80,6 +80,6 @@ void			heredoc(t_hub *info, char *code)
 		}
 		ft_putchar('\n');
 	}
-	info->stdio[0] = pipefd[0];
+	sh->stdio[0] = pipefd[0];
 	close(pipefd[1]);
 }

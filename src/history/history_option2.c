@@ -6,34 +6,34 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 15:11:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 12:43:58 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:05:50 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-static void		add_to_file_bis(t_hub *info, int fd)
+static void		add_to_file_bis(t_shell *sh, int fd)
 {
-	t_dlist	*dlst;
+	t_hist	*hist;
 	int		i;
 
 	i = 1;
-	dlst = info->node;
-	while (dlst->prev)
-		dlst = dlst->prev;
-	while (dlst)
+	hist = sh->hist;
+	while (hist->prev)
+		hist = hist->prev;
+	while (hist)
 	{
-		if (dlst->str)
+		if (hist->str)
 		{
 			ft_putendl_fd(ft_strjoin(ft_strjoin(ft_itoa(i), " "),
-						dlst->str), fd);
+						hist->str), fd);
 		}
-		dlst = dlst->next;
+		hist = hist->next;
 		i++;
 	}
 }
 
-static void		add_to_file(t_hub *info)
+static void		add_to_file(t_shell *sh)
 {
 	char	*pathb;
 	int		fd;
@@ -45,19 +45,19 @@ static void		add_to_file(t_hub *info)
 		free(pathb);
 		return ;
 	}
-	add_to_file_bis(info, fd);
+	add_to_file_bis(sh, fd);
 	unlink("/tmp/history");
 	rename(pathb, "/tmp/history");
 	free(pathb);
 }
 
-void			option_r(t_hub *info)
+void			option_r(t_shell *sh)
 {
 	int		fd;
 	char	*line;
 	char	*str;
 
-	str = ft_strdup(info->node->str);
+	str = ft_strdup(sh->hist->str);
 	if ((fd = open("/tmp/history", O_RDWR | O_CREAT, 0644)) == -1)
 	{
 		ft_putendl_fd("history : No such file or directory", 2);
@@ -66,12 +66,12 @@ void			option_r(t_hub *info)
 	while (get_next_line(fd, &line) > 0)
 	{
 		line = split_line(line);
-		info->node->str = line;
-		push_node_bis(&info->node, create_node());
-		info->node = info->node->next;
+		sh->hist->str = line;
+		push_node_bis(&sh->hist, create_node());
+		sh->hist = sh->hist->next;
 	}
-	add_to_file(info);
-	info->node->str = ft_strdup(str);
+	add_to_file(sh);
+	sh->hist->str = ft_strdup(str);
 	close(fd);
 	free(str);
 }

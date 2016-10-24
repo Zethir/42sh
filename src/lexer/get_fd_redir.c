@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 19:10:54 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 11:29:26 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/24 16:06:04 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <lexer.h>
 
 void	get_first_fd(t_lex *lex, int i)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_hub_job.c                                     :+:      :+:    :+:   */
+/*   free_job.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:35:47 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 10:14:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 18:44:54 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <parser.h>
 
 void	free_job(t_job *job)
 {
@@ -21,7 +21,7 @@ void	free_job(t_job *job)
 		while (job->process)
 		{
 			if (job->process->cmd)
-				ft_strdel(&job->process->cmd);
+				free(job->process->cmd);
 			if (job->process->stdio)
 				free(job->process->stdio);
 			job->process->completed = 0;
@@ -36,41 +36,17 @@ void	free_job(t_job *job)
 	job = NULL;
 }
 
-void	free_hub(t_hub *info)
-{
-	if (info->stdio)
-		free(info->stdio);
-	free(info);
-	info = NULL;
-}
-
-void	free_prompt(t_prompt **prompt)
-{
-	t_prompt *tmp;
-
-	tmp = *prompt;
-	tmp->i = 0;
-	tmp->copy_mode = 0;
-	tmp->cursor_start = 0;
-	tmp->cursor_end = 0;
-	if (tmp->copy_str)
-		free(tmp->copy_str);
-	tmp->win_size = 0;
-	free(tmp);
-	tmp = NULL;
-}
-
 void	free_parse(t_parse **head)
 {
 	t_parse *parse;
 
 	parse = *head;
 	if (parse->argv)
-		ft_strdel(parse->argv);
+		free(parse->argv);
 	if (parse->right_path)
 		free(parse->right_path);
 	if (parse->env)
-		ft_strdel(parse->env);
+		free(parse->env);
 	parse->pid = 0;
 	free(parse);
 	parse = NULL;

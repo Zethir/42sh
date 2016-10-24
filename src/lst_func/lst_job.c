@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:22:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 11:57:46 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/24 15:15:38 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <parser.h>
 
 void		push_process(t_process *node, t_process **head)
 {
@@ -30,7 +30,7 @@ void		push_process(t_process *node, t_process **head)
 	tmp->next = node;
 }
 
-void		create_process(t_job *job, t_token *token, t_hub *info)
+void		create_process(t_job *job, t_token *token, t_shell *sh)
 {
 	t_process	*new_elem;
 
@@ -39,10 +39,10 @@ void		create_process(t_job *job, t_token *token, t_hub *info)
 	new_elem->next = NULL;
 	if (!(new_elem->stdio = (int *)malloc(sizeof(int) * 3)))
 		return ;
-	new_elem->stdio[0] = info->stdio[0];
-	new_elem->stdio[1] = info->stdio[1];
-	new_elem->stdio[2] = info->stdio[2];
-	new_elem->closefd = info->closefd;
+	new_elem->stdio[0] = sh->stdio[0];
+	new_elem->stdio[1] = sh->stdio[1];
+	new_elem->stdio[2] = sh->stdio[2];
+	new_elem->closefd = sh->closefd;
 	new_elem->completed = 0;
 	new_elem->cmd = ft_strdup(token->cmd);
 	push_process(new_elem, &job->process);

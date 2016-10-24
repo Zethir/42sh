@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 10:10:08 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 18:29:22 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <termcaps.h>
 
-static void	reset_prompt(t_hub *info)
+static void	reset_prompt(t_prompt *prompt)
 {
 	size_t	i;
 	size_t	j;
@@ -21,9 +21,9 @@ static void	reset_prompt(t_hub *info)
 	i = 0;
 	tputs(tgetstr("vi", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
-	while (i < ft_strlen(info->prompt->cmd))
+	while (i < ft_strlen(prompt->cmd))
 	{
-		if (j >= info->prompt->win_size)
+		if (j >= prompt->win_size)
 		{
 			tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 			tputs(tgetstr("up", NULL), 1, ft_putchar_int);
@@ -37,9 +37,9 @@ static void	reset_prompt(t_hub *info)
 	color(RESET, "");
 }
 
-static void	print_cursor(t_hub *info, char *buff, int i)
+static void	print_cursor(t_prompt *prompt, char *buff, int i)
 {
-	if (i == info->prompt->i && buff[0] != 10)
+	if (i == prompt->i && buff[0] != 10)
 	{
 		tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
 		ft_putchar(' ');
@@ -47,25 +47,25 @@ static void	print_cursor(t_hub *info, char *buff, int i)
 	tputs(tgetstr("me", NULL), 1, ft_putchar_int);
 }
 
-void		prompt_print(t_hub *info, char *buff)
+void		prompt_print(t_prompt *prompt, char *buff)
 {
 	int		i;
 	size_t	j;
 
 	i = 0;
-	reset_prompt(info);
+	reset_prompt(prompt);
 	j = 3;
-	while (info->prompt->cmd[i])
+	while (prompt->cmd[i])
 	{
 		tputs(tgetstr("me", NULL), 1, ft_putchar_int);
-		if (i == info->prompt->i)
+		if (i == prompt->i)
 			tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
-		if (info->prompt->copy_mode == 1 && i >= info->prompt->cursor_start &&
-				i <= info->prompt->cursor_end)
+		if (prompt->copy_mode == 1 && i >= prompt->cursor_start &&
+				i <= prompt->cursor_end)
 			tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
-		ft_putchar(info->prompt->cmd[i]);
+		ft_putchar(prompt->cmd[i]);
 		j++;
-		if (j >= info->prompt->win_size)
+		if (j >= prompt->win_size)
 		{
 			ft_putendl("");
 			tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
@@ -73,57 +73,59 @@ void		prompt_print(t_hub *info, char *buff)
 		}
 		i++;
 	}
-	print_cursor(info, buff, i);
+	print_cursor(prompt, buff, i);
 }
 
-static void	prompt_hub(t_hub *info, char *buff)
+static void	prompt_shell(t_shell *sh, t_prompt *prompt, char *buff)
 {
-	if (ft_strlen(info->prompt->cmd) <= 10000)
+	if (prompt->i < 4500)
 	{
-		deal_with_charac(info, buff);
-		deal_with_space(info, buff);
+		deal_with_charac(prompt, buff);
+		deal_with_space(prompt, buff);
 	}
-	go_down_line(info, buff);
-	go_up_line(info, buff);
-	deal_with_backspace(info, buff);
-	deal_with_delete(info, buff);
-	deal_with_left(info, buff);
-	deal_with_right(info, buff);
-	deal_with_up(info, buff);
-	deal_with_down(info, buff);
-	go_to_start_of_line(info, buff);
-	go_to_previous_word(info, buff);
-	go_to_next_word(info, buff);
-	go_to_end(info, buff);
-	start_copy_mode(info, buff);
-	copy_string(info, buff);
-	cut_string(info, buff);
-	paste_string(info, buff);
+	go_down_line(prompt, buff);
+	go_up_line(prompt, buff);
+	deal_with_backspace(prompt, buff);
+	deal_with_delete(prompt, buff);
+	deal_with_left(prompt, buff);
+	deal_with_right(prompt, buff);
+	deal_with_up(sh, prompt, buff);
+	deal_with_down(sh, prompt, buff);
+	go_to_start_of_line(prompt, buff);
+	go_to_previous_word(prompt, buff);
+	go_to_next_word(prompt, buff);
+	go_to_end(prompt, buff);
+	start_copy_mode(prompt, buff);
+	copy_string(prompt, buff);
+	cut_string(prompt, buff);
+	paste_string(prompt, buff);
 }
 
-char		*deal_with_termcap(t_hub *info)
+char		*deal_with_termcap(t_shell *sh)
 {
+	t_prompt	*prompt;
 	int			ret;
 	char		buff[4];
 
-	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
-	info->prompt = init_prompt();
-	prompt_print(info, buff);
+	prompt = init_prompt();
+	prompt_print(prompt, buff);
+	stock_prompt(prompt, 0);
 	while ((ret = read(0, buff, BUFF_SIZE) != -1))
 	{
-		prompt_hub(info, buff);
-		if (buff[0] == 10 && info->prompt->cmd)
+		prompt_shell(sh, prompt, buff);
+		if (buff[0] == 10 && prompt->cmd[0])
 		{
-			prompt_print(info, buff);
-			if (info->node->next)
-				go_to_end_list(info);
-			if (info->prompt->cmd[0])
-				info->node->str = ft_strdup(info->prompt->cmd);
+			prompt_print(prompt, buff);
+			if (sh->hist->next)
+				go_to_end_list(sh->hist);
+			if (prompt->cmd[0])
+				sh->hist->str = ft_strdup(prompt->cmd);
 			else
 				return (NULL);
 			break ;
 		}
 		ft_bzero(buff, 4);
 	}
-	return (info->prompt->cmd);
+	free_prompt(&prompt);
+	return (sh->hist->str);
 }

@@ -6,30 +6,30 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 12:10:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 18:40:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-static void	history_option(t_hub *info, char **cmd, int fd)
+static void	history_option(t_shell *sh, char **cmd, int fd)
 {
-	t_dlist	*dlist;
+	t_hist	*hist;
 	int		nbr;
 	char	*line;
 	int		i;
 
 	i = 0;
-	dlist = info->node;
+	hist = sh->hist;
 	if (numeric_error(cmd) == 1)
 		return ;
 	nbr = ft_atoi(cmd[1]);
-	while (info->node->prev)
+	while (sh->hist->prev)
 	{
-		info->node = info->node->prev;
+		sh->hist = sh->hist->prev;
 		i++;
 	}
-	info->node = dlist;
+	sh->hist = hist;
 	nbr = i - 1 - nbr;
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -39,7 +39,7 @@ static void	history_option(t_hub *info, char **cmd, int fd)
 	}
 }
 
-int			do_history(t_hub *info, char **cmd)
+int			do_history(t_shell *sh, char **cmd)
 {
 	int		fd;
 	char	*line;
@@ -57,15 +57,15 @@ int			do_history(t_hub *info, char **cmd)
 	else if (cmd[1])
 	{
 		if (cmd[1][0] == '-')
-			do_option(info, cmd);
+			do_option(sh, cmd);
 		else
-			history_option(info, cmd, fd);
+			history_option(sh, cmd, fd);
 	}
 	close(fd);
 	return (0);
 }
 
-void		add_history(t_hub *info)
+void		add_history(t_shell *sh)
 {
 	char	*buf;
 	int		fd;
@@ -79,10 +79,13 @@ void		add_history(t_hub *info)
 		return ;
 	}
 	while (get_next_line(fd, &buf) > 0)
+	{	
+		free(buf);
 		i++;
+	}
 	i += 1;
 	str = ft_strjoin(ft_itoa(i), " ");
-	str = ft_strjoin(str, info->node->str);
+	str = ft_strjoin(str, sh->hist->str);
 	ft_putendl_fd(str, fd);
 	free(str);
 	close(fd);
@@ -106,7 +109,7 @@ char		*split_line(char *line)
 	return (&line[i]);
 }
 
-void		deal_with_file(t_hub *info)
+void		deal_with_file(t_shell *sh)
 {
 	int		fd;
 	char	*line;
@@ -121,9 +124,10 @@ void		deal_with_file(t_hub *info)
 		if (get_next_line(fd, &line) != 1)
 			break ;
 		line = split_line(line);
-		info->node->str = line;
-		push_node_bis(&info->node, create_node());
-		info->node = info->node->next;
+		sh->hist->str = line;
+		push_node_bis(&sh->hist, create_node());
+		sh->hist = sh->hist->next;
 	}
+	free(line);
 	close(fd);
 }

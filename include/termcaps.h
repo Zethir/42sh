@@ -6,12 +6,14 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 18:29:00 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/24 17:55:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TERMCAPS_H
 # define TERMCAPS_H
+
+#include <shell.h>
 
 # define ARROW_LEFT ((buff[0] == 27 && buff[1] == 91 && buff[2] == 68))
 # define ARROW_RIGHT ((buff[0] == 27 && buff[1] == 91 && buff[2] == 67))
@@ -43,7 +45,7 @@
 
 typedef struct	s_prompt
 {
-	char		*cmd;
+	char		cmd[5000];
 	int			i;
 	int			copy_mode;
 	int			cursor_start;
@@ -53,6 +55,26 @@ typedef struct	s_prompt
 }				t_prompt;
 
 t_prompt		*init_prompt();
+t_prompt		*stock_prompt(t_prompt *prompt, int i);
 void			free_prompt(t_prompt **info);
+void			deal_with_charac(t_prompt *prompt, char *buff);
+void			deal_with_space(t_prompt *prompt, char *buff);
+void			deal_with_backspace(t_prompt *prompt, char *buff);
+void			deal_with_delete(t_prompt *prompt, char *buff);
+void			deal_with_left(t_prompt *prompt, char *buff);
+void			deal_with_right(t_prompt *prompt, char *buff);
+void			deal_with_up(t_shell *sh, t_prompt *prompt, char *buff);
+void			deal_with_down(t_shell *sh, t_prompt *prompt, char *buff);
+void			start_copy_mode(t_prompt *prompt, char *buff);
+void			copy_string(t_prompt *prompt, char *buff);
+void			cut_string(t_prompt *prompt, char *buff);
+void			paste_string(t_prompt *prompt, char *buff);
+void			go_to_start_of_line(t_prompt *prompt, char *buff);
+void			go_to_end(t_prompt *prompt, char *buff);
+void			go_to_previous_word(t_prompt *prompt, char *buff);
+void			go_to_next_word(t_prompt *prompt, char *buff);
+void			go_down_line(t_prompt *prompt, char *buff);
+void			go_up_line(t_prompt *prompt, char *buff);
+void			prompt_print(t_prompt *prompt, char *buff);
 
 #endif

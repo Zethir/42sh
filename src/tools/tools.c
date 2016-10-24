@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 12:52:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 20:48:15 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:35:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
 void	color(char *color, char *str)
 {
@@ -19,9 +19,9 @@ void	color(char *color, char *str)
 	ft_putstr_fd(str, 2);
 }
 
-int		get_index(t_lst *node)
+int		get_index(t_env *node)
 {
-	t_lst	*tmp;
+	t_env	*tmp;
 	int		i;
 
 	i = 0;

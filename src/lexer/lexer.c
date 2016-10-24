@@ -6,24 +6,24 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/22 18:44:02 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/24 16:06:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <lexer.h>
 
 static int	check_parse_error(t_lex *lex, int i)
 {
 	if (i < 0)
 	{
-		print_parse_error(lex);
+		print_parse_error(lex->line[lex->hd]);
 		return (-1);
 	}
 	else
 		return (0);
 }
 
-int			check_lexer(t_hub *info, t_lex *lex)
+int			check_lexer(t_shell *sh, t_lex *lex)
 {
 	int		i;
 
@@ -46,7 +46,7 @@ int			check_lexer(t_hub *info, t_lex *lex)
 			lex->hd++;
 		if ((!lex->line[lex->hd] || !lex->line[lex->hd + 1]) && i != 0 &&
 				lex->token->token_value != 13)
-			get_missing_cmd(info, lex);
+			get_missing_cmd(sh, lex);
 	}
 	return (0);
 }

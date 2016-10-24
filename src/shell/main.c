@@ -6,65 +6,65 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 12:10:24 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 17:11:47 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <lexer.h>
 
-static void		deal_with_inhib(t_hub *info)
+static void		deal_with_inhib(t_shell *sh, t_lex *lex)
 {
 	char	*tmp;
 
 	tmp = ft_strdup("");
-	if (!info->lex->line)
+	if (!lex->line)
 		return ;
-	while (check_for_parenth(info->lex->line) != 0)
+	while (check_for_parenth(lex->line) != 0)
 	{
 		ft_putchar('\n');
-		tmp = deal_with_termcap(info);
-		info->lex->line = ft_strjoin(info->lex->line, tmp);
+		tmp = deal_with_termcap(sh);
+		lex->line = ft_strjoin(lex->line, tmp);
 	}
 	free(tmp);
 }
 
-static void		deal_with_prompt(t_hub *info)
+static void		deal_with_prompt(t_shell *sh)
 {
-	info->lex = init_lexer_struct();
-	info->lex->line = deal_with_termcap(info);
-	deal_with_inhib(info);
+	t_lex	*lex;
+
+	lex = init_lexer_struct();
+	ft_strcpy(lex->line, deal_with_termcap(sh));
+	deal_with_inhib(sh, lex);
 	ft_putchar('\n');
-	if (!info->lex->line)
+	if (!lex->line)
 		return ;
-	info->lex->token = init_token_struct();
-	if (check_lexer(info, info->lex) == -1)
+	lex->token = init_token_struct();
+	if (check_lexer(sh, lex) == -1)
 		return ;
-	info->job = init_job();
-	init_stdio(info);
-	parse_cmd(info);
-	exec_job(info);
-	add_history(info);
-	push_node_bis(&info->node, create_node());
-	info->node = info->node->next;
+	init_stdio(sh);
+	parse_cmd(sh, lex->token);
+	add_history(sh);
+	free_lex(&lex);
 }
 
 static void		start_prog(char **env)
 {
-	t_hub	*info;
+	t_shell	*sh;
 
-	info = init_struct(env);
+	sh = init_struct(env);
 	while (1)
 	{
-		if (init_term(info) == -1)
+		if (init_term(sh) == -1)
 			return ;
-		if (check_lst(info->lst) == 0)
-			info->lst = init_lst(env);
-		get_prompt(info->lst);
-		stock_struct(info, 0);
-		deal_with_prompt(info);
-		free_struct_lex(&info->lex);
+		if (check_env(sh->env) == 0)
+			sh->env = init_env(env);
+		get_prompt(sh->env);
+		stock_struct(sh, 0);
+		deal_with_prompt(sh);
+		push_node_bis(&sh->hist, create_node());
+		sh->hist = sh->hist->next;
 	}
-	if (reset_term(info) == -1)
+	if (reset_term(sh) == -1)
 		return ;
 }
 

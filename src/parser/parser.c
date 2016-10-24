@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 18:54:20 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/24 17:07:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <parser.h>
 
 static int		job_success(t_job *job)
 {
@@ -26,34 +26,32 @@ static int		job_success(t_job *job)
 	return (1);
 }
 
-void			exec_process(t_hub *info, t_process *process, int *iofile)
+void			exec_process(t_shell *sh, t_process *process, int *iofile)
 {
-	init_parse(info, process->cmd);
-	if (check_builtins(info->parse->argv[0]))
+	t_parse *parse;
+
+	parse = init_parse(sh, process->cmd);
+	if (check_builtins(parse->argv[0]))
 	{
 		if (iofile[0] != 0)
 			process->stdio[0] = iofile[0];
 		if (iofile[1] != 1)
 			process->stdio[1] = iofile[1];
-		launch_builtin(info, process);
+		launch_builtin(sh, parse, process);
 	}
-	else if ((info->parse->pid = fork()) == 0)
+	else if ((parse->pid = fork()) == 0)
 	{
 		if (iofile[0] != 0)
 			process->stdio[0] = iofile[0];
 		if (iofile[1] != 1)
 			process->stdio[1] = iofile[1];
-		launch_bin(info, process);
+		launch_bin(sh, parse, process);
 	}
 	wait_for_process(process);
-	free_parse(&info->parse);
-	if (iofile[0] != 0)
-		close(iofile[0]);
-	if (iofile[1] != 1)
-		close(iofile[1]);
+	free_parse(&parse);
 }
 
-static void		launch_process(t_hub *info, t_job *job)
+static void		launch_process(t_shell *sh, t_job *job)
 {
 	t_process	*process;
 	int			iofile[2];
@@ -70,23 +68,27 @@ static void		launch_process(t_hub *info, t_job *job)
 		}
 		else
 			iofile[1] = 1;
-		exec_process(info, job->process, iofile);
+		exec_process(sh, job->process, iofile);
+		if (iofile[0] != 0)
+			close(iofile[0]);
+		if (iofile[1] != 1)
+			close(iofile[1]);
 		iofile[0] = pipefd[0];
 		job->process = job->process->next;
 	}
 	job->process = process;
 }
 
-void			exec_job(t_hub *info)
+void			exec_job(t_shell *sh, t_job *job)
 {
-	t_job	*job;
+	t_job 	*tmp;
 
-	job = info->job;
+	tmp = job;
 	while (job)
 	{
 		if (job->linker == 0)
 			job = job->next;
-		launch_process(info, job);
+		launch_process(sh, job);
 		if (!job_success(job) && job->linker == AND)
 		{
 			while (job->next && job->linker == AND)
@@ -99,34 +101,33 @@ void			exec_job(t_hub *info)
 		}
 		job = job->next;
 	}
-	free_job(info->job);
+	job = tmp;
+	free_job(job);
 }
 
-void			parse_cmd(t_hub *info)
+void			parse_cmd(t_shell *sh, t_token *token)
 {
 	t_job		*job;
-	t_token		*token;
 
-	token = info->lex->token;
-	job = info->job;
+	job = init_job();
 	while (token)
 	{
 		if (token->token_value == PIPE)
 		{
-			token_pipe(info, job, token);
+			token_pipe(sh, job, token);
 			token = token->next;
 		}
 		else if (token->token_value == AND || token->token_value == OR ||
 				token->token_value == SEPARATOR)
 		{
-			token_linker(info, job, token);
+			token_linker(sh, job, token);
 			token = token->next;
 		}
 		else
 		{
-			if ((token = hub_redir(info, token)) == NULL)
+			if ((token = hub_redir(sh, token)) == NULL)
 				return ;
 		}
 	}
-	info->job = job;
+	exec_job(sh, job);
 }

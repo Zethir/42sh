@@ -6,59 +6,48 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 10:15:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:31:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-static void	free_all_struct(t_hub *info)
+void		free_all_struct(t_shell *sh)
 {
-	if (info->job)
-		free_job(info->job);
-	if (info->parse)
-		free_parse(&info->parse);
-	if (info->lex)
-	{
-		free_struct_lex(&info->lex);
-		free_lex(&info->lex);
-	}
-	if (info->prompt)
-		free_prompt(&info->prompt);
-	if (info->lst)
-		free_list(info->lst);
-	if (info->node)
-		free_dlist(info->node);
-	if (info)
-		free_hub(info);
+	if (sh->env)
+		free_env(sh->env);
+	if (sh->hist)
+		free_hist(sh->hist);
+	if (sh)
+		free_shell(sh);
 }
 
-int			reset_term(t_hub *info)
+int			reset_term(t_shell *sh)
 {
-	stock_struct(info, 1);
-	free_all_struct(info);
+	stock_struct(sh, 1);
 	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
-	if (tcgetattr(0, &(info->term)) == -1)
+	if (tcgetattr(0, &(sh->term)) == -1)
 		return (-1);
-	info->term.c_lflag |= (ICANON | ECHO);
-	if (tcsetattr(0, 0, &(info->term)) == -1)
+	sh->term.c_lflag |= (ICANON | ECHO);
+	if (tcsetattr(0, 0, &(sh->term)) == -1)
+		return (-1);
+	free_all_struct(sh);
+	return (0);
+}
+
+int			reset_term_no_free(t_shell *sh)
+{
+	stock_struct(sh, 1);
+	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
+	if (tcgetattr(0, &(sh->term)) == -1)
+		return (-1);
+	sh->term.c_lflag |= (ICANON | ECHO);
+	if (tcsetattr(0, 0, &(sh->term)) == -1)
 		return (-1);
 	return (0);
 }
 
-int			reset_term_no_free(t_hub *info)
-{
-	stock_struct(info, 1);
-	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
-	if (tcgetattr(0, &(info->term)) == -1)
-		return (-1);
-	info->term.c_lflag |= (ICANON | ECHO);
-	if (tcsetattr(0, 0, &(info->term)) == -1)
-		return (-1);
-	return (0);
-}
-
-int			init_term(t_hub *info)
+int			init_term(t_shell *sh)
 {
 	char			*name_term;
 
@@ -66,12 +55,12 @@ int			init_term(t_hub *info)
 		return (-1);
 	if (tgetent(NULL, name_term) != 1)
 		return (-1);
-	if (tcgetattr(0, &(info->term)) == -1)
+	if (tcgetattr(0, &(sh->term)) == -1)
 		return (-1);
-	info->term.c_lflag &= ~(ICANON | ECHO);
-	info->term.c_cc[VMIN] = 1;
-	info->term.c_cc[VTIME] = 0;
-	if (tcsetattr(0, TCSADRAIN, &(info->term)) == -1)
+	sh->term.c_lflag &= ~(ICANON | ECHO);
+	sh->term.c_cc[VMIN] = 1;
+	sh->term.c_cc[VTIME] = 0;
+	if (tcsetattr(0, TCSADRAIN, &(sh->term)) == -1)
 		return (-1);
 	return (0);
 }

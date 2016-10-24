@@ -6,71 +6,71 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 16:19:36 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/24 16:10:39 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-int		check_lst(t_lst *node)
+int		check_env(t_env *env)
 {
-	t_lst	*tmp;
+	t_env	*tmp;
 
-	tmp = node;
-	while (node)
+	tmp = env;
+	while (env)
 	{
-		if (node->line)
+		if (env->line)
 			return (1);
 		else
-			node = node->next;
+			env = env->next;
 	}
-	node = tmp;
+	env = tmp;
 	return (0);
 }
 
-int		get_intel(t_lst *node, char *str)
+int		get_intel(t_env *env, char *str)
 {
-	t_lst	*tmp;
+	t_env	*tmp;
 
-	tmp = node;
-	while (node)
+	tmp = env;
+	while (env)
 	{
-		if (ft_strcmp(node->name, str) == 0)
+		if (ft_strcmp(env->name, str) == 0)
 		{
-			node = tmp;
+			env = tmp;
 			return (1);
 		}
-		node = node->next;
+		env = env->next;
 	}
-	node = tmp;
+	env = tmp;
 	return (0);
 }
 
-void	push_node(t_lst *node, t_lst **head)
+void	push_node(t_env *env, t_env **head)
 {
-	t_lst	*tmp;
+	t_env	*tmp;
 
 	if (*head == NULL)
 	{
-		*head = node;
+		*head = env;
 		return ;
 	}
 	else
 		tmp = *head;
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = node;
+	tmp->next = env;
 }
 
-t_lst	*init_lst(char **env)
+t_env	*init_env(char **env)
 {
-	t_lst	*node;
-	t_lst	*head;
+	t_env	*node;
+	t_env	*head;
 
 	head = NULL;
 	while (*env)
 	{
-		if (!(node = (t_lst *)malloc(sizeof(t_lst))))
+		if (!(node = (t_env *)malloc(sizeof(t_env))))
 			return (NULL);
 		node->next = NULL;
 		node->line = ft_strdup(*env);

@@ -6,18 +6,20 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 12:56:05 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 19:09:51 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-static void		exec_cmd_add_lst(t_hub *info, char **cmd, char *line)
+static void		exec_cmd_add_lst(t_shell *sh, char **cmd, char *line)
 {
 	char	**tabl;
+	char	**env;
 	int		i;
 
 	i = 0;
+	env = NULL;
 	while (*cmd)
 	{
 		line = ft_strjoin(line, " ");
@@ -25,36 +27,37 @@ static void		exec_cmd_add_lst(t_hub *info, char **cmd, char *line)
 		cmd++;
 	}
 	tabl = ft_strsplit_ws(line);
-	info->node->str = ft_strdup("");
+	sh->hist->str = ft_strdup("");
 	while (tabl[i])
 	{
 		ft_putstr(tabl[i]);
 		if (i != 0)
-			info->node->str = ft_strjoin(info->node->str, " ");
-		info->node->str = ft_strjoin(info->node->str, tabl[i]);
+			sh->hist->str = ft_strjoin(sh->hist->str, " ");
+		sh->hist->str = ft_strjoin(sh->hist->str, tabl[i]);
 		ft_putchar(' ');
 		i++;
 	}
-	ft_putchar('\n');
-	tabl = get_env(info->lst);
-	exec_env(info, info->node->str, tabl);
 	ft_strdel(tabl);
+	ft_putchar('\n');
+	env = get_env(sh->env);
+	exec_env(sh, sh->hist->str, env);
+	free(env);
 }
 
-static void		deal_with_dash(t_hub *info, char **cmd, int fd)
+static void		deal_with_dash(t_shell *sh, char **cmd, int fd)
 {
 	int		i;
-	t_dlist	*dlist;
+	t_hist	*hist;
 	char	*line;
 
-	dlist = info->node;
+	hist = sh->hist;
 	i = 0;
-	while (info->node->prev)
+	while (sh->hist->prev)
 	{
-		info->node = info->node->prev;
+		sh->hist = sh->hist->prev;
 		i++;
 	}
-	info->node = dlist;
+	sh->hist = hist;
 	i = i - ft_atoi(&cmd[0][2]);
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -63,14 +66,14 @@ static void		deal_with_dash(t_hub *info, char **cmd, int fd)
 			while (*line != ' ')
 				line++;
 			cmd++;
-			exec_cmd_add_lst(info, cmd, line);
+			exec_cmd_add_lst(sh, cmd, line);
 		}
 		i--;
 	}
 	free(line);
 }
 
-static void		deal_with_number(t_hub *info, char **cmd, int fd)
+static void		deal_with_number(t_shell *sh, char **cmd, int fd)
 {
 	char	*line;
 	int		i;
@@ -83,37 +86,37 @@ static void		deal_with_number(t_hub *info, char **cmd, int fd)
 			while (*line != ' ')
 				line++;
 			cmd++;
-			exec_cmd_add_lst(info, cmd, line);
+			exec_cmd_add_lst(sh, cmd, line);
 		}
 		i--;
 	}
 	free(line);
 }
 
-static void		deal_with_string(t_hub *info, char **cmd)
+static void		deal_with_string(t_shell *sh, char **cmd)
 {
-	t_dlist	*dlist;
+	t_hist	*hist;
 	char	*line;
 
-	dlist = info->node;
+	hist = sh->hist;
 	line = NULL;
-	while (info->node->prev)
+	while (sh->hist->prev)
 	{
-		if (ft_strncmp(info->node->str, &cmd[0][1], ft_strlen(&cmd[0][1])) == 0)
+		if (ft_strncmp(sh->hist->str, &cmd[0][1], ft_strlen(&cmd[0][1])) == 0)
 		{
-			line = ft_strdup(info->node->str);
+			line = ft_strdup(sh->hist->str);
 			cmd++;
-			info->node = dlist;
-			exec_cmd_add_lst(info, cmd, line);
+			sh->hist = hist;
+			exec_cmd_add_lst(sh, cmd, line);
 			break ;
 		}
-		info->node = info->node->prev;
+		sh->hist = sh->hist->prev;
 	}
 	free(line);
-	info->node = dlist;
+	sh->hist = hist;
 }
 
-int				do_designator(t_hub *info, char **cmd)
+int				do_designator(t_shell *sh, char **cmd)
 {
 	int		fd;
 
@@ -125,17 +128,17 @@ int				do_designator(t_hub *info, char **cmd)
 	if (cmd[0][1] == '-')
 	{
 		if (check_number_bis(cmd) == 0)
-			deal_with_dash(info, cmd, fd);
+			deal_with_dash(sh, cmd, fd);
 	}
 	else if (cmd[0][1] >= '0' && cmd[0][1] <= '9')
 	{
 		if (check_number(cmd) == 0)
-			deal_with_number(info, cmd, fd);
+			deal_with_number(sh, cmd, fd);
 	}
 	else if (cmd[0][1])
 	{
 		if (check_alpha(cmd) == 0)
-			deal_with_string(info, cmd);
+			deal_with_string(sh, cmd);
 	}
 	close(fd);
 	return (0);

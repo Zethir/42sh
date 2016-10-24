@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 18:35:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 11:37:46 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:48:35 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
 int		numeric_error(char **cmd)
 {
@@ -44,9 +44,9 @@ void	no_command_error(char *arg)
 	ft_putendl_fd(": Command not found.", 2);
 }
 
-int		arg_in_dir(t_lst *node, char *arg)
+int		arg_in_dir(t_env *node, char *arg)
 {
-	t_lst			*tmp;
+	t_env			*tmp;
 	struct dirent	*ret;
 	DIR				*dir;
 	char			*str;
@@ -71,7 +71,7 @@ int		arg_in_dir(t_lst *node, char *arg)
 	return (1);
 }
 
-void	print_right_error(t_lst *node, char *arg)
+void	print_right_error(t_env *node, char *arg)
 {
 	if (access(arg, X_OK) == -1 && arg_in_dir(node, arg) == 0)
 	{

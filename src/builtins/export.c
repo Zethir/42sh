@@ -6,105 +6,103 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/10 11:45:51 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 18:37:25 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/24 15:59:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-static void		print_local(t_lst *node)
+static void		print_local(t_env *env)
 {
-	t_lst *tmp;
+	t_env *tmp;
 
-	tmp = node;
-	while (node)
+	tmp = env;
+	while (env)
 	{
-		if (!node->line)
-			node = node->next;
-		else if (node->flag == 1)
+		if (!env->line)
+			env = env->next;
+		else if (env->flag == 1)
 		{
 			ft_putstr("export ");
-			ft_putendl(node->line);
-			node = node->next;
+			ft_putendl(env->line);
+			env = env->next;
 		}
 		else
-			node = node->next;
+			env = env->next;
 	}
-	node = tmp;
+	env = tmp;
 }
 
-int				check_local_variable(t_hub *info, int i, int flag)
+int				check_local_variable(t_env *env, char *arg, int flag)
 {
-	t_lst	*tmp;
+	t_env	*tmp;
 
-	tmp = info->lst;
-	while (info->lst)
+	tmp = env;
+	while (env)
 	{
-		if (ft_strncmp(info->parse->argv[i], info->lst->name,
-					ft_strlen(info->lst->name)) == 0 && info->lst->flag == flag)
+		if (ft_strncmp(arg, env->name, ft_strlen(env->name)) == 0 &&
+				env->flag == flag)
 		{
-			if (ft_strchr(info->parse->argv[i], '=') != NULL)
-				info->lst->line = info->parse->argv[i];
-			info->lst = tmp;
+			if (ft_strchr(arg, '=') != NULL)
+				env->line = arg;
+			env = tmp;
 			return (1);
 		}
-		info->lst = info->lst->next;
+		env = env->next;
 	}
-	info->lst = tmp;
+	env = tmp;
 	return (0);
 }
 
-void			add_to_list(t_hub *info, t_lst *node, int j, int flag)
+void			add_to_list(t_env *env, char *arg, int flag)
 {
-	t_lex	*lex;
-	t_lst	*new_elem;
+	t_env	*new_elem;
 	int		i;
 
-	lex = info->lex;
-	i = ft_strlen_char(info->parse->argv[j], '=');
-	new_elem = (t_lst *)malloc(sizeof(t_lst));
+	i = ft_strlen_char(arg, '=');
+	new_elem = (t_env *)malloc(sizeof(t_env));
 	new_elem->next = NULL;
-	new_elem->line = ft_strdup(info->parse->argv[j]);
+	new_elem->line = ft_strdup(arg);
 	new_elem->name = (char *)malloc(sizeof(i) + 1);
-	ft_strncpy(new_elem->name, info->parse->argv[j], i);
+	ft_strncpy(new_elem->name, arg, i);
 	new_elem->flag = flag;
-	push_node(new_elem, &node);
+	push_node(new_elem, &env);
 }
 
-static int		export_arg(t_hub *info, int i)
+static int		export_arg(t_env *env, char *arg)
 {
-	if (check_wrong_identifier(info, i) == 1)
+	if (check_wrong_identifier(arg) == 1)
 		return (-1);
-	else if (info->parse->argv[i][0] == '=')
+	else if (arg[0] == '=')
 	{
-		print_identifier_error(info, i);
+		print_identifier_error(arg);
 		return (-1);
 	}
-	if (check_local_variable(info, i, 1) == 0)
+	if (check_local_variable(env, arg, 1) == 0)
 	{
-		if (check_local_variable(info, i, 2) == 0)
-			add_to_list(info, info->lst, i, 1);
+		if (check_local_variable(env, arg, 2) == 0)
+			add_to_list(env, arg, 1);
 		else
-			export_new_variable(info, i);
+			export_new_variable(env, arg);
 	}
 	return (0);
 }
 
-int				do_export(t_hub *info)
+int				do_export(t_env *env, char **arg)
 {
 	int		i;
 
 	i = 1;
-	if (info->parse->argv[1])
+	if (arg[1])
 	{
-		while (info->parse->argv[i])
+		while (arg[i])
 		{
-			if (export_arg(info, i) == -1)
+			if (export_arg(env, arg[i]) == -1)
 				return (-1);
 			i++;
 		}
 	}
 	else
-		print_local(info->lst);
+		print_local(env);
 	return (0);
 }

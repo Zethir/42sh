@@ -6,33 +6,31 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/23 18:07:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 12:16:08 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:48:46 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-void	print_identifier_error(t_hub *info, int i)
+void	print_identifier_error(char *arg)
 {
 	ft_putstr_fd("42sh: export: ", 2);
-	ft_putstr_fd(info->parse->argv[i], 2);
+	ft_putstr_fd(arg, 2);
 	ft_putendl_fd(": not a valid identifier", 2);
 }
 
-int		check_wrong_identifier(t_hub *info, int j)
+int		check_wrong_identifier(char *arg)
 {
-	t_parse	*parse;
 	int		i;
 
 	i = 0;
-	parse = info->parse;
-	while (parse->argv[j][i])
+	while (arg[i])
 	{
-		if (parse->argv[j][i] < 'A' || parse->argv[j][i] > 'Z')
-			if (parse->argv[j][i] < 'a' || parse->argv[j][i] > 'z')
-				if (parse->argv[j][i] != '=')
+		if (arg[i] < 'A' || arg[i] > 'Z')
+			if (arg[i] < 'a' || arg[i] > 'z')
+				if (arg[i] != '=')
 				{
-					print_identifier_error(info, j);
+					print_identifier_error(arg);
 					return (1);
 				}
 		i++;

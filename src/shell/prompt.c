@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 17:48:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 11:47:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 15:34:18 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
 static void	deal_with_prompt_path(int i, char *buff)
 {
@@ -39,67 +39,67 @@ static void	deal_with_prompt_path(int i, char *buff)
 	ft_putchar('\n');
 }
 
-static void	prompt_name(t_lst *node)
+static void	prompt_name(t_env *env)
 {
-	t_lst	*tmp;
+	t_env	*tmp;
 
-	tmp = node;
-	while (node)
+	tmp = env;
+	while (env)
 	{
-		if (ft_strcmp(node->name, "USER") == 0)
+		if (ft_strcmp(env->name, "USER") == 0)
 		{
-			color(CYAN, node->user);
+			color(CYAN, env->user);
 			color(RESET, "");
 		}
-		node = node->next;
+		env = env->next;
 	}
-	node = tmp;
+	env = tmp;
 	ft_putstr(" in ");
 }
 
-static int	cmp_pwd_home(t_lst *node, char *buff)
+static int	cmp_pwd_home(t_env *env, char *buff)
 {
-	t_lst	*tmp;
+	t_env	*tmp;
 	int		i;
 
-	tmp = node;
+	tmp = env;
 	i = 0;
-	while (node)
+	while (env)
 	{
-		if (ft_strcmp(node->name, "HOME") == 0)
+		if (ft_strcmp(env->name, "HOME") == 0)
 		{
-			if (ft_strcmp(node->home, buff) == 0)
+			if (ft_strcmp(env->home, buff) == 0)
 				return (1);
-			else if (ft_strncmp(node->home, buff, ft_strlen(node->home)) == 0)
+			else if (ft_strncmp(env->home, buff, ft_strlen(env->home)) == 0)
 			{
-				i = ft_strlen(node->home);
+				i = ft_strlen(env->home);
 				return (i);
 			}
 		}
-		node = node->next;
+		env = env->next;
 	}
-	node = tmp;
+	env = tmp;
 	return (0);
 }
 
-static void	prompt_path(t_lst *node)
+static void	prompt_path(t_env *env)
 {
 	char	buff[100];
 	int		i;
 
-	if (get_intel(node, "PWD") == 1)
+	if (get_intel(env, "PWD") == 1)
 	{
 		getcwd(buff, 100);
-		i = cmp_pwd_home(node, buff);
+		i = cmp_pwd_home(env, buff);
 		deal_with_prompt_path(i, buff);
 		return ;
 	}
 }
 
-void		get_prompt(t_lst *node)
+void		get_prompt(t_env *env)
 {
 	color(BLUE, "# ");
 	color(RESET, "");
-	prompt_name(node);
-	prompt_path(node);
+	prompt_name(env);
+	prompt_path(env);
 }

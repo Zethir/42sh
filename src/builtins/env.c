@@ -6,30 +6,30 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 12:12:50 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/24 19:10:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-void		print_env(t_lst *node)
+void		print_env(t_env *env)
 {
-	t_lst *tmp;
+	t_env *tmp;
 
-	tmp = node;
-	while (node)
+	tmp = env;
+	while (env)
 	{
-		if (!node->line)
-			node = node->next;
-		else if (node->flag == 0)
+		if (!env->line)
+			env = env->next;
+		else if (env->flag == 0)
 		{
-			ft_putendl(node->line);
-			node = node->next;
+			ft_putendl(env->line);
+			env = env->next;
 		}
 		else
-			node = node->next;
+			env = env->next;
 	}
-	node = tmp;
+	env = tmp;
 }
 
 static int	cmp_line(char **arg, char **env_cpy)
@@ -49,7 +49,7 @@ static int	cmp_line(char **arg, char **env_cpy)
 	return (0);
 }
 
-static void	deal_with_arg(t_hub *info, char **arg, char **env_cpy)
+static void	deal_with_arg(t_shell *sh, char **arg, char **env_cpy)
 {
 	char	*cmd;
 
@@ -60,7 +60,7 @@ static void	deal_with_arg(t_hub *info, char **arg, char **env_cpy)
 			if (check_caract(*arg, '=') != 1)
 			{
 				cmd = join_env(arg);
-				exec_env(info, cmd, env_cpy);
+				exec_env(sh, cmd, env_cpy);
 				return ;
 			}
 			else if (check_caract(*arg, '=') == 1)
@@ -71,21 +71,21 @@ static void	deal_with_arg(t_hub *info, char **arg, char **env_cpy)
 	ft_print_tab(env_cpy);
 }
 
-int			deal_with_env(t_hub *info, char **arg)
+int			deal_with_env(t_shell *sh, char **arg)
 {
 	char	**env_cpy;
 
-	env_cpy = get_env(info->lst);
+	env_cpy = get_env(sh->env);
 	arg++;
 	if (*arg)
 	{
 		if (*arg[0] == '-')
-			deal_with_opt(info, arg, env_cpy);
+			deal_with_opt(sh, arg, env_cpy);
 		else
-			deal_with_arg(info, arg, env_cpy);
+			deal_with_arg(sh, arg, env_cpy);
 		free(env_cpy);
 	}
 	else
-		print_env(info->lst);
+		print_env(sh->env);
 	return (0);
 }

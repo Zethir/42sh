@@ -6,15 +6,15 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:35:40 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 11:38:23 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:49:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-void	print_parse_error(t_lex *lex)
+void	print_parse_error(char c)
 {
 	ft_putstr_fd("42sh: parse error near `", 2);
-	ft_putchar_fd(lex->line[lex->hd], 2);
+	ft_putchar_fd(c, 2);
 	ft_putendl_fd("'", 2);
 }

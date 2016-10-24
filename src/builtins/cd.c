@@ -6,39 +6,39 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/29 13:41:53 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/20 18:35:54 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:14:16 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-static void		go_to_root(t_lst *node)
+static void		go_to_root(t_env *env)
 {
-	t_lst		*tmp;
+	t_env		*tmp;
 
-	tmp = node;
-	while (node)
+	tmp = env;
+	while (env)
 	{
-		if (ft_strcmp(node->name, "HOME") == 0)
+		if (ft_strcmp(env->name, "HOME") == 0)
 		{
-			node->home = ft_strchr(node->home, '/');
-			chdir(node->home);
+			env->home = ft_strchr(env->home, '/');
+			chdir(env->home);
 			return ;
 		}
-		node = node->next;
+		env = env->next;
 	}
-	node = tmp;
+	env = tmp;
 }
 
-static char		*deal_with_root(t_lst *node, char *arg)
+static char		*deal_with_root(t_env *env, char *arg)
 {
 	char		*tmp;
 
 	if (!arg[1])
-		go_to_root(node);
+		go_to_root(env);
 	else if (arg[1] == '/')
 	{
-		go_to_root(node);
+		go_to_root(env);
 		if (arg[2])
 			tmp = ft_strsub(arg, 2, ft_strlen(arg));
 		else
@@ -81,7 +81,7 @@ static void		deal_with_cd_arg(char *arg)
 		closedir(dir);
 }
 
-int				do_cd(t_lst *node, char **arg)
+int				do_cd(t_env *env, char **arg)
 {
 	int			i;
 
@@ -95,10 +95,10 @@ int				do_cd(t_lst *node, char **arg)
 		return (-1);
 	}
 	else if (!*arg)
-		go_to_root(node);
+		go_to_root(env);
 	else if (*arg[0] == '~')
 	{
-		*arg = deal_with_root(node, *arg);
+		*arg = deal_with_root(env, *arg);
 		if (!*arg)
 			return (-1);
 	}

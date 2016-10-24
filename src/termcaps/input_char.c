@@ -6,69 +6,53 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 16:28:53 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 11:35:46 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/24 13:34:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <termcaps.h>
 
-void	deal_with_delete(t_hub *info, char *buff)
+void	deal_with_delete(t_prompt *prompt, char *buff)
 {
-	t_prompt	*prompt;
-
-	prompt = info->prompt;
 	if (DELETE && prompt->cmd[prompt->i])
 	{
 		ft_memmove(prompt->cmd + prompt->i, prompt->cmd + prompt->i + 1,
 				ft_strlen(prompt->cmd + prompt->i + 1) + 1);
-		prompt_print(info, buff);
+		prompt_print(prompt, buff);
 	}
-	info->prompt = prompt;
 }
 
-void	deal_with_backspace(t_hub *info, char *buff)
+void	deal_with_backspace(t_prompt *prompt, char *buff)
 {
-	t_prompt	*prompt;
-
-	prompt = info->prompt;
 	if (BACK_SPACE && prompt->i > 0)
 	{
 		prompt->i--;
 		ft_memmove(prompt->cmd + prompt->i, prompt->cmd + prompt->i + 1,
 				ft_strlen(prompt->cmd + prompt->i + 1) + 1);
-		prompt_print(info, buff);
+		prompt_print(prompt, buff);
 	}
-	info->prompt = prompt;
 }
 
-void	deal_with_space(t_hub *info, char *buff)
+void	deal_with_space(t_prompt *prompt, char *buff)
 {
-	t_prompt	*prompt;
-
-	prompt = info->prompt;
 	if (WHITE_SPACE)
 	{
 		ft_memmove(prompt->cmd + prompt->i + 1, prompt->cmd + prompt->i,
 			ft_strlen(prompt->cmd + prompt->i) + 1);
 		prompt->cmd[prompt->i] = ' ';
 		prompt->i++;
-		prompt_print(info, buff);
+		prompt_print(prompt, buff);
 	}
-	info->prompt = prompt;
 }
 
-void	deal_with_charac(t_hub *info, char *buff)
+void	deal_with_charac(t_prompt *prompt, char *buff)
 {
-	t_prompt	*prompt;
-
-	prompt = info->prompt;
 	if (CHARACTERE)
 	{
 		ft_memmove(prompt->cmd + prompt->i + 1, prompt->cmd + prompt->i,
 				ft_strlen(prompt->cmd + prompt->i) + 1);
 		prompt->cmd[prompt->i] = *buff;
 		prompt->i++;
-		prompt_print(info, buff);
+		prompt_print(prompt, buff);
 	}
-	info->prompt = prompt;
 }

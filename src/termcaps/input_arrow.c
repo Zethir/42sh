@@ -6,62 +6,60 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 00:03:33 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 12:51:42 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 18:18:07 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <termcaps.h>
 
-void	deal_with_down(t_hub *info, char *buff)
+void	deal_with_down(t_shell *sh, t_prompt *prompt, char *buff)
 {
-	if (ARROW_DOWN && info->node->next)
+	if (ARROW_DOWN && sh->hist->next)
 	{
-		info->node = info->node->next;
-		if (!info->node->str)
-			info->node->str = ft_strdup("");
-		info->prompt->cmd = ft_strdup(info->node->str);
-		info->prompt->i = ft_strlen(info->prompt->cmd);
-		prompt_print(info, buff);
+		sh->hist = sh->hist->next;
+		if (!sh->hist->str)
+			sh->hist->str = ft_strdup("");
+		ft_strcpy(prompt->cmd, sh->hist->str);
+		prompt->i = ft_strlen(prompt->cmd);
+		prompt_print(prompt, buff);
 	}
 }
 
-void	deal_with_up(t_hub *info, char *buff)
+void	deal_with_up(t_shell *sh, t_prompt *prompt, char *buff)
 {
-	if (ARROW_UP && info->node->prev)
+	if (ARROW_UP && sh->hist->prev)
 	{
-		info->node = info->node->prev;
-		info->prompt->cmd = ft_strdup(info->node->str);
-		info->prompt->i = ft_strlen(info->prompt->cmd);
-		prompt_print(info, buff);
+		sh->hist = sh->hist->prev;
+		ft_strcpy(prompt->cmd, sh->hist->str);
+		prompt->i = ft_strlen(prompt->cmd);
+		prompt_print(prompt, buff);
 	}
 }
 
-void	deal_with_left(t_hub *info, char *buff)
+void	deal_with_left(t_prompt *prompt, char *buff)
 {
-	if (ARROW_LEFT && info->prompt->i > 0)
+	if (ARROW_LEFT && prompt->i > 0)
 	{
-		if (info->prompt->copy_mode == 1 &&
-				info->prompt->i == info->prompt->cursor_start)
-			info->prompt->cursor_start--;
-		else if (info->prompt->copy_mode == 1 &&
-				info->prompt->cursor_start < info->prompt->cursor_end)
-			info->prompt->cursor_end--;
-		info->prompt->i--;
-		prompt_print(info, buff);
+		if (prompt->copy_mode == 1 && prompt->i == prompt->cursor_start)
+			prompt->cursor_start--;
+		else if (prompt->copy_mode == 1 &&
+				prompt->cursor_start < prompt->cursor_end)
+			prompt->cursor_end--;
+		prompt->i--;
+		prompt_print(prompt, buff);
 	}
 }
 
-void	deal_with_right(t_hub *info, char *buff)
+void	deal_with_right(t_prompt *prompt, char *buff)
 {
-	if (ARROW_RIGHT && info->prompt->cmd[info->prompt->i])
+	if (ARROW_RIGHT && prompt->cmd[prompt->i])
 	{
-		if (info->prompt->copy_mode == 1 &&
-				info->prompt->i == info->prompt->cursor_end)
-			info->prompt->cursor_end++;
-		else if (info->prompt->copy_mode == 1 &&
-				info->prompt->cursor_start < info->prompt->cursor_end)
-			info->prompt->cursor_start++;
-		info->prompt->i++;
-		prompt_print(info, buff);
+		if (prompt->copy_mode == 1 && prompt->i == prompt->cursor_end)
+			prompt->cursor_end++;
+		else if (prompt->copy_mode == 1 &&
+				prompt->cursor_start < prompt->cursor_end)
+			prompt->cursor_start++;
+		prompt->i++;
+		prompt_print(prompt, buff);
 	}
 }

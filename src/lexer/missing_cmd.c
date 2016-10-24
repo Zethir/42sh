@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unsetenv.c                                         :+:      :+:    :+:   */
+/*   missing_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/28 17:12:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 15:59:43 by cboussau         ###   ########.fr       */
+/*   Created: 2016/10/24 15:43:35 by cboussau          #+#    #+#             */
+/*   Updated: 2016/10/24 16:07:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include <lexer.h>
 
-int			do_unsetenv(t_env *env, char **arg, int flag)
+void	get_missing_cmd(t_shell *sh, t_lex *lex)
 {
-	t_env	*tmp;
+	t_token	*token;
 
-	arg++;
-	tmp = env;
-	if (!*arg)
+	token = lex->token;
+	if (token->token_value != R_TRUNC_FD && token->token_value !=
+			R_TRUNC_FD_CLOSE && token->token_value != R_IN_FD &&
+			token->token_value != R_IN_FD_CLOSE)
 	{
-		ft_putendl_fd("unsetenv: Too few arguments.", 2);
-		return (-1);
+		lex->line = ft_strjoin(sh->hist->str, " ");
+		lex->line = ft_strjoin(lex->line, deal_with_termcap(sh));
+		ft_putchar('\n');
 	}
-	else
-	{
-		while (*arg)
-		{
-			while (env)
-			{
-				if (ft_strcmp(env->name, *arg) == 0 && env->flag == flag)
-					env->line = NULL;
-				env = env->next;
-			}
-			env = tmp;
-			arg++;
-		}
-	}
-	return (0);
 }

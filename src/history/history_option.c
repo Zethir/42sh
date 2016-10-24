@@ -6,42 +6,42 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 11:55:41 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:05:25 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-static int		option_dbis2(t_hub *info, int nbr, int fd)
+static int		option_dbis2(t_shell *sh, int nbr, int fd)
 {
-	t_dlist	*dlst;
+	t_hist	*hist;
 	int		i;
 
-	dlst = info->node;
+	hist = sh->hist;
 	i = 1;
-	while (info->node->prev)
-		info->node = info->node->prev;
-	while (info->node)
+	while (sh->hist->prev)
+		sh->hist = sh->hist->prev;
+	while (sh->hist)
 	{
 		if (nbr != 0)
 		{
 			ft_putendl_fd(ft_strjoin(ft_strjoin(ft_itoa(i), " "),
-						info->node->str), fd);
+						sh->hist->str), fd);
 			i++;
 		}
 		if (nbr == 0)
 		{
-			info->node->prev->next = info->node->next;
-			info->node->next->prev = info->node->prev;
+			sh->hist->prev->next = sh->hist->next;
+			sh->hist->next->prev = sh->hist->prev;
 		}
 		nbr--;
-		info->node = info->node->next;
+		sh->hist = sh->hist->next;
 	}
-	info->node = dlst;
+	sh->hist = hist;
 	return (nbr);
 }
 
-static void		option_dbis(t_hub *info, char **cmd)
+static void		option_dbis(t_shell *sh, char **cmd)
 {
 	char	*pathb;
 	int		fd;
@@ -56,7 +56,7 @@ static void		option_dbis(t_hub *info, char **cmd)
 		free(pathb);
 		return ;
 	}
-	nbr = option_dbis2(info, nbr, fd);
+	nbr = option_dbis2(sh, nbr, fd);
 	unlink("/tmp/history");
 	rename(pathb, "/tmp/history");
 	free(pathb);
@@ -67,7 +67,7 @@ static void		option_dbis(t_hub *info, char **cmd)
 	}
 }
 
-static void		option_d(t_hub *info, char **cmd)
+static void		option_d(t_shell *sh, char **cmd)
 {
 	int		i;
 
@@ -81,10 +81,10 @@ static void		option_d(t_hub *info, char **cmd)
 		}
 		i++;
 	}
-	option_dbis(info, cmd);
+	option_dbis(sh, cmd);
 }
 
-static void		option_c(t_hub *info)
+static void		option_c(t_shell *sh)
 {
 	int		fd;
 	char	*str;
@@ -94,27 +94,27 @@ static void		option_c(t_hub *info)
 		ft_putendl_fd("history : No such file or directory", 2);
 		return ;
 	}
-	str = ft_strdup(info->node->str);
-	info->node = create_node();
-	info->node->str = ft_strdup(str);
+	str = ft_strdup(sh->hist->str);
+	sh->hist = create_node();
+	sh->hist->str = ft_strdup(str);
 	free(str);
 }
 
-void			do_option(t_hub *info, char **cmd)
+void			do_option(t_shell *sh, char **cmd)
 {
 	if (ft_strcmp(cmd[1], "-c") == 0)
-		option_c(info);
+		option_c(sh);
 	else if (ft_strcmp(cmd[1], "-d") == 0)
 	{
 		if (!cmd[2])
 			ft_putendl_fd("Need entry number to execute", 2);
 		else
-			option_d(info, cmd);
+			option_d(sh, cmd);
 	}
 	else if (ft_strcmp(cmd[1], "-r") == 0)
 	{
 		if (!cmd[2])
-			option_r(info);
+			option_r(sh);
 		else
 			ft_putendl_fd("Option [-r] doesn't need any arguments", 2);
 	}

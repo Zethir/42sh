@@ -1,66 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_struct.c                                       :+:      :+:    :+:   */
+/*   env_struct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:17:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 17:02:31 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:12:37 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-t_hub		*stock_struct(t_hub *info, int i)
+t_shell		*stock_struct(t_shell *sh, int i)
 {
-	static t_hub *tmp = NULL;
+	static t_shell *tmp = NULL;
 
 	if (i == 0)
-		tmp = info;
+		tmp = sh;
 	return (tmp);
 }
 
-t_prompt	*init_prompt(void)
+t_shell		*init_struct(char **env)
 {
-	t_prompt		*prompt;
-	struct winsize	win;
+	t_shell	*sh;
 
-	if (!(prompt = (t_prompt *)malloc(sizeof(t_prompt))))
+	if (!(sh = (t_shell *)malloc(sizeof(t_shell))))
 		return (NULL);
-	if (!(prompt->cmd = (char *)malloc(sizeof(char) * 10000)))
+	sh->env = init_env(env);
+	if (!(sh->hist = (t_hist *)malloc(sizeof(t_hist))))
 		return (NULL);
-	ft_bzero(prompt->cmd, 10000);
-	prompt->i = 0;
-	prompt->copy_mode = 0;
-	prompt->cursor_start = 0;
-	prompt->cursor_end = 0;
-	prompt->copy_str = ft_strdup("");
-	ioctl(0, TIOCGWINSZ, &win);
-	prompt->win_size = win.ws_col;
-	return (prompt);
+	sh->hist = create_node();
+	deal_with_file(sh);
+	return (sh);
 }
 
-t_hub		*init_struct(char **env)
+void		init_stdio(t_shell *sh)
 {
-	t_hub	*info;
-
-	if (!(info = (t_hub *)malloc(sizeof(t_hub))))
-		return (NULL);
-	info->lst = init_lst(env);
-	if (!(info->node = (t_dlist *)malloc(sizeof(t_dlist))))
-		return (NULL);
-	info->node = create_node();
-	deal_with_file(info);
-	return (info);
-}
-
-void		init_stdio(t_hub *info)
-{
-	if (!(info->stdio = (int *)malloc(sizeof(int) * 3)))
+	if (!(sh->stdio = (int *)malloc(sizeof(int) * 3)))
 		return ;
-	info->stdio[0] = 0;
-	info->stdio[1] = 1;
-	info->stdio[2] = 2;
-	info->closefd = -1;
+	sh->stdio[0] = 0;
+	sh->stdio[1] = 1;
+	sh->stdio[2] = 2;
+	sh->closefd = -1;
 }

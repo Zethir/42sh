@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 10:09:10 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 18:19:21 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-void	free_list(t_lst *node)
+void	free_env(t_env *node)
 {
 	while (node)
 	{
@@ -26,7 +26,7 @@ void	free_list(t_lst *node)
 	node = NULL;
 }
 
-void	free_dlist(t_dlist *node)
+void	free_hist(t_hist *node)
 {
 	while (node)
 	{
@@ -38,38 +38,11 @@ void	free_dlist(t_dlist *node)
 	node = NULL;
 }
 
-void	free_struct_lex(t_lex **head)
+void	free_shell(t_shell *sh)
 {
-	t_lex	*lex;
-
-	lex = *head;
-	if (lex->line)
-	{
-		while (lex->token)
-		{
-			if (lex->token->cmd)
-				ft_strdel(&lex->token->cmd);
-			if (lex->token->fd)
-				free(lex->token->fd);
-			lex->token->token_value = 0;
-			lex->token = lex->token->next;
-		}
-		free(lex->token);
-		lex->token = NULL;
-	}
-}
-
-void	free_lex(t_lex **head)
-{
-	t_lex	*lex;
-
-	lex = *head;
-	if (lex->line)
-		ft_strdel(&lex->line);
-	lex->hd = 0;
-	lex->tl = 0;
-	if (lex->fd)
-		free(lex->fd);
-	free(lex);
-	lex = NULL;
+	if (sh->stdio)
+		free(sh->stdio);
+	sh->closefd = 0;
+	free(sh);
+	sh = NULL;
 }

@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unsetenv.c                                         :+:      :+:    :+:   */
+/*   lst_lexer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/28 17:12:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 15:59:43 by cboussau         ###   ########.fr       */
+/*   Created: 2016/10/24 15:10:14 by cboussau          #+#    #+#             */
+/*   Updated: 2016/10/24 15:10:55 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include <lexer.h>
 
-int			do_unsetenv(t_env *env, char **arg, int flag)
+t_lex	*init_lexer_struct(void)
 {
-	t_env	*tmp;
+	t_lex	*lex;
 
-	arg++;
-	tmp = env;
-	if (!*arg)
-	{
-		ft_putendl_fd("unsetenv: Too few arguments.", 2);
-		return (-1);
-	}
-	else
-	{
-		while (*arg)
-		{
-			while (env)
-			{
-				if (ft_strcmp(env->name, *arg) == 0 && env->flag == flag)
-					env->line = NULL;
-				env = env->next;
-			}
-			env = tmp;
-			arg++;
-		}
-	}
-	return (0);
+	if (!(lex = (t_lex *)malloc(sizeof(t_lex))))
+		return (NULL);
+	if (!(lex->fd = (int *)malloc(sizeof(int) * 2)))
+		return (NULL);
+	lex->line = ft_strdup("");
+	lex->hd = 0;
+	lex->tl = 0;
+	lex->fd[0] = -1;
+	lex->fd[1] = -1;
+	return (lex);
 }

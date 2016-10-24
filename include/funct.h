@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:38:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 19:22:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:04:10 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void				print_error_opt(char *arg);
 void				print_error_arg(void);
 void				print_env_error(char *arg);
 void				print_main_error(char *arg);
+void				print_parse_error(char c);
+void				print_identifier_error(char *arg);
 void				out_of_range_error(char **cmd);
 void				no_command_error(char *arg);
 void				ft_signal(int id);
@@ -28,6 +30,7 @@ void				win_size(int id);
 void				close_pipefds(int pipefds[], int num);
 void				wait_for_child(int num);
 void				color(char *color, char *str);
+int					check_wrong_identifier(char *arg);
 int					check_number_bis(char **cmd);
 int					check_number(char **cmd);
 int					check_alpha(char **cmd);

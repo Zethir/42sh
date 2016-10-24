@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 17:06:02 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 10:22:20 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:35:40 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
 int		check_caract(char *str, char c)
 {
@@ -28,10 +28,10 @@ int		check_caract(char *str, char c)
 	return (0);
 }
 
-t_lst	*delete_elem(t_lst *node)
+t_env	*delete_elem(t_env *node)
 {
-	t_lst	*tmp;
-	t_lst	*tmp2;
+	t_env	*tmp;
+	t_env	*tmp2;
 
 	tmp = node;
 	tmp2 = node;

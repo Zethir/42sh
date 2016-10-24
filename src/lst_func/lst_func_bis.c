@@ -6,63 +6,48 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 10:10:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 15:13:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <shell.h>
 
-t_dlist	*create_node(void)
+t_hist	*create_node(void)
 {
-	t_dlist	*node;
+	t_hist	*hist;
 
-	if (!(node = (t_dlist *)malloc(sizeof(t_dlist))))
+	if (!(hist = (t_hist *)malloc(sizeof(t_hist))))
 		return (NULL);
-	node->str = NULL;
-	node->prev = NULL;
-	node->next = NULL;
-	return (node);
+	hist->str = NULL;
+	hist->prev = NULL;
+	hist->next = NULL;
+	return (hist);
 }
 
-void	push_node_bis(t_dlist **head, t_dlist *new_node)
+void	push_node_bis(t_hist **head, t_hist *new_hist)
 {
-	t_dlist *cur;
+	t_hist *cur;
 
 	if (!*head)
 	{
-		*head = new_node;
+		*head = new_hist;
 		return ;
 	}
 	cur = *head;
 	while (cur->next)
 		cur = cur->next;
-	cur->next = new_node;
-	new_node->prev = cur;
+	cur->next = new_hist;
+	new_hist->prev = cur;
 }
 
-void	go_to_end_list(t_hub *info)
+void	go_to_end_list(t_hist *hist)
 {
 	char	*str;
 
-	str = ft_strdup(info->node->str);
-	while (info->node->next)
-		info->node = info->node->next;
-	info->node->str = ft_strdup(str);
+	str = ft_strdup(hist->str);
+	while (hist->next)
+		hist = hist->next;
+	hist->str = ft_strdup(str);
 	free(str);
 }
 
-t_lex	*init_lexer_struct(void)
-{
-	t_lex	*lex;
-
-	if (!(lex = (t_lex *)malloc(sizeof(t_lex))))
-		return (NULL);
-	if (!(lex->fd = (int *)malloc(sizeof(int) * 2)))
-		return (NULL);
-	lex->line = ft_strdup("");
-	lex->hd = 0;
-	lex->tl = 0;
-	lex->fd[0] = -1;
-	lex->fd[1] = -1;
-	return (lex);
-}

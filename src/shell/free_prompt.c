@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unsetenv.c                                         :+:      :+:    :+:   */
+/*   free_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/28 17:12:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 15:59:43 by cboussau         ###   ########.fr       */
+/*   Created: 2016/10/24 15:29:44 by cboussau          #+#    #+#             */
+/*   Updated: 2016/10/24 17:51:19 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include <termcaps.h>
 
-int			do_unsetenv(t_env *env, char **arg, int flag)
+void	free_prompt(t_prompt **prompt)
 {
-	t_env	*tmp;
+	t_prompt *tmp;
 
-	arg++;
-	tmp = env;
-	if (!*arg)
-	{
-		ft_putendl_fd("unsetenv: Too few arguments.", 2);
-		return (-1);
-	}
-	else
-	{
-		while (*arg)
-		{
-			while (env)
-			{
-				if (ft_strcmp(env->name, *arg) == 0 && env->flag == flag)
-					env->line = NULL;
-				env = env->next;
-			}
-			env = tmp;
-			arg++;
-		}
-	}
-	return (0);
+	tmp = *prompt;
+	tmp->i = 0;
+	tmp->copy_mode = 0;
+	tmp->cursor_start = 0;
+	tmp->cursor_end = 0;
+	if (tmp->copy_str)
+		free(tmp->copy_str);
+	tmp->win_size = 0;
+	free(tmp);
+	tmp = NULL;
 }

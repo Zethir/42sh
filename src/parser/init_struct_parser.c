@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:38:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/23 11:47:11 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 19:12:45 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <parser.h>
 
 static char		*check_path(char **path, char *arg)
 {
@@ -36,15 +36,15 @@ static char		*check_path(char **path, char *arg)
 	return (NULL);
 }
 
-char			**get_env(t_lst *node)
+char			**get_env(t_env *node)
 {
-	t_lst	*tmp;
+	t_env	*tmp;
 	char	**env;
 	int		i;
 
-	tmp = node;
 	i = get_index(node);
 	env = (char **)malloc(sizeof(char *) * i + 1);
+	tmp = node;
 	i = 0;
 	while (node)
 	{
@@ -62,67 +62,66 @@ char			**get_env(t_lst *node)
 	return (env);
 }
 
-static char		**split_path(t_lst *node)
+static char		**split_path(t_env *env)
 {
-	t_lst	*tmp;
+	t_env	*tmp;
 	char	**path;
 
-	tmp = node;
-	while (node)
+	tmp = env;
+	while (env)
 	{
-		if (ft_strcmp(node->name, "PATH") == 0)
+		if (ft_strcmp(env->name, "PATH") == 0)
 		{
-			if (node->line)
+			if (env->line)
 			{
-				path = ft_strsplit(&node->line[5], ':');
+				path = ft_strsplit(&env->line[5], ':');
 				return (path);
 			}
 			else
 				return (NULL);
 		}
-		node = node->next;
+		env = env->next;
 	}
-	node = tmp;
+	env = tmp;
 	return (NULL);
 }
 
-static void		deal_with_path(t_hub *info, char **path)
+static void		deal_with_path(t_parse *parse, char **path)
 {
-	if (path && *info->parse->argv && info->parse->env)
+	if (path && *parse->argv && parse->env)
 	{
-		info->parse->right_path = check_path(path, *info->parse->argv);
-		if (info->parse->right_path)
+		parse->right_path = check_path(path, *parse->argv);
+		if (parse->right_path)
 		{
-			info->parse->right_path = ft_strjoin(info->parse->right_path, "/");
-			info->parse->right_path = ft_strjoin(info->parse->right_path,
-					*info->parse->argv);
+			parse->right_path = ft_strjoin(parse->right_path, "/");
+			parse->right_path = ft_strjoin(parse->right_path, *parse->argv);
 		}
 		else
 		{
-			info->parse->right_path = ft_strdup("");
-			info->parse->right_path = ft_strjoin(info->parse->right_path,
-					*info->parse->argv);
+			parse->right_path = ft_strdup("");
+			parse->right_path = ft_strjoin(parse->right_path, *parse->argv);
 		}
 	}
-	else if (*info->parse->argv && info->parse->env)
+	else if (*parse->argv && parse->env)
 	{
-		info->parse->right_path = ft_strdup("");
-		info->parse->right_path = ft_strjoin(info->parse->right_path,
-				*info->parse->argv);
+		parse->right_path = ft_strdup("");
+		parse->right_path = ft_strjoin(parse->right_path, *parse->argv);
 	}
 }
 
-void			init_parse(t_hub *info, char *cmd)
+t_parse		*init_parse(t_shell *sh, char *cmd)
 {
+	t_parse	*parse;
 	char	**path;
 
-	info->parse = (t_parse *)malloc(sizeof(t_parse));
-	info->parse->env = get_env(info->lst);
-	info->parse->argv = ft_strsplit_ws(cmd);
+	parse = (t_parse *)malloc(sizeof(t_parse));
+	parse->env = get_env(sh->env);
+	parse->argv = ft_strsplit_ws(cmd);
 	if (!(path = (char **)malloc(sizeof(char *) * 7)))
-		return ;
-	path = split_path(info->lst);
-	deal_with_path(info, path);
+		return (NULL);
+	path = split_path(sh->env);
+	deal_with_path(parse, path);
 	if (path)
 		ft_strdel(path);
+	return (parse);
 }

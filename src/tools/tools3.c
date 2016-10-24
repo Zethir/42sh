@@ -6,29 +6,32 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/17 00:06:48 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/22 17:56:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:43:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sh42.h>
+#include <termcaps.h>
 
 void	win_size(int id)
 {
-	t_hub			*info;
+	t_shell			*sh;
+	t_prompt		*prompt;
 	char			*str;
 	struct winsize	win;
 
 	(void)id;
-	info = NULL;
+	sh = NULL;
 	str = ft_strdup("");
-	info = stock_struct(info, 1);
+	sh = stock_struct(sh, 1);
+	prompt = NULL;
+	prompt = stock_prompt(prompt, 1);
 	ioctl(0, TIOCGWINSZ, &win);
-	info->prompt->win_size = win.ws_col;
-	prompt_print(info, str);
+	prompt->win_size = win.ws_col;
+	prompt_print(prompt, str);
 	free(str);
 }
 
-char	*get_home(t_lst *node)
+char	*get_home(t_env *node)
 {
 	char	*str;
 
