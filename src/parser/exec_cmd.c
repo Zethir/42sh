@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 16:49:40 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 15:41:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	get_new_stdio(t_process *process)
 		close(process->closefd);
 }
 
-void		launch_builtin(t_shell *sh, t_parse *parse, t_process *process)
+void		launch_builtin(t_shell *sh, t_parse *parse, t_job *job)
 {
 	int		save_stdio[3];
 	int		ret;
@@ -32,9 +32,9 @@ void		launch_builtin(t_shell *sh, t_parse *parse, t_process *process)
 	save_stdio[0] = dup(0);
 	save_stdio[1] = dup(1);
 	save_stdio[2] = dup(2);
-	get_new_stdio(process);
-	if ((ret = do_builtins(sh, parse)) == 0)
-		process->completed = 1;
+	get_new_stdio(job->process);
+	if ((ret = do_builtins(sh, job, parse)) == 0)
+		job->process->completed = 1;
 	dup2(save_stdio[0], 0);
 	dup2(save_stdio[1], 1);
 	dup2(save_stdio[2], 2);
@@ -55,10 +55,12 @@ void		launch_bin(t_shell *sh, t_parse *parse, t_process *process)
 void		exec_env(t_shell *sh, char *arg, char **env_cpy)
 {
 	t_parse		*parse;
+	t_job		*job;
 
 	parse = init_parse(sh, arg);
+	job = NULL;
 	if (check_builtins(arg))
-		do_builtins(sh, parse);
+		do_builtins(sh, job, parse);
 	else if ((parse->pid = fork()) == 0)
 	{
 		reset_term_no_free(sh);

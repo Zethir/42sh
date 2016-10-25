@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 14:28:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 15:41:35 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,28 @@ static int		job_success(t_job *job)
 	return (1);
 }
 
-void			exec_process(t_shell *sh, t_process *process, int *iofile)
+void			exec_process(t_shell *sh, t_job *job, int *iofile)
 {
 	t_parse *parse;
 
-	parse = init_parse(sh, process->cmd);
+	parse = init_parse(sh, job->process->cmd);
 	if (check_builtins(parse->argv[0]))
 	{
 		if (iofile[0] != 0)
-			process->stdio[0] = iofile[0];
+			job->process->stdio[0] = iofile[0];
 		if (iofile[1] != 1)
-			process->stdio[1] = iofile[1];
-		launch_builtin(sh, parse, process);
+			job->process->stdio[1] = iofile[1];
+		launch_builtin(sh, parse, job);
 	}
 	else if ((parse->pid = fork()) == 0)
 	{
 		if (iofile[0] != 0)
-			process->stdio[0] = iofile[0];
+			job->process->stdio[0] = iofile[0];
 		if (iofile[1] != 1)
-			process->stdio[1] = iofile[1];
-		launch_bin(sh, parse, process);
+			job->process->stdio[1] = iofile[1];
+		launch_bin(sh, parse, job->process);
 	}
-	wait_for_process(process);
+	wait_for_process(job->process);
 	free_parse(&parse);
 }
 
@@ -68,7 +68,7 @@ static void		launch_process(t_shell *sh, t_job *job)
 		}
 		else
 			iofile[1] = 1;
-		exec_process(sh, job->process, iofile);
+		exec_process(sh, job, iofile);
 		if (iofile[0] != 0)
 			close(iofile[0]);
 		if (iofile[1] != 1)
