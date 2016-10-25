@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:20:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 15:39:37 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 17:44:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,11 @@ void					free_job(t_job *job);
 void					free_parse(t_parse **head);
 void					launch_builtin(t_shell *sh, t_parse *pa, t_job *job);
 void					launch_bin(t_shell *sh, t_parse *p, t_process *process);
-void					create_job(t_job *job, t_token *token);
-void					create_process(t_job *job, t_token *token, t_shell *sh);
-void					token_linker(t_shell *sh, t_job *job, t_token *token);
-void					token_pipe(t_shell *sh, t_job *job, t_token *token);
+void					create_job(t_job **job, t_process **p, t_token *token);
+void					create_process(t_process **p, t_token *token, t_shell *sh);
+void					token_linker(t_shell *sh, t_job **job, t_process **p,
+		t_token *token);
+void					token_pipe(t_shell *sh, t_process **p, t_token *token);
 int						do_builtins(t_shell *sh, t_job *job, t_parse *parse);
 int						do_exit(t_shell *sh, t_job *job, t_parse *parse);
 

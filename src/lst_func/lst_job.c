@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:22:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 14:07:53 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/25 17:50:25 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		push_process(t_process *node, t_process **head)
 	tmp->next = node;
 }
 
-void		create_process(t_job *job, t_token *token, t_shell *sh)
+void		create_process(t_process **process, t_token *token, t_shell *sh)
 {
 	t_process	*new_elem;
 
@@ -45,7 +45,7 @@ void		create_process(t_job *job, t_token *token, t_shell *sh)
 	new_elem->closefd = sh->closefd;
 	new_elem->completed = 0;
 	new_elem->cmd = ft_strdup(token->cmd);
-	push_process(new_elem, &job->process);
+	push_process(new_elem, process);
 }
 
 void		push_job(t_job *node, t_job **head)
@@ -64,7 +64,7 @@ void		push_job(t_job *node, t_job **head)
 	tmp->next = node;
 }
 
-void		create_job(t_job *job, t_token *token)
+void		create_job(t_job **job, t_process **process, t_token *token)
 {
 	t_job	*new_job;
 
@@ -72,8 +72,8 @@ void		create_job(t_job *job, t_token *token)
 		return ;
 	new_job->next = NULL;
 	new_job->linker = token->token_value;
-	new_job->process = job->process;
-	push_job(new_job, &job);
+	new_job->process = *process;
+	push_job(new_job, job);
 }
 
 t_job		*init_job(void)

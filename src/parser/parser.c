@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 15:41:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 18:00:57 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ void			exec_job(t_shell *sh, t_job *job)
 	tmp = job;
 	while (job)
 	{
-		if (job->linker == 0)
-			job = job->next;
 		launch_process(sh, job);
 		if (!job_success(job) && job->linker == AND)
 		{
@@ -108,20 +106,23 @@ void			exec_job(t_shell *sh, t_job *job)
 void			parse_cmd(t_shell *sh, t_token *token)
 {
 	t_job		*job;
+	t_process	*process;
 
-	job = init_job();
+	job = NULL;
+	process = NULL;
 	while (token)
 	{
 		init_stdio(sh);
 		if (token->token_value == PIPE)
 		{
-			token_pipe(sh, job, token);
+			token_pipe(sh, &process, token);
 			token = token->next;
 		}
 		else if (token->token_value == AND || token->token_value == OR ||
 				token->token_value == SEPARATOR)
 		{
-			token_linker(sh, job, token);
+			token_linker(sh, &job, &process, token);
+			process = NULL;
 			token = token->next;
 		}
 		else

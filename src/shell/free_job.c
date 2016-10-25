@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:35:47 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 14:26:12 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/25 18:00:44 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	free_job(t_job *job)
 
 	while (job)
 	{
-		if (job->linker == 0)
-			job = job->next;
 		while (job->process)
 		{
 			if (job->process->cmd)
