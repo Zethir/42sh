@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 18:19:21 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:09:46 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,21 @@
 
 void	free_env(t_env *node)
 {
+	t_env	*tmp;
+
 	while (node)
 	{
 		if (node->line)
 			free(node->line);
 		if (node->name)
 			free(node->name);
+		if (node->home)
+			free(node->home);
+		if (node->user)
+			free(node->user);
+		tmp = node;
 		node = node->next;
+		free(tmp);
 	}
 	free(node);
 	node = NULL;
@@ -28,11 +36,15 @@ void	free_env(t_env *node)
 
 void	free_hist(t_hist *node)
 {
+	t_hist	*tmp;
+
 	while (node)
 	{
 		if (node->str)
 			free(node->str);
+		tmp = node;
 		node = node->next;
+		free(tmp);
 	}
 	free(node);
 	node = NULL;
