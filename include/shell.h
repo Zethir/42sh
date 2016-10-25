@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/25 13:55:41 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:34:08 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void				get_prompt(t_env *env);
 void				free_env(t_env *env);
 void				free_hist(t_hist *hist);
 void				free_shell(t_shell *sh);
-void				free_all_struct(t_shell *sh);
+void				free_stdio(t_shell *sh);
 void				exec_cmd(t_shell *sh);
 void				print_env(t_env *env);
 void				restore_env(t_env *node, char **save);

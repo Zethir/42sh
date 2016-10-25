@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 19:19:33 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:23:12 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void		deal_with_prompt(t_shell *sh)
 	lex->token = init_token_struct();
 	if (check_lexer(sh, lex) == -1)
 		return ;
-	init_stdio(sh);
 	parse_cmd(sh, lex->token);
 	add_history(sh);
 	free_lex(&lex);
