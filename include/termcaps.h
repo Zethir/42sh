@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 17:55:28 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:14:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void			deal_with_backspace(t_prompt *prompt, char *buff);
 void			deal_with_delete(t_prompt *prompt, char *buff);
 void			deal_with_left(t_prompt *prompt, char *buff);
 void			deal_with_right(t_prompt *prompt, char *buff);
-void			deal_with_up(t_shell *sh, t_prompt *prompt, char *buff);
-void			deal_with_down(t_shell *sh, t_prompt *prompt, char *buff);
+void			deal_with_up(t_hist *hist, t_prompt *prompt, char *buff);
+void			deal_with_down(t_hist *hist, t_prompt *prompt, char *buff);
 void			start_copy_mode(t_prompt *prompt, char *buff);
 void			copy_string(t_prompt *prompt, char *buff);
 void			cut_string(t_prompt *prompt, char *buff);

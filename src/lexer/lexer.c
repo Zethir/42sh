@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/25 15:53:24 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/25 20:34:36 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ static int	check_parse_error(t_lex *lex, int i)
 		return (0);
 }
 
-int			check_lexer(t_shell *sh, t_lex *lex)
+int			check_lexer(t_lex *lex, t_hist *hist)
 {
 	char	*tmp;
 	int		i;
 
 	i = 0;
+	lex->token = init_token_struct();
 	while (lex->line[lex->hd])
 	{
 		tmp = ft_strsub(lex->line, lex->tl, lex->hd + 1);
@@ -47,7 +48,7 @@ int			check_lexer(t_shell *sh, t_lex *lex)
 			lex->hd++;
 		if ((!lex->line[lex->hd] || !lex->line[lex->hd + 1]) && i != 0 &&
 				lex->token->token_value != 13)
-			get_missing_cmd(sh, lex);
+			get_missing_cmd(lex, hist);
 		free(tmp);
 	}
 	return (0);

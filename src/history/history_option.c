@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 16:05:25 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 18:41:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void		option_c(t_shell *sh)
 		return ;
 	}
 	str = ft_strdup(sh->hist->str);
-	sh->hist = create_node();
+	sh->hist = create_hist();
 	sh->hist->str = ft_strdup(str);
 	free(str);
 }

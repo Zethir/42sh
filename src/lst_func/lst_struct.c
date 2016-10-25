@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/11 18:17:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 14:39:06 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:02:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_shell		*init_struct(char **env)
 	if (!(sh = (t_shell *)malloc(sizeof(t_shell))))
 		return (NULL);
 	sh->env = init_env(env);
-	sh->hist = create_node();
+	sh->hist = create_hist();
 	deal_with_file(sh);
 	return (sh);
 }
