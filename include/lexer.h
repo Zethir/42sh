@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 17:06:40 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 16:13:50 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void				append_redir(t_shell *sh, t_token *token, char *filename);
 void				parse_cmd(t_shell *sh, t_token *token);
 int					add_token(t_lex *lex, char *cmd, int val);
 int					get_second_fd(t_lex *lex, int i);
-int					is_redir(t_lex *lex, int i);
+int					is_redir(t_lex *lex, int i, char *tmp);
 int					is_token(t_lex *lex, int i);
 int					is_add_bis(t_lex *lex, char *str, int i);
 int					is_in_bis(t_lex *lex, char *str, int i);
