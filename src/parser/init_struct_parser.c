@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:38:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 12:51:53 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 13:48:16 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,19 @@ t_parse		*init_parse(t_shell *sh, char *cmd)
 {
 	t_parse	*parse;
 	char	**path;
+	int		i;
 
+	i = 0;
 	parse = (t_parse *)malloc(sizeof(t_parse));
 	parse->env = get_env(sh->env);
 	parse->argv = ft_strsplit_ws(cmd);
-	if (!(path = (char **)malloc(sizeof(char *) * 7)))
-		return (NULL);
 	path = split_path(sh->env);
 	deal_with_path(parse, path);
-	if (path)
-		ft_strdel(path);
+	while (path[i])
+	{
+		free(path[i]);
+		i++;
+	}
+	free(path);
 	return (parse);
 }
