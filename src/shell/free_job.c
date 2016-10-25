@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:35:47 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 12:56:26 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:13:58 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	free_job(t_job *job)
 {
+	t_job		*tmp;
+	t_process	*tmp2;
+
 	while (job)
 	{
 		if (job->linker == 0)
@@ -25,12 +28,16 @@ void	free_job(t_job *job)
 			if (job->process->stdio)
 				free(job->process->stdio);
 			job->process->completed = 0;
+			tmp2 = job->process;
 			job->process = job->process->next;
+			free(tmp2);
 		}
 		free(job->process);
 		job->process = NULL;
 		job->linker = 0;
+		tmp = job;
 		job = job->next;
+		free(tmp);
 	}
 	free(job);
 	job = NULL;
