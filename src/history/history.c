@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 15:11:39 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 16:17:15 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,10 @@ int			do_history(t_shell *sh, char **cmd)
 void		add_history(t_shell *sh)
 {
 	char	*buf;
+	char	*str;
+	char	*tmp;
 	int		fd;
 	int		i;
-	char	*str;
 
 	i = 0;
 	if ((fd = open("/tmp/history", O_CREAT | O_RDWR | O_APPEND, 0644)) == -1)
@@ -84,8 +85,11 @@ void		add_history(t_shell *sh)
 		i++;
 	}
 	i += 1;
-	str = ft_strjoin(ft_itoa(i), " ");
-	str = ft_strjoin(str, sh->hist->str);
+	tmp = ft_itoa(i);
+	buf = ft_strjoin(tmp, " ");
+	str = ft_strjoin(buf, sh->hist->str);
+	free(buf);
+	free(tmp);
 	ft_putendl_fd(str, fd);
 	free(str);
 	close(fd);
