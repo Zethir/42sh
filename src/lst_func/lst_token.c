@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 15:27:34 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/24 18:42:41 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:53:23 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,28 @@ static char		*clean_cmd(char *cmd)
 {
 	char	**str;
 	char	*res;
+	char	*tmp;
 	int		i;
 
 	str = ft_strsplit_ws(cmd);
 	if (!str[0])
 		return (NULL);
-	res = str[0];
+	res = ft_strdup(str[0]);
 	i = 1;
 	while (str[i])
 	{
-		res = ft_strjoin(res, " ");
-		res = ft_strjoin(res, str[i]);
+		tmp = ft_strjoin(res, " ");
+		res = ft_strjoin(tmp, str[i]);
+		free(tmp);
 		i++;
 	}
-	if (str)
-		free(str);
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 	return (res);
 }
 
@@ -69,6 +76,7 @@ int				add_token(t_lex *lex, char *cmd, int val)
 	new_elem->fd[0] = lex->fd[0];
 	new_elem->fd[1] = lex->fd[1];
 	push_token(new_elem, &lex->token);
+	free(cmd);
 	return (0);
 }
 

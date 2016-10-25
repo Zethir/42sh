@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 18:40:03 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 15:11:39 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void		deal_with_file(t_shell *sh)
 {
 	int		fd;
 	char	*line;
+	char	*tmp;
 
 	if ((fd = open("/tmp/history", O_RDWR | O_CREAT, 0644)) == -1)
 	{
@@ -123,11 +124,12 @@ void		deal_with_file(t_shell *sh)
 	{
 		if (get_next_line(fd, &line) != 1)
 			break ;
-		line = split_line(line);
-		sh->hist->str = line;
+		tmp = ft_strdup(split_line(line));
+		free(line);
+		sh->hist->str = ft_strdup(tmp);
 		push_node_bis(&sh->hist, create_node());
 		sh->hist = sh->hist->next;
+		free(tmp);
 	}
-	free(line);
 	close(fd);
 }

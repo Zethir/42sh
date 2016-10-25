@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/25 14:34:08 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:44:15 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void				init_stdio(t_shell *sh);
 void				exec_env(t_shell *sh, char *arg, char **env_cpy);
 void				push_node(t_env *env, t_env **head);
 void				push_node_bis(t_hist **head, t_hist *new_node);
-void				go_to_end_list(t_hist *hist);
 void				add_history(t_shell *sh);
 void				deal_with_file(t_shell *sh);
 void				do_option(t_shell *sh, char **cmd);

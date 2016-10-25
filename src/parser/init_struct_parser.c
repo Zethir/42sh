@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:38:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 13:48:16 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 15:12:43 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,24 +88,29 @@ static char		**split_path(t_env *env)
 
 static void		deal_with_path(t_parse *parse, char **path)
 {
+	char	*tmp;
+
 	if (path && *parse->argv && parse->env)
 	{
 		parse->right_path = check_path(path, *parse->argv);
 		if (parse->right_path)
 		{
-			parse->right_path = ft_strjoin(parse->right_path, "/");
-			parse->right_path = ft_strjoin(parse->right_path, *parse->argv);
+			tmp = ft_strjoin(parse->right_path, "/");
+			parse->right_path = ft_strjoin(tmp, *parse->argv);
+			free(tmp);
 		}
 		else
 		{
-			parse->right_path = ft_strdup("");
-			parse->right_path = ft_strjoin(parse->right_path, *parse->argv);
+			tmp = ft_strdup("");
+			parse->right_path = ft_strjoin(tmp, *parse->argv);
+			free(tmp);
 		}
 	}
 	else if (*parse->argv && parse->env)
 	{
-		parse->right_path = ft_strdup("");
-		parse->right_path = ft_strjoin(parse->right_path, *parse->argv);
+		tmp = ft_strdup("");
+		parse->right_path = ft_strjoin(tmp, *parse->argv);
+		free(tmp);
 	}
 }
 

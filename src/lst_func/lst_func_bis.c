@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 15:13:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:43:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,3 @@ void	push_node_bis(t_hist **head, t_hist *new_hist)
 	cur->next = new_hist;
 	new_hist->prev = cur;
 }
-
-void	go_to_end_list(t_hist *hist)
-{
-	char	*str;
-
-	str = ft_strdup(hist->str);
-	while (hist->next)
-		hist = hist->next;
-	hist->str = ft_strdup(str);
-	free(str);
-}
-
