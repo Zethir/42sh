@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 17:07:03 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:28:35 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void			parse_cmd(t_shell *sh, t_token *token)
 	job = init_job();
 	while (token)
 	{
+		init_stdio(sh);
 		if (token->token_value == PIPE)
 		{
 			token_pipe(sh, job, token);
@@ -128,6 +129,7 @@ void			parse_cmd(t_shell *sh, t_token *token)
 			if ((token = hub_redir(sh, token)) == NULL)
 				return ;
 		}
+		free_stdio(sh);
 	}
 	exec_job(sh, job);
 }

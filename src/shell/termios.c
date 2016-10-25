@@ -6,21 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 16:31:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:32:07 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
-
-void		free_all_struct(t_shell *sh)
-{
-	if (sh->env)
-		free_env(sh->env);
-	if (sh->hist)
-		free_hist(sh->hist);
-	if (sh)
-		free_shell(sh);
-}
 
 int			reset_term(t_shell *sh)
 {
@@ -31,7 +21,7 @@ int			reset_term(t_shell *sh)
 	sh->term.c_lflag |= (ICANON | ECHO);
 	if (tcsetattr(0, 0, &(sh->term)) == -1)
 		return (-1);
-	free_all_struct(sh);
+	free_shell(sh);
 	return (0);
 }
 
