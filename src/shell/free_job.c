@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:35:47 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 18:44:54 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 12:56:26 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,27 @@ void	free_job(t_job *job)
 void	free_parse(t_parse **head)
 {
 	t_parse *parse;
+	int		i;
 
 	parse = *head;
-	if (parse->argv)
-		free(parse->argv);
+	i = 0;
+	while (parse->argv[i])
+	{
+		if (parse->argv[i])
+			free(parse->argv[i]);
+		i++;
+	}
+	free(parse->argv);
+	i = 0;
+	while (parse->env[i])
+	{
+		if (parse->env[i])
+			free(parse->env[i]);
+		i++;
+	}
+	free(parse->env);
 	if (parse->right_path)
 		free(parse->right_path);
-	if (parse->env)
-		free(parse->env);
 	parse->pid = 0;
 	free(parse);
 	parse = NULL;
