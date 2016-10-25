@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 14:49:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 15:30:38 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ static int	do_builtins_bis(t_shell *sh, t_parse *parse, char *cmd)
 		return (do_history(sh, parse->argv));
 	else if (ft_strncmp(cmd, "!", 1) == 0)
 		return (do_designator(sh, parse->argv));
-	else if (ft_strcmp(cmd, "exit") == 0)
-		return (do_exit(sh, parse->argv));
 	else if (ft_strcmp(cmd, "export") == 0)
 		return (do_export(sh->env, parse->argv));
+	else if (ft_strcmp(cmd, "echo") == 0)
+		return (do_echo(parse->argv));
 	else if (ft_strchr(cmd, '=') != NULL)
 		return (create_new_variable(sh->env, parse->argv));
 	else if (ft_strcmp(cmd, "unset") == 0)
@@ -58,7 +58,7 @@ static int	do_builtins_bis(t_shell *sh, t_parse *parse, char *cmd)
 		return (-1);
 }
 
-int			do_builtins(t_shell *sh, t_parse *parse)
+int			do_builtins(t_shell *sh, t_job *job, t_parse *parse)
 {
 	char *cmd;
 
@@ -71,8 +71,8 @@ int			do_builtins(t_shell *sh, t_parse *parse)
 		return (do_unsetenv(sh->env, parse->argv, 0));
 	else if (ft_strcmp(cmd, "cd") == 0)
 		return (do_cd(sh->env, parse->argv));
-	else if (ft_strcmp(cmd, "echo") == 0)
-		return (do_echo(parse->argv));
+	else if (ft_strcmp(cmd, "exit") == 0)
+		return (do_exit(sh, job, parse));
 	else
 		return (do_builtins_bis(sh, parse, cmd));
 }
