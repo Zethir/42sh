@@ -6,14 +6,15 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 17:55:28 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:15:52 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TERMCAPS_H
 # define TERMCAPS_H
 
-#include <shell.h>
+# include <shell.h>
+# include <ft_select.h>
 
 # define ARROW_LEFT ((buff[0] == 27 && buff[1] == 91 && buff[2] == 68))
 # define ARROW_RIGHT ((buff[0] == 27 && buff[1] == 91 && buff[2] == 67))

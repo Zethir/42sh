@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 14:42:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:38:41 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,10 @@ char		*deal_with_termcap(t_shell *sh)
 	stock_prompt(prompt, 0);
 	while ((ret = read(0, buff, BUFF_SIZE) != -1))
 	{
+	printf("buff[0] = %d\n", buff[0]);
+	printf("buff[1] = %d\n", buff[1]);
+	printf("buff[2] = %d\n", buff[2]);
+	printf("buff[3] = %d\n", buff[3]);
 		prompt_shell(sh, prompt, buff);
 		if (buff[0] == 10 && prompt->cmd[0])
 		{
