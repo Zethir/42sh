@@ -6,13 +6,13 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:57:33 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/25 16:10:18 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/26 16:35:46 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
-static int		is_and(t_lex *lex, int i, char *tmp)
+static int		is_and(t_lex *lex, t_token_ht *token_ht, int i, char *tmp)
 {
 	if (lex->line[i] == '&')
 	{
@@ -26,7 +26,7 @@ static int		is_and(t_lex *lex, int i, char *tmp)
 			if (lex->line[i] == '|' || lex->line[i] == '&' ||
 					lex->line[i] == '<' || lex->line[i] == ';')
 				return (-1);
-			if (add_token(lex, tmp, 1) < 0)
+			if ((token_ht = add_token(lex, token_ht, tmp, 1)) == NULL)
 				return (-1);
 			return (i);
 		}
@@ -34,7 +34,7 @@ static int		is_and(t_lex *lex, int i, char *tmp)
 	return (0);
 }
 
-static int		is_or(t_lex *lex, int i, char *tmp)
+static int		is_or(t_lex *lex, t_token_ht *token_ht, int i, char *tmp)
 {
 	if (lex->line[i] == '|')
 	{
@@ -49,18 +49,18 @@ static int		is_or(t_lex *lex, int i, char *tmp)
 					lex->line[i] == '&' || lex->line[i] == '|' ||
 					lex->line[i] == ';')
 				return (-1);
-			if (add_token(lex, tmp, 2) < 0)
+			if ((token_ht = add_token(lex, token_ht, tmp, 2)) == NULL)
 				return (-1);
 			return (i);
 		}
-		if (add_token(lex, tmp,	3) < 0)
+		if ((token_ht = add_token(lex, token_ht, tmp, 3)) == NULL)
 			return (-1);
 		return (i);
 	}
 	return (0);
 }
 
-static int		is_separator(t_lex *lex, int i, char *tmp)
+static int		is_separator(t_lex *lex, t_token_ht *token_ht, int i, char *tmp)
 {
 	if (lex->line[i] == ';')
 	{
@@ -68,38 +68,38 @@ static int		is_separator(t_lex *lex, int i, char *tmp)
 		if (lex->line[i] == '>' || lex->line[i] == '<' || lex->line[i] == '&'
 				|| lex->line[i] == '|')
 			return (-1);
-		if (add_token(lex, tmp,	13) < 0)
+		if ((token_ht = add_token(lex, token_ht, tmp, 13)) == NULL)
 			return (-1);
 		return (i);
 	}
 	return (0);
 }
 
-int				is_token(t_lex *lex, int i)
+int				is_token(t_lex *lex, t_token_ht *token_ht, int i)
 {
 	char	*tmp;
 	int		j;
 
 	tmp = ft_strsub(lex->line, lex->tl, lex->hd - lex->tl);
-	j = is_and(lex, i, tmp);
+	j = is_and(lex, token_ht, i, tmp);
 	if (j > 0 || j < 0)
 	{
 		free(tmp);
 		return (j);
 	}
-	j = is_or(lex, i, tmp);
+	j = is_or(lex, token_ht, i, tmp);
 	if (j > 0 || j < 0)
 	{
 		free(tmp);
 		return (j);
 	}
-	j = is_redir(lex, i, tmp);
+	j = is_redir(lex, token_ht, i, tmp);
 	if (j > 0 || j < 0)
 	{
 		free(tmp);
 		return (j);
 	}
-	j = is_separator(lex, i, tmp);
+	j = is_separator(lex, token_ht, i, tmp);
 	if (j > 0 || j < 0)
 	{
 		free(tmp);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 20:36:51 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/26 17:45:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ void			parse_cmd(t_shell *sh, t_token *token)
 			if ((token = hub_redir(sh, token)) == NULL)
 				return ;
 		}
-		free_stdio(sh);
 	}
 	exec_job(sh, job);
 }

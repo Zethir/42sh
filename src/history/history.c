@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 19:03:14 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/26 19:45:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,7 @@ void		deal_with_file(t_shell *sh)
 			break ;
 		tmp = ft_strdup(split_line(line));
 		free(line);
-		sh->hist->str = ft_strdup(tmp);
-		push_hist(&sh->hist, create_hist());
-		sh->hist = sh->hist->next;
+		init_hist(&sh->hist, tmp);
 		free(tmp);
 	}
 	close(fd);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 19:01:10 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/26 19:46:40 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,26 @@ void	push_hist(t_hist **head, t_hist *new_hist)
 	cur->next = new_hist;
 	new_hist->prev = cur;
 }
+
+void	init_hist(t_hist **head, char *str)
+{
+	t_hist	*hist;
+	t_hist	*cur;
+
+	if (!(hist = (t_hist *)malloc(sizeof(t_hist))))
+		return ;
+	hist->prev = NULL;
+	hist->next = NULL;
+	hist->str = ft_strdup(str);
+	if (*head == NULL)
+	{
+		*head = hist;
+		return ;
+	}
+	cur = *head;
+	while (cur->next)
+		cur = cur->next;
+	cur->next = hist;
+	hist->prev = cur;
+}
+

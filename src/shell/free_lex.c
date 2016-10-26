@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:25:59 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 19:08:45 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/26 17:58:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	free_struct_lex(t_lex **head)
 		{
 			if (lex->token->cmd)
 				free(lex->token->cmd);
-			if (lex->token->fd)
-				free(lex->token->fd);
 			lex->token->token_value = 0;
 			tmp = lex->token;
 			lex->token = lex->token->next;
@@ -46,8 +44,17 @@ void	free_lex(t_lex **head)
 		free(lex->line);
 	lex->hd = 0;
 	lex->tl = 0;
-	if (lex->fd)
-		free(lex->fd);
+	lex->fd[0] = 0;
+	lex->fd[1] = 0;
 	free(lex);
 	lex = NULL;
+}
+
+void	free_token_ht(t_token_ht **token)
+{
+	t_token_ht	*token_ht;
+
+	token_ht = *token;
+	free(token_ht);
+	token_ht = NULL;
 }

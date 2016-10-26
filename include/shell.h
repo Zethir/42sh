@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/26 15:42:37 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/26 19:44:12 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct		s_hist
 
 typedef struct		s_shell
 {
-	int				*stdio;
+	int				stdio[3];
 	int				closefd;
 	struct s_hist	*hist;
 	struct s_env	*env;
@@ -69,6 +69,7 @@ t_env				*delete_elem(t_env *env);
 t_shell				*stock_struct(t_shell *sh, int i);
 t_shell				*init_struct(char **env);
 t_hist				*create_hist(void);
+void				init_hist(t_hist **head, char *str);
 void				heredoc(t_shell *sh, char *code);
 void				init_stdio(t_shell *sh);
 void				exec_env(t_shell *sh, char *arg, char **env_cpy);
@@ -82,7 +83,6 @@ void				get_prompt(t_env *env);
 void				free_env(t_env *env);
 void				free_hist(t_hist *hist);
 void				free_shell(t_shell *sh);
-void				free_stdio(t_shell *sh);
 void				exec_cmd(t_shell *sh);
 void				print_env(t_env *env);
 void				restore_env(t_env *node, char **save);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 20:35:48 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/26 19:26:08 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,25 @@ static void		deal_with_inhib(t_hist *hist, t_lex *lex)
 
 static void		deal_with_prompt(t_shell *sh)
 {
-	t_lex	*lex;
+	t_token_ht	*token_ht;
+	t_lex		*lex;
 
+	if (!(token_ht = (t_token_ht *)malloc(sizeof(t_lex))))
+		return ;
+	token_ht->head = NULL;
+	token_ht->tail = NULL;
 	lex = init_lexer_struct();
 	lex->line = ft_strdup(deal_with_termcap(sh->hist));
 	deal_with_inhib(sh->hist, lex);
 	ft_putchar('\n');
 	if (!lex->line)
 		return ;
-	if (check_lexer(lex, sh->hist) == -1)
+	if ((lex->token = check_lexer(lex, token_ht, sh->hist)) == NULL)
 		return ;
 	parse_cmd(sh, lex->token);
 	add_history(sh);
 	free_lex(&lex);
+	free_token_ht(&token_ht);
 }
 
 static void		start_prog(char **env)

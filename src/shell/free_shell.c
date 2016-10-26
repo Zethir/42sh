@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 15:51:04 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:45:58 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,4 @@ void	free_shell(t_shell *sh)
 	sh->closefd = 0;
 	free(sh);
 	sh = NULL;
-}
-
-void	free_stdio(t_shell *sh)
-{
-	if (sh->stdio)
-		free(sh->stdio);
-	sh->closefd = -1;
 }
