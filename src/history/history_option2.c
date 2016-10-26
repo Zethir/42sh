@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 15:11:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 16:05:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 18:42:32 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void			option_r(t_shell *sh)
 	{
 		line = split_line(line);
 		sh->hist->str = line;
-		push_node_bis(&sh->hist, create_node());
+		push_hist(&sh->hist, create_hist());
 		sh->hist = sh->hist->next;
 	}
 	add_to_file(sh);

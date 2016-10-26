@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 16:13:50 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/25 20:32:26 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_token				*hub_redir(t_shell *sh, t_token *token);
 void				free_struct_lex(t_lex **lex);
 void				free_lex(t_lex **lex);
 void				get_first_fd(t_lex *lex, int i);
-void				get_missing_cmd(t_shell *sh, t_lex *lex);
+void				get_missing_cmd(t_lex *lex, t_hist *hist);
 void				truncate_redir(t_shell *sh, t_token *token, char *filename);
 void				append_redir(t_shell *sh, t_token *token, char *filename);
 void				parse_cmd(t_shell *sh, t_token *token);
@@ -68,7 +68,7 @@ int					is_in_bis(t_lex *lex, char *str, int i);
 int					is_replace_bis(t_lex *lex, char *str, int i);
 int					is_heredoc_bis(t_lex *lex, char *str, int i);
 int					list_browser(t_lex *lex);
-int					check_lexer(t_shell *sh, t_lex *lex);
+int					check_lexer(t_lex *lex, t_hist *hist);
 int					input_redir(t_shell *sh, t_token *token, char *filename);
 int					trunc_in_fd(t_shell *sh, t_token *token, t_token *tmp);
 int					out_fd_close(t_shell *sh, t_token *token, t_token *tmp);

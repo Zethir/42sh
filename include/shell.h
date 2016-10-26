@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/26 15:38:45 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/26 15:42:37 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ typedef struct		s_shell
 
 t_env				*init_env(char **env);
 t_env				*delete_elem(t_env *env);
-t_hist				*create_node(void);
 t_shell				*stock_struct(t_shell *sh, int i);
 t_shell				*init_struct(char **env);
+t_hist				*create_hist(void);
 void				heredoc(t_shell *sh, char *code);
 void				init_stdio(t_shell *sh);
 void				exec_env(t_shell *sh, char *arg, char **env_cpy);
 void				push_node(t_env *env, t_env **head);
-void				push_node_bis(t_hist **head, t_hist *new_node);
+void				push_hist(t_hist **head, t_hist *new_node);
 void				add_history(t_shell *sh);
 void				deal_with_file(t_shell *sh);
 void				do_option(t_shell *sh, char **cmd);
@@ -110,6 +110,6 @@ int					check_local_variable(t_env *env, char *arg, int flag);
 char				*get_home(t_env *env);
 char				*join_env(char **arg);
 char				**get_env(t_env *env);
-char				*deal_with_termcap(t_shell *sh);
+char				*deal_with_termcap(t_hist *hist);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 15:27:34 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/25 16:03:18 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 20:37:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,14 @@ static char		*clean_cmd(char *cmd)
 	while (str[i])
 	{
 		tmp = ft_strjoin(res, " ");
+		free(res);
 		res = ft_strjoin(tmp, str[i]);
 		free(tmp);
 		i++;
 	}
 	i = 0;
 	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
+		free(str[i++]);
 	free(str);
 	return (res);
 }
@@ -84,7 +82,8 @@ t_token			*init_token_struct(void)
 {
 	t_token *token;
 
-	token = (t_token *)malloc(sizeof(t_token));
+	if (!(token = (t_token *)malloc(sizeof(t_token))))
+		return (NULL);
 	token->next = NULL;
 	token->cmd = NULL;
 	token->token_value = 0;

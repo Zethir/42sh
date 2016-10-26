@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 15:38:41 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/26 15:41:50 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		prompt_print(t_prompt *prompt, char *buff)
 	print_cursor(prompt, buff, i);
 }
 
-static void	prompt_shell(t_shell *sh, t_prompt *prompt, char *buff)
+static void	prompt_shell(t_hist *hist, t_prompt *prompt, char *buff)
 {
 	if (prompt->i < 4500)
 	{
@@ -89,8 +89,8 @@ static void	prompt_shell(t_shell *sh, t_prompt *prompt, char *buff)
 	deal_with_delete(prompt, buff);
 	deal_with_left(prompt, buff);
 	deal_with_right(prompt, buff);
-	deal_with_up(sh, prompt, buff);
-	deal_with_down(sh, prompt, buff);
+	deal_with_up(hist, prompt, buff);
+	deal_with_down(hist, prompt, buff);
 	go_to_start_of_line(prompt, buff);
 	go_to_previous_word(prompt, buff);
 	go_to_next_word(prompt, buff);
@@ -101,7 +101,7 @@ static void	prompt_shell(t_shell *sh, t_prompt *prompt, char *buff)
 	paste_string(prompt, buff);
 }
 
-char		*deal_with_termcap(t_shell *sh)
+char		*deal_with_termcap(t_hist *hist)
 {
 	t_prompt	*prompt;
 	int			ret;
@@ -112,16 +112,12 @@ char		*deal_with_termcap(t_shell *sh)
 	stock_prompt(prompt, 0);
 	while ((ret = read(0, buff, BUFF_SIZE) != -1))
 	{
-	printf("buff[0] = %d\n", buff[0]);
-	printf("buff[1] = %d\n", buff[1]);
-	printf("buff[2] = %d\n", buff[2]);
-	printf("buff[3] = %d\n", buff[3]);
-		prompt_shell(sh, prompt, buff);
+		prompt_shell(hist, prompt, buff);
 		if (buff[0] == 10 && prompt->cmd[0])
 		{
 			prompt_print(prompt, buff);
 			if (prompt->cmd[0])
-				sh->hist->str = ft_strdup(prompt->cmd);
+				hist->str = ft_strdup(prompt->cmd);
 			else
 				return (NULL);
 			break ;
@@ -129,5 +125,5 @@ char		*deal_with_termcap(t_shell *sh)
 		ft_bzero(buff, 4);
 	}
 	free_prompt(&prompt);
-	return (sh->hist->str);
+	return (hist->str);
 }

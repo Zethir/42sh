@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 14:41:55 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 20:35:48 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
-static void		deal_with_inhib(t_shell *sh, t_lex *lex)
+static void		deal_with_inhib(t_hist *hist, t_lex *lex)
 {
 	char	*tmp;
 
@@ -22,7 +22,7 @@ static void		deal_with_inhib(t_shell *sh, t_lex *lex)
 	while (check_for_parenth(lex->line) != 0)
 	{
 		ft_putchar('\n');
-		tmp = deal_with_termcap(sh);
+		tmp = deal_with_termcap(hist);
 		lex->line = ft_strjoin(lex->line, tmp);
 	}
 	free(tmp);
@@ -33,13 +33,12 @@ static void		deal_with_prompt(t_shell *sh)
 	t_lex	*lex;
 
 	lex = init_lexer_struct();
-	lex->line = ft_strdup(deal_with_termcap(sh));
-	deal_with_inhib(sh, lex);
+	lex->line = ft_strdup(deal_with_termcap(sh->hist));
+	deal_with_inhib(sh->hist, lex);
 	ft_putchar('\n');
 	if (!lex->line)
 		return ;
-	lex->token = init_token_struct();
-	if (check_lexer(sh, lex) == -1)
+	if (check_lexer(lex, sh->hist) == -1)
 		return ;
 	parse_cmd(sh, lex->token);
 	add_history(sh);
@@ -60,7 +59,7 @@ static void		start_prog(char **env)
 		get_prompt(sh->env);
 		stock_struct(sh, 0);
 		deal_with_prompt(sh);
-		push_node_bis(&sh->hist, create_node());
+		push_hist(&sh->hist, create_hist());
 		sh->hist = sh->hist->next;
 	}
 	if (reset_term(sh) == -1)

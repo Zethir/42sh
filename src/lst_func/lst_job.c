@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/09 17:22:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 17:50:25 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 18:56:26 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void		push_process(t_process *node, t_process **head)
 		return ;
 	}
 	else
-	{
 		tmp = *head;
-	}
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = node;

@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/27 16:57:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 14:43:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:01:10 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-t_hist	*create_node(void)
+t_hist	*create_hist(void)
 {
 	t_hist	*hist;
 
@@ -24,7 +24,7 @@ t_hist	*create_node(void)
 	return (hist);
 }
 
-void	push_node_bis(t_hist **head, t_hist *new_hist)
+void	push_hist(t_hist **head, t_hist *new_hist)
 {
 	t_hist *cur;
 
