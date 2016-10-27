@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 14:11:10 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 18:11:35 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		print_env(t_env *env)
 	tmp = env;
 	while (env)
 	{
-		if (!env->line)
+		if (ft_strlen(env->line) < 1)
 			env = env->next;
 		else if (env->flag == 0)
 		{
@@ -88,12 +88,6 @@ int			deal_with_env(t_shell *sh, char **arg)
 	}
 	else
 		print_env(sh->env);
-	while (env_cpy[i])
-	{
-		free(env_cpy[i]);
-		i++;
-	}
-	free(env_cpy);
-	env_cpy = NULL;
+	ft_free_tab(env_cpy);
 	return (0);
 }

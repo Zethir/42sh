@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 13:07:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 18:10:26 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static int		option_dbis2(t_shell *sh, int nbr, int fd)
 {
 	t_hist	*hist;
+	char	*str;
+	char	*tmp;
 	int		i;
 
 	hist = sh->hist;
@@ -25,14 +27,21 @@ static int		option_dbis2(t_shell *sh, int nbr, int fd)
 	{
 		if (nbr != 0)
 		{
-			ft_putendl_fd(ft_strjoin(ft_strjoin(ft_itoa(i), " "),
-						sh->hist->str), fd);
+			tmp = ft_itoa(i);
+			str = ft_strjoin(tmp, " ");
+			free(tmp);
+			tmp = ft_strjoin(str, sh->hist->str);
+			ft_putendl_fd(tmp , fd);
+			free(str);
+			free(tmp);
 			i++;
 		}
 		if (nbr == 0)
 		{
 			sh->hist->prev->next = sh->hist->next;
 			sh->hist->next->prev = sh->hist->prev;
+			free(sh->hist->str);
+			free(sh->hist);
 		}
 		nbr--;
 		sh->hist = sh->hist->next;
@@ -95,8 +104,10 @@ static void		option_c(t_shell *sh)
 		return ;
 	}
 	str = ft_strdup(sh->hist->str);
-	sh->hist = create_hist();
-	sh->hist->str = ft_strdup(str);
+	free_hist(sh->head);
+	sh->head = NULL;
+	sh->hist = init_hist(str);
+	push_hist(&sh->head, sh->hist);
 	free(str);
 }
 

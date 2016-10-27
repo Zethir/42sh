@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 15:48:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 14:29:04 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 19:55:18 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_token			*hub_redir(t_shell *sh, t_token *token)
 			}
 			else if (hub_trunc_add_heredoc(sh, token) == -1)
 			{
+				free(token->cmd);
 				token->cmd = ft_strdup(tmp->cmd);
 				break ;
 			}
