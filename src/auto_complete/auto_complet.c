@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/26 19:42:55 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/27 19:45:57 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,20 @@ static char		*join_for_select(char **tab_files, char *cmd)
 {
 	char	*filenames;
 	char	*tmp;
+	char	*res;
 	int		i;
 
 	i = 0;
-	filenames = ft_strdup(tab_files[0]);
+	tmp = ft_strdup(tab_files[0]);
+	filenames = NULL;
 	while (tab_files[i])
 	{
 		if (!ft_strncmp(cmd, tab_files[i], ft_strlen(cmd)))
 		{
-			tmp = ft_strjoin(filenames, " ");
-			free(filenames);
-			filenames = ft_strjoin(tmp, tab_files[i]);
+			res = ft_strjoin(tmp, " ");
 			free(tmp);
+			filenames = ft_strjoin(res, tab_files[i]);
+			free(res);
 		}
 		i++;
 	}
@@ -66,11 +68,17 @@ static char		*exec_select(char *cmd)
 {
 	char	**tab_for_exec;
 	char	**tab_files;
+	char	*tmp;
 
 	tab_files = tab_to_select();
 	if (cmd)
 	{
-		tab_for_exec = ft_strsplit_ws(join_for_select(tab_files, cmd));
+		tmp = join_for_select(tab_files, cmd);
+		if (!tmp)
+			return (NULL);
+		tab_for_exec = ft_strsplit_ws(tmp);
+		if (!tab_for_exec[2])
+			return (tab_for_exec[1]);
 		return (main_select(ft_tablen(tab_for_exec), tab_for_exec));
 	}
 	return (main_select(ft_tablen(tab_files), tab_files));
@@ -84,21 +92,23 @@ char			*auto_complete(char *cmd)
 	int		i;
 
 	i = 0;
+	if (deal_with_cmd(cmd) == 0)
+		return (cmd);
 	sel = ft_strsplit_ws(cmd);
 	while (sel[i])
 		i++;
-	if (sel[i - 1] && i > 1)
+	if (sel[i - 1] && deal_with_cmd(cmd) == 2)
 	{
-		tmp = ft_strdup(exec_select(sel[i -1]));
-		res = ft_strjoin(sel[0], " ");
-		res = ft_strjoin(res, tmp);
-		return (res);
+		tmp = exec_select(sel[i - 1]);
+		res = join_cmd_bis(sel);
 	}
 	else 
 	{
-		tmp = ft_strdup(exec_select(NULL));
-		res = ft_strjoin(sel[0], " ");
-		res = ft_strjoin(res, tmp);
-		return (res);
+		tmp = exec_select(NULL);
+		res = join_cmd(sel);
 	}
+	if (!tmp)
+		return (cmd);
+	res = ft_strjoin(res, tmp);
+	return (res);
 }
