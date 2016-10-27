@@ -6,29 +6,11 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 15:27:34 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/26 19:42:55 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/27 15:34:24 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
-
-static void		push_token(t_token *node, t_token **head)
-{
-	t_token		*tmp;
-	t_token		*tmp2;
-
-	tmp2 = *head;
-	if (tmp2->cmd == NULL)
-	{
-		*head = node;
-		return ;
-	}
-	else
-		tmp = *head;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = node;
-}
 
 static char		*clean_cmd(char *cmd)
 {
@@ -57,36 +39,42 @@ static char		*clean_cmd(char *cmd)
 	return (res);
 }
 
-int				add_token(t_lex *lex, char *cmd, int val)
+t_token			*init_token(t_lex *lex, char *cmd, int val)
 {
 	t_token		*new_elem;
 
 	if (!(new_elem = (t_token *)malloc(sizeof(t_token))))
-		return (-1);
-	if (!(new_elem->fd = (int *)malloc(sizeof(int) * 2)))
-		return (-1);
-	new_elem->next = NULL;
+		return (NULL);
 	cmd = clean_cmd(cmd);
 	if (!cmd)
-		return (-1);
+		return (NULL);
 	new_elem->cmd = ft_strdup(cmd);
 	new_elem->token_value = val;
 	new_elem->fd[0] = lex->fd[0];
 	new_elem->fd[1] = lex->fd[1];
-	push_token(new_elem, &lex->token);
 	free(cmd);
-	return (0);
+	return (new_elem);
 }
 
-t_token			*init_token_struct(void)
+t_token_ht		*add_token(t_lex *lex, t_token_ht *token_ht, char *cmd, int val)
 {
-	t_token *token;
+	t_token		*token;
 
-	if (!(token = (t_token *)malloc(sizeof(t_token))))
-		return (NULL);
-	token->next = NULL;
-	token->cmd = NULL;
-	token->token_value = 0;
-	token->fd = NULL;
-	return (token);
+	if (token_ht)
+	{
+		token = init_token(lex, cmd, val);
+		if (token_ht->tail == NULL)
+		{
+			token->prev = NULL;
+			token_ht->head = token;
+			token_ht->tail = token;
+		}
+		else
+		{
+			token_ht->tail->next = token;
+			token->prev = token_ht->tail;
+			token_ht->tail = token;
+		}
+	}
+	return (token_ht);
 }

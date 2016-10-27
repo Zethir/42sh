@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/30 18:07:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/04/12 09:18:43 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 14:16:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char		*ft_mem_concat(char *str, char *buf)
 	char *tmp;
 
 	tmp = ft_strjoin(str, buf);
-	ft_strdel(&str);
+	free(str);
 	return (tmp);
 }
 
@@ -57,7 +57,7 @@ int				get_next_line(int const fd, char **line)
 		str = ft_mem_concat(str, buf);
 		if (ft_get_line(line, str, overf[fd]) == 1)
 		{
-			ft_strdel(&str);
+			free(str);
 			return (1);
 		}
 	}

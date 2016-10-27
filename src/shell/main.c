@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 20:35:48 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 13:56:20 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
-static void		deal_with_inhib(t_hist *hist, t_lex *lex)
+static void		deal_with_inhib(t_shell *sh, t_lex *lex)
 {
 	char	*tmp;
 
@@ -22,7 +22,7 @@ static void		deal_with_inhib(t_hist *hist, t_lex *lex)
 	while (check_for_parenth(lex->line) != 0)
 	{
 		ft_putchar('\n');
-		tmp = deal_with_termcap(hist);
+		tmp = deal_with_termcap(sh);
 		lex->line = ft_strjoin(lex->line, tmp);
 	}
 	free(tmp);
@@ -30,19 +30,25 @@ static void		deal_with_inhib(t_hist *hist, t_lex *lex)
 
 static void		deal_with_prompt(t_shell *sh)
 {
-	t_lex	*lex;
+	t_token_ht	*token_ht;
+	t_lex		*lex;
 
+	if (!(token_ht = (t_token_ht *)malloc(sizeof(t_lex))))
+		return ;
+	token_ht->head = NULL;
+	token_ht->tail = NULL;
 	lex = init_lexer_struct();
-	lex->line = ft_strdup(deal_with_termcap(sh->hist));
-	deal_with_inhib(sh->hist, lex);
+	lex->line = ft_strdup(deal_with_termcap(sh));
+	deal_with_inhib(sh, lex);
 	ft_putchar('\n');
 	if (!lex->line)
 		return ;
-	if (check_lexer(lex, sh->hist) == -1)
+	if ((lex->token = check_lexer(lex, token_ht, sh)) == NULL)
 		return ;
 	parse_cmd(sh, lex->token);
 	add_history(sh);
 	free_lex(&lex);
+	free_token_ht(&token_ht);
 }
 
 static void		start_prog(char **env)
@@ -59,8 +65,9 @@ static void		start_prog(char **env)
 		get_prompt(sh->env);
 		stock_struct(sh, 0);
 		deal_with_prompt(sh);
-		push_hist(&sh->hist, create_hist());
 		sh->hist = sh->hist->next;
+		sh->hist = create_hist();
+		push_hist(&sh->head, sh->hist);
 	}
 	if (reset_term(sh) == -1)
 		return ;

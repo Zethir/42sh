@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:17:59 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 18:17:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:50:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_prompt	*init_prompt(void)
 	prompt->copy_mode = 0;
 	prompt->cursor_start = 0;
 	prompt->cursor_end = 0;
-	prompt->copy_str = ft_strdup("");
+	prompt->copy_str = NULL;
 	ioctl(0, TIOCGWINSZ, &win);
 	prompt->win_size = win.ws_col;
 	return (prompt);

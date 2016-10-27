@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 19:10:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 14:11:10 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,26 @@ static void	deal_with_arg(t_shell *sh, char **arg, char **env_cpy)
 int			deal_with_env(t_shell *sh, char **arg)
 {
 	char	**env_cpy;
+	int		i;
 
 	env_cpy = get_env(sh->env);
 	arg++;
+	i = 0;
 	if (*arg)
 	{
 		if (*arg[0] == '-')
 			deal_with_opt(sh, arg, env_cpy);
 		else
 			deal_with_arg(sh, arg, env_cpy);
-		free(env_cpy);
 	}
 	else
 		print_env(sh->env);
+	while (env_cpy[i])
+	{
+		free(env_cpy[i]);
+		i++;
+	}
+	free(env_cpy);
+	env_cpy = NULL;
 	return (0);
 }

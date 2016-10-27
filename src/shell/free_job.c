@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:35:47 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 18:00:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:45:26 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	free_job(t_job *job)
 		{
 			if (job->process->cmd)
 				free(job->process->cmd);
-			if (job->process->stdio)
-				free(job->process->stdio);
 			job->process->completed = 0;
 			tmp2 = job->process;
 			job->process = job->process->next;

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 18:29:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 15:39:45 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/26 17:33:31 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int		trunc_in_fd(t_shell *sh, t_token *token, t_token *tmp)
 {
 	if (token->fd[0] == 0)
 		sh->stdio[0] = token->fd[1];
-	if (token->fd[1] == 1 || token->fd[1] == -1)
+	if (token->fd[0] == 1 || token->fd[0] == -1)
 		sh->stdio[1] = token->fd[1];
-	if (token->fd[2] == 1)
+	if (token->fd[0] == 2)
 		sh->stdio[2] = token->fd[1];
 	if (token->next)
 	{

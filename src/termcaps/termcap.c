@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 19:42:55 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/27 15:34:06 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		prompt_print(t_prompt *prompt, char *buff)
 	print_cursor(prompt, buff, i);
 }
 
-static void	prompt_shell(t_hist *hist, t_prompt *prompt, char *buff)
+static void	prompt_shell(t_shell *sh, t_prompt *prompt, char *buff)
 {
 	if (prompt->i < 4500)
 	{
@@ -89,8 +89,8 @@ static void	prompt_shell(t_hist *hist, t_prompt *prompt, char *buff)
 	deal_with_delete(prompt, buff);
 	deal_with_left(prompt, buff);
 	deal_with_right(prompt, buff);
-	deal_with_up(hist, prompt, buff);
-	deal_with_down(hist, prompt, buff);
+	deal_with_up(sh, prompt, buff);
+	deal_with_down(sh, prompt, buff);
 	go_to_start_of_line(prompt, buff);
 	go_to_previous_word(prompt, buff);
 	go_to_next_word(prompt, buff);
@@ -101,7 +101,7 @@ static void	prompt_shell(t_hist *hist, t_prompt *prompt, char *buff)
 	paste_string(prompt, buff);
 }
 
-char		*deal_with_termcap(t_hist *hist)
+char		*deal_with_termcap(t_shell *sh)
 {
 	t_prompt	*prompt;
 	int			ret;
@@ -112,12 +112,14 @@ char		*deal_with_termcap(t_hist *hist)
 	stock_prompt(prompt, 0);
 	while ((ret = read(0, buff, BUFF_SIZE) != -1))
 	{
-		prompt_shell(hist, prompt, buff);
+		prompt_shell(sh, prompt, buff);
 		if (buff[0] == 10 && prompt->cmd[0])
 		{
 			prompt_print(prompt, buff);
+			while (sh->hist->next)
+				sh->hist = sh->hist->next;
 			if (prompt->cmd[0])
-				hist->str = ft_strdup(prompt->cmd);
+				sh->hist->str = ft_strdup(prompt->cmd);
 			else
 				return (NULL);
 			break ;
@@ -131,5 +133,5 @@ char		*deal_with_termcap(t_hist *hist)
 		ft_bzero(buff, 4);
 	}
 	free_prompt(&prompt);
-	return (hist->str);
+	return (sh->hist->str);
 }

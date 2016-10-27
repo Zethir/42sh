@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 15:49:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 20:33:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 13:37:12 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void			heredoc(t_shell *sh, char *code)
 	code = ft_wipespace(code);
 	while (ft_strcmp(line, code))
 	{
-		line = deal_with_termcap(sh->hist);
+		line = deal_with_termcap(sh);
 		if (line && ft_strcmp(line, code))
 		{
 			ft_putendl_fd(line, pipefd[1]);

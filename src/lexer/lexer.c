@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/25 20:34:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 13:35:43 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,21 @@ static int	check_parse_error(t_lex *lex, int i)
 		return (0);
 }
 
-int			check_lexer(t_lex *lex, t_hist *hist)
+t_token		*check_lexer(t_lex *lex, t_token_ht *token_ht, t_shell *sh)
 {
-	char	*tmp;
-	int		i;
+	char		*tmp;
+	int			i;
 
 	i = 0;
-	lex->token = init_token_struct();
 	while (lex->line[lex->hd])
 	{
 		tmp = ft_strsub(lex->line, lex->tl, lex->hd + 1);
-		i = is_token(lex, lex->hd);
+		i = is_token(lex, token_ht, lex->hd);
 		if (check_parse_error(lex, i) == -1)
-			return (-1);
+			return (NULL);
 		if (!lex->line[lex->hd + 1] && i == 0)
-			if (add_token(lex, tmp, 13) == -1)
-				return (-1);
+			if ((token_ht = add_token(lex, token_ht, tmp, 13)) == NULL)
+				return (NULL);
 		if (i > 0 && lex->hd > 0)
 		{
 			lex->hd = i;
@@ -47,9 +46,10 @@ int			check_lexer(t_lex *lex, t_hist *hist)
 		else
 			lex->hd++;
 		if ((!lex->line[lex->hd] || !lex->line[lex->hd + 1]) && i != 0 &&
-				lex->token->token_value != 13)
-			get_missing_cmd(lex, hist);
+				token_ht->tail->token_value != 13)
+			get_missing_cmd(lex, token_ht, sh);
 		free(tmp);
 	}
-	return (0);
+	token_ht->tail->next = NULL;
+	return (token_ht->head);
 }

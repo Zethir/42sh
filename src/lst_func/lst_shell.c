@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_struct.c                                       :+:      :+:    :+:   */
+/*   lst_shell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/11 18:17:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 19:02:59 by cboussau         ###   ########.fr       */
+/*   Created: 2016/10/26 19:29:20 by cboussau          #+#    #+#             */
+/*   Updated: 2016/10/27 13:22:00 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,14 @@ t_shell		*init_struct(char **env)
 	if (!(sh = (t_shell *)malloc(sizeof(t_shell))))
 		return (NULL);
 	sh->env = init_env(env);
+	sh->head = deal_with_file();
 	sh->hist = create_hist();
-	deal_with_file(sh);
+	push_hist(&sh->head, sh->hist);
 	return (sh);
 }
 
 void		init_stdio(t_shell *sh)
 {
-	if (!(sh->stdio = (int *)malloc(sizeof(int) * 3)))
-		return ;
 	sh->stdio[0] = 0;
 	sh->stdio[1] = 1;
 	sh->stdio[2] = 2;

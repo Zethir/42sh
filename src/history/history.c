@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 19:03:14 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 14:00:33 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,16 +113,19 @@ char		*split_line(char *line)
 	return (&line[i]);
 }
 
-void		deal_with_file(t_shell *sh)
+t_hist		*deal_with_file()
 {
+	t_hist	*head;
+	t_hist	*hist;
 	int		fd;
 	char	*line;
 	char	*tmp;
 
+	head = NULL;
 	if ((fd = open("/tmp/history", O_RDWR | O_CREAT, 0644)) == -1)
 	{
 		ft_putendl_fd("history : No such file or directory", 2);
-		return ;
+		return (NULL);
 	}
 	while (1)
 	{
@@ -130,10 +133,10 @@ void		deal_with_file(t_shell *sh)
 			break ;
 		tmp = ft_strdup(split_line(line));
 		free(line);
-		sh->hist->str = ft_strdup(tmp);
-		push_hist(&sh->hist, create_hist());
-		sh->hist = sh->hist->next;
+		hist = init_hist(tmp);
+		push_hist(&head, hist);
 		free(tmp);
 	}
 	close(fd);
+	return (head);
 }
