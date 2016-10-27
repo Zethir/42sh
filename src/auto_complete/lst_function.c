@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:58:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 15:28:14 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/26 17:22:21 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-static void		delete_elem(t_lst *ptr, t_struct *info)
+static void		delete_lst(t_lst *ptr, t_struct *info)
 {
 	t_lst	*del;
 
@@ -52,7 +52,7 @@ void			del_elem_from_list(t_struct *info)
 		ptr->next->line = 1;
 	else if (ptr->prev)
 		ptr->prev->line = 1;
-	delete_elem(ptr, info);
+	delete_lst(ptr, info);
 }
 
 static t_lst	*init_elem(char *argv)

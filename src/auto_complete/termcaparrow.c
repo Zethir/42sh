@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/24 20:12:50 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 13:53:55 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/26 17:25:14 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-static void	deal_with_left(t_struct *info, t_lst *ptr)
+static void	left(t_struct *info, t_lst *ptr)
 {
 	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 68)
 	{
@@ -29,7 +29,7 @@ static void	deal_with_left(t_struct *info, t_lst *ptr)
 	}
 }
 
-static void	deal_with_right(t_struct *info, t_lst *ptr)
+static void	right(t_struct *info, t_lst *ptr)
 {
 	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 67)
 	{
@@ -46,7 +46,7 @@ static void	deal_with_right(t_struct *info, t_lst *ptr)
 	}
 }
 
-static void	deal_with_down(t_struct *info, t_lst *ptr)
+static void	down(t_struct *info, t_lst *ptr)
 {
 	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 66)
 	{
@@ -63,7 +63,7 @@ static void	deal_with_down(t_struct *info, t_lst *ptr)
 	}
 }
 
-static void	deal_with_up(t_struct *info, t_lst *ptr)
+static void	up(t_struct *info, t_lst *ptr)
 {
 	if (info->buff[0] == 27 && info->buff[1] == 91 && info->buff[2] == 65)
 	{
@@ -85,8 +85,8 @@ void		deal_with_arrow(t_struct *info)
 	t_lst	*ptr;
 
 	ptr = info->node->head;
-	deal_with_up(info, ptr);
-	deal_with_down(info, ptr);
-	deal_with_left(info, ptr);
-	deal_with_right(info, ptr);
+	up(info, ptr);
+	down(info, ptr);
+	left(info, ptr);
+	right(info, ptr);
 }

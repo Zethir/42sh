@@ -6,21 +6,15 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:50:27 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 15:38:43 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/26 18:40:44 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
+# include <shell.h>
 # include <libft.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <termios.h>
-# include <curses.h>
-# include <term.h>
-# include <sys/ioctl.h>
 
 typedef struct		s_lst
 {
@@ -83,5 +77,6 @@ void				ft_signal(int id);
 void				start_end(t_struct *info);
 void				free_lst(t_struct *info);
 char				*main_select(int argc, char **argv);
+char				*auto_complete(char *cmd);
 
 #endif
