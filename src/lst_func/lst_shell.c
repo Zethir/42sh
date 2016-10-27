@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 19:29:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 13:22:00 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 15:34:55 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ t_shell		*init_struct(char **env)
 	if (!(sh = (t_shell *)malloc(sizeof(t_shell))))
 		return (NULL);
 	sh->env = init_env(env);
-	sh->head = deal_with_file();
+	deal_with_file(sh);
+	sh->hist = sh->hist->next;
 	sh->hist = create_hist();
 	push_hist(&sh->head, sh->hist);
 	return (sh);

@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/27 13:33:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 15:34:03 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ t_env				*delete_elem(t_env *env);
 t_shell				*stock_struct(t_shell *sh, int i);
 t_shell				*init_struct(char **env);
 t_hist				*create_hist(void);
-t_hist				*deal_with_file();
 t_hist				*init_hist(char *str);
+void				deal_with_file(t_shell *sh);
 void				heredoc(t_shell *sh, char *code);
 void				init_stdio(t_shell *sh);
 void				exec_env(t_shell *sh, char *arg, char **env_cpy);
