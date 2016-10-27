@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/26 19:44:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 13:33:50 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct		s_shell
 {
 	int				stdio[3];
 	int				closefd;
+	struct s_hist	*head;
 	struct s_hist	*hist;
 	struct s_env	*env;
 	struct termios	term;
@@ -69,14 +70,14 @@ t_env				*delete_elem(t_env *env);
 t_shell				*stock_struct(t_shell *sh, int i);
 t_shell				*init_struct(char **env);
 t_hist				*create_hist(void);
-void				init_hist(t_hist **head, char *str);
+t_hist				*deal_with_file();
+t_hist				*init_hist(char *str);
 void				heredoc(t_shell *sh, char *code);
 void				init_stdio(t_shell *sh);
 void				exec_env(t_shell *sh, char *arg, char **env_cpy);
 void				push_node(t_env *env, t_env **head);
 void				push_hist(t_hist **head, t_hist *new_node);
 void				add_history(t_shell *sh);
-void				deal_with_file(t_shell *sh);
 void				do_option(t_shell *sh, char **cmd);
 void				option_r(t_shell *sh);
 void				get_prompt(t_env *env);
@@ -110,6 +111,6 @@ int					check_local_variable(t_env *env, char *arg, int flag);
 char				*get_home(t_env *env);
 char				*join_env(char **arg);
 char				**get_env(t_env *env);
-char				*deal_with_termcap(t_hist *hist);
+char				*deal_with_termcap(t_shell *sh);
 
 #endif

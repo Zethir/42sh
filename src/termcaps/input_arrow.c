@@ -6,31 +6,31 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 00:03:33 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 18:18:06 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 13:45:50 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <termcaps.h>
 
-void	deal_with_down(t_hist *hist, t_prompt *prompt, char *buff)
+void	deal_with_down(t_shell *sh, t_prompt *prompt, char *buff)
 {
-	if (ARROW_DOWN && hist->next)
+	if (ARROW_DOWN && sh->hist->next)
 	{
-		hist = hist->next;
-		if (!hist->str)
-			hist->str = ft_strdup("");
-		ft_strcpy(prompt->cmd, hist->str);
+		sh->hist = sh->hist->next;
+		if (!sh->hist->str)
+			sh->hist->str = ft_strdup("");
+		ft_strcpy(prompt->cmd, sh->hist->str);
 		prompt->i = ft_strlen(prompt->cmd);
 		prompt_print(prompt, buff);
 	}
 }
 
-void	deal_with_up(t_hist *hist, t_prompt *prompt, char *buff)
+void	deal_with_up(t_shell *sh, t_prompt *prompt, char *buff)
 {
-	if (ARROW_UP && hist->prev)
+	if (ARROW_UP && sh->hist->prev)
 	{
-		hist = hist->prev;
-		ft_strcpy(prompt->cmd, hist->str);
+		sh->hist = sh->hist->prev;
+		ft_strcpy(prompt->cmd, sh->hist->str);
 		prompt->i = ft_strlen(prompt->cmd);
 		prompt_print(prompt, buff);
 	}

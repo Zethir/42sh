@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 17:57:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 13:36:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,12 @@ t_token				*init_token(t_lex *lex, char *cmd, int val);
 t_token				*hub_redir(t_shell *sh, t_token *token);
 t_token_ht			*add_token(t_lex *lex, t_token_ht *token_ht, char *cmd,
 		int val);
-t_token				*check_lexer(t_lex *lex, t_token_ht *token_ht, t_hist *hist);
+t_token				*check_lexer(t_lex *lex, t_token_ht *token_ht, t_shell *sh);
 void				free_struct_lex(t_lex **lex);
 void				free_lex(t_lex **lex);
 void				free_token_ht(t_token_ht **token);
 void				get_first_fd(t_lex *lex, int i);
-void				get_missing_cmd(t_lex *lex, t_token_ht *token_ht,
-		t_hist *hist);
+void				get_missing_cmd(t_lex *lex, t_token_ht *token_ht, t_shell *sh);
 void				truncate_redir(t_shell *sh, t_token *token, char *filename);
 void				append_redir(t_shell *sh, t_token *token, char *filename);
 void				parse_cmd(t_shell *sh, t_token *token);
