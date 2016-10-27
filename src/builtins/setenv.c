@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 19:39:25 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 15:59:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 15:59:35 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,26 @@
 static int	cmp_list_arg(t_env *env, char **arg)
 {
 	t_env	*tmp;
+	char	*str;
+	char	*tmp2;
 
 	tmp = env;
+	tmp2 = NULL;
 	while (env)
 	{
 		if (ft_strcmp(env->name, *arg) == 0 && env->flag == 0)
 		{
-			env->line = ft_strjoin(*arg, "=");
+			free(env->line);
+			str = ft_strjoin(*arg, "=");
 			if (arg[1])
-				env->line = ft_strjoin(env->line, arg[1]);
+			{
+				tmp2 = ft_strjoin(str, arg[1]);
+				env->line = ft_strdup(tmp2);
+			}
+			else
+				env->line = ft_strdup(str);
+			free(tmp2);
+			free(str);
 			env = tmp;
 			return (1);
 		}
@@ -35,7 +46,8 @@ static int	cmp_list_arg(t_env *env, char **arg)
 
 static void	handle_arg_setenv(t_env *env, char **arg)
 {
-	t_env *new_elem;
+	t_env	*new_elem;
+	char	*str;
 
 	if ((arg[0][0] >= 'A' && arg[0][0] <= 'Z') ||
 			(arg[0][0] >= 'a' && arg[0][0] <= 'z'))
@@ -44,11 +56,14 @@ static void	handle_arg_setenv(t_env *env, char **arg)
 		{
 			new_elem = (t_env *)malloc(sizeof(t_env));
 			new_elem->next = NULL;
-			new_elem->line = ft_strjoin(*arg, "=");
+			str = ft_strjoin(*arg, "=");
 			new_elem->name = ft_strdup(*arg);
 			new_elem->flag = 0;
 			if (arg[1])
-				new_elem->line = ft_strjoin(new_elem->line, arg[1]);
+				new_elem->line = ft_strjoin(str, arg[1]);
+			else
+				new_elem->line = ft_strdup(str);
+			free(str);
 			push_node(new_elem, &env);
 		}
 	}

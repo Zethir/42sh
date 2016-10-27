@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 15:49:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 13:37:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 19:48:42 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,22 @@ void			heredoc(t_shell *sh, char *code)
 {
 	int		pipefd[2];
 	char	*line;
+	char	*str;
 
 	line = "";
 	pipe(pipefd);
-	code = ft_wipespace(code);
-	while (ft_strcmp(line, code))
+	str = ft_wipespace(code);
+	while (ft_strcmp(line, str))
 	{
 		line = deal_with_termcap(sh);
-		if (line && ft_strcmp(line, code))
+		if (line && ft_strcmp(line, str))
 		{
 			ft_putendl_fd(line, pipefd[1]);
 			free(line);
 		}
 		ft_putchar('\n');
 	}
+	free(str);
 	sh->stdio[0] = pipefd[0];
 	close(pipefd[1]);
 }

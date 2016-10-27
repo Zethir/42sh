@@ -6,49 +6,39 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 13:07:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 19:40:10 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static void		exec_cmd_add_lst(t_shell *sh, char **cmd, char *line)
+static void		deal_with_dash_bis(t_shell *sh, char **cmd, int fd, int i)
 {
-	char	**tabl;
-	char	**env;
-	int		i;
+	char	*line;
+	char	*tmp;
 
-	i = 0;
-	env = NULL;
-	while (*cmd)
+	while (get_next_line(fd, &line) > 0)
 	{
-		line = ft_strjoin(line, " ");
-		line = ft_strjoin(line, *cmd);
-		cmd++;
+		if (i == 1)
+		{
+			i = 0;
+			while (line[i] != ' ')
+				i++;
+			tmp = ft_strdup(&line[i]);
+			free(line);
+			exec_cmd_lst(sh, cmd, tmp);
+			free(tmp);
+			return ;
+		}
+		free(line);
+		i--;
 	}
-	tabl = ft_strsplit_ws(line);
-	sh->hist->str = ft_strdup("");
-	while (tabl[i])
-	{
-		ft_putstr(tabl[i]);
-		if (i != 0)
-			sh->hist->str = ft_strjoin(sh->hist->str, " ");
-		sh->hist->str = ft_strjoin(sh->hist->str, tabl[i]);
-		ft_putchar(' ');
-		i++;
-	}
-	ft_strdel(tabl);
-	ft_putchar('\n');
-	env = get_env(sh->env);
-	exec_env(sh, sh->hist->str, env);
-	free(env);
 }
 
 static void		deal_with_dash(t_shell *sh, char **cmd, int fd)
 {
-	int		i;
 	t_hist	*hist;
-	char	*line;
+	int		i;
 
 	hist = sh->hist;
 	i = 0;
@@ -58,24 +48,14 @@ static void		deal_with_dash(t_shell *sh, char **cmd, int fd)
 		i++;
 	}
 	sh->hist = hist;
-	i = i - ft_atoi(&cmd[0][2]);
-	while (get_next_line(fd, &line) > 0)
-	{
-		if (i == 1)
-		{
-			while (*line != ' ')
-				line++;
-			cmd++;
-			exec_cmd_add_lst(sh, cmd, line);
-		}
-		i--;
-	}
-	free(line);
+	i = i - ft_atoi(&cmd[0][2]) + 1;
+	deal_with_dash_bis(sh, cmd, fd, i);
 }
 
 static void		deal_with_number(t_shell *sh, char **cmd, int fd)
 {
 	char	*line;
+	char	*tmp;
 	int		i;
 
 	i = ft_atoi(&cmd[0][1]);
@@ -83,14 +63,18 @@ static void		deal_with_number(t_shell *sh, char **cmd, int fd)
 	{
 		if (i == 1)
 		{
-			while (*line != ' ')
-				line++;
-			cmd++;
-			exec_cmd_add_lst(sh, cmd, line);
+			i = 0;
+			while (line[i] != ' ')
+				i++;
+			tmp = ft_strdup(&line[i]);
+			free(line);
+			exec_cmd_lst(sh, cmd, tmp);
+			free(tmp);
+			return ;
 		}
+		free(line);
 		i--;
 	}
-	free(line);
 }
 
 static void		deal_with_string(t_shell *sh, char **cmd)
@@ -105,14 +89,13 @@ static void		deal_with_string(t_shell *sh, char **cmd)
 		if (ft_strncmp(sh->hist->str, &cmd[0][1], ft_strlen(&cmd[0][1])) == 0)
 		{
 			line = ft_strdup(sh->hist->str);
-			cmd++;
 			sh->hist = hist;
-			exec_cmd_add_lst(sh, cmd, line);
+			exec_cmd_lst(sh, cmd, line);
+			free(line);
 			break ;
 		}
 		sh->hist = sh->hist->prev;
 	}
-	free(line);
 	sh->hist = hist;
 }
 

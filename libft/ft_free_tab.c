@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 20:01:01 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/21 20:02:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 18:13:00 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	ft_free_tab(char **tabl)
 {
-	while (*tabl)
+	int	i;
+
+	i = 0;
+	while (tabl[i])
 	{
-		free(*tabl);
-		tabl++;
+		free(tabl[i]);
+		i++;
 	}
 	free(tabl);
 	tabl = NULL;

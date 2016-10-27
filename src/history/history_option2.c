@@ -6,11 +6,25 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 15:11:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 13:07:27 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/27 17:58:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+
+static void		print_in_file(char *cmd, int fd, int i)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = ft_itoa(i);
+	tmp2 = ft_strjoin(tmp, " ");
+	free(tmp);
+	tmp = ft_strjoin(tmp2, cmd);
+	ft_putendl_fd(tmp, fd);
+	free(tmp);
+	free(tmp2);
+}
 
 static void		add_to_file_bis(t_shell *sh, int fd)
 {
@@ -24,10 +38,7 @@ static void		add_to_file_bis(t_shell *sh, int fd)
 	while (hist)
 	{
 		if (hist->str)
-		{
-			ft_putendl_fd(ft_strjoin(ft_strjoin(ft_itoa(i), " "),
-						hist->str), fd);
-		}
+			print_in_file(hist->str, fd, i);
 		hist = hist->next;
 		i++;
 	}
@@ -51,6 +62,17 @@ static void		add_to_file(t_shell *sh)
 	free(pathb);
 }
 
+static void		refresh_hist(t_shell *sh, char *line)
+{
+	char	*tmp;
+
+	tmp = ft_strdup(split_line(line));
+	free(line);
+	sh->hist = init_hist(tmp);
+	push_hist(&sh->head, sh->hist);
+	free(tmp);
+}
+
 void			option_r(t_shell *sh)
 {
 	int		fd;
@@ -64,13 +86,9 @@ void			option_r(t_shell *sh)
 		return ;
 	}
 	while (get_next_line(fd, &line) > 0)
-	{
-		line = split_line(line);
-		sh->hist->str = line;
-		push_hist(&sh->hist, create_hist());
-		sh->hist = sh->hist->next;
-	}
+		refresh_hist(sh, line);
 	add_to_file(sh);
+	free(sh->hist->str);
 	sh->hist->str = ft_strdup(str);
 	close(fd);
 	free(str);
