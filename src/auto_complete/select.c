@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   select.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/22 18:49:21 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 15:37:43 by qdiaz            ###   ########.fr       */
+/*   Created: 2016/10/26 18:41:54 by qdiaz             #+#    #+#             */
+/*   Updated: 2016/10/26 19:42:55 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	*do_select(char **argv, int id)
 	info->fd = open(ttyname(0), O_RDWR);
 	if (info->fd == -1)
 		return (NULL);
-	tputs(tgetstr("cl", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("do", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("sc", NULL), 1, ft_putchar_int);
 	stock_select_struct(info, 0);
 	win_select_size(id);
@@ -49,6 +50,7 @@ char		*main_select(int argc, char **argv)
 		ft_putendl_fd("Too few argument to function call", 2);
 		return (NULL);
 	}
+	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 	if (str)
 		return (str);
 	return (NULL);
