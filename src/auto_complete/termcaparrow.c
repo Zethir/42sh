@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/24 20:12:50 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 17:25:14 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/27 19:51:38 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,5 @@ void		deal_with_arrow(t_struct *info)
 	down(info, ptr);
 	left(info, ptr);
 	right(info, ptr);
+	my_tab(info, ptr);
 }

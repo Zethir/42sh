@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:50:27 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 18:40:44 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/27 19:51:36 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,11 @@ void				win_select_size(int id);
 void				ft_signal(int id);
 void				start_end(t_struct *info);
 void				free_lst(t_struct *info);
+void				my_tab(t_struct *info, t_lst *ptr);
 char				*main_select(int argc, char **argv);
 char				*auto_complete(char *cmd);
+char				*join_cmd(char **sel);
+char				*join_cmd_bis(char **sel);
+int					deal_with_cmd(char *cmd);
 
 #endif

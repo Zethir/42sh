@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 21:11:14 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 15:22:20 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/27 19:22:10 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,6 @@ static char	*deal_with_input(t_struct *info)
 		free_lst(info);
 		return (str);
 	}
-	if (info->buff[0] == 27 && info->buff[1] == 0)
-	{
-		clean_lst(info);
-		free_lst(info);
-//		reset_term(info);
-		if (close(info->fd) < 0)
-			ft_putendl_fd("Can't close fd", 2);
-		exit(-1);
-	}
-	if (info->buff[0] == 127 || (info->buff[0] == 27 && info->buff[1] == 91
-				&& info->buff[2] == 51))
-		del_elem_from_list(info);
 	return (NULL);
 }
 

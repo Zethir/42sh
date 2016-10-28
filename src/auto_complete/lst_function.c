@@ -6,54 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:58:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 17:22:21 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/27 19:23:14 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
-
-static void		delete_lst(t_lst *ptr, t_struct *info)
-{
-	t_lst	*del;
-
-	del = ptr;
-	if (del == info->node->tail)
-		info->node->tail = del->prev;
-	if (del == info->node->head)
-	{
-		if (!del->next)
-		{
-			tputs(tgetstr("ue", NULL), 0, ft_putchar_int);
-			clean_lst(info);
-			ft_putendl_fd("There is no elements in this list anymore.", 2);
-			free_lst(info);
-//			reset_term(info);
-			exit(-1);
-		}
-		info->node->head = del->next;
-	}
-	if (del->next != NULL)
-		del->next->prev = del->prev;
-	if (del->prev != NULL)
-		del->prev->next = del->next;
-	free(del);
-	info->node->length -= 1;
-}
-
-void			del_elem_from_list(t_struct *info)
-{
-	t_lst	*ptr;
-
-	ptr = info->node->head;
-	while (ptr->line != 1)
-		ptr = ptr->next;
-	ptr->line = 0;
-	if (ptr->next)
-		ptr->next->line = 1;
-	else if (ptr->prev)
-		ptr->prev->line = 1;
-	delete_lst(ptr, info);
-}
 
 static t_lst	*init_elem(char *argv)
 {
