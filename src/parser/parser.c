@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 14:00:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:33:27 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void		launch_process(t_shell *sh, t_job *job)
 
 void			exec_job(t_shell *sh, t_job *job)
 {
-	t_job 	*tmp;
+	t_job	*tmp;
 
 	tmp = job;
 	while (job)

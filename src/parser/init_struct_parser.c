@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:38:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 14:06:00 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:41:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static void		deal_with_path(t_parse *parse, char **path)
 	}
 }
 
-t_parse		*init_parse(t_shell *sh, char *cmd)
+t_parse			*init_parse(t_shell *sh, char *cmd)
 {
 	t_parse	*parse;
 	char	**path;

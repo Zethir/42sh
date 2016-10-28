@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/31 20:16:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 15:38:19 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:33:45 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	free_hist(t_hist *node)
 
 void	free_shell(t_shell *sh)
 {
-
 	free_env(sh->env);
 	free_hist(sh->head);
 	sh->closefd = 0;

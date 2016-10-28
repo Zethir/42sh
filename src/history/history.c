@@ -6,75 +6,30 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 13:24:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 15:51:01 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static void	history_option(t_shell *sh, char **cmd, int fd)
+static void	add_history_bis(t_shell *sh, int i, int fd)
 {
-	t_hist	*hist;
-	int		nbr;
-	char	*line;
-	int		i;
+	char	*str;
+	char	*tmp;
 
-	i = 0;
-	hist = sh->hist;
-	if (numeric_error(cmd) == 1)
-		return ;
-	nbr = ft_atoi(cmd[1]);
-	while (sh->hist->prev)
-	{
-		sh->hist = sh->hist->prev;
-		i++;
-	}
-	sh->hist = hist;
-	nbr = i - 1 - nbr;
-	while (get_next_line(fd, &line) > 0)
-	{
-		if (nbr < 0)
-			ft_putendl(line);
-		free(line);
-		nbr--;
-	}
-}
-
-int			do_history(t_shell *sh, char **cmd)
-{
-	int		fd;
-	char	*line;
-
-	if ((fd = open("/tmp/history", O_RDONLY)) == -1)
-	{
-		ft_putendl_fd("history : No such file or directory", 2);
-		return (-1);
-	}
-	if (!cmd[1])
-	{
-		while (get_next_line(fd, &line) > 0)
-		{
-			ft_putendl(line);
-			free(line);
-		}
-		free(line);
-	}
-	else if (cmd[1])
-	{
-		if (cmd[1][0] == '-')
-			do_option(sh, cmd);
-		else
-			history_option(sh, cmd, fd);
-	}
-	close(fd);
-	return (0);
+	i += 1;
+	tmp = ft_itoa(i);
+	str = ft_strjoin(tmp, " ");
+	free(tmp);
+	tmp = ft_strjoin(str, sh->hist->str);
+	free(str);
+	ft_putendl_fd(tmp, fd);
+	free(tmp);
 }
 
 void		add_history(t_shell *sh)
 {
 	char	*buf;
-	char	*str;
-	char	*tmp;
 	int		fd;
 	int		i;
 
@@ -85,19 +40,12 @@ void		add_history(t_shell *sh)
 		return ;
 	}
 	while (get_next_line(fd, &buf) > 0)
-	{	
+	{
 		free(buf);
 		i++;
 	}
 	free(buf);
-	i += 1;
-	tmp = ft_itoa(i);
-	buf = ft_strjoin(tmp, " ");
-	str = ft_strjoin(buf, sh->hist->str);
-	free(buf);
-	free(tmp);
-	ft_putendl_fd(str, fd);
-	free(str);
+	add_history_bis(sh, i, fd);
 	close(fd);
 }
 

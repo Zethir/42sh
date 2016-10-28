@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:57:33 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/26 16:35:46 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:45:52 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,28 @@ static int		is_separator(t_lex *lex, t_token_ht *token_ht, int i, char *tmp)
 	return (0);
 }
 
+static int		is_token_bis(t_lex *lex, t_token_ht *token_ht, int i)
+{
+	char	*tmp;
+	int		j;
+
+	tmp = ft_strsub(lex->line, lex->tl, lex->hd - lex->tl);
+	j = is_redir(lex, token_ht, i, tmp);
+	if (j > 0 || j < 0)
+	{
+		free(tmp);
+		return (j);
+	}
+	j = is_separator(lex, token_ht, i, tmp);
+	if (j > 0 || j < 0)
+	{
+		free(tmp);
+		return (j);
+	}
+	free(tmp);
+	return (j);
+}
+
 int				is_token(t_lex *lex, t_token_ht *token_ht, int i)
 {
 	char	*tmp;
@@ -93,18 +115,7 @@ int				is_token(t_lex *lex, t_token_ht *token_ht, int i)
 		free(tmp);
 		return (j);
 	}
-	j = is_redir(lex, token_ht, i, tmp);
-	if (j > 0 || j < 0)
-	{
-		free(tmp);
-		return (j);
-	}
-	j = is_separator(lex, token_ht, i, tmp);
-	if (j > 0 || j < 0)
-	{
-		free(tmp);
-		return (j);
-	}
+	j = is_token_bis(lex, token_ht, i);
 	free(tmp);
 	return (j);
 }
