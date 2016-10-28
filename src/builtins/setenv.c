@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 19:39:25 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 16:00:57 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 16:28:56 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static void	handle_arg_setenv(t_env *env, char **arg)
 			new_elem->next = NULL;
 			str = ft_strjoin(*arg, "=");
 			new_elem->name = ft_strdup(*arg);
+			new_elem->home = NULL;
+			new_elem->user = NULL;
 			new_elem->flag = 0;
 			if (arg[1])
 				new_elem->line = ft_strjoin(str, arg[1]);
