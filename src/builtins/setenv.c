@@ -6,35 +6,41 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 19:39:25 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 15:59:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 16:28:56 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
+static void	add_var_env(t_env *env, char **arg)
+{
+	char	*str;
+	char	*tmp;
+
+	free(env->line);
+	str = ft_strjoin(*arg, "=");
+	tmp = NULL;
+	if (arg[1])
+	{
+		tmp = ft_strjoin(str, arg[1]);
+		env->line = ft_strdup(tmp);
+		free(tmp);
+	}
+	else
+		env->line = ft_strdup(str);
+	free(str);
+}
+
 static int	cmp_list_arg(t_env *env, char **arg)
 {
 	t_env	*tmp;
-	char	*str;
-	char	*tmp2;
 
 	tmp = env;
-	tmp2 = NULL;
 	while (env)
 	{
 		if (ft_strcmp(env->name, *arg) == 0 && env->flag == 0)
 		{
-			free(env->line);
-			str = ft_strjoin(*arg, "=");
-			if (arg[1])
-			{
-				tmp2 = ft_strjoin(str, arg[1]);
-				env->line = ft_strdup(tmp2);
-			}
-			else
-				env->line = ft_strdup(str);
-			free(tmp2);
-			free(str);
+			add_var_env(env, arg);
 			env = tmp;
 			return (1);
 		}
@@ -58,6 +64,8 @@ static void	handle_arg_setenv(t_env *env, char **arg)
 			new_elem->next = NULL;
 			str = ft_strjoin(*arg, "=");
 			new_elem->name = ft_strdup(*arg);
+			new_elem->home = NULL;
+			new_elem->user = NULL;
 			new_elem->flag = 0;
 			if (arg[1])
 				new_elem->line = ft_strjoin(str, arg[1]);

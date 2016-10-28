@@ -5,104 +5,123 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/29 13:41:53 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 14:14:16 by cboussau         ###   ########.fr       */
+/*   Created: 2016/10/28 17:24:05 by cboussau          #+#    #+#             */
+/*   Updated: 2016/10/28 17:51:43 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static void		go_to_root(t_env *env)
+static void		cd_prev(t_env *env)
 {
-	t_env		*tmp;
+	char	buf[512];
+	char	*str;
+	t_env	*tmp;
 
 	tmp = env;
 	while (env)
 	{
-		if (ft_strcmp(env->name, "HOME") == 0)
+		if (ft_strcmp(env->name, "OLDPWD") == 0)
 		{
-			env->home = ft_strchr(env->home, '/');
-			chdir(env->home);
-			return ;
+			str = ft_strsub(ft_strchr(env->line, '='), 1, ft_strlen(env->line));
+			if (getcwd(buf, 512) != NULL)
+				change_varcontent(env, "OLDPWD", getcwd(buf, 512));
+			chdir(str);
+			free(str);
+			change_varcontent(env, "PWD", getcwd(buf, 512));
 		}
 		env = env->next;
 	}
 	env = tmp;
 }
 
-static char		*deal_with_root(t_env *env, char *arg)
+static void		cd_home(t_env *env)
 {
-	char		*tmp;
+	char	buf[512];
+	t_env	*tmp;
 
-	if (!arg[1])
-		go_to_root(env);
-	else if (arg[1] == '/')
+	tmp = env;
+	while (env)
 	{
-		go_to_root(env);
-		if (arg[2])
-			tmp = ft_strsub(arg, 2, ft_strlen(arg));
-		else
-			tmp = ft_strsub(arg, 1, ft_strlen(arg));
-		return (tmp);
+		if (ft_strcmp(env->name, "HOME") == 0)
+		{
+			if (getcwd(buf, 512) != NULL)
+				change_varcontent(env, "OLDPWD", getcwd(buf, 512));
+			chdir(env->home);
+			change_varcontent(tmp, "PWD", getcwd(buf, 512));
+		}
+		env = env->next;
 	}
-	else
-	{
-		ft_putstr_fd("Unknown user: ", 2);
-		ft_putstr_fd(&arg[1], 2);
-		ft_putendl_fd(".", 2);
-	}
-	return (NULL);
+	env = tmp;
 }
 
-static void		deal_with_cd_arg(char *arg)
+static char		*go_to_dir_from_root(t_env *env, char **cmd)
 {
-	DIR			*dir;
-	struct stat	st;
+	t_env 	*tmp;
+	char	*str;
 
-	dir = opendir(arg);
-	if (stat(arg, &st) == -1)
+	tmp = env;
+	while (env)
 	{
-		ft_putstr_fd(arg, 2);
-		ft_putendl_fd(": No such file or directory.", 2);
+		if (ft_strcmp(env->name, "HOME") == 0)
+			chdir(env->home);
+		env = env->next;
+	}
+	env = tmp;
+	str = ft_strsub(cmd[1], 2, ft_strlen(cmd[1]));
+	return(str);
+}
+
+static void		deal_with_cd_arg(t_env *env, char **cmd)
+{
+	struct stat	st;
+	char		buf[512];
+
+	if (stat(cmd[1], &st) == -1)
+	{
+		ft_putstr_fd(cmd[1], 2);
+		ft_putstr_fd(": No such file or directory.\n", 2);
 	}
 	else if (!(S_ISDIR(st.st_mode)))
 	{
-		ft_putstr_fd(arg, 2);
-		ft_putendl_fd(": Not a directory", 2);
+		ft_putstr_fd(cmd[1], 2);
+		ft_putstr_fd(": Not a directory.\n", 2);
 	}
-	else if (access(arg, X_OK) == -1)
+	else if (access(cmd[1], X_OK) == -1)
 	{
-		ft_putstr_fd(arg, 2);
-		ft_putendl_fd(": Permission denied: ", 2);
+		ft_putstr_fd(cmd[1], 2);
+		ft_putstr_fd(": Permission denied.\n", 2);
 	}
 	else
-		chdir(arg);
-	if (dir)
-		closedir(dir);
+	{
+		change_varcontent(env, "OLDPWD", getcwd(buf, 512));
+		chdir(cmd[1]);
+		change_varcontent(env, "PWD", getcwd(buf, 512));
+	}
 }
 
-int				do_cd(t_env *env, char **arg)
+int			do_cd(t_env *env, char **cmd)
 {
-	int			i;
+	char	*tmp;
 
-	arg++;
-	i = 0;
-	while (arg[i])
-		i++;
-	if (i > 1)
+	if (!cmd[1] || (ft_strcmp(cmd[1], "~") == 0))
+		cd_home(env);
+	else if (cmd[1][0] == '~')
 	{
-		ft_putendl_fd("cd: Too many arguments.", 2);
+		tmp = go_to_dir_from_root(env, cmd);
+		free(cmd[1]);
+		cmd[1] = ft_strdup(tmp);
+		free(tmp);
+		deal_with_cd_arg(env, cmd);
+	}
+	else if (cmd[1] && cmd[2])
+	{
+		ft_putstr_fd("cd: Too many arguments.\n", 2);
 		return (-1);
 	}
-	else if (!*arg)
-		go_to_root(env);
-	else if (*arg[0] == '~')
-	{
-		*arg = deal_with_root(env, *arg);
-		if (!*arg)
-			return (-1);
-	}
-	if (*arg)
-		deal_with_cd_arg(*arg);
+	else if (ft_strcmp(cmd[1], "-") == 0)
+		cd_prev(env);
+	else
+		deal_with_cd_arg(env, cmd);
 	return (0);
 }
