@@ -6,27 +6,29 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/27 19:45:57 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/28 19:36:19 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-static char		**tab_to_select(void)
+static char		**tab_to_select(char *cmd)
 {
 	char			**tab_files;
 	DIR				*dir;
 	struct dirent	*ret;
 	int				i;
+	char			*test;
 
 	i = 0;
-	dir = opendir(".");
+	test = deal_with_dir(cmd);
+	dir = opendir(test);
 	while ((ret = readdir(dir)))
 		i++;
 	if (!(tab_files = (char **)malloc(sizeof(char *) * i)))
 		return (NULL);
 	i = 0;
-	dir = opendir(".");
+	dir = opendir(test);
 	while ((ret = readdir(dir)))
 	{
 		if (ft_strncmp(ret->d_name, ".", 1))
@@ -70,7 +72,8 @@ static char		*exec_select(char *cmd)
 	char	**tab_files;
 	char	*tmp;
 
-	tab_files = tab_to_select();
+	tab_files = tab_to_select(cmd);
+	cmd = split_if_dir(cmd);
 	if (cmd)
 	{
 		tmp = join_for_select(tab_files, cmd);
@@ -78,10 +81,12 @@ static char		*exec_select(char *cmd)
 			return (NULL);
 		tab_for_exec = ft_strsplit_ws(tmp);
 		if (!tab_for_exec[2])
-			return (tab_for_exec[1]);
-		return (main_select(ft_tablen(tab_for_exec), tab_for_exec));
+			return (deal_with_slash(tab_for_exec[1]));
+		tmp = main_select(ft_tablen(tab_for_exec), tab_for_exec);
+		return (deal_with_slash(tmp));
 	}
-	return (main_select(ft_tablen(tab_files), tab_files));
+	tmp = main_select(ft_tablen(tab_files), tab_files);
+	return (deal_with_slash(tmp));
 }
 
 char			*auto_complete(char *cmd)
@@ -109,6 +114,6 @@ char			*auto_complete(char *cmd)
 	}
 	if (!tmp)
 		return (cmd);
-	res = ft_strjoin(res, tmp);
+	res = join_if_dir(tmp, res, cmd);
 	return (res);
 }

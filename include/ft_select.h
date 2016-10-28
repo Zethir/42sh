@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:50:27 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 19:51:36 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/28 17:20:39 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ char				*main_select(int argc, char **argv);
 char				*auto_complete(char *cmd);
 char				*join_cmd(char **sel);
 char				*join_cmd_bis(char **sel);
+char				*deal_with_slash(char *cmd);
+char				*deal_with_dir(char *cmd);
+char				*split_if_dir(char *cmd);
+char				*join_if_dir(char *tmp, char *res, char *cmd);
 int					deal_with_cmd(char *cmd);
 
 #endif

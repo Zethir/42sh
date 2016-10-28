@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:58:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 19:23:14 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/28 16:49:20 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_intel			*init_lst(char **argv)
 	t_intel	*node;
 	size_t	i;
 
-	i = 1;
+	i = 0;
 	if (!(node = (t_intel *)malloc(sizeof(t_intel))))
 		return (NULL);
 	node->length = 0;

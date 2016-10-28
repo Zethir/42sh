@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:41:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/26 19:42:55 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/28 16:49:49 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char		*main_select(int argc, char **argv)
 		return (NULL);
 	}
 	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
-	if (str)
+	if (str && str[0])
 		return (str);
 	return (NULL);
 }
