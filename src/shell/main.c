@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 14:00:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 19:19:23 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,15 @@ static void		deal_with_prompt(t_shell *sh)
 	token_ht->head = NULL;
 	token_ht->tail = NULL;
 	lex = init_lexer_struct();
-	lex->line = ft_strdup(deal_with_termcap(sh));
-	deal_with_inhib(sh, lex);
+	lex->line = deal_with_termcap(sh);
 	ft_putchar('\n');
 	if (!lex->line)
+	{
+		free_lex(&lex);
+		free_token_ht(&token_ht);
 		return ;
+	}
+	deal_with_inhib(sh, lex);
 	if ((lex->token = check_lexer(lex, token_ht, sh)) == NULL)
 		return ;
 	init_stdio(sh);

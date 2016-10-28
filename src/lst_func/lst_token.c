@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 15:27:34 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/27 15:34:24 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/28 19:06:56 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ t_token_ht		*add_token(t_lex *lex, t_token_ht *token_ht, char *cmd, int val)
 	if (token_ht)
 	{
 		token = init_token(lex, cmd, val);
+		if (!token)
+			return (NULL);
 		if (token_ht->tail == NULL)
 		{
 			token->prev = NULL;
