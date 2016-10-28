@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 19:51:13 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:00:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void			parse_cmd(t_shell *sh, t_token *token)
 
 	job = NULL;
 	process = NULL;
-	init_stdio(sh);
 	while (token)
 	{
 		if (token->token_value == PIPE)
@@ -122,7 +121,6 @@ void			parse_cmd(t_shell *sh, t_token *token)
 				token->token_value == SEPARATOR)
 		{
 			token_linker(sh, &job, &process, token);
-			process = NULL;
 			token = token->next;
 		}
 		else

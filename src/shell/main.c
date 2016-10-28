@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 13:56:20 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:00:44 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void		deal_with_prompt(t_shell *sh)
 		return ;
 	if ((lex->token = check_lexer(lex, token_ht, sh)) == NULL)
 		return ;
+	init_stdio(sh);
 	parse_cmd(sh, lex->token);
 	add_history(sh);
 	free_lex(&lex);
