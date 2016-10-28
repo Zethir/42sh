@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 18:29:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 17:33:31 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 13:44:53 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ int		in_fd_close(t_shell *sh, t_token *token, t_token *tmp)
 
 int		trunc_in_fd(t_shell *sh, t_token *token, t_token *tmp)
 {
+	char	*str;
+
+	str = NULL;
 	if (token->fd[0] == 0)
 		sh->stdio[0] = token->fd[1];
 	if (token->fd[0] == 1 || token->fd[0] == -1)
@@ -60,8 +63,10 @@ int		trunc_in_fd(t_shell *sh, t_token *token, t_token *tmp)
 		sh->stdio[2] = token->fd[1];
 	if (token->next)
 	{
-		tmp->cmd = ft_strjoin(tmp->cmd, " ");
-		tmp->cmd = ft_strjoin(tmp->cmd, token->next->cmd);
+		str = ft_strjoin(tmp->cmd, " ");
+		free(tmp->cmd);
+		tmp->cmd = ft_strjoin(str, token->next->cmd);
+		free(str);
 		return (1);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 15:11:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 17:58:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 13:26:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void			option_r(t_shell *sh)
 	}
 	while (get_next_line(fd, &line) > 0)
 		refresh_hist(sh, line);
+	free(line);
 	add_to_file(sh);
 	free(sh->hist->str);
 	sh->hist->str = ft_strdup(str);

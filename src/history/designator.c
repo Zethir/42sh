@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 19:40:10 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 13:28:43 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void		deal_with_dash_bis(t_shell *sh, char **cmd, int fd, int i)
 		free(line);
 		i--;
 	}
+	free(line);
 }
 
 static void		deal_with_dash(t_shell *sh, char **cmd, int fd)
@@ -75,6 +76,7 @@ static void		deal_with_number(t_shell *sh, char **cmd, int fd)
 		free(line);
 		i--;
 	}
+	free(line);
 }
 
 static void		deal_with_string(t_shell *sh, char **cmd)

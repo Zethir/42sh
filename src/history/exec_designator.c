@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 19:33:14 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 19:34:07 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 13:29:08 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void		add_lst(t_shell *sh, char **tabl)
 	int		i;
 
 	i = 1;
+	free(sh->hist->str);
 	sh->hist->str = ft_strdup(tabl[0]);
 	ft_putstr(tabl[0]);
 	ft_putchar(' ');

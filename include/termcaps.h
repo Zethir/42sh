@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 15:34:40 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/28 13:53:15 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void			start_copy_mode(t_prompt *prompt, char *buff);
 void			copy_string(t_prompt *prompt, char *buff);
 void			cut_string(t_prompt *prompt, char *buff);
 void			paste_string(t_prompt *prompt, char *buff);
+void			start_auto_complete(t_prompt *prompt, char *buff);
 void			go_to_start_of_line(t_prompt *prompt, char *buff);
 void			go_to_end(t_prompt *prompt, char *buff);
 void			go_to_previous_word(t_prompt *prompt, char *buff);

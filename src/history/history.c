@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 16:15:21 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/28 13:24:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int			do_history(t_shell *sh, char **cmd)
 			ft_putendl(line);
 			free(line);
 		}
+		free(line);
 	}
 	else if (cmd[1])
 	{
@@ -88,6 +89,7 @@ void		add_history(t_shell *sh)
 		free(buf);
 		i++;
 	}
+	free(buf);
 	i += 1;
 	tmp = ft_itoa(i);
 	buf = ft_strjoin(tmp, " ");
@@ -139,5 +141,6 @@ void		deal_with_file(t_shell *sh)
 		push_hist(&sh->head, sh->hist);
 		free(tmp);
 	}
+	free(line);
 	close(fd);
 }

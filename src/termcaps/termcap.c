@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 15:34:06 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/28 13:51:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ static void	prompt_shell(t_shell *sh, t_prompt *prompt, char *buff)
 	copy_string(prompt, buff);
 	cut_string(prompt, buff);
 	paste_string(prompt, buff);
+	start_auto_complete(prompt, buff);
 }
 
 char		*deal_with_termcap(t_shell *sh)
@@ -123,12 +124,6 @@ char		*deal_with_termcap(t_shell *sh)
 			else
 				return (NULL);
 			break ;
-		}
-		if (buff[0] == 9 && prompt->cmd[0])
-		{
-			ft_strcpy(prompt->cmd, auto_complete(prompt->cmd));
-			prompt->i = ft_strlen(prompt->cmd) - 1;
-			prompt_print(prompt, buff);
 		}
 		ft_bzero(buff, 4);
 	}
