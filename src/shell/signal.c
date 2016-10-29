@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 19:23:38 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/29 16:55:20 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include <termcaps.h>
 
 void	sigtstp(int id)
 {
@@ -45,15 +45,21 @@ void	sigcont(int id)
 
 void	sigint(int id)
 {
-	t_shell	*sh;
+	t_shell		*sh;
+	t_prompt	*prompt;
+	char		str[1];
 
 	(void)id;
 	sh = NULL;
-	sh = stock_struct(sh, 1);
+	prompt = NULL;
+	str[0] = 10;
 	ft_putchar('\n');
+	sh = stock_struct(sh, 1);
+	prompt = stock_prompt(prompt, 1);
+	ft_bzero(prompt->cmd, 5000);
+	prompt->i = 0;
 	get_prompt(sh->env);
-	color(RED, "$> ");
-	color(RESET, "");
+	prompt_print(prompt, str);
 }
 
 void	sigquit(int id)
