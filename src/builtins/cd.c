@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 17:24:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 17:51:43 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/29 14:44:26 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void		cd_home(t_env *env)
 
 static char		*go_to_dir_from_root(t_env *env, char **cmd)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 	char	*str;
 
 	tmp = env;
@@ -69,7 +69,7 @@ static char		*go_to_dir_from_root(t_env *env, char **cmd)
 	}
 	env = tmp;
 	str = ft_strsub(cmd[1], 2, ft_strlen(cmd[1]));
-	return(str);
+	return (str);
 }
 
 static void		deal_with_cd_arg(t_env *env, char **cmd)
@@ -100,7 +100,7 @@ static void		deal_with_cd_arg(t_env *env, char **cmd)
 	}
 }
 
-int			do_cd(t_env *env, char **cmd)
+int				do_cd(t_env *env, char **cmd)
 {
 	char	*tmp;
 

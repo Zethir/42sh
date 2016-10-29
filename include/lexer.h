@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 13:36:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/29 14:37:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ void				truncate_redir(t_shell *sh, t_token *token, char *filename);
 void				append_redir(t_shell *sh, t_token *token, char *filename);
 void				parse_cmd(t_shell *sh, t_token *token);
 int					get_second_fd(t_lex *lex, int i);
-int					is_redir(t_lex *lex, t_token_ht *token_ht, int i, char *tmp);
+int					is_redir(t_lex *lex, t_token_ht *token_ht, int i);
 int					is_token(t_lex *lex, t_token_ht *token_ht, int i);
+int					is_replace_bis(t_lex *lex, t_token_ht *t, int i, char *tmp);
+int					is_in_bis(t_lex *lex, t_token_ht *t, int i, char *tmp);
 int					list_browser(t_lex *lex);
 int					input_redir(t_shell *sh, t_token *token, char *filename);
 int					trunc_in_fd(t_shell *sh, t_token *token, t_token *tmp);
