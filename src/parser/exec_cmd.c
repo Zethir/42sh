@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 15:41:03 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/29 13:39:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void		launch_builtin(t_shell *sh, t_parse *parse, t_job *job)
 	dup2(save_stdio[2], 2);
 }
 
-void		launch_bin(t_shell *sh, t_parse *parse, t_process *process)
+void		launch_bin(t_shell *sh, t_parse *parse, t_process *p)
 {
-	get_new_stdio(process);
+	get_new_stdio(p);
 	reset_term_no_free(sh);
 	if (execve(parse->right_path, parse->argv, parse->env) < 0)
 	{
@@ -73,18 +73,4 @@ void		exec_env(t_shell *sh, char *arg, char **env_cpy)
 	}
 	wait(0);
 	free_parse(&parse);
-}
-
-void		wait_for_process(t_process *process)
-{
-	int		status;
-
-	status = 0;
-	wait(&status);
-	if (WIFEXITED(status) && status == 0)
-		process->completed = 1;
-	if (WIFEXITED(status) && status != 0)
-		process->completed = 0;
-	if (WIFSIGNALED(status))
-		process->completed = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:20:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 15:44:33 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/29 13:40:21 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct			s_process
 	char				aggr;
 	int					closefd;
 	int					completed;
+	pid_t				pid;
 	struct s_process	*next;
 
 }						t_process;
@@ -48,7 +49,8 @@ void					exec_job(t_shell *sh, t_job *job);
 void					exec_process(t_shell *sh, t_job *job, int *iofile);
 void					push_process(t_process *node, t_process **head);
 void					push_job(t_job *node, t_job **head);
-void					wait_for_process(t_process *process);
+void					wait_for_job(t_job *job, int i);
+void					update_process_status(t_process *p, pid_t pid, int sta);
 void					free_job(t_job *job);
 void					free_parse(t_parse **head);
 void					launch_builtin(t_shell *sh, t_parse *pa, t_job *job);
@@ -58,7 +60,9 @@ void					create_process(t_process **p, t_token *token, t_shell *sh);
 void					token_linker(t_shell *sh, t_job **job, t_process **p,
 		t_token *token);
 void					token_pipe(t_shell *sh, t_process **p, t_token *token);
+int						get_num_process(t_process *process);
 int						do_builtins(t_shell *sh, t_job *job, t_parse *parse);
 int						do_exit(t_shell *sh, t_job *job, t_parse *parse);
+int						job_success(t_job *job);
 
 #endif

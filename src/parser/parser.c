@@ -6,25 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 19:46:54 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/29 13:41:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
-
-static int		job_success(t_job *job)
-{
-	t_process *process;
-
-	process = job->process;
-	while (process)
-	{
-		if (process->completed == 0)
-			return (0);
-		process = process->next;
-	}
-	return (1);
-}
 
 void			exec_process(t_shell *sh, t_job *job, int *iofile)
 {
@@ -39,7 +25,7 @@ void			exec_process(t_shell *sh, t_job *job, int *iofile)
 			job->process->stdio[1] = iofile[1];
 		launch_builtin(sh, parse, job);
 	}
-	else if ((parse->pid = fork()) == 0)
+	else if ((job->process->pid = fork()) == 0)
 	{
 		if (iofile[0] != 0)
 			job->process->stdio[0] = iofile[0];
@@ -47,8 +33,11 @@ void			exec_process(t_shell *sh, t_job *job, int *iofile)
 			job->process->stdio[1] = iofile[1];
 		launch_bin(sh, parse, job->process);
 	}
-	wait_for_process(job->process);
 	free_parse(&parse);
+	if (iofile[0] != 0)
+		close(iofile[0]);
+	if (iofile[1] != 1)
+		close(iofile[1]);
 }
 
 static void		launch_process(t_shell *sh, t_job *job)
@@ -56,9 +45,11 @@ static void		launch_process(t_shell *sh, t_job *job)
 	t_process	*process;
 	int			iofile[2];
 	int			pipefd[2];
+	int			i;
 
 	process = job->process;
 	iofile[0] = 0;
+	i = get_num_process(job->process);
 	while (job->process)
 	{
 		if (job->process->next)
@@ -69,14 +60,11 @@ static void		launch_process(t_shell *sh, t_job *job)
 		else
 			iofile[1] = 1;
 		exec_process(sh, job, iofile);
-		if (iofile[0] != 0)
-			close(iofile[0]);
-		if (iofile[1] != 1)
-			close(iofile[1]);
 		iofile[0] = pipefd[0];
 		job->process = job->process->next;
 	}
 	job->process = process;
+	wait_for_job(job, i);
 }
 
 void			exec_job(t_shell *sh, t_job *job)

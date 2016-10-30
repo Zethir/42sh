@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 14:57:33 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/28 19:06:58 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/29 14:48:33 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,10 @@ static int		is_token_bis(t_lex *lex, t_token_ht *token_ht, int i)
 	char	*tmp;
 	int		j;
 
-	tmp = ft_strsub(lex->line, lex->tl, lex->hd - lex->tl);
-	j = is_redir(lex, token_ht, i, tmp);
+	j = is_redir(lex, token_ht, i);
 	if (j > 0 || j < 0)
-	{
-		free(tmp);
 		return (j);
-	}
+	tmp = ft_strsub(lex->line, lex->tl, lex->hd - lex->tl);
 	j = is_separator(lex, token_ht, i, tmp);
 	if (j > 0 || j < 0)
 	{
