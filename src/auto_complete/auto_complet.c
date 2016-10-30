@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/30 19:02:37 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/30 19:28:42 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,10 @@ char			*auto_complete(char *cmd)
 	}
 	ft_free_tab(sel);
 	if (!tmp)
+	{
+		free(res);
 		return (ft_strdup(cmd));
+	}
 	tmp2 = ft_strdup(res);
 	free(res);
 	res = join_if_dir(tmp, tmp2, cmd);
