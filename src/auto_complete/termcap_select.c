@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 21:11:14 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/30 15:02:40 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/30 15:04:49 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char		*deal_with_term(t_struct *info)
 	if (((info->node->length) % info->nb_col) != 0)
 		info->nb_item += 1;
 	str = deal_with_input(info);
-	if (str)
+	if (str || info->on)
 		return (str);
 	print_lst(info);
 	ft_bzero(info->buff, BUFF_SIZE);
