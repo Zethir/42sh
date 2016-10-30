@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 17:42:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 19:23:41 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/30 17:47:58 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char				*ft_strtrim(char const *s);
 char				*ft_strnjoin(char const *s1, char const *s2, size_t len);
 char				**ft_strsplit(char const *s, char c);
 char				**ft_strsplit_ws(char const *s);
+int					ft_strchr_int(char *str, char c);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strequ(char const *s1, char const *s2);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 13:51:06 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 17:22:57 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/30 18:18:19 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 void	start_auto_complete(t_prompt *prompt, char *buff)
 {
+	char	*res;
+
 	if (buff[0] == 9 && prompt->cmd[0])
 	{
-		ft_strcpy(prompt->cmd, auto_complete(prompt->cmd));
+		res = auto_complete(prompt->cmd);
+		ft_strcpy(prompt->cmd, res);
+		if (res)
+			free(res);
 		prompt->i = ft_strlen(prompt->cmd);
 		prompt_print(prompt, buff);
 	}
