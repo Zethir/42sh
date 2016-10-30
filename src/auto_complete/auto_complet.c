@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/30 15:02:58 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/30 16:45:08 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char		**tab_to_select(char *cmd)
 	char			*test;
 
 	i = 0;
-	test = deal_with_dir(cmd);
+	test = ft_strdup(deal_with_dir(cmd));
 	dir = opendir(test);
 	while ((ret = readdir(dir)))
 		i++;
@@ -73,7 +73,9 @@ static char		*exec_select(char *cmd)
 	char	**tab_for_exec;
 	char	**tab_files;
 	char	*tmp;
+	char	*tmp2;
 
+	tmp2 = NULL;
 	tab_files = tab_to_select(cmd);
 	cmd = split_if_dir(cmd);
 	if (cmd)
@@ -83,12 +85,25 @@ static char		*exec_select(char *cmd)
 			return (NULL);
 		tab_for_exec = ft_strsplit_ws(tmp);
 		if (!tab_for_exec[1])
-			return (deal_with_slash(tab_for_exec[0]));
+		{
+			free(tmp);
+			tmp = ft_strdup(tab_for_exec[0]);
+			ft_free_tab(tab_for_exec);
+			tmp2 = deal_with_slash(tmp);
+			free(tmp);
+			return (tmp2);
+		}
 		tmp = main_select(ft_tablen(tab_for_exec), tab_for_exec);
-		return (deal_with_slash(tmp));
+		ft_free_tab(tab_for_exec);
+		tmp2 = deal_with_slash(tmp);
+		free(tmp);
+		return (tmp2);
 	}
 	tmp = main_select(ft_tablen(tab_files), tab_files);
-	return (deal_with_slash(tmp));
+	tmp2 = deal_with_slash(tmp);
+//	ft_free_tab(tab_files);
+	free(tmp);
+	return (tmp2);
 }
 
 char			*auto_complete(char *cmd)
@@ -114,8 +129,10 @@ char			*auto_complete(char *cmd)
 		tmp = exec_select(NULL);
 		res = join_cmd(sel);
 	}
+	ft_free_tab(sel);
 	if (!tmp)
 		return (cmd);
 	res = join_if_dir(tmp, res, cmd);
+	free(tmp);
 	return (res);
 }

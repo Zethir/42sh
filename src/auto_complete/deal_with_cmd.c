@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:30:57 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/29 17:52:12 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/30 16:20:50 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ char	*first_occur(char **tab_files, char *cmd)
 	while (tab_files[i])
 	{
 		if (!ft_strncmp(cmd, tab_files[i], ft_strlen(cmd)))
+		{
 			return (tab_files[i]);
+		}
 		i++;
 	}
 	return (NULL);
