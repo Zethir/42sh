@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/30 18:40:53 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/30 19:02:37 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ static char		*exec_select(char *cmd)
 	}
 	tmp = main_select(ft_tablen(tab_files), tab_files);
 	tmp2 = deal_with_slash(tmp);
-	free(tmp);
+	if (tmp)
+		free(tmp);
 	ft_free_tab(tab_files);
 	return (tmp2);
 }
@@ -119,7 +120,7 @@ char			*auto_complete(char *cmd)
 
 	i = 0;
 	if (deal_with_cmd(cmd) == 0)
-		return (cmd);
+		return (ft_strdup(cmd));
 	sel = ft_strsplit_ws(cmd);
 	while (sel[i])
 		i++;
@@ -135,7 +136,7 @@ char			*auto_complete(char *cmd)
 	}
 	ft_free_tab(sel);
 	if (!tmp)
-		return (cmd);
+		return (ft_strdup(cmd));
 	tmp2 = ft_strdup(res);
 	free(res);
 	res = join_if_dir(tmp, tmp2, cmd);
