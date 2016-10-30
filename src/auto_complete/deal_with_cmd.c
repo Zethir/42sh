@@ -6,12 +6,39 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:30:57 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/28 17:38:07 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/29 17:52:12 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
+int	first_occur_index(char **tab_files, char *cmd)
+{
+	int		i;
+	
+	i = 0;
+	while (tab_files[i])
+	{
+		if (!ft_strncmp(cmd, tab_files[i], ft_strlen(cmd)))
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+char	*first_occur(char **tab_files, char *cmd)
+{
+	int		i;
+	
+	i = 0;
+	while (tab_files[i])
+	{
+		if (!ft_strncmp(cmd, tab_files[i], ft_strlen(cmd)))
+			return (tab_files[i]);
+		i++;
+	}
+	return (NULL);
+}
 
 char     *join_cmd(char **sel)
 {
@@ -24,10 +51,13 @@ char     *join_cmd(char **sel)
 	res = ft_strdup(sel[0]);
 	while (sel[i])
 	{
-		tmp = ft_strjoin(res, " ");
-		free(res);
-		res = ft_strjoin(tmp, sel[i]);
-		free(tmp);
+		if (ft_strcmp(sel[0], sel[i]))
+		{
+			tmp = ft_strjoin(res, " ");
+			free(res);
+			res = ft_strjoin(tmp, sel[i]);
+			free(tmp);
+		}
 		i++;
 	}
 	if (!ft_strchr(res, '/'))
@@ -46,10 +76,13 @@ char     *join_cmd_bis(char **sel)
 	res = ft_strdup(sel[0]);
 	while (sel[i] && sel[i + 1])
 	{
-		tmp = ft_strjoin(res, " ");
-		free(res);
-		res = ft_strjoin(tmp, sel[i]);
-		free(tmp);
+		if (ft_strcmp(sel[0], sel[i]))
+		{
+			tmp = ft_strjoin(res, " ");
+			free(res);
+			res = ft_strjoin(tmp, sel[i]);
+			free(tmp);
+		}
 		i++;
 	}
 	res = ft_strjoin(res, " ");

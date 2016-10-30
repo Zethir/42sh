@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 16:50:19 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/29 18:52:34 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_struct	*init_select_struct(char **argv)
 
 	if (!(info = (t_struct *)malloc(sizeof(t_struct))))
 		return (NULL);
+	info->on = 0;
 	info->node = init_lst(argv);
 	info->node->head->line = 1;
 	return (info);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 21:11:14 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 19:22:10 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/29 19:44:56 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,25 @@ void		clean_lst(t_struct *info)
 static char	*join_select(t_struct *info)
 {
 	t_lst	*ptr;
+	char	*tmp;
 	char	*str;
 
 	ptr = info->node->head;
-	str = ft_strdup("");
+	str = NULL;
+	tmp = NULL;
 	while (ptr)
 	{
 		if (ptr->save)
 		{
-			str = ft_strjoin(str, ptr->save);
-			str = ft_strjoin(str, " ");
+			tmp = ft_strdup("");
+			str = ft_strjoin(tmp, ptr->save);
+			free(tmp);
+			tmp = ft_strjoin(str, " ");
+			free(str);
 		}
 		ptr = ptr->next;
 	}
-	return (str);
+	return (tmp);
 }
 
 static char	*deal_with_input(t_struct *info)
@@ -49,8 +54,10 @@ static char	*deal_with_input(t_struct *info)
 	start_end(info);
 	if (*info->buff == 10)
 	{
+		info->on = 1;
 		clean_lst(info);
 		str = join_select(info);
+		printf("str = %s\n", str);
 		free_lst(info);
 		return (str);
 	}

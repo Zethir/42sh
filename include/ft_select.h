@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:50:27 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 17:20:39 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/29 19:44:56 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_intel
 
 typedef struct		s_struct
 {
+	int				on;
 	size_t			size_last;
 	size_t			col;
 	size_t			row;
@@ -85,6 +86,8 @@ char				*deal_with_slash(char *cmd);
 char				*deal_with_dir(char *cmd);
 char				*split_if_dir(char *cmd);
 char				*join_if_dir(char *tmp, char *res, char *cmd);
+char				*first_occur(char **tab_files, char *cmd);
 int					deal_with_cmd(char *cmd);
+int					first_occur_index(char **tab_files, char *cmd);
 
 #endif

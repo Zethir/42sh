@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:41:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/28 16:49:49 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/29 19:44:56 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*do_select(char **argv, int id)
 	while (1)
 	{
 		str = deal_with_term(info);
-		if (str)
+		if (str || info->on == 1)
 			break ;
 	}
 	if (close(info->fd) < 0)

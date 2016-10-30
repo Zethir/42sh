@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/28 19:36:19 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/29 17:58:51 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char		**tab_to_select(char *cmd)
 		}
 	}
 	closedir(dir);
-	tab_files[i] = NULL; 
+	tab_files[i] = NULL;
 	return (tab_files);
 }
 
@@ -49,20 +49,22 @@ static char		*join_for_select(char **tab_files, char *cmd)
 	char	*res;
 	int		i;
 
-	i = 0;
-	tmp = ft_strdup(tab_files[0]);
 	filenames = NULL;
+	tmp = ft_strdup(first_occur(tab_files, cmd));
+	i = first_occur_index(tab_files, cmd) + 1;
 	while (tab_files[i])
 	{
 		if (!ft_strncmp(cmd, tab_files[i], ft_strlen(cmd)))
 		{
 			res = ft_strjoin(tmp, " ");
 			free(tmp);
-			filenames = ft_strjoin(res, tab_files[i]);
+			tmp = ft_strjoin(res, tab_files[i]);
 			free(res);
 		}
 		i++;
 	}
+	filenames = ft_strdup(tmp);
+	free(tmp);
 	return (filenames);
 }
 
@@ -80,8 +82,8 @@ static char		*exec_select(char *cmd)
 		if (!tmp)
 			return (NULL);
 		tab_for_exec = ft_strsplit_ws(tmp);
-		if (!tab_for_exec[2])
-			return (deal_with_slash(tab_for_exec[1]));
+		if (!tab_for_exec[1])
+			return (deal_with_slash(tab_for_exec[0]));
 		tmp = main_select(ft_tablen(tab_for_exec), tab_for_exec);
 		return (deal_with_slash(tmp));
 	}

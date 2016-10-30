@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/24 22:02:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 13:54:12 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/29 19:44:56 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static void	print_underline(t_lst *ptr, t_struct *info)
 		ft_putstr_fd("\033[1;34m", 2);
 		ft_putendl(ptr->name);
 		ft_putstr_fd("\e[00m", 2);
-		bzero(ptr->save, ft_strlen(ptr->save));
+		free(ptr->save);
+		ptr->save = NULL;
 		ptr->select = 0;
 	}
 	else if (ptr->select == 1)

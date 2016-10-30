@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 14:33:58 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/28 19:44:57 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/29 17:57:11 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ char	*join_if_dir(char *tmp, char *res, char *cmd)
 		return (ft_strjoin(res, tmp));
 	while (split_tmp[i])
 	{
-		dir = ft_strjoin(dir, "/");
 		split_tmp[i] = ft_strjoin(dir, split_tmp[i]);
 		i++;
 	}
 	tmp = join_cmd(split_tmp);
 	tmp = deal_with_slash(tmp);
+//	ft_free_tab(split_tmp);
 	return (tmp);
 }
 
@@ -85,15 +85,17 @@ char	*split_if_dir(char	*cmd)
 char	*deal_with_dir(char *cmd)
 {
 	char	*res;
+	char	*tmp;
 
-	res = ft_strdup("");
-	ft_strclr(res);
+	tmp = NULL;
 	if (!cmd)
 		return (".");
-	if (ft_strchr(cmd, '/'))
+	if ((tmp = ft_strrchr(cmd, '/')) != NULL)
 	{
-		res = ft_memmove(res, cmd, ft_strlen(cmd) - 1);
-		printf("res = %s\n", res);
+		if (tmp[1])
+			res = ft_strsub(cmd, 0, ft_strlen(cmd) - ft_strlen(tmp) + 1);
+		else
+			res = ft_strdup(cmd);
 		return (res);
 	}
 	else
