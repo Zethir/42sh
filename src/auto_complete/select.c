@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:41:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/30 18:40:46 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/30 18:42:45 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ char	*do_select(char **argv, int id)
 {
 	t_struct	*info;
 	char		*str;
-	char		*tmp;
+	char		tmp[30];
 	
 	info = init_select_struct(argv);
-	tmp = ttyname(0);
+	ttyname_r(0, tmp, 13);
 	info->fd = open(tmp, O_RDWR);
 	if (info->fd == -1)
 		return (NULL);

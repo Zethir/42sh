@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:30:57 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/30 16:20:50 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/30 18:22:26 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,10 @@ char	*first_occur(char **tab_files, char *cmd)
 	while (tab_files[i])
 	{
 		if (!ft_strncmp(cmd, tab_files[i], ft_strlen(cmd)))
-		{
 			return (tab_files[i]);
-		}
 		i++;
 	}
-	return (NULL);
+	return (cmd);
 }
 
 char     *join_cmd(char **sel)
@@ -62,8 +60,13 @@ char     *join_cmd(char **sel)
 		}
 		i++;
 	}
-	if (!ft_strchr(res, '/'))
-		res = ft_strjoin(res, " ");
+	tmp = ft_strdup(res);
+	free(res);
+	if (!ft_strchr(tmp, '/'))
+		res = ft_strjoin(tmp, " ");
+	else
+		res = ft_strdup(tmp);
+	free(tmp);
 	return (res);
 }
 
