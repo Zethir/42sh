@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 21:11:14 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/29 19:44:56 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/30 15:02:51 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static char	*deal_with_input(t_struct *info)
 		info->on = 1;
 		clean_lst(info);
 		str = join_select(info);
-		printf("str = %s\n", str);
 		free_lst(info);
 		return (str);
 	}
@@ -91,7 +90,7 @@ char		*deal_with_term(t_struct *info)
 	if (((info->node->length) % info->nb_col) != 0)
 		info->nb_item += 1;
 	str = deal_with_input(info);
-	if (str)
+	if (str || info->on)
 		return (str);
 	print_lst(info);
 	ft_bzero(info->buff, BUFF_SIZE);
