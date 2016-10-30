@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 21:11:14 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/29 19:44:56 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/30 15:02:40 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static char	*deal_with_input(t_struct *info)
 		info->on = 1;
 		clean_lst(info);
 		str = join_select(info);
-		printf("str = %s\n", str);
 		free_lst(info);
 		return (str);
 	}
