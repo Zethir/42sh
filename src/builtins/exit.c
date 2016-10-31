@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 16:11:24 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 15:49:44 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/31 18:23:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			do_exit(t_shell *sh, t_job *job, t_parse *parse)
 		free_job(job);
 		free_parse(&parse);
 		reset_term(sh);
-		exit(-1);
+		exit(0);
 	}
 	while (parse->argv[i])
 		i++;
