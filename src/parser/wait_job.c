@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/29 12:56:15 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/29 14:43:15 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/31 16:52:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,14 @@ void	wait_for_job(t_job *job, int i)
 	pid_t	pid;
 
 	status = 0;
+	pid = 0;
 	while (i > 0)
 	{
 		pid = wait(&status);
 		update_process_status(job->process, pid, status);
 		if (pid == -1)
 			break ;
+		status = 0;
 		i--;
 	}
 }

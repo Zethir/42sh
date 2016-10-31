@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:20:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/29 13:40:21 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/31 16:55:25 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct			s_process
 typedef struct			s_job
 {
 	int					linker;
+	pid_t				pgid;
 	struct s_process	*process;
 	struct s_job		*next;
 }						t_job;
@@ -54,7 +55,7 @@ void					update_process_status(t_process *p, pid_t pid, int sta);
 void					free_job(t_job *job);
 void					free_parse(t_parse **head);
 void					launch_builtin(t_shell *sh, t_parse *pa, t_job *job);
-void					launch_bin(t_shell *sh, t_parse *p, t_process *process);
+void					launch_bin(t_shell *sh, t_parse *p, t_job *job);
 void					create_job(t_job **job, t_process **p, t_token *token);
 void					create_process(t_process **p, t_token *token, t_shell *sh);
 void					token_linker(t_shell *sh, t_job **job, t_process **p,

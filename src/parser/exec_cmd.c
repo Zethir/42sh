@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/29 13:39:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/31 16:55:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void		launch_builtin(t_shell *sh, t_parse *parse, t_job *job)
 	dup2(save_stdio[2], 2);
 }
 
-void		launch_bin(t_shell *sh, t_parse *parse, t_process *p)
+void		launch_bin(t_shell *sh, t_parse *parse, t_job *job)
 {
-	get_new_stdio(p);
+	get_new_stdio(job->process);
 	reset_term_no_free(sh);
 	if (execve(parse->right_path, parse->argv, parse->env) < 0)
 	{
