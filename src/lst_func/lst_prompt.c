@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:17:59 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 14:20:48 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 15:26:58 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_prompt	*init_prompt(void)
 {
 	t_prompt		*prompt;
 	struct winsize	win;
-	
+
 	if (!(prompt = (t_prompt *)malloc(sizeof(t_prompt))))
 		return (NULL);
 	ft_bzero(prompt->cmd, 5000);

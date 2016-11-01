@@ -6,15 +6,15 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/29 14:37:11 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 15:30:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-#include <termcap.h>
-#include <shell.h>
+# include <termcap.h>
+# include <shell.h>
 
 typedef enum		e_token_type
 {
@@ -43,18 +43,18 @@ typedef struct		s_token
 
 typedef struct		s_token_ht
 {
-	struct	s_token	*head;
-	struct	s_token	*tail;
+	struct s_token	*head;
+	struct s_token	*tail;
 }					t_token_ht;
 
 typedef struct		s_lex
 {
-	char				*line;
-	int					fd[2];
-	int					hd;
-	int					tl;
-	struct s_token		*token;
-}						t_lex;
+	char			*line;
+	int				fd[2];
+	int				hd;
+	int				tl;
+	struct s_token	*token;
+}					t_lex;
 
 t_lex				*init_lexer_struct(void);
 t_token				*init_token(t_lex *lex, char *cmd, int val);
@@ -66,7 +66,8 @@ void				free_struct_lex(t_lex **lex);
 void				free_lex(t_lex **lex);
 void				free_token_ht(t_token_ht **token);
 void				get_first_fd(t_lex *lex, int i);
-void				get_missing_cmd(t_lex *lex, t_token_ht *token_ht, t_shell *sh);
+void				get_missing_cmd(t_lex *lex, t_token_ht *token_ht,
+		t_shell *sh);
 void				truncate_redir(t_shell *sh, t_token *token, char *filename);
 void				append_redir(t_shell *sh, t_token *token, char *filename);
 void				parse_cmd(t_shell *sh, t_token *token);

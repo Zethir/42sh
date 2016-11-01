@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 14:54:00 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 15:54:32 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,16 +118,7 @@ char		*deal_with_termcap(t_shell *sh)
 		prompt_shell(sh, prompt, buff);
 		if (buff[0] == 10)
 		{
-			prompt_print(prompt, 0);
-			while (sh->hist->next)
-				sh->hist = sh->hist->next;
-			if (prompt->cmd[0])
-			{
-				sh->hist->str = ft_strdup(prompt->cmd);
-				str = ft_strdup(sh->hist->str);
-			}
-			else
-				sh->hist->str = ft_strdup("");
+			str = input_return(sh, prompt);
 			break ;
 		}
 		ft_bzero(buff, 4);
