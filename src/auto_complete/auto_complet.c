@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/30 19:28:42 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/31 19:14:53 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char		**tab_to_select(char *cmd)
 	char			*test;
 
 	i = 0;
-	test = ft_strdup(deal_with_dir(cmd));
+	test = deal_with_dir(cmd);
 	dir = opendir(test);
 	while ((ret = readdir(dir)))
 		i++;
@@ -77,12 +77,15 @@ static char		*exec_select(char *cmd)
 	char	*tmp;
 	char	*tmp2;
 
-	tmp2 = NULL;
 	tab_files = tab_to_select(cmd);
-	cmd = split_if_dir(cmd);
-	if (cmd)
+	tmp2 = split_if_dir(cmd);
+	if (tmp2)
 	{
+		free(cmd);
+		cmd = ft_strdup(tmp2);
+		free(tmp2);
 		tmp = join_for_select(tab_files, cmd);
+		free(cmd);
 		ft_free_tab(tab_files);
 		if (!tmp)
 			return (NULL);
@@ -96,6 +99,7 @@ static char		*exec_select(char *cmd)
 			free(tmp);
 			return (tmp2);
 		}
+		free(tmp);
 		tmp = main_select(ft_tablen(tab_for_exec), tab_for_exec);
 		ft_free_tab(tab_for_exec);
 		tmp2 = deal_with_slash(tmp);
@@ -126,7 +130,7 @@ char			*auto_complete(char *cmd)
 		i++;
 	if (sel[i - 1] && deal_with_cmd(cmd) == 2)
 	{
-		tmp = exec_select(sel[i - 1]);
+		tmp = exec_select(ft_strdup(sel[i - 1]));
 		res = join_cmd_bis(sel);
 	}
 	else 

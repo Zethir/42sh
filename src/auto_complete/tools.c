@@ -6,26 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 16:23:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 19:18:22 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/31 15:26:53 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
-
-void	free_lst(t_struct *info)
-{
-	t_lst	*ptr;
-
-	ptr = info->node->head;
-	while (ptr)
-	{
-		if (ptr->name)
-			ft_strdel(&ptr->name);
-		if (ptr->save)
-			ft_strdel(&ptr->save);
-		ptr = ptr->next;
-	}
-}
 
 void	left_arrow(t_struct *info, t_lst *ptr)
 {

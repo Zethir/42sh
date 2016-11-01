@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:41:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/30 19:34:10 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/31 18:37:09 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*do_select(char **argv, int id)
 	}
 	if (close(info->fd) < 0)
 		ft_putendl_fd("Can't close fd", 2);
+	free_lst(info);
 	return (str);
 }
 

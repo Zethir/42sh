@@ -6,16 +6,16 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:30:57 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/30 19:21:52 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/10/31 19:14:56 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-int	first_occur_index(char **tab_files, char *cmd)
+int			first_occur_index(char **tab_files, char *cmd)
 {
 	int		i;
-	
+
 	i = 0;
 	while (tab_files[i])
 	{
@@ -26,10 +26,10 @@ int	first_occur_index(char **tab_files, char *cmd)
 	return (0);
 }
 
-char	*first_occur(char **tab_files, char *cmd)
+char		*first_occur(char **tab_files, char *cmd)
 {
 	int		i;
-	
+
 	i = 0;
 	while (tab_files[i])
 	{
@@ -40,7 +40,7 @@ char	*first_occur(char **tab_files, char *cmd)
 	return (cmd);
 }
 
-char     *join_cmd(char **sel)
+char		*join_cmd(char **sel)
 {
 	char	*res;
 	char	*tmp;
@@ -70,7 +70,7 @@ char     *join_cmd(char **sel)
 	return (res);
 }
 
-char     *join_cmd_bis(char **sel)
+char		*join_cmd_bis(char **sel)
 {
 	char	*res;
 	char	*tmp;
@@ -95,7 +95,7 @@ char     *join_cmd_bis(char **sel)
 	return (tmp);
 }
 
-int		deal_with_cmd(char *cmd)
+int			deal_with_cmd(char *cmd)
 {
 	int		i;
 	int		cnt;
@@ -105,7 +105,7 @@ int		deal_with_cmd(char *cmd)
 	while (cmd[i])
 	{
 		if (cmd[i] == ' ')
-			cnt++;;
+			cnt++;
 		i++;
 	}
 	if (cnt == 0)

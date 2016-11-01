@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/24 22:02:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/30 18:40:42 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/31 17:11:31 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	print_standout(t_lst *ptr)
 	ft_putendl(ptr->name);
 	ptr->select = 1;
 	ft_putstr_fd("\e[00m", 2);
-	ptr->save = ft_strdup(ptr->name);
+	if (!ptr->save)
+		ptr->save = ft_strdup(ptr->name);
 	tputs(tgetstr("me", NULL), 0, ft_putchar_int);
 }
 
