@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 20:59:52 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 23:17:36 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,20 @@ void	sigcont(int id)
 
 void	sigint(int id)
 {
-	t_shell		*sh;
-	t_prompt	*prompt;
+	t_shell			*sh;
+	t_prompt		*prompt;
+	struct winsize	win;
 
 	(void)id;
 	sh = NULL;
 	prompt = NULL;
 	sh = stock_struct(sh, 1);
 	prompt = stock_prompt(prompt, 1);
+	if (prompt->win_size == 0)
+	{
+		ioctl(0, TIOCGWINSZ, &win);
+		prompt->win_size = win.ws_col;
+	}
 	prompt_print(prompt, 0);
 	ft_putchar('\n');
 	ft_strclr(prompt->cmd);
