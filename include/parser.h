@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:20:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/31 16:55:25 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 15:30:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void					free_parse(t_parse **head);
 void					launch_builtin(t_shell *sh, t_parse *pa, t_job *job);
 void					launch_bin(t_shell *sh, t_parse *p, t_job *job);
 void					create_job(t_job **job, t_process **p, t_token *token);
-void					create_process(t_process **p, t_token *token, t_shell *sh);
+void					create_process(t_process **p, t_token *token,
+		t_shell *sh);
 void					token_linker(t_shell *sh, t_job **job, t_process **p,
 		t_token *token);
 void					token_pipe(t_shell *sh, t_process **p, t_token *token);
