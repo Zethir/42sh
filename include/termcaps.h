@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 13:53:15 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 14:53:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ void			go_to_previous_word(t_prompt *prompt, char *buff);
 void			go_to_next_word(t_prompt *prompt, char *buff);
 void			go_down_line(t_prompt *prompt, char *buff);
 void			go_up_line(t_prompt *prompt, char *buff);
-void			prompt_print(t_prompt *prompt, char *buff);
+void			prompt_print(t_prompt *prompt, int show_cursor);
 
 #endif

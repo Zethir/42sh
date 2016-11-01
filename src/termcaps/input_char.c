@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 16:28:53 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 13:34:34 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 14:59:24 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	deal_with_delete(t_prompt *prompt, char *buff)
 	{
 		ft_memmove(prompt->cmd + prompt->i, prompt->cmd + prompt->i + 1,
 				ft_strlen(prompt->cmd + prompt->i + 1) + 1);
-		prompt_print(prompt, buff);
+		prompt_print(prompt, 1);
 	}
 }
 
@@ -29,7 +29,7 @@ void	deal_with_backspace(t_prompt *prompt, char *buff)
 		prompt->i--;
 		ft_memmove(prompt->cmd + prompt->i, prompt->cmd + prompt->i + 1,
 				ft_strlen(prompt->cmd + prompt->i + 1) + 1);
-		prompt_print(prompt, buff);
+		prompt_print(prompt, 1);
 	}
 }
 
@@ -41,7 +41,7 @@ void	deal_with_space(t_prompt *prompt, char *buff)
 			ft_strlen(prompt->cmd + prompt->i) + 1);
 		prompt->cmd[prompt->i] = ' ';
 		prompt->i++;
-		prompt_print(prompt, buff);
+		prompt_print(prompt, 1);
 	}
 }
 
@@ -53,6 +53,6 @@ void	deal_with_charac(t_prompt *prompt, char *buff)
 				ft_strlen(prompt->cmd + prompt->i) + 1);
 		prompt->cmd[prompt->i] = *buff;
 		prompt->i++;
-		prompt_print(prompt, buff);
+		prompt_print(prompt, 1);
 	}
 }

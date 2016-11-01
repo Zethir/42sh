@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 13:51:06 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/30 19:02:41 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/01 14:59:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	start_auto_complete(t_prompt *prompt, char *buff)
 		if (res)
 			free(res);
 		prompt->i = ft_strlen(prompt->cmd);
-		prompt_print(prompt, buff);
+		prompt_print(prompt, 1);
 	}
 }
