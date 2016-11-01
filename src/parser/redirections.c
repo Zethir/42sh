@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 15:49:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 13:42:47 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/30 19:53:27 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,22 @@ int				input_redir(t_shell *sh, t_token *token, char *filename)
 	return (0);
 }
 
+static int		heredoc_cmp(char *line, char *str, int pipefd[2])
+{
+	if (line && ft_strcmp(line, str))
+	{
+		ft_putendl_fd(line, pipefd[1]);
+		free(line);
+	}
+	else if (line)
+	{
+		free(line);
+		ft_putchar('\n');
+		return (1);
+	}
+	return (0);
+}
+
 void			heredoc(t_shell *sh, char *code)
 {
 	int		pipefd[2];
@@ -77,18 +93,12 @@ void			heredoc(t_shell *sh, char *code)
 
 	pipe(pipefd);
 	str = ft_wipespace(code);
-	line = "";
-	while (ft_strcmp(line, str))
+	while (1)
 	{
 		free(sh->hist->str);
-		line = ft_strdup(deal_with_termcap(sh));
-		if (line && ft_strcmp(line, str))
-		{
-			ft_putendl_fd(line, pipefd[1]);
-			free(line);
-		}
-		else
-			free(line);
+		line = deal_with_termcap(sh);
+		if (heredoc_cmp(line, str, pipefd) == 1)
+			break ;
 		ft_putchar('\n');
 	}
 	free(str);

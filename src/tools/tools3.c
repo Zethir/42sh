@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/17 00:06:48 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 16:43:28 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 15:01:12 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,16 @@ void	win_size(int id)
 {
 	t_shell			*sh;
 	t_prompt		*prompt;
-	char			*str;
 	struct winsize	win;
 
 	(void)id;
 	sh = NULL;
-	str = ft_strdup("");
 	sh = stock_struct(sh, 1);
 	prompt = NULL;
 	prompt = stock_prompt(prompt, 1);
 	ioctl(0, TIOCGWINSZ, &win);
 	prompt->win_size = win.ws_col;
-	prompt_print(prompt, str);
-	free(str);
+	prompt_print(prompt, 1);
 }
 
 char	*get_home(t_env *node)

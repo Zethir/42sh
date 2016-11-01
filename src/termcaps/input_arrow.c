@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 00:03:33 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 13:45:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 14:58:51 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	deal_with_down(t_shell *sh, t_prompt *prompt, char *buff)
 			sh->hist->str = ft_strdup("");
 		ft_strcpy(prompt->cmd, sh->hist->str);
 		prompt->i = ft_strlen(prompt->cmd);
-		prompt_print(prompt, buff);
+		prompt_print(prompt, 1);
 	}
 }
 
@@ -32,7 +32,7 @@ void	deal_with_up(t_shell *sh, t_prompt *prompt, char *buff)
 		sh->hist = sh->hist->prev;
 		ft_strcpy(prompt->cmd, sh->hist->str);
 		prompt->i = ft_strlen(prompt->cmd);
-		prompt_print(prompt, buff);
+		prompt_print(prompt, 1);
 	}
 }
 
@@ -46,7 +46,7 @@ void	deal_with_left(t_prompt *prompt, char *buff)
 				prompt->cursor_start < prompt->cursor_end)
 			prompt->cursor_end--;
 		prompt->i--;
-		prompt_print(prompt, buff);
+		prompt_print(prompt, 1);
 	}
 }
 
@@ -60,6 +60,6 @@ void	deal_with_right(t_prompt *prompt, char *buff)
 				prompt->cursor_start < prompt->cursor_end)
 			prompt->cursor_start++;
 		prompt->i++;
-		prompt_print(prompt, buff);
+		prompt_print(prompt, 1);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 15:50:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/10/31 14:54:23 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int			reset_term(t_shell *sh)
 {
-	stock_struct(sh, 1);
 	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
 	if (tcgetattr(0, &(sh->term)) == -1)
 		return (-1);
@@ -27,7 +26,6 @@ int			reset_term(t_shell *sh)
 
 int			reset_term_no_free(t_shell *sh)
 {
-	stock_struct(sh, 1);
 	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
 	if (tcgetattr(0, &(sh->term)) == -1)
 		return (-1);

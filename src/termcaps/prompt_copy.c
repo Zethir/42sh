@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:37:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 18:28:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 15:00:04 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	cut_string(t_prompt *prompt, char *buff)
 				ft_strlen(prompt->cmd + prompt->i + 1) + len);
 		prompt->cursor_start = 0;
 		prompt->cursor_end = 0;
-		prompt_print(prompt, buff);
+		prompt_print(prompt, 1);
 	}
 }
 
@@ -79,6 +79,6 @@ void	paste_string(t_prompt *prompt, char *buff)
 			prompt->i++;
 			i++;
 		}
-		prompt_print(prompt, buff);
+		prompt_print(prompt, 1);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/29 16:55:20 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 15:14:18 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,18 @@ void	sigint(int id)
 {
 	t_shell		*sh;
 	t_prompt	*prompt;
-	char		str[1];
 
 	(void)id;
 	sh = NULL;
 	prompt = NULL;
-	str[0] = 10;
-	ft_putchar('\n');
 	sh = stock_struct(sh, 1);
 	prompt = stock_prompt(prompt, 1);
-	ft_bzero(prompt->cmd, 5000);
+	prompt_print(prompt, 0);
+	ft_putchar('\n');
+	ft_strclr(prompt->cmd);
 	prompt->i = 0;
 	get_prompt(sh->env);
-	prompt_print(prompt, str);
+	prompt_print(prompt, 1);
 }
 
 void	sigquit(int id)
@@ -80,5 +79,5 @@ void	ft_signal(int id)
 	signal(SIGTSTP, sigtstp);
 	signal(SIGINT, sigint);
 	signal(SIGQUIT, sigquit);
-	signal(SIGTERM, sigquit);
+	signal(SIGTERM, SIG_IGN);
 }

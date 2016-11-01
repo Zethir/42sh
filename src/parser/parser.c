@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/29 13:41:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 14:08:38 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			exec_process(t_shell *sh, t_job *job, int *iofile)
 			job->process->stdio[0] = iofile[0];
 		if (iofile[1] != 1)
 			job->process->stdio[1] = iofile[1];
-		launch_bin(sh, parse, job->process);
+		launch_bin(sh, parse, job);
 	}
 	free_parse(&parse);
 	if (iofile[0] != 0)
