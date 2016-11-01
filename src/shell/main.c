@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 14:31:12 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 20:54:01 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,9 @@ int				main(int argc, char **argv, char **env)
 {
 	int		id;
 
-	argv = NULL;
 	id = 0;
-	signal(SIGINT, SIG_IGN);
-	ft_signal(id);
+	argv = NULL;
+	ign_signal(id);
 	if (argc == 1)
 		start_prog(env);
 	else

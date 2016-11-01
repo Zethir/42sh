@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:50:27 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 19:11:38 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/01 20:41:19 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void				left_arrow(t_struct *info, t_lst *ptr);
 void				right_arrow(t_struct *info, t_lst *ptr);
 void				check_size(t_struct *info);
 void				win_select_size(int id);
-void				ft_signal(int id);
 void				start_end(t_struct *info);
 void				free_lst(t_struct *info);
 void				my_tab(t_struct *info, t_lst *ptr);
@@ -89,7 +88,7 @@ char				*join_if_dir(char *tmp, char *res, char *cmd);
 char				*first_occur(char **tab_files, char *cmd);
 char				*exec_select(char *cmd);
 char				*exec_select_cmd(char *frag_cmd, char **tab_files);
-char				*exec_select_one_result(char *filenames, char **tab_for_exec);
+char				*exec_select_one_result(char *filenames, char **tab_exec);
 char				*exec_select_null(char **tab_files);
 char				*join_for_select(char **tab_files, char *cmd);
 char				*arg_exists(char **sel, char *cmd, int i);

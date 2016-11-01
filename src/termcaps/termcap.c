@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 15:54:32 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 22:31:16 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void		prompt_print(t_prompt *prompt, int show_cursor)
 	print_cursor(prompt, show_cursor, i);
 }
 
-static void	prompt_shell(t_shell *sh, t_prompt *prompt, char *buff)
+void		prompt_shell(t_shell *sh, t_prompt *prompt, char *buff)
 {
 	if (prompt->i < 4500)
 	{
@@ -116,6 +116,8 @@ char		*deal_with_termcap(t_shell *sh)
 	while ((ret = read(0, buff, BUFF_SIZE) != -1))
 	{
 		prompt_shell(sh, prompt, buff);
+		if (buff[0] == 4 && !prompt->cmd[0])
+			exit_eof(sh, prompt);
 		if (buff[0] == 10)
 		{
 			str = input_return(sh, prompt);

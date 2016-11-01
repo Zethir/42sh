@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 15:45:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 15:51:45 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 22:30:23 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,49 @@ char	*input_return(t_shell *sh, t_prompt *prompt)
 	}
 	else
 		sh->hist->str = ft_strdup("");
+	return (str);
+}
+
+char	*input_eof(t_prompt *prompt, char buff)
+{
+	char	*str;
+
+	str = NULL;
+	prompt_print(prompt, 0);
+	str = ft_strdup(&buff);
+	return (str);
+}
+
+void	exit_eof(t_shell *sh, t_prompt *prompt)
+{
+	prompt_print(prompt, 0);
+	reset_term(sh);
+	exit(0);
+}
+
+char	*termcap_heredoc(t_shell *sh)
+{
+	t_prompt	*p;
+	int			ret;
+	char		buff[4];
+	char		*str;
+
+	p = init_prompt();
+	prompt_print(p, 1);
+	stock_prompt(p, 0);
+	str = NULL;
+	while ((ret = read(0, buff, BUFF_SIZE) != -1))
+	{
+		prompt_shell(sh, p, buff);
+		if (buff[0] == 4 && !p->cmd[0] && (str = input_eof(p, buff[0])))
+			break ;
+		if (buff[0] == 10)
+		{
+			str = input_return(sh, p);
+			break ;
+		}
+		ft_bzero(buff, 4);
+	}
+	free_prompt(&p);
 	return (str);
 }

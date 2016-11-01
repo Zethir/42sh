@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 15:14:18 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 20:59:52 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	sigcont(int id)
 	get_prompt(sh->env);
 	color(RED, "$> ");
 	color(RESET, "");
-	signal(SIGTSTP, ft_signal);
+	signal(SIGTSTP, ign_signal);
 }
 
 void	sigint(int id)
@@ -61,23 +61,12 @@ void	sigint(int id)
 	prompt_print(prompt, 1);
 }
 
-void	sigquit(int id)
-{
-	t_shell *sh;
-
-	(void)id;
-	sh = NULL;
-	reset_term(sh);
-	exit(0);
-}
-
-void	ft_signal(int id)
+void	ign_signal(int id)
 {
 	(void)id;
 	signal(SIGWINCH, win_size);
 	signal(SIGCONT, sigcont);
 	signal(SIGTSTP, sigtstp);
 	signal(SIGINT, sigint);
-	signal(SIGQUIT, sigquit);
-	signal(SIGTERM, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 }

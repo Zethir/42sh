@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 15:49:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/30 19:53:27 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/01 22:04:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,13 @@ int				input_redir(t_shell *sh, t_token *token, char *filename)
 
 static int		heredoc_cmp(char *line, char *str, int pipefd[2])
 {
-	if (line && ft_strcmp(line, str))
+	if (line && line[0] == 4 && !ft_strcmp(str, "EOF"))
+	{
+		free(line);
+		ft_putchar('\n');
+		return (1);
+	}
+	else if (line && ft_strcmp(line, str))
 	{
 		ft_putendl_fd(line, pipefd[1]);
 		free(line);
@@ -95,8 +101,7 @@ void			heredoc(t_shell *sh, char *code)
 	str = ft_wipespace(code);
 	while (1)
 	{
-		free(sh->hist->str);
-		line = deal_with_termcap(sh);
+		line = termcap_heredoc(sh);
 		if (heredoc_cmp(line, str, pipefd) == 1)
 			break ;
 		ft_putchar('\n');
