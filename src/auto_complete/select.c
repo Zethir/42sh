@@ -6,18 +6,18 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:41:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/31 18:37:09 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/01 16:19:38 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-char	*do_select(char **argv, int id)
+char		*do_select(char **argv, int id)
 {
 	t_struct	*info;
 	char		*str;
 	char		tmp[30];
-	
+
 	info = init_select_struct(argv);
 	ttyname_r(0, tmp, 13);
 	info->fd = open(tmp, O_RDWR);

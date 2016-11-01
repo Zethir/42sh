@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:50:27 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/31 15:18:00 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/01 19:11:38 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,14 @@ char				*deal_with_dir(char *cmd);
 char				*split_if_dir(char *cmd);
 char				*join_if_dir(char *tmp, char *res, char *cmd);
 char				*first_occur(char **tab_files, char *cmd);
+char				*exec_select(char *cmd);
+char				*exec_select_cmd(char *frag_cmd, char **tab_files);
+char				*exec_select_one_result(char *filenames, char **tab_for_exec);
+char				*exec_select_null(char **tab_files);
+char				*join_for_select(char **tab_files, char *cmd);
+char				*arg_exists(char **sel, char *cmd, int i);
+char				*arg_does_not_exist(char **sel, char *cmd);
+char				*send_result(char *select_result, char *res, char *cmd);
 int					deal_with_cmd(char *cmd);
 int					first_occur_index(char **tab_files, char *cmd);
 

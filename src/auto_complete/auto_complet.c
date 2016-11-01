@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/31 19:14:53 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/01 19:13:51 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,33 @@
 static char		**tab_to_select(char *cmd)
 {
 	char			**tab_files;
+	char			*directory;
 	DIR				*dir;
 	struct dirent	*ret;
 	int				i;
-	char			*test;
 
 	i = 0;
-	test = deal_with_dir(cmd);
-	dir = opendir(test);
+	directory = deal_with_dir(cmd);
+	dir = opendir(directory);
 	while ((ret = readdir(dir)))
 		i++;
 	if (!(tab_files = (char **)malloc(sizeof(char *) * i)))
 		return (NULL);
 	i = 0;
 	closedir(dir);
-	dir = opendir(test);
-	free(test);
+	dir = opendir(directory);
+	free(directory);
 	while ((ret = readdir(dir)))
 	{
 		if (ft_strncmp(ret->d_name, ".", 1))
-		{
-			tab_files[i] = ft_strdup(ret->d_name);
-			i++;
-		}
+			tab_files[i++] = ft_strdup(ret->d_name);
 	}
 	closedir(dir);
 	tab_files[i] = NULL;
 	return (tab_files);
 }
 
-static char		*join_for_select(char **tab_files, char *cmd)
+char			*join_for_select(char **tab_files, char *cmd)
 {
 	char	*filenames;
 	char	*tmp;
@@ -70,56 +67,22 @@ static char		*join_for_select(char **tab_files, char *cmd)
 	return (filenames);
 }
 
-static char		*exec_select(char *cmd)
+char			*exec_select(char *cmd)
 {
-	char	**tab_for_exec;
 	char	**tab_files;
-	char	*tmp;
-	char	*tmp2;
+	char	*frag_cmd;
 
 	tab_files = tab_to_select(cmd);
-	tmp2 = split_if_dir(cmd);
-	if (tmp2)
-	{
-		free(cmd);
-		cmd = ft_strdup(tmp2);
-		free(tmp2);
-		tmp = join_for_select(tab_files, cmd);
-		free(cmd);
-		ft_free_tab(tab_files);
-		if (!tmp)
-			return (NULL);
-		tab_for_exec = ft_strsplit_ws(tmp);
-		if (!tab_for_exec[1])
-		{
-			free(tmp);
-			tmp = ft_strdup(tab_for_exec[0]);
-			ft_free_tab(tab_for_exec);
-			tmp2 = deal_with_slash(tmp);
-			free(tmp);
-			return (tmp2);
-		}
-		free(tmp);
-		tmp = main_select(ft_tablen(tab_for_exec), tab_for_exec);
-		ft_free_tab(tab_for_exec);
-		tmp2 = deal_with_slash(tmp);
-		free(tmp);
-		return (tmp2);
-	}
-	tmp = main_select(ft_tablen(tab_files), tab_files);
-	tmp2 = deal_with_slash(tmp);
-	if (tmp)
-		free(tmp);
-	ft_free_tab(tab_files);
-	return (tmp2);
+	frag_cmd = split_if_dir(cmd);
+	if (frag_cmd)
+		return (exec_select_cmd(frag_cmd, tab_files));
+	return (exec_select_null(tab_files));
 }
 
 char			*auto_complete(char *cmd)
 {
 	char	**sel;
 	char	*res;
-	char	*tmp;
-	char	*tmp2;
 	int		i;
 
 	i = 0;
@@ -129,25 +92,9 @@ char			*auto_complete(char *cmd)
 	while (sel[i])
 		i++;
 	if (sel[i - 1] && deal_with_cmd(cmd) == 2)
-	{
-		tmp = exec_select(ft_strdup(sel[i - 1]));
-		res = join_cmd_bis(sel);
-	}
-	else 
-	{
-		tmp = exec_select(NULL);
-		res = join_cmd(sel);
-	}
+		res = arg_exists(sel, cmd, i);
+	else
+		res = arg_does_not_exist(sel, cmd);
 	ft_free_tab(sel);
-	if (!tmp)
-	{
-		free(res);
-		return (ft_strdup(cmd));
-	}
-	tmp2 = ft_strdup(res);
-	free(res);
-	res = join_if_dir(tmp, tmp2, cmd);
-	free(tmp2);
-	free(tmp);
 	return (res);
 }

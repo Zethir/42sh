@@ -6,13 +6,27 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 14:33:58 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/31 19:14:58 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/01 18:09:12 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-char	*join_if_dir(char *tmp, char *res, char *cmd)
+static char	*join_if_dir_bis(char *dir, char *select_result, char **split_tmp)
+{
+	char	*tmp2;
+
+	free(dir);
+	select_result = join_cmd(split_tmp);
+	tmp2 = ft_strdup(select_result);
+	free(select_result);
+	select_result = deal_with_slash(tmp2);
+	free(tmp2);
+	ft_free_tab(split_tmp);
+	return (select_result);
+}
+
+char		*join_if_dir(char *select_result, char *res, char *cmd)
 {
 	char	**split_tmp;
 	char	*tmp2;
@@ -25,9 +39,9 @@ char	*join_if_dir(char *tmp, char *res, char *cmd)
 	if (!ft_strcmp(dir, "."))
 	{
 		free(dir);
-		return (ft_strjoin(res, tmp));
+		return (ft_strjoin(res, select_result));
 	}
-	split_tmp = ft_strsplit_ws(tmp);
+	split_tmp = ft_strsplit_ws(select_result);
 	while (split_tmp[i])
 	{
 		tmp2 = ft_strjoin(dir, split_tmp[i]);
@@ -36,17 +50,11 @@ char	*join_if_dir(char *tmp, char *res, char *cmd)
 		free(tmp2);
 		i++;
 	}
-	free(dir);
-	tmp = join_cmd(split_tmp);
-	tmp2 = ft_strdup(tmp);
-	free(tmp);
-	tmp = deal_with_slash(tmp2);
-	free(tmp2);
-	ft_free_tab(split_tmp);
-	return (tmp);
+	select_result = join_if_dir_bis(dir, select_result, split_tmp);
+	return (select_result);
 }
 
-char	*deal_with_slash(char *cmd)
+char		*deal_with_slash(char *cmd)
 {
 	char	**split_res;
 	char	*tmp;
@@ -74,7 +82,7 @@ char	*deal_with_slash(char *cmd)
 	return (cmd);
 }
 
-char	*split_if_dir(char *cmd)
+char		*split_if_dir(char *cmd)
 {
 	char	**split_res;
 	char	*res;
@@ -103,7 +111,7 @@ char	*split_if_dir(char *cmd)
 	return (ft_strdup(cmd));
 }
 
-char	*deal_with_dir(char *cmd)
+char		*deal_with_dir(char *cmd)
 {
 	char	*res;
 	char	*tmp;
