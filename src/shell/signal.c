@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 23:17:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/02 14:27:52 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,14 @@ void	sigint(int id)
 	prompt = stock_prompt(prompt, 1);
 	if (prompt->win_size == 0)
 	{
+		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 		ioctl(0, TIOCGWINSZ, &win);
 		prompt->win_size = win.ws_col;
 	}
 	prompt_print(prompt, 0);
-	ft_putchar('\n');
 	ft_strclr(prompt->cmd);
 	prompt->i = 0;
+	ft_putchar('\n');
 	get_prompt(sh->env);
 	prompt_print(prompt, 1);
 }

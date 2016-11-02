@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/24 15:43:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 13:36:38 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/02 16:32:58 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,23 @@
 void	get_missing_cmd(t_lex *lex, t_token_ht *token_ht, t_shell *sh)
 {
 	t_token	*token;
+	char	*tmp;
+	char	*tmp2;
 
 	token = token_ht->tail;
+	tmp = NULL;
 	if (token->token_value != R_TRUNC_FD && token->token_value !=
 			R_TRUNC_FD_CLOSE && token->token_value != R_IN_FD &&
 			token->token_value != R_IN_FD_CLOSE)
 	{
-		lex->line = ft_strjoin(sh->hist->str, " ");
-		lex->line = ft_strjoin(lex->line, deal_with_termcap(sh));
+		tmp = ft_strjoin(sh->hist->str, " ");
+		free(lex->line);
+		tmp2 = termcap_heredoc(sh);
+		lex->line = ft_strjoin(tmp, tmp2);
+		free(tmp);
+		free(tmp2);
+		free(sh->hist->str);
+		sh->hist->str = ft_strdup(lex->line);
 		ft_putchar('\n');
 	}
 }

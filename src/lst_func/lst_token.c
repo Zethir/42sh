@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 15:27:34 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/01 18:58:08 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/02 16:34:48 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static char		*clean_cmd(char *cmd)
 
 	str = ft_strsplit_ws(cmd);
 	if (!str[0])
+	{
+		ft_free_tab(str);
 		return (NULL);
+	}
 	res = ft_strdup(str[0]);
 	i = 1;
 	while (str[i])
@@ -33,21 +36,38 @@ static char		*clean_cmd(char *cmd)
 		i++;
 	}
 	i = 0;
-	while (str[i])
-		free(str[i++]);
-	free(str);
+	ft_free_tab(str);
 	return (res);
 }
 
-t_token			*init_token(t_lex *lex, char *cmd, int val)
+t_token			*cmd_is_empty(t_lex *lex, t_token *new_elem, int val)
+{
+	new_elem->cmd = ft_strdup("");
+	new_elem->token_value = val;
+	new_elem->fd[0] = lex->fd[0];
+	new_elem->fd[1] = lex->fd[1];
+	return (new_elem);
+}
+
+t_token			*init_token(t_lex *lex, t_token_ht *token, char *cmd, int val)
 {
 	t_token		*new_elem;
+	int			value;
 
 	if (!(new_elem = (t_token *)malloc(sizeof(t_token))))
 		return (NULL);
+	if (token->tail)
+		value = token->tail->token_value;
+	else
+		value = 0;
 	cmd = clean_cmd(cmd);
-	if (!cmd)
+	if (!cmd && (value == 7 || value == 8 || value == 11 || value == 12))
+		return (cmd_is_empty(lex, new_elem, val));
+	else if (!cmd)
+	{
+		free(new_elem);
 		return (NULL);
+	}
 	new_elem->cmd = ft_strdup(cmd);
 	new_elem->token_value = val;
 	new_elem->fd[0] = lex->fd[0];
@@ -62,7 +82,7 @@ t_token_ht		*add_token(t_lex *lex, t_token_ht *token_ht, char *cmd, int val)
 
 	if (token_ht)
 	{
-		token = init_token(lex, cmd, val);
+		token = init_token(lex, token_ht, cmd, val);
 		if (!token)
 			return (NULL);
 		if (token_ht->tail == NULL)

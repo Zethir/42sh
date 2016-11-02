@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 23:16:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/02 14:50:46 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		prompt_print(t_prompt *prompt, int show_cursor)
 	while (prompt->cmd[i])
 	{
 		tputs(tgetstr("me", NULL), 1, ft_putchar_int);
-		if (i == prompt->i)
+		if (i == prompt->i && show_cursor == 1)
 			tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
 		if (prompt->copy_mode == 1 && i >= prompt->cursor_start &&
 				i <= prompt->cursor_end)

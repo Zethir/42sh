@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 18:29:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 13:44:53 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/02 16:09:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 int		out_fd_close(t_shell *sh, t_token *token, t_token *tmp)
 {
+	char	*str;
+
 	if (token->fd[0] != -1)
 		sh->closefd = token->fd[0];
 	else
 		sh->closefd = 1;
 	if (token->next)
 	{
-		tmp->cmd = ft_strjoin(tmp->cmd, " ");
-		tmp->cmd = ft_strjoin(tmp->cmd, token->next->cmd);
+		str = ft_strjoin(tmp->cmd, " ");
+		free(tmp->cmd);
+		tmp->cmd = ft_strjoin(str, token->next->cmd);
+		free(str);
 		return (1);
 	}
 	else
@@ -33,14 +37,18 @@ int		out_fd_close(t_shell *sh, t_token *token, t_token *tmp)
 
 int		in_fd_close(t_shell *sh, t_token *token, t_token *tmp)
 {
+	char	*str;
+
 	if (token->fd[0] != -1)
 		sh->closefd = token->fd[0];
 	else
 		sh->closefd = 0;
 	if (token->next)
 	{
-		tmp->cmd = ft_strjoin(tmp->cmd, " ");
-		tmp->cmd = ft_strjoin(tmp->cmd, token->next->cmd);
+		str = ft_strjoin(tmp->cmd, " ");
+		free(tmp->cmd);
+		tmp->cmd = ft_strjoin(str, token->next->cmd);
+		free(str);
 		return (1);
 	}
 	else

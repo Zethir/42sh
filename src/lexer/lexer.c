@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/28 18:58:41 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/02 15:31:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ t_token		*check_lexer(t_lex *lex, t_token_ht *token_ht, t_shell *sh)
 		tmp = ft_strsub(lex->line, lex->tl, lex->hd + 1);
 		i = is_token(lex, token_ht, lex->hd);
 		if (check_parse_error(lex, i) == -1)
+		{
+			free(tmp);
 			return (NULL);
+		}
 		if (!lex->line[lex->hd + 1] && i == 0)
 			if ((token_ht = add_token(lex, token_ht, tmp, 13)) == NULL)
 				return (NULL);

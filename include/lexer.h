@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 20:44:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/02 16:23:58 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ typedef struct		s_lex
 }					t_lex;
 
 t_lex				*init_lexer_struct(void);
-t_token				*init_token(t_lex *lex, char *cmd, int val);
+t_token				*init_token(t_lex *lex, t_token_ht *token, char *cmd,
+		int val);
 t_token				*hub_redir(t_shell *sh, t_token *token);
 t_token_ht			*add_token(t_lex *lex, t_token_ht *token_ht, char *cmd,
 		int val);
 t_token				*check_lexer(t_lex *lex, t_token_ht *token_ht, t_shell *sh);
+t_token				*cmd_is_empty(t_lex *lex, t_token *new_elem, int val);
 void				free_struct_lex(t_lex **lex);
 void				free_lex(t_lex **lex);
 void				free_token_ht(t_token_ht **token);

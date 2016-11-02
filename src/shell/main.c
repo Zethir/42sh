@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 20:54:01 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/02 16:28:43 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,33 @@
 static void		deal_with_inhib(t_shell *sh, t_lex *lex)
 {
 	char	*tmp;
+	char	*tmp2;
 
-	tmp = ft_strdup("");
-	if (!lex->line)
-		return ;
+	tmp = NULL;
 	while (check_for_parenth(lex->line) != 0)
 	{
+		tmp = termcap_heredoc(sh);
+		tmp2 = ft_strjoin(lex->line, tmp);
+		free(lex->line);
+		free(tmp);
+		lex->line = ft_strdup(tmp2);
+		free(tmp2);
+		free(sh->hist->str);
+		sh->hist->str = ft_strdup(lex->line);
 		ft_putchar('\n');
-		tmp = deal_with_termcap(sh);
-		lex->line = ft_strjoin(lex->line, tmp);
 	}
-	free(tmp);
+}
+
+static void		lexer_parser(t_shell *sh, t_lex *lex, t_token_ht *token_ht)
+{
+	if ((lex->token = check_lexer(lex, token_ht, sh)) == NULL)
+	{
+		free_lex(&lex);
+		free_token_ht(&token_ht);
+		return ;
+	}
+	init_stdio(sh);
+	parse_cmd(sh, lex->token);
 }
 
 static void		deal_with_prompt(t_shell *sh)
@@ -47,10 +63,7 @@ static void		deal_with_prompt(t_shell *sh)
 		return ;
 	}
 	deal_with_inhib(sh, lex);
-	if ((lex->token = check_lexer(lex, token_ht, sh)) == NULL)
-		return ;
-	init_stdio(sh);
-	parse_cmd(sh, lex->token);
+	lexer_parser(sh, lex, token_ht);
 	add_history(sh);
 	free_lex(&lex);
 	free_token_ht(&token_ht);
@@ -67,8 +80,8 @@ static void		start_prog(char **env)
 			return ;
 		if (check_env(sh->env) == 0)
 			sh->env = init_env(env);
-		get_prompt(sh->env);
 		stock_struct(sh, 0);
+		get_prompt(sh->env);
 		deal_with_prompt(sh);
 		sh->hist = sh->hist->next;
 		sh->hist = create_hist();
