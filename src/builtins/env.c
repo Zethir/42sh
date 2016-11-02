@@ -74,11 +74,9 @@ static void	deal_with_arg(t_shell *sh, char **arg, char **env_cpy)
 int			deal_with_env(t_shell *sh, char **arg)
 {
 	char	**env_cpy;
-	int		i;
 
 	env_cpy = get_env(sh->env);
 	arg++;
-	i = 0;
 	if (*arg)
 	{
 		if (*arg[0] == '-')
