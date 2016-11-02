@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/02 16:28:43 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/02 20:09:39 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ static void		deal_with_inhib(t_shell *sh, t_lex *lex)
 	while (check_for_parenth(lex->line) != 0)
 	{
 		tmp = termcap_heredoc(sh);
+		tmp2 = ft_strjoin("\"", tmp);
+		free(tmp);
+		tmp = ft_strjoin(tmp2, "\"");
+		free(tmp2);
 		tmp2 = ft_strjoin(lex->line, tmp);
 		free(lex->line);
 		free(tmp);
@@ -32,16 +36,17 @@ static void		deal_with_inhib(t_shell *sh, t_lex *lex)
 	}
 }
 
-static void		lexer_parser(t_shell *sh, t_lex *lex, t_token_ht *token_ht)
+static int		lexer_parser(t_shell *sh, t_lex *lex, t_token_ht *token_ht)
 {
 	if ((lex->token = check_lexer(lex, token_ht, sh)) == NULL)
 	{
 		free_lex(&lex);
 		free_token_ht(&token_ht);
-		return ;
+		return (-1);
 	}
 	init_stdio(sh);
 	parse_cmd(sh, lex->token);
+	return (0);
 }
 
 static void		deal_with_prompt(t_shell *sh)
@@ -63,7 +68,8 @@ static void		deal_with_prompt(t_shell *sh)
 		return ;
 	}
 	deal_with_inhib(sh, lex);
-	lexer_parser(sh, lex, token_ht);
+	if (lexer_parser(sh, lex, token_ht) == -1)
+		return ;
 	add_history(sh);
 	free_lex(&lex);
 	free_token_ht(&token_ht);
