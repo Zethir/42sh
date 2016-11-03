@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:30:57 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/03 19:01:39 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/03 20:26:56 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ char		*join_cmd(char **sel)
 	res = ft_strdup(sel[0]);
 	while (sel[i])
 	{
-		if (ft_strcmp(sel[0], sel[i]))
-		{
+	//	if (ft_strcmp(sel[0], sel[i]))
+	//	{
 			tmp = ft_strjoin(res, " ");
 			free(res);
 			res = ft_strjoin(tmp, sel[i]);
 			free(tmp);
-		}
+	//	}
 		i++;
 	}
 	tmp = ft_strdup(res);

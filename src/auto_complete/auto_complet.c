@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/03 19:18:13 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/03 21:02:01 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,26 @@ char			*exec_select(char *cmd)
 char			*auto_complete(char *cmd)
 {
 	char	**sel;
-	char	*res;
+	char	*tmp;
 	int		i;
 
 	i = 0;
 	if (deal_with_cmd(cmd) == 0)
 		return (ft_strdup(cmd));
 	sel = ft_strsplit_ws(cmd);
+	printf("\n");
+	ft_print_tab(sel);
+	printf("\n");
 	while (sel[i])
 		i++;
-	if (sel[i - 1] && deal_with_cmd(cmd) == 2)
-		res = arg_exists(sel, cmd, i);
+	tmp = ft_strdup(sel[i - 1]);
+	free(sel[i - 1]);
+	if (tmp && deal_with_cmd(cmd) == 2)
+		sel[i - 1] = arg_exists(sel, tmp, i);
 	else
-		res = arg_does_not_exist(sel, cmd);
+		sel[i - 1] = arg_does_not_exist(sel, tmp);
+	free(tmp);
+	tmp = join_tab(sel);
 	ft_free_tab(sel);
-	return (res);
+	return (tmp);
 }
