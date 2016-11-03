@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 13:28:43 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/03 18:59:22 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void		deal_with_dash_bis(t_shell *sh, char **cmd, int fd, int i)
 			tmp = ft_strdup(&line[i]);
 			free(line);
 			exec_cmd_lst(sh, cmd, tmp);
-			free(tmp);
 			return ;
 		}
 		free(line);
@@ -70,7 +69,6 @@ static void		deal_with_number(t_shell *sh, char **cmd, int fd)
 			tmp = ft_strdup(&line[i]);
 			free(line);
 			exec_cmd_lst(sh, cmd, tmp);
-			free(tmp);
 			return ;
 		}
 		free(line);
@@ -93,7 +91,6 @@ static void		deal_with_string(t_shell *sh, char **cmd)
 			line = ft_strdup(sh->hist->str);
 			sh->hist = hist;
 			exec_cmd_lst(sh, cmd, line);
-			free(line);
 			break ;
 		}
 		sh->hist = sh->hist->prev;

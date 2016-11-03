@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/13 13:38:49 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/02 19:32:57 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/03 19:20:38 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ t_parse			*init_parse(t_shell *sh, char *cmd)
 	parse->argv = ft_strsplit_ws(cmd);
 	path = split_path(sh->env);
 	deal_with_path(parse, path);
-	ft_free_tab(path);
+	if (path)
+		ft_free_tab(path);
 	return (parse);
 }

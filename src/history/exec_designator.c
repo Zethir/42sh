@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 19:33:14 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 13:29:08 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/03 18:59:08 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void			exec_cmd_lst(t_shell *sh, char **cmd, char *line)
 		i++;
 	}
 	tabl = ft_strsplit_ws(line);
+	free(line);
 	add_lst(sh, tabl);
 	ft_free_tab(tabl);
 }

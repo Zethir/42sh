@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/14 15:35:47 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/31 15:58:27 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/03 19:26:55 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ void	free_parse(t_parse **head)
 	t_parse *parse;
 
 	parse = *head;
-	ft_free_tab(parse->argv);
-	ft_free_tab(parse->env);
+	if (parse->argv)
+		ft_free_tab(parse->argv);
+	if (parse->env)
+		ft_free_tab(parse->env);
 	if (parse->right_path)
 		free(parse->right_path);
 	parse->pid = 0;
