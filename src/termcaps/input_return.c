@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 15:45:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/02 16:33:08 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/03 16:58:24 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static char	*input_return_heredoc(t_prompt *prompt)
 	prompt_print(prompt, 0);
 	if (prompt->cmd[0])
 		str = ft_strdup(prompt->cmd);
+	else
+		str = ft_strdup("");
 	return (str);
 }
 
