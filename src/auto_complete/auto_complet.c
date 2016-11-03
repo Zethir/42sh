@@ -6,23 +6,22 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/01 19:13:51 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/03 19:18:13 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_select.h>
 
-static char		**tab_to_select(char *cmd)
+static char		**tab_to_select(char *cmd, int i)
 {
 	char			**tab_files;
 	char			*directory;
 	DIR				*dir;
 	struct dirent	*ret;
-	int				i;
 
-	i = 0;
 	directory = deal_with_dir(cmd);
-	dir = opendir(directory);
+	if (!(dir = opendir(directory)))
+		return (NULL);
 	while ((ret = readdir(dir)))
 		i++;
 	if (!(tab_files = (char **)malloc(sizeof(char *) * i)))
@@ -71,8 +70,11 @@ char			*exec_select(char *cmd)
 {
 	char	**tab_files;
 	char	*frag_cmd;
+	int		i;
 
-	tab_files = tab_to_select(cmd);
+	i = 0;
+	if (!(tab_files = tab_to_select(cmd, i)))
+		return (NULL);
 	frag_cmd = split_if_dir(cmd);
 	if (frag_cmd)
 		return (exec_select_cmd(frag_cmd, tab_files));
