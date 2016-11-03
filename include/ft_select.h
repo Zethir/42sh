@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:50:27 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/03 21:43:32 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/03 22:15:43 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void				my_tab(t_struct *info, t_lst *ptr);
 char				*main_select(int argc, char **argv);
 char				*auto_complete(char *cmd);
 char				*join_cmd(char **sel);
-//char				*join_cmd_bis(char **sel);
 char				*deal_with_slash(char *cmd);
 char				*deal_with_dir(char *cmd);
 char				*split_if_dir(char *cmd);
@@ -91,7 +90,7 @@ char				*exec_select_cmd(char *frag_cmd, char **tab_files);
 char				*exec_select_one_result(char *filenames, char **tab_exec);
 char				*exec_select_null(char **tab_files);
 char				*join_for_select(char **tab_files, char *cmd);
-char				*arg_exists(char **sel, char *cmd, int i);
+char				*arg_exists(char *cmd);
 char				*arg_does_not_exist(char *cmd);
 char				*send_result(char *select_result, char *cmd);
 int					deal_with_cmd(char *cmd);
