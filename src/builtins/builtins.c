@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 17:25:42 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/25 15:30:38 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/03 16:31:45 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ static int	do_builtins_bis(t_shell *sh, t_parse *parse, char *cmd)
 		return (do_designator(sh, parse->argv));
 	else if (ft_strcmp(cmd, "export") == 0)
 		return (do_export(sh->env, parse->argv));
-	else if (ft_strcmp(cmd, "echo") == 0)
-		return (do_echo(parse->argv));
 	else if (ft_strchr(cmd, '=') != NULL)
 		return (create_new_variable(sh->env, parse->argv));
+	else if (ft_strcmp(cmd, "echo") == 0)
+		return (do_echo(parse->argv));
 	else if (ft_strcmp(cmd, "unset") == 0)
 		return (do_unsetenv(sh->env, parse->argv, 1));
 	else

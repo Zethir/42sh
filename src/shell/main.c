@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/02 20:09:39 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/03 16:50:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ static void		deal_with_inhib(t_shell *sh, t_lex *lex)
 	while (check_for_parenth(lex->line) != 0)
 	{
 		tmp = termcap_heredoc(sh);
-		tmp2 = ft_strjoin("\"", tmp);
+		tmp2 = ft_strjoin("\n", tmp);
 		free(tmp);
-		tmp = ft_strjoin(tmp2, "\"");
-		free(tmp2);
-		tmp2 = ft_strjoin(lex->line, tmp);
+		tmp = ft_strjoin(lex->line, tmp2);
 		free(lex->line);
-		free(tmp);
-		lex->line = ft_strdup(tmp2);
 		free(tmp2);
+		lex->line = ft_strdup(tmp);
+		free(tmp);
 		free(sh->hist->str);
 		sh->hist->str = ft_strdup(lex->line);
 		ft_putchar('\n');
