@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 13:51:06 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/03 20:20:01 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/03 20:21:36 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void		check_if_arg_is_dir(t_prompt *prompt)
 		ft_strclr(prompt->cmd);
 		ft_strcpy(prompt->cmd, tmp);
 		prompt->i = ft_strlen(prompt->cmd);
+		prompt_print(prompt, 1);
 		free(tmp);
 	}
 	if (arg)
