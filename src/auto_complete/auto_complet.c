@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/03 21:02:01 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/03 21:04:36 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,6 @@ char			*auto_complete(char *cmd)
 	if (deal_with_cmd(cmd) == 0)
 		return (ft_strdup(cmd));
 	sel = ft_strsplit_ws(cmd);
-	printf("\n");
-	ft_print_tab(sel);
-	printf("\n");
 	while (sel[i])
 		i++;
 	tmp = ft_strdup(sel[i - 1]);

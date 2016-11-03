@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 13:51:06 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/03 20:56:31 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/03 21:09:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void		check_if_arg_is_dir(t_prompt *prompt)
 	arg = ft_strsplit_ws(prompt->cmd);
 	while (arg[i])
 		i++;
-	if ((str = opendir(arg[i - 1])) != NULL)
+	if ((str = opendir(arg[i - 1])) != NULL &&
+			arg[i - 1][ft_strlen(arg[i - 1]) - 1] != '/')
 	{
 		tmp = ft_strdup(arg[i -1]);
 		free(arg[i - 1]);
