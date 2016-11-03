@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 13:51:06 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/03 20:21:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/03 20:56:31 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <termcaps.h>
 
-static char		*join_tab(char **arg)
+char			*join_tab(char **arg)
 {
 	char	*tmp;
 	char	*tmp2;
