@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/03 21:04:36 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/03 22:21:54 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,23 @@ char			*exec_select(char *cmd)
 	return (exec_select_null(tab_files));
 }
 
+static char		*auto_complete_no_arg(char *cmd)
+{
+	char	*tmp;
+	char	*res;
+
+	tmp = ft_strdup("");
+	if (tmp && deal_with_cmd(cmd) == 2)
+		res = arg_exists(tmp);
+	else
+		res = arg_does_not_exist(tmp);
+	free(tmp);
+	tmp = ft_strdup(res);
+	free(res);
+	res = ft_strjoin(cmd, tmp);
+	return (res);
+}
+
 char			*auto_complete(char *cmd)
 {
 	char	**sel;
@@ -93,14 +110,18 @@ char			*auto_complete(char *cmd)
 	sel = ft_strsplit_ws(cmd);
 	while (sel[i])
 		i++;
-	tmp = ft_strdup(sel[i - 1]);
-	free(sel[i - 1]);
-	if (tmp && deal_with_cmd(cmd) == 2)
-		sel[i - 1] = arg_exists(sel, tmp, i);
+	if (i == 1)
+		tmp = ft_strdup(auto_complete_no_arg(cmd));
 	else
-		sel[i - 1] = arg_does_not_exist(sel, tmp);
-	free(tmp);
-	tmp = join_tab(sel);
+	{
+		tmp = ft_strdup(sel[i - 1]);
+		if (tmp && deal_with_cmd(cmd) == 2)
+			sel[i - 1] = arg_exists(tmp);
+		else
+			sel[i - 1] = arg_does_not_exist(tmp);
+		free(tmp);
+		tmp = join_tab(sel);
+	}
 	ft_free_tab(sel);
 	return (tmp);
 }

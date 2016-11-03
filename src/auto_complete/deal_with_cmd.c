@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:30:57 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/03 20:26:56 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/03 22:21:54 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,20 @@ char		*first_occur(char **tab_files, char *cmd)
 	return (cmd);
 }
 
-char		*join_cmd(char **sel)
+char		*join_cmd(char **arg)
 {
 	char	*res;
 	char	*tmp;
 	int		i;
 
 	i = 1;
-	res = ft_strdup(sel[0]);
-	while (sel[i])
+	res = ft_strdup(arg[0]);
+	while (arg[i])
 	{
-	//	if (ft_strcmp(sel[0], sel[i]))
-	//	{
-			tmp = ft_strjoin(res, " ");
-			free(res);
-			res = ft_strjoin(tmp, sel[i]);
-			free(tmp);
-	//	}
+		tmp = ft_strjoin(res, " ");
+		free(res);
+		res = ft_strjoin(tmp, arg[i]);
+		free(tmp);
 		i++;
 	}
 	tmp = ft_strdup(res);
@@ -67,31 +64,6 @@ char		*join_cmd(char **sel)
 		res = ft_strdup(tmp);
 	free(tmp);
 	return (res);
-}
-
-char		*join_cmd_bis(char **sel)
-{
-	char	*res;
-	char	*tmp;
-	int		i;
-
-	i = 1;
-	tmp = NULL;
-	res = ft_strdup(sel[0]);
-	while (sel[i] && sel[i + 1])
-	{
-		if (ft_strcmp(sel[0], sel[i]))
-		{
-			tmp = ft_strjoin(res, " ");
-			free(res);
-			res = ft_strjoin(tmp, sel[i]);
-			free(tmp);
-		}
-		i++;
-	}
-	tmp = ft_strjoin(res, " ");
-	free(res);
-	return (tmp);
 }
 
 int			deal_with_cmd(char *cmd)

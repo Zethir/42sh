@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 14:33:58 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/03 20:20:47 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/03 22:21:54 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*join_if_dir_bis(char *dir, char *select_result, char **split_tmp)
 	return (select_result);
 }
 
-char		*join_if_dir(char *select_result, char *res, char *cmd)
+char		*join_if_dir(char *select_result, char *cmd)
 {
 	char	**split_tmp;
 	char	*tmp2;
@@ -36,13 +36,13 @@ char		*join_if_dir(char *select_result, char *res, char *cmd)
 	i = 0;
 	split_tmp = NULL;
 	dir = deal_with_dir(cmd);
+	split_tmp = ft_strsplit_ws(select_result);
 	if (!ft_strcmp(dir, "."))
 	{
-		free(dir);
-		return (ft_strjoin(res, select_result));
+		select_result = join_if_dir_bis(dir, select_result, split_tmp);
+		return (select_result);
 	}
-	split_tmp = ft_strsplit_ws(select_result);
-	while (split_tmp[i])
+	while (split_tmp[i] && ft_strcmp(dir, "."))
 	{
 		tmp2 = ft_strjoin(dir, split_tmp[i]);
 		free(split_tmp[i]);
