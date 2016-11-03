@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 14:33:58 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/01 18:09:12 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/03 20:20:47 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*join_if_dir_bis(char *dir, char *select_result, char **split_tmp)
 	select_result = join_cmd(split_tmp);
 	tmp2 = ft_strdup(select_result);
 	free(select_result);
-	select_result = deal_with_slash(tmp2);
+	select_result = ft_strdup(tmp2);
 	free(tmp2);
 	ft_free_tab(split_tmp);
 	return (select_result);
@@ -52,34 +52,6 @@ char		*join_if_dir(char *select_result, char *res, char *cmd)
 	}
 	select_result = join_if_dir_bis(dir, select_result, split_tmp);
 	return (select_result);
-}
-
-char		*deal_with_slash(char *cmd)
-{
-	char	**split_res;
-	char	*tmp;
-	DIR		*dir;
-	int		i;
-
-	i = 0;
-	if (!cmd)
-		return (NULL);
-	split_res = ft_strsplit_ws(cmd);
-	while (split_res[i])
-	{
-		if ((dir = opendir(split_res[i])) != NULL)
-		{
-			tmp = ft_strjoin(split_res[i], "/");
-			free(split_res[i]);
-			split_res[i] = ft_strdup(tmp);
-			free(tmp);
-			closedir(dir);
-		}
-		i++;
-	}
-	cmd = join_cmd(split_res);
-	ft_free_tab(split_res);
-	return (cmd);
 }
 
 char		*split_if_dir(char *cmd)
@@ -121,7 +93,7 @@ char		*deal_with_dir(char *cmd)
 		return (ft_strdup("."));
 	if ((tmp = ft_strrchr(cmd, '/')) != NULL)
 	{
-		if (tmp[1])
+		if (tmp[1] && tmp[1] != ' ')
 			res = ft_strsub(cmd, 0, ft_strlen(cmd) - ft_strlen(tmp) + 1);
 		else
 			res = ft_strdup(cmd);

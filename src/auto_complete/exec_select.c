@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 15:25:57 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/01 18:19:39 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/03 20:19:22 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*exec_select_one_result(char *filenames, char **tab_for_exec)
 	free(filenames);
 	filenames = ft_strdup(tab_for_exec[0]);
 	ft_free_tab(tab_for_exec);
-	frag_cmd = deal_with_slash(filenames);
+	frag_cmd = ft_strdup(filenames);
 	free(filenames);
 	return (frag_cmd);
 }
@@ -43,7 +43,7 @@ char	*exec_select_cmd(char *frag_cmd, char **tab_files)
 	free(filenames);
 	filenames = main_select(ft_tablen(tab_for_exec), tab_for_exec);
 	ft_free_tab(tab_for_exec);
-	frag_cmd = deal_with_slash(filenames);
+	frag_cmd = ft_strdup(filenames);
 	free(filenames);
 	return (frag_cmd);
 }
@@ -54,9 +54,12 @@ char	*exec_select_null(char **tab_files)
 	char	*select_result;
 
 	select_result = main_select(ft_tablen(tab_files), tab_files);
-	frag_cmd = deal_with_slash(select_result);
-	if (select_result)
-		free(select_result);
 	ft_free_tab(tab_files);
-	return (frag_cmd);
+	if (select_result)
+	{
+		frag_cmd = ft_strdup(select_result);
+		free(select_result);
+		return (frag_cmd);
+	}
+	return (NULL);
 }
