@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 15:20:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 15:51:01 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/03 17:49:39 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	add_history_bis(t_shell *sh, int i, int fd)
 {
+	char	**arg;
 	char	*str;
 	char	*tmp;
 
@@ -21,6 +22,19 @@ static void	add_history_bis(t_shell *sh, int i, int fd)
 	tmp = ft_itoa(i);
 	str = ft_strjoin(tmp, " ");
 	free(tmp);
+	arg = ft_strsplit(sh->hist->str, '\n');
+	free(sh->hist->str);
+	sh->hist->str = ft_strdup(arg[0]);
+	i = 1;
+	while (arg[i])
+	{
+		tmp = ft_strjoin(sh->hist->str, "\\n");
+		free(sh->hist->str);
+		sh->hist->str = ft_strjoin(tmp, arg[i]);
+		free(tmp);
+		i++;
+	}
+	ft_free_tab(arg);
 	tmp = ft_strjoin(str, sh->hist->str);
 	free(str);
 	ft_putendl_fd(tmp, fd);
