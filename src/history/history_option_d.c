@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 15:09:15 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/03 22:21:38 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/04 13:00:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ static void		option_d_free_node(t_shell *sh)
 	{
 		sh->hist->prev->next = sh->hist->next;
 		sh->hist->next->prev = sh->hist->prev;
-		free(sh->hist->str);
-		free(sh->hist);
+		hist = sh->hist;
+		sh->hist = sh->hist->next;
+		free(hist->str);
+		free(hist);
 	}
 	else
 	{
@@ -50,7 +52,7 @@ static void		option_d_update_hist(t_shell *sh, int fd, int *i)
 	(*i)++;
 }
 
-static int		option_dbis2(t_shell *sh, int nbr, int fd)
+static void		option_dbis2(t_shell *sh, int nbr, int fd)
 {
 	t_hist	*hist;
 	int		i;
@@ -59,17 +61,18 @@ static int		option_dbis2(t_shell *sh, int nbr, int fd)
 	i = 1;
 	while (sh->hist->prev)
 		sh->hist = sh->hist->prev;
-	while (sh->hist)
+	while (sh->hist->next)
 	{
 		if (nbr != 0)
+		{
 			option_d_update_hist(sh, fd, &i);
+			sh->hist = sh->hist->next;
+		}
 		if (nbr == 0)
 			option_d_free_node(sh);
 		nbr--;
-		sh->hist = sh->hist->next;
 	}
 	sh->hist = hist;
-	return (nbr);
 }
 
 static void		option_dbis(t_shell *sh, char **cmd)
@@ -89,7 +92,7 @@ static void		option_dbis(t_shell *sh, char **cmd)
 	}
 	if (check_if_out_of_range(cmd, nbr) == 1)
 		return ;
-	nbr = option_dbis2(sh, nbr, fd);
+	option_dbis2(sh, nbr, fd);
 	unlink("/tmp/history");
 	rename(pathb, "/tmp/history");
 	free(pathb);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 22:07:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/03 22:16:11 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/04 12:37:48 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,7 @@ int		check_if_out_of_range(char **cmd, int nbr)
 		i++;
 	}
 	free(line);
-	printf("nbr = %d\n", nbr);
-	printf("i = %d\n", i);
-	if (nbr > i + 1)
+	if (nbr >= i - 1)
 	{
 		out_of_range_error(cmd);
 		return (1);
