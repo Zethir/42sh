@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 18:11:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/04 19:10:25 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	cmp_line(char **arg, char **env_cpy)
 	{
 		if (ft_strccmp(env_cpy[i], *arg, '=') == 0)
 		{
+			free(env_cpy[i]);
 			env_cpy[i] = ft_strdup(*arg);
 			return (1);
 		}
@@ -51,8 +52,10 @@ static int	cmp_line(char **arg, char **env_cpy)
 
 static void	deal_with_arg(t_shell *sh, char **arg, char **env_cpy)
 {
+	char	**res;
 	char	*cmd;
 
+	res = NULL;
 	while (*arg)
 	{
 		if (cmp_line(arg, env_cpy) == 0)
@@ -64,7 +67,12 @@ static void	deal_with_arg(t_shell *sh, char **arg, char **env_cpy)
 				return ;
 			}
 			else if (check_caract(*arg, '=') == 1)
-				env_cpy = add_elem(env_cpy, *arg);
+			{
+				res = add_elem(env_cpy, *arg);
+				ft_print_tab(res);
+				ft_free_tab(res);
+				return ;
+			}
 		}
 		arg++;
 	}

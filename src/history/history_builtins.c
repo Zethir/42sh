@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 14:52:09 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 14:58:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/04 19:18:04 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	history_option(t_shell *sh, char **cmd, int fd)
 		free(line);
 		nbr--;
 	}
+	free(line);
 }
 
 static void	do_history_bis(t_shell *sh, char **cmd, int fd)

@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 18:28:20 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/04 17:19:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/04 17:51:07 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ char	*add_index_tab(char **sel)
 	char	*tmp2;
 	char	*tmp3;
 
+	tmp = ft_strdup("");
+	tmp2 = arg_does_not_exist(tmp);
+	free(tmp);
 	tmp = join_tab(sel);
-	tmp2 = arg_does_not_exist(NULL);
 	tmp3 = ft_strjoin(tmp, " ");
 	free(tmp);
 	tmp = ft_strjoin(tmp3, tmp2);

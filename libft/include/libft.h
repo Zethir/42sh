@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 17:42:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/30 17:47:58 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 19:04:37 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ char				*ft_itoa(int n);
 char				*ft_itoa_base(int value, int base);
 char				*ft_chardup(const char c);
 char				*ft_wipespace(char *str);
+char				**ft_tabdup(char **tabl);
 size_t				ft_nbrlen(int n);
 
 #endif

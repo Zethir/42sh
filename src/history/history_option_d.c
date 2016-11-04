@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 15:09:15 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/04 13:00:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/04 19:23:07 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ static void		option_dbis(t_shell *sh, char **cmd)
 		return ;
 	}
 	if (check_if_out_of_range(cmd, nbr) == 1)
+	{
+		free(pathb);
 		return ;
+	}
 	option_dbis2(sh, nbr, fd);
 	unlink("/tmp/history");
 	rename(pathb, "/tmp/history");

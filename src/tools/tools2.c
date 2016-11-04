@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 17:06:02 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 16:35:40 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/04 18:46:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,16 @@ t_env	*delete_elem(t_env *node)
 char	**add_elem(char **tabl, char *arg)
 {
 	char	**res;
-	int		size_tab;
+	char	*tmp;
+	char	*tmp2;
 
-	size_tab = ft_tablen(tabl);
-	if (!(res = (char **)malloc(sizeof(char *) * size_tab + 1)))
-		return (NULL);
-	res = tabl;
-	res[size_tab] = arg;
-	res[size_tab + 1] = NULL;
+	tmp = join_tab(tabl);
+	tmp2 = ft_strjoin(tmp, " ");
+	free(tmp);
+	tmp = ft_strjoin(tmp2, arg);
+	free(tmp2);
+	res = ft_strsplit_ws(tmp);
+	free(tmp);
 	return (res);
 }
 
