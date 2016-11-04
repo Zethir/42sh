@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 13:51:06 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/04 13:47:27 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/04 13:50:36 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ static int		check_if_arg_is_dir(t_prompt *prompt)
 	{
 		arg_is_dir(prompt, arg, i);
 		closedir(str);
+		if (arg)
+			ft_free_tab(arg);
 		return (1);
 	}
 	if (arg)
