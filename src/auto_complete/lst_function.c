@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 18:58:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/31 17:11:42 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 15:17:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 static t_lst	*init_elem(char *argv)
 {

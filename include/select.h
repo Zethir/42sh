@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_select.h                                        :+:      :+:    :+:   */
+/*   select.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/22 18:50:27 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/03 22:15:43 by qdiaz            ###   ########.fr       */
+/*   Created: 2016/11/04 15:15:39 by cboussau          #+#    #+#             */
+/*   Updated: 2016/11/04 15:15:46 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT_H
-# define FT_SELECT_H
+#ifndef SELECT_H
+# define SELECT_H
 
 # include <shell.h>
 # include <libft.h>
@@ -93,6 +93,8 @@ char				*join_for_select(char **tab_files, char *cmd);
 char				*arg_exists(char *cmd);
 char				*arg_does_not_exist(char *cmd);
 char				*send_result(char *select_result, char *cmd);
+char				**add_index_tab(char **sel);
+char				*get_res_arg(char **sel, char *cmd, int i);
 int					deal_with_cmd(char *cmd);
 int					first_occur_index(char **tab_files, char *cmd);
 

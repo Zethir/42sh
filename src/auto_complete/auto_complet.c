@@ -6,11 +6,11 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/04 16:21:16 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 16:23:52 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 static char		**tab_to_select(char *cmd, int i)
 {
@@ -112,18 +112,11 @@ char			*auto_complete(char *cmd)
 	while (sel[i])
 		i++;
 	if (i == 1)
-		tmp = auto_complete_no_arg(cmd);
-	else
 	{
-		tmp = ft_strdup(sel[i - 1]);
-		free(sel[i - 1]);
-		if (tmp && deal_with_cmd(cmd) == 2)
-			sel[i - 1] = arg_exists(tmp);
-		else
-			sel[i - 1] = arg_does_not_exist(tmp);
-		free(tmp);
-		tmp = join_tab(sel);
+		tmp = auto_complete_no_arg(cmd);
+		ft_free_tab(sel);
 	}
-	ft_free_tab(sel);
+	else
+		tmp = get_res_arg(sel, cmd, i);
 	return (tmp);
 }

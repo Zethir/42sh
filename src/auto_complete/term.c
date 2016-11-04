@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/31 15:25:10 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 15:17:23 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 t_struct	*stock_select_struct(t_struct *info, int i)
 {

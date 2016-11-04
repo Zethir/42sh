@@ -6,11 +6,11 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 17:30:57 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/04 16:21:16 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 16:23:25 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 int			first_occur_index(char **tab_files, char *cmd)
 {
@@ -48,6 +48,7 @@ char		*join_cmd(char **arg)
 
 	i = 1;
 	res = ft_strdup(arg[0]);
+
 	while (arg[i])
 	{
 		tmp = ft_strjoin(res, " ");

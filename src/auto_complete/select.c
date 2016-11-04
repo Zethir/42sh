@@ -6,11 +6,11 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:41:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/01 16:19:38 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 15:17:14 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 char		*do_select(char **argv, int id)
 {

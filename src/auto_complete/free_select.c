@@ -6,11 +6,11 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 15:25:17 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/31 18:15:12 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 15:16:57 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 void	free_lst(t_struct *info)
 {

@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 18:22:56 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/26 13:52:49 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 15:16:42 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 void		deal_with_col(t_struct *info)
 {

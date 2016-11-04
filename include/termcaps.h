@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 22:31:38 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/04 15:15:53 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define TERMCAPS_H
 
 # include <shell.h>
-# include <ft_select.h>
+# include <select.h>
 
 # define ARROW_LEFT ((buff[0] == 27 && buff[1] == 91 && buff[2] == 68))
 # define ARROW_RIGHT ((buff[0] == 27 && buff[1] == 91 && buff[2] == 67))

@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/24 22:02:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/31 17:11:31 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 15:17:44 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 static void	print_standout(t_lst *ptr)
 {
