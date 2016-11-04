@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/03 22:21:54 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 14:00:55 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static char		*auto_complete_no_arg(char *cmd)
 	tmp = ft_strdup(res);
 	free(res);
 	res = ft_strjoin(cmd, tmp);
+	free(tmp);
 	return (res);
 }
 
@@ -111,10 +112,11 @@ char			*auto_complete(char *cmd)
 	while (sel[i])
 		i++;
 	if (i == 1)
-		tmp = ft_strdup(auto_complete_no_arg(cmd));
+		tmp = auto_complete_no_arg(cmd);
 	else
 	{
 		tmp = ft_strdup(sel[i - 1]);
+		free(sel[i - 1]);
 		if (tmp && deal_with_cmd(cmd) == 2)
 			sel[i - 1] = arg_exists(tmp);
 		else
