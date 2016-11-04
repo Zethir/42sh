@@ -6,11 +6,11 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 14:33:58 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/03 22:21:54 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 15:16:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 static char	*join_if_dir_bis(char *dir, char *select_result, char **split_tmp)
 {

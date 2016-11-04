@@ -6,11 +6,11 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 15:25:57 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/03 22:21:54 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 15:16:50 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 char	*exec_select_one_result(char *filenames, char **tab_for_exec)
 {

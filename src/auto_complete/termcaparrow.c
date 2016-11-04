@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/24 20:12:50 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 19:51:38 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 15:17:38 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 static void	left(t_struct *info, t_lst *ptr)
 {

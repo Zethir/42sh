@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/18 16:23:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/31 15:26:53 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 15:17:55 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 void	left_arrow(t_struct *info, t_lst *ptr)
 {

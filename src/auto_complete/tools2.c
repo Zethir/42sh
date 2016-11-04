@@ -6,11 +6,11 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 19:47:38 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/10/27 19:51:40 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 15:18:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 void		my_tab(t_struct *info, t_lst *ptr)
 {

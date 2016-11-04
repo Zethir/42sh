@@ -6,11 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/22 21:11:14 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/31 15:24:36 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 15:17:30 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_select.h>
+#include <select.h>
 
 void		clean_lst(t_struct *info)
 {
