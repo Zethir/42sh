@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/04 16:23:52 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/04 17:19:21 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,9 @@ char			*auto_complete(char *cmd)
 	while (sel[i])
 		i++;
 	if (i == 1)
-	{
 		tmp = auto_complete_no_arg(cmd);
-		ft_free_tab(sel);
-	}
 	else
 		tmp = get_res_arg(sel, cmd, i);
+	ft_free_tab(sel);
 	return (tmp);
 }

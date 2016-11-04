@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 18:28:20 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/04 16:25:59 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/04 17:19:29 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,24 @@ char	*arg_does_not_exist(char *cmd)
 	return (tmp);
 }
 
-char	**add_index_tab(char **sel)
+char	*add_index_tab(char **sel)
 {
-	char	**res_tab;
-	int		i;
-	int		j;
+	char	*tmp;
+	char	*tmp2;
+	char	*tmp3;
 
-	i = 0;
-	j = ft_tablen(sel) + 1;
-	if (!(res_tab = (char **)malloc(sizeof(char *) * ft_tablen(sel) + 1)))
-		return (NULL);
-	while (sel[i])
-	{
-		res_tab[i] = ft_strdup(sel[i]);
-		i++;
-	}
-	res_tab[i] = ft_strdup("");
-	i++;
-	res_tab[i] = NULL;
-	ft_free_tab(sel);
-	return (res_tab);
+	tmp = join_tab(sel);
+	tmp2 = arg_does_not_exist(NULL);
+	tmp3 = ft_strjoin(tmp, " ");
+	free(tmp);
+	tmp = ft_strjoin(tmp3, tmp2);
+	free(tmp2);
+	free(tmp3);
+	return (tmp);
 }
 
 char	*get_res_arg(char **sel, char *cmd, int i)
 {
-	char	**res_tab;
 	char	*tmp;
 
 	tmp = ft_strdup(sel[i - 1]);
@@ -82,12 +75,8 @@ char	*get_res_arg(char **sel, char *cmd, int i)
 	}
 	else
 	{
-		res_tab = add_index_tab(sel);
-		res_tab[i] = arg_does_not_exist(NULL);
 		free(tmp);
-		tmp = join_tab(res_tab);
-	//	if (res_tab)
-	//		ft_free_tab(res_tab);
+		tmp = add_index_tab(sel);
 	}
 	return (tmp);
 }
