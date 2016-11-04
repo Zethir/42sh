@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 22:07:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/04 12:37:48 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/04 13:40:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ int		check_if_out_of_range(char **cmd, int nbr)
 		out_of_range_error(cmd);
 		return (1);
 	}
+	free(path);
 	return (0);
 }

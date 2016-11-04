@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 13:51:06 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/04 12:48:00 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/04 13:47:27 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char			*join_tab(char **arg)
 	while (arg[i])
 	{
 		tmp = ft_strjoin(tmp2, " ");
-		free(tmp2);
+		free (tmp2);
 		tmp2 = ft_strjoin(tmp, arg[i]);
 		free (tmp);
 		i++;
@@ -31,11 +31,26 @@ char			*join_tab(char **arg)
 	return (tmp2);
 }
 
+static void		arg_is_dir(t_prompt *prompt, char **arg, int i)
+{
+	char	*tmp;
+
+	tmp = ft_strdup(arg[i - 1]);
+	free(arg[i - 1]);
+	arg[i - 1] = ft_strjoin(tmp, "/");
+	free(tmp);
+	tmp = join_tab(arg);
+	ft_strclr(prompt->cmd);
+	ft_strcpy(prompt->cmd, tmp);
+	prompt->i = ft_strlen(prompt->cmd);
+	prompt_print(prompt, 1);
+	free(tmp);
+}
+
 static int		check_if_arg_is_dir(t_prompt *prompt)
 {
 	char	**arg;
 	DIR		*str;
-	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -45,16 +60,8 @@ static int		check_if_arg_is_dir(t_prompt *prompt)
 	if ((str = opendir(arg[i - 1])) != NULL &&
 			arg[i - 1][ft_strlen(arg[i - 1]) - 1] != '/')
 	{
-		tmp = ft_strdup(arg[i -1]);
-		free(arg[i - 1]);
-		arg[i - 1] = ft_strjoin(tmp, "/");
-		free(tmp);
-		tmp = join_tab(arg);
-		ft_strclr(prompt->cmd);
-		ft_strcpy(prompt->cmd, tmp);
-		prompt->i = ft_strlen(prompt->cmd);
-		prompt_print(prompt, 1);
-		free(tmp);
+		arg_is_dir(prompt, arg, i);
+		closedir(str);
 		return (1);
 	}
 	if (arg)
