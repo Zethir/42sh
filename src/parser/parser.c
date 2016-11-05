@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 10:42:39 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/05 14:29:27 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void			exec_job(t_shell *sh, t_job *job)
 	t_job	*tmp;
 
 	tmp = job;
+	reset_term_no_free(sh);
 	while (job)
 	{
 		launch_process(sh, job);

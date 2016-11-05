@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 12:09:52 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/05 14:29:17 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static int		lexer_parser(t_shell *sh, t_lex *lex, t_token_ht *token_ht)
 		free_token_ht(&token_ht);
 		return (-1);
 	}
-	reset_term_no_free(sh);
 	init_stdio(sh);
 	parse_cmd(sh, lex->token);
 	return (0);
