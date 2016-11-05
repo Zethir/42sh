@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 15:49:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 11:44:26 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/05 12:14:44 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int				input_redir(t_shell *sh, t_token *token, char *filename)
 	if ((fd = open(str, O_RDONLY)) == -1)
 	{
 		ft_putstr_fd("42sh: No such file: ", 2);
-		ft_putendl(filename);
+		ft_putendl_fd(filename, 2);
 		free(str);
 		return (-1);
 	}

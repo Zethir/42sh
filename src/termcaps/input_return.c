@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 15:45:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/03 16:58:24 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/05 12:06:32 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ char		*termcap_heredoc(t_shell *sh)
 	char		*str;
 
 	p = init_prompt();
-	prompt_print(p, 1);
 	stock_prompt(p, 0);
+	prompt_print(p, 1);
 	str = NULL;
 	while ((ret = read(0, buff, BUFF_SIZE) != -1))
 	{
