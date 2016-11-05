@@ -6,7 +6,7 @@
 #    By: cboussau <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/24 14:53:02 by cboussau          #+#    #+#              #
-#    Updated: 2016/10/26 15:42:56 by qdiaz            ###   ########.fr        #
+#    Updated: 2016/11/05 11:36:34 by cboussau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ O_DIR =	.tmp/obj
 O_DIRS = $(C_DIRS:$(C_DIR)%=$(O_DIR)%)
 O_FILES = $(C_FILES:$(C_DIR)%.c=$(O_DIR)%.o)
 
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 INCLUDES = -Iinclude -Ilibft/include
 LIB = -Llibft -lft -ltermcap
 
