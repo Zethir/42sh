@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/04 19:10:25 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/05 12:49:56 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		print_env(t_env *env)
 	tmp = env;
 	while (env)
 	{
-		if (ft_strlen(env->line) < 1)
+		if (!env->line)
 			env = env->next;
 		else if (env->flag == 0)
 		{

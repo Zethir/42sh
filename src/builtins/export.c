@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/10 11:45:51 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 15:59:11 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/05 12:49:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void			add_to_list(t_env *env, char *arg, int flag)
 	new_elem->next = NULL;
 	new_elem->line = ft_strdup(arg);
 	new_elem->name = (char *)malloc(sizeof(i) + 1);
+	new_elem->home = NULL;
+	new_elem->user = NULL;
 	ft_strncpy(new_elem->name, arg, i);
 	new_elem->flag = flag;
 	push_node(new_elem, &env);

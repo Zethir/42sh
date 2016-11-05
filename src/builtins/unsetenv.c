@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 17:12:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/27 16:06:26 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/05 12:49:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			do_unsetenv(t_env *env, char **arg, int flag)
 			if (ft_strcmp(env->name, *arg) == 0 && env->flag == flag)
 			{
 				free(env->line);
-				env->line = ft_strdup("");
+				env->line = NULL;
 			}
 			env = env->next;
 		}
