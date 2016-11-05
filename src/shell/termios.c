@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/02 18:16:13 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/05 10:43:43 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int			reset_term(t_shell *sh)
 
 int			reset_term_no_free(t_shell *sh)
 {
+	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
 	if (tcgetattr(0, &(sh->term)) == -1)
 		return (-1);
 	sh->term.c_lflag |= (ICANON | ECHO);
