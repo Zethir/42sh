@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 13:51:06 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/04 16:02:01 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/05 11:32:15 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ char			*join_tab(char **arg)
 	while (arg[i])
 	{
 		tmp = ft_strjoin(tmp2, " ");
-		free (tmp2);
+		free(tmp2);
 		tmp2 = ft_strjoin(tmp, arg[i]);
-		free (tmp);
+		free(tmp);
 		i++;
 	}
 	return (tmp2);
@@ -73,7 +73,7 @@ static int		check_if_arg_is_dir(t_prompt *prompt)
 	return (0);
 }
 
-void	start_auto_complete(t_prompt *prompt, char *buff)
+void			start_auto_complete(t_prompt *prompt, char *buff)
 {
 	char	*res;
 

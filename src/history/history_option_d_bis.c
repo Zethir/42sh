@@ -6,13 +6,24 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 22:07:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/04 19:24:08 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/05 11:29:46 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-int		check_if_out_of_range(char **cmd, int nbr)
+static int	out_of_range(char **cmd, char *path, int nbr, int i)
+{
+	if (nbr >= i - 1)
+	{
+		out_of_range_error(cmd);
+		free(path);
+		return (1);
+	}
+	return (0);
+}
+
+int			check_if_out_of_range(char **cmd, int nbr)
 {
 	char	*path;
 	char	*line;
@@ -33,12 +44,8 @@ int		check_if_out_of_range(char **cmd, int nbr)
 		i++;
 	}
 	free(line);
-	if (nbr >= i - 1)
-	{
-		out_of_range_error(cmd);
-		free(path);
+	if (out_of_range(cmd, path, nbr, i) == 1)
 		return (1);
-	}
 	free(path);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 18:28:20 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/04 17:51:07 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/05 11:22:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*get_res_arg(char **sel, char *cmd, int i)
 
 	tmp = ft_strdup(sel[i - 1]);
 	if (tmp && deal_with_cmd(cmd) == 2)
-	{		
+	{
 		free(sel[i - 1]);
 		sel[i - 1] = arg_exists(tmp);
 		free(tmp);
