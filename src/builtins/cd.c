@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 17:24:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 16:47:41 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 19:08:33 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,44 @@
 
 static void		cd_prev(t_env *env)
 {
-	char	buf[512];
-	char	*str;
 	t_env	*tmp;
+	char	*str;
 
 	tmp = env;
+	str = NULL;
 	while (env)
 	{
 		if (ft_strcmp(env->name, "OLDPWD") == 0)
-		{
 			str = ft_strsub(ft_strchr(env->line, '='), 1, ft_strlen(env->line));
-			if (getcwd(buf, 512) != NULL)
-				change_varcontent(env, "OLDPWD", getcwd(buf, 512));
-			chdir(str);
-			free(str);
-			change_varcontent(env, "PWD", getcwd(buf, 512));
-		}
 		env = env->next;
 	}
 	env = tmp;
+	if (str)
+	{
+		change_directory(env, str);
+		free(str);
+	}
 }
 
 static void		cd_home(t_env *env)
 {
-	char	buf[512];
 	t_env	*tmp;
+	char	*str;
 
 	tmp = env;
+	str = NULL;
 	while (env)
 	{
 		if (ft_strcmp(env->name, "HOME") == 0)
-		{
-			if (getcwd(buf, 512) != NULL)
-				change_varcontent(env, "OLDPWD", getcwd(buf, 512));
-			chdir(env->home);
-			change_varcontent(tmp, "PWD", getcwd(buf, 512));
-		}
+			str = ft_strdup(ft_strchr(env->line, '/'));
 		env = env->next;
 	}
 	env = tmp;
+	if (str)
+	{
+		change_directory(env, str);
+		free(str);
+	}
 }
 
 static char		*go_to_dir_from_root(t_env *env, char **cmd)
@@ -61,10 +60,11 @@ static char		*go_to_dir_from_root(t_env *env, char **cmd)
 	char	*str;
 
 	tmp = env;
+	str = NULL;
 	while (env)
 	{
 		if (ft_strcmp(env->name, "HOME") == 0)
-			chdir(env->home);
+			chdir(ft_strchr(env->line, '/'));
 		env = env->next;
 	}
 	env = tmp;

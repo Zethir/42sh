@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/08 16:50:55 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 18:19:08 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ typedef struct		s_env
 {
 	char			*line;
 	char			*name;
-	char			*home;
-	char			*user;
 	int				flag;
 	struct s_env	*next;
 }					t_env;

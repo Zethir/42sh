@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 17:48:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 16:38:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 18:31:43 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	prompt_name(t_env *env)
 	{
 		if (ft_strcmp(env->name, "USER") == 0)
 		{
-			color(CYAN, env->user);
+			color(CYAN, ft_strchr(env->line, '=') + 1);
 			color(RESET, "");
 		}
 		env = env->next;
@@ -75,11 +75,12 @@ static int	cmp_pwd_home(t_env *env, char *buff)
 	{
 		if (ft_strcmp(env->name, "HOME") == 0)
 		{
-			if (ft_strcmp(env->home, buff) == 0)
+			if (ft_strcmp(ft_strchr(env->line, '/'), buff) == 0)
 				return (1);
-			else if (ft_strncmp(env->home, buff, ft_strlen(env->home)) == 0)
+			else if (ft_strncmp(ft_strchr(env->line, '/'), buff,
+						ft_strlen(ft_strchr(env->line, '/'))) == 0)
 			{
-				i = ft_strlen(env->home);
+				i = ft_strlen(ft_strchr(env->line, '/'));
 				return (i);
 			}
 		}

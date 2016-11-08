@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:37:50 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 17:04:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 18:23:53 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,6 @@ t_env	*init_env(char **env)
 		node->line = ft_strdup(*env);
 		node->flag = 0;
 		node->name = ft_strsub(*env, 0, ft_strlen_char(*env, '='));
-		if (ft_strccmp(*env, "USER=", '=') == 0)
-			node->user = ft_strsub(*env, 5, ft_strlen(*env) - 5);
-		else
-			node->user = NULL;
-		if (ft_strncmp(*env, "HOME=", 5) == 0)
-			node->home = ft_strdup(ft_strchr(*env, '/'));
-		else
-			node->home = NULL;
 		push_node(node, &head);
 		env++;
 	}
