@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 12:15:16 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/08 21:03:33 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@ static void	get_new_stdio(t_process *process)
 void		launch_builtin(t_shell *sh, t_parse *parse, t_job *job)
 {
 	int		save_stdio[3];
-	int		ret;
 
 	save_stdio[0] = dup(0);
 	save_stdio[1] = dup(1);
 	save_stdio[2] = dup(2);
 	get_new_stdio(job->process);
-	if ((ret = do_builtins(sh, job, parse)) == 0)
+	if ((sh->return_val = do_builtins(sh, job, parse)) == 0)
 		job->process->completed = 1;
 	dup2(save_stdio[0], 0);
 	dup2(save_stdio[1], 1);

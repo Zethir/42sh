@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/29 12:56:15 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/31 18:17:00 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 21:32:04 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,37 @@ int		get_num_process(t_process *process)
 	return (i);
 }
 
-void	update_process_status(t_process *process, pid_t pid, int status)
+void	update_process_status(t_shell *sh, t_process *p, pid_t pid, int status)
 {
 	t_process *tmp;
 
-	tmp = process;
-	while (process)
+	tmp = p;
+	while (p)
 	{
-		if (process->pid == pid)
+		if (p->pid == pid)
 		{
 			if (WIFEXITED(status) && status == 0)
-				process->completed = 1;
+			{
+				p->completed = 1;
+				sh->return_val = WEXITSTATUS(status);	
+			}
 			if (WIFEXITED(status) && status != 0)
-				process->completed = 0;
+			{
+				p->completed = 0;
+				sh->return_val = WEXITSTATUS(status);	
+			}
 			if (WIFSIGNALED(status))
-				process->completed = 1;
+			{
+				p->completed = 1;
+				sh->return_val = WEXITSTATUS(status);
+			}
 		}
-		process = process->next;
+		p = p->next;
 	}
-	process = tmp;
+	p = tmp;
 }
 
-void	wait_for_job(t_job *job, int i)
+void	wait_for_job(t_shell *sh, t_job *job, int i)
 {
 	int		status;
 	pid_t	pid;
@@ -73,7 +82,7 @@ void	wait_for_job(t_job *job, int i)
 	while (i > 0)
 	{
 		pid = wait(&status);
-		update_process_status(job->process, pid, status);
+		update_process_status(sh, job->process, pid, status);
 		if (pid == -1)
 			break ;
 		status = 0;

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 16:29:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 20:57:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int		lexer_parser(t_shell *sh, t_lex *lex, t_token_ht *token_ht)
 		return (-1);
 	}
 	init_stdio(sh);
+	sh->return_val = 0;
 	parse_cmd(sh, lex->token);
 	return (0);
 }

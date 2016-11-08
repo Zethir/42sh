@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:20:00 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 10:42:57 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 21:29:36 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ void					exec_job(t_shell *sh, t_job *job);
 void					exec_process(t_shell *sh, t_job *job, int *iofile);
 void					push_process(t_process *node, t_process **head);
 void					push_job(t_job *node, t_job **head);
-void					wait_for_job(t_job *job, int i);
-void					update_process_status(t_process *p, pid_t pid, int sta);
+void					wait_for_job(t_shell *sh, t_job *job, int i);
+void					update_process_status(t_shell *sh, t_process *p,
+		pid_t pid, int sta);
 void					free_job(t_job *job);
 void					free_parse(t_parse **head);
 void					launch_builtin(t_shell *sh, t_parse *pa, t_job *job);
