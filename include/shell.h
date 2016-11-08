@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/08 18:19:08 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 21:41:09 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ void				restore_env(t_env *node, char **save);
 void				exec_pipe(t_shell *sh);
 void				export_new_variable(t_env *env, char *arg);
 void				add_to_list(t_env *env, char *arg, int flag);
-void				deal_with_opt(t_shell *sh, char **arg, char **env_cpy);
 void				exec_cmd_lst(t_shell *sh, char **cmd, char *line);
 void				change_varcontent(t_env *env, char *name_ref, char *data);
 void				ign_signal(int id);
 void				change_directory(t_env *env, char *cmd);
+int					deal_with_opt(t_shell *sh, char **arg, char **env_cpy);
 int					do_designator(t_shell *sh, char **cmd);
 int					do_export(t_env *env, char **arg);
 int					do_cd(t_env *node, char **arg);

@@ -6,24 +6,26 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 17:27:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 16:03:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 21:08:20 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-void	print_error_opt(char *arg)
+int		print_error_opt(char *arg)
 {
 	ft_putstr_fd("env: unsetenv ", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd(": Invalid argument\n", 2);
+	return (1);
 }
 
-void	print_error_arg(void)
+int		print_error_arg(void)
 {
 	ft_putendl_fd("env: missing argument after option", 2);
 	ft_putstr_fd("usage: env [-iv] [-P utilpath] [-S string] [-u name]\n", 2);
 	ft_putstr_fd("           [name=value ...] [utility [argument ...]]\n", 2);
+	return (1);
 }
 
 int		print_alpha_error(char **arg)

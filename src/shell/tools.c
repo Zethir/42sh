@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 12:52:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 16:19:05 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 21:18:30 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int			check_caract(char *str, char c)
 
 	i = 0;
 	if (str[i] == c)
-		return (0);
+		return (-1);
 	while (str[i])
 	{
 		if (str[i] == c)

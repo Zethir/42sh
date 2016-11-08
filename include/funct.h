@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:38:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 16:10:16 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 21:36:59 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void				win_size(int id);
 void				close_pipefds(int pipefds[], int num);
 void				wait_for_child(int num);
 void				color(char *color, char *str);
+int					print_wrong_identifier_env(char *arg);
 int					check_wrong_identifier(char *arg);
 int					check_number_bis(char **cmd);
 int					check_number(char **cmd);
