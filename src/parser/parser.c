@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 15:19:20 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 21:32:39 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 22:06:11 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static void		launch_process(t_shell *sh, t_job *job)
 	}
 	job->process = process;
 	wait_for_job(sh, job, i);
-	printf("return_val = %d\n", sh->return_val);
 }
 
 void			exec_job(t_shell *sh, t_job *job)
