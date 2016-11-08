@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:37:50 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 19:28:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 20:28:16 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-int		check_env(t_env *env)
+int			check_env(t_env *env)
 {
 	t_env	*tmp;
 
@@ -28,7 +28,7 @@ int		check_env(t_env *env)
 	return (0);
 }
 
-int		get_intel(t_env *env, char *str)
+int			get_intel(t_env *env, char *str)
 {
 	t_env	*tmp;
 
@@ -46,7 +46,7 @@ int		get_intel(t_env *env, char *str)
 	return (0);
 }
 
-void	push_node(t_env *env, t_env **head)
+void		push_node(t_env *env, t_env **head)
 {
 	t_env	*tmp;
 
@@ -62,37 +62,41 @@ void	push_node(t_env *env, t_env **head)
 	tmp->next = env;
 }
 
-t_env	*init_env(char **env)
+static void	shell_level(char **env)
 {
-	t_env	*node;
-	t_env	*head;
-	int		i;
 	char	**tabl;
 	char	*str;
 	char	*tmp;
+	int		i;
+
+	i = 0;
+	i = ft_atoi(ft_strchr(*env, '=') + 1);
+	i += 1;
+	tabl = ft_strsplit(*env, '=');
+	if (tabl[1])
+		free(tabl[1]);
+	tabl[1] = ft_itoa(i);
+	str = ft_strjoin(tabl[0], "=");
+	tmp = ft_strjoin(str, tabl[1]);
+	free(str);
+	ft_bzero(*env, ft_strlen(*env));
+	ft_strcpy(*env, tmp);
+	free(tmp);
+}
+
+t_env		*init_env(char **env)
+{
+	t_env	*node;
+	t_env	*head;
 
 	head = NULL;
-	i = 0;
 	while (*env)
 	{
 		if (!(node = (t_env *)malloc(sizeof(t_env))))
 			return (NULL);
 		node->next = NULL;
 		if (ft_strncmp(*env, "SHLVL", 5) == 0)
-		{
-			i = ft_atoi(ft_strchr(*env, '=') + 1);
-			i += 1;
-			tabl = ft_strsplit(*env, '=');
-			if (tabl[1])
-				free(tabl[1]);
-			tabl[1] = ft_itoa(i);
-			str = ft_strjoin(tabl[0], "=");
-			tmp = ft_strjoin(str, tabl[1]);
-			free(str);
-			ft_bzero(*env, ft_strlen(*env));
-			ft_strcpy(*env, tmp);
-			free(tmp);
-		}
+			shell_level(&*env);
 		node->line = ft_strdup(*env);
 		node->flag = 0;
 		node->name = ft_strsub(*env, 0, ft_strlen_char(*env, '='));
