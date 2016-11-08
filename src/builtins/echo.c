@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/14 14:55:27 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/03 16:53:01 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/08 16:21:55 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void		print_echo(char *cmd)
 	i = 0;
 	while (cmd[i])
 	{
-		while (cmd[i] && (cmd[i] == '\"' || cmd[i] == '\''))
+		if ((cmd[i] == '\"' || cmd[i] == '\'') && 
+				(i == 0 || (size_t)i == ft_strlen(cmd) - 1))
 			i++;
 		if ((size_t)i < ft_strlen(cmd))
 			ft_putchar(cmd[i]);

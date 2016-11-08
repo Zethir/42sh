@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 14:29:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 16:29:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		deal_with_inhib(t_shell *sh, t_lex *lex)
 	char	*tmp2;
 
 	tmp = NULL;
-	while (check_for_parenth(lex->line) != 0)
+	while (check_for_quotes(lex->line) != 0)
 	{
 		tmp = termcap_heredoc(sh);
 		tmp2 = ft_strjoin("\n", tmp);

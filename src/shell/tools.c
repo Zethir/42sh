@@ -6,20 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 12:52:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/02 20:01:11 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 16:19:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-void	color(char *color, char *str)
-{
-	ft_putchar_fd('\033', 2);
-	ft_putstr_fd(color, 2);
-	ft_putstr_fd(str, 2);
-}
-
-int		get_index(t_env *node)
+int			get_index(t_env *node)
 {
 	t_env	*tmp;
 	int		i;
@@ -35,40 +28,71 @@ int		get_index(t_env *node)
 	return (i);
 }
 
-int		ft_strccmp(const char *s1, const char *s2, char c)
+static int	check_for_sister(char *arg, char c, int i)
 {
-	unsigned char *tmp1;
-	unsigned char *tmp2;
-
-	tmp1 = (unsigned char *)s1;
-	tmp2 = (unsigned char *)s2;
-	while (*tmp1 && *tmp1 == *tmp2 && *tmp1 != c)
+	while (arg[i])
 	{
-		tmp1++;
-		tmp2++;
+		if (arg[i] == c)
+			return (1);
+		i++;
 	}
-	return (*tmp1 - *tmp2);
+	return (0);
 }
 
-int		check_for_parenth(char *arg)
+int			check_for_quotes(char *arg)
 {
 	int		i;
-	int		j;
-	int		k;
 
 	i = 0;
-	j = 0;
-	k = 0;
 	while (arg[i])
 	{
 		if (arg[i] == 39)
-			j++;
+		{
+			if (check_for_sister(arg, 39, i + 1) == 1)
+				return (0);
+			else
+				return (1);
+		}
 		if (arg[i] == 34)
-			k++;
+		{
+			if (check_for_sister(arg, 34, i + 1) == 1)
+				return (0);
+			else
+				return (1);
+		}
 		i++;
 	}
-	if ((j == 0 || j % 2 == 0) && (k == 0 || k % 2 == 0))
+	return (0);
+}
+
+int			check_caract(char *str, char c)
+{
+	int		i;
+
+	i = 0;
+	if (str[i] == c)
 		return (0);
-	else
-		return (-1);
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char		**add_elem(char **tabl, char *arg)
+{
+	char	**res;
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = join_tab(tabl);
+	tmp2 = ft_strjoin(tmp, " ");
+	free(tmp);
+	tmp = ft_strjoin(tmp2, arg);
+	free(tmp2);
+	res = ft_strsplit_ws(tmp);
+	free(tmp);
+	return (res);
 }

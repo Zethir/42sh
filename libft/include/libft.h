@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 17:42:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/04 19:04:37 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 15:08:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int					ft_isspace(int c);
 int					ft_tablen(char **tableau);
 int					get_next_line(int const fd, char **line);
 int					ft_strccmp(const char *s1, const char *s2, char c);
+char				*join_tab(char **tabl);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int value, int base);
 char				*ft_chardup(const char c);

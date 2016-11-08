@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:38:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/04 18:44:38 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 16:10:16 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int					start_pipe(int pipefds[], int num);
 int					check_builtins(char *cmd);
 int					do_echo(char **cmd);
 int					check_caract(char *str, char c);
-int					check_for_parenth(char *arg);
+int					check_for_quotes(char *arg);
 int					check_if_out_of_range(char **cmd, int nbr);
 char				*split_line(char *line);
 char				*join_tab(char **arg);

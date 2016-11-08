@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors4.c                                          :+:      :+:    :+:   */
+/*   join_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/27 16:35:40 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 11:43:57 by qdiaz            ###   ########.fr       */
+/*   Created: 2016/11/08 15:06:27 by cboussau          #+#    #+#             */
+/*   Updated: 2016/11/08 15:07:36 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "libft.h"
 
-void	print_parse_error(char c)
+char	*join_tab(char **arg)
 {
-	ft_putstr_fd("42sh: parse error near `", 2);
-	ft_putchar_fd(c, 2);
-	ft_putendl_fd("'", 2);
+	char	*tmp;
+	char	*tmp2;
+	int		i;
+
+	tmp2 = ft_strdup(arg[0]);
+	i = 1;
+	while (arg[i])
+	{
+		tmp = ft_strjoin(tmp2, " ");
+		free(tmp2);
+		tmp2 = ft_strjoin(tmp, arg[i]);
+		free(tmp);
+		i++;
+	}
+	return (tmp2);
 }

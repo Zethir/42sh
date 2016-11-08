@@ -6,30 +6,11 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 13:51:06 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 15:47:47 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 15:58:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <termcaps.h>
-
-char			*join_tab(char **arg)
-{
-	char	*tmp;
-	char	*tmp2;
-	int		i;
-
-	tmp2 = ft_strdup(arg[0]);
-	i = 1;
-	while (arg[i])
-	{
-		tmp = ft_strjoin(tmp2, " ");
-		free(tmp2);
-		tmp2 = ft_strjoin(tmp, arg[i]);
-		free(tmp);
-		i++;
-	}
-	return (tmp2);
-}
 
 static void		arg_is_dir(t_prompt *prompt, char **arg, int i)
 {

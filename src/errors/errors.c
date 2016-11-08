@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 17:27:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/24 16:00:14 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 16:03:50 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,17 @@ int		print_alpha_error(char **arg)
 	return (0);
 }
 
-void	print_env_error(char *arg)
-{
-	ft_putstr_fd("env: ", 2);
-	ft_putstr_fd(arg, 2);
-	ft_putendl_fd(": No such file or directory", 2);
-}
-
 void	print_main_error(char *arg)
 {
 	ft_putstr_fd("env: illegal option -- ", 2);
 	ft_putendl_fd(arg, 2);
 	ft_putstr_fd("usage: env [-iv] [-P utilpath] [-S string] [-u name]\n", 2);
 	ft_putstr_fd("           [name=value ...] [utility [argument ...]]\n", 2);
+}
+
+void	print_parse_error(char c)
+{
+	ft_putstr_fd("42sh: parse error near `", 2);
+	ft_putchar_fd(c, 2);
+	ft_putendl_fd("'", 2);
 }

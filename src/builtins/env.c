@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 12:49:56 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 15:09:01 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	deal_with_arg(t_shell *sh, char **arg, char **env_cpy)
 		{
 			if (check_caract(*arg, '=') != 1)
 			{
-				cmd = join_env(arg);
+				cmd = join_tab(arg);
 				exec_env(sh, cmd, env_cpy);
 				return ;
 			}

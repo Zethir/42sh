@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 17:24:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/29 14:44:26 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 16:47:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ static char		*go_to_dir_from_root(t_env *env, char **cmd)
 static void		deal_with_cd_arg(t_env *env, char **cmd)
 {
 	struct stat	st;
-	char		buf[512];
-
 	if (stat(cmd[1], &st) == -1)
 	{
 		ft_putstr_fd(cmd[1], 2);
@@ -93,11 +91,7 @@ static void		deal_with_cd_arg(t_env *env, char **cmd)
 		ft_putstr_fd(": Permission denied.\n", 2);
 	}
 	else
-	{
-		change_varcontent(env, "OLDPWD", getcwd(buf, 512));
-		chdir(cmd[1]);
-		change_varcontent(env, "PWD", getcwd(buf, 512));
-	}
+		change_directory(env, cmd[1]);
 }
 
 int				do_cd(t_env *env, char **cmd)

@@ -6,11 +6,24 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 10:43:43 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 15:19:33 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include <termcaps.h>
+
+void	win_size(int id)
+{
+	t_prompt		*prompt;
+	struct winsize	win;
+
+	(void)id;
+	prompt = NULL;
+	prompt = stock_prompt(prompt, 1);
+	ioctl(0, TIOCGWINSZ, &win);
+	prompt->win_size = win.ws_col;
+	prompt_print(prompt, 1);
+}
 
 int			reset_term(t_shell *sh)
 {

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 18:35:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 11:43:27 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/08 16:02:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,6 @@ void	out_of_range_error(char **cmd)
 	ft_putendl_fd(": history position out of range", 2);
 }
 
-void	no_command_error(char *arg)
-{
-	ft_putstr_fd(arg, 2);
-	ft_putendl_fd(": Command not found.", 2);
-}
-
 int		arg_in_dir(t_env *node, char *arg)
 {
 	t_env			*tmp;
@@ -69,15 +63,4 @@ int		arg_in_dir(t_env *node, char *arg)
 			if (!(ft_strcmp(arg, ret->d_name)))
 				return (0);
 	return (1);
-}
-
-void	print_right_error(t_env *node, char *arg)
-{
-	if (access(arg, X_OK) == -1 && arg_in_dir(node, arg) == 0)
-	{
-		ft_putstr_fd("error: permission denied: ", 2);
-		ft_putendl_fd(arg, 2);
-	}
-	else
-		no_command_error(arg);
 }

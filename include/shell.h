@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/02 19:16:58 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 16:50:55 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void				deal_with_opt(t_shell *sh, char **arg, char **env_cpy);
 void				exec_cmd_lst(t_shell *sh, char **cmd, char *line);
 void				change_varcontent(t_env *env, char *name_ref, char *data);
 void				ign_signal(int id);
+void				change_directory(t_env *env, char *cmd);
 int					do_designator(t_shell *sh, char **cmd);
 int					do_export(t_env *env, char **arg);
 int					do_cd(t_env *node, char **arg);

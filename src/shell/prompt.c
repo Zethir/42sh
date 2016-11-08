@@ -6,11 +6,18 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 17:48:35 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/02 14:21:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 16:38:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+
+void		color(char *color, char *str)
+{
+	ft_putchar_fd('\033', 2);
+	ft_putstr_fd(color, 2);
+	ft_putstr_fd(str, 2);
+}
 
 static void	deal_with_prompt_path(int i, char *buff)
 {
@@ -82,24 +89,24 @@ static int	cmp_pwd_home(t_env *env, char *buff)
 	return (0);
 }
 
-static void	prompt_path(t_env *env)
+void		get_prompt(t_env *env)
 {
 	char	buff[100];
 	int		i;
 
-	if (get_intel(env, "PWD") == 1)
-	{
-		getcwd(buff, 100);
-		i = cmp_pwd_home(env, buff);
-		deal_with_prompt_path(i, buff);
-		return ;
-	}
-}
-
-void		get_prompt(t_env *env)
-{
 	color(BLUE, "# ");
 	color(RESET, "");
 	prompt_name(env);
-	prompt_path(env);
+	ft_bzero(buff, 100);
+	if (get_intel(env, "PWD") == 1)
+	{
+		getcwd(buff, 100);
+		if (buff[0] != 0)
+		{
+			i = cmp_pwd_home(env, buff);
+			deal_with_prompt_path(i, buff);
+		}
+		else
+			ft_putendl_fd("\033[31mDirectory does not exist\033[39m", 2);
+	}
 }
