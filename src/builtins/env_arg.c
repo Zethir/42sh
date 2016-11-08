@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 15:14:10 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/08 21:42:01 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ static int	check_u_opt(t_shell *sh, char **arg, char **env_cpy)
 	{
 		arg++;
 		if (check_arg(env_cpy, *arg) == 0)
-			print_error_opt(*arg);
+			return (print_error_opt(*arg));
 		arg++;
 		if (*arg)
 		{
 			cmd = join_tab(arg);
 			exec_env(sh, cmd, env_cpy);
+			return (sh->return_val);
 		}
 		else
 			ft_print_tab(env_cpy);
@@ -69,14 +70,15 @@ static int	check_u_opt(t_shell *sh, char **arg, char **env_cpy)
 		return (1);
 }
 
-void		deal_with_opt(t_shell *sh, char **arg, char **env_cpy)
+int			deal_with_opt(t_shell *sh, char **arg, char **env_cpy)
 {
 	if (check_u_opt(sh, arg, env_cpy) == 1 &&
 			check_i_opt(sh, arg, env_cpy) == 1)
 	{
 		if (!arg[1] && !arg[0][2] && (arg[0][1] == 'u' || arg[0][1] == 'i'))
-			print_error_arg();
+			return(print_error_arg());
 		else
-			print_main_error(&*arg[0]);
+			return (print_main_error(&*arg[0]));
 	}
+	return (0);
 }
