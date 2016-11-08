@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/08 21:41:09 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/08 21:44:14 by qdiaz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct		s_shell
 {
 	int				stdio[3];
 	int				closefd;
+	int				return_val;
 	struct s_hist	*head;
 	struct s_hist	*hist;
 	struct s_env	*env;
