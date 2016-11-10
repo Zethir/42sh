@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:37:50 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 20:28:16 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/10 22:20:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void	shell_level(char **env)
 	ft_bzero(*env, ft_strlen(*env));
 	ft_strcpy(*env, tmp);
 	free(tmp);
+	ft_free_tab(tabl);
 }
 
 t_env		*init_env(char **env)
