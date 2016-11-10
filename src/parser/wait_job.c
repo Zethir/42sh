@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/29 12:56:15 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 21:53:05 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/10 18:10:49 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ void	update_process_status(t_shell *sh, t_process *p, pid_t pid, int status)
 			if (WIFEXITED(status) && status == 0)
 			{
 				p->completed = 1;
-				sh->return_val = WEXITSTATUS(status);	
+				sh->return_val = WEXITSTATUS(status);
 			}
 			if (WIFEXITED(status) && status != 0)
 			{
 				p->completed = 0;
-				sh->return_val = WEXITSTATUS(status);	
+				sh->return_val = WEXITSTATUS(status);
 			}
 			if (WIFSIGNALED(status))
 			{

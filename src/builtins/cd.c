@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 17:24:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 19:08:33 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/10 17:33:24 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int				do_cd(t_env *env, char **cmd)
 	else if (cmd[1] && cmd[2])
 	{
 		ft_putstr_fd("cd: Too many arguments.\n", 2);
-		return (-1);
+		return (1);
 	}
 	else if (ft_strcmp(cmd[1], "-") == 0)
 		cd_prev(env);

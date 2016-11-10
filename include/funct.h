@@ -6,17 +6,14 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:38:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 21:36:59 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/10 17:26:29 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCT_H
 # define FUNCT_H
 
-void				print_error_opt(char *arg);
-void				print_error_arg(void);
 void				print_env_error(char *arg);
-void				print_main_error(char *arg);
 void				print_parse_error(char c);
 void				print_identifier_error(char *arg);
 void				out_of_range_error(char **cmd);
@@ -30,6 +27,9 @@ void				win_size(int id);
 void				close_pipefds(int pipefds[], int num);
 void				wait_for_child(int num);
 void				color(char *color, char *str);
+int					print_error_opt(char *arg);
+int					print_error_arg(void);
+int					print_main_error(char *arg);
 int					print_wrong_identifier_env(char *arg);
 int					check_wrong_identifier(char *arg);
 int					check_number_bis(char **cmd);

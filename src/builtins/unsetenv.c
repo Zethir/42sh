@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 17:12:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 19:06:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/10 17:32:00 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			do_unsetenv(t_env *env, char **arg, int flag)
 	if (!*arg)
 	{
 		ft_putendl_fd("unsetenv: Too few arguments.", 2);
-		return (-1);
+		return (1);
 	}
 	while (*arg)
 	{

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/17 16:55:39 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/03 18:59:22 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/10 17:49:12 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,22 +105,28 @@ int				do_designator(t_shell *sh, char **cmd)
 	if ((fd = open("/tmp/history", O_RDONLY)) == -1)
 	{
 		ft_putendl_fd("history : No such file or directory", 2);
-		return (-1);
+		return (1);
 	}
 	if (cmd[0][1] == '-')
 	{
 		if (check_number_bis(cmd) == 0)
 			deal_with_dash(sh, cmd, fd);
+		else
+			return (1);
 	}
 	else if (cmd[0][1] >= '0' && cmd[0][1] <= '9')
 	{
 		if (check_number(cmd) == 0)
 			deal_with_number(sh, cmd, fd);
+		else
+			return (1);
 	}
 	else if (cmd[0][1])
 	{
 		if (check_alpha(cmd) == 0)
 			deal_with_string(sh, cmd);
+		else
+			return (1);
 	}
 	close(fd);
 	return (0);

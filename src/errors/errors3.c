@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/23 18:07:23 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 11:43:43 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/10 17:48:35 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		check_number_bis(char **cmd)
 		if (cmd[0][i] < '0' || cmd[0][i] > '9')
 		{
 			ft_putendl_fd("Only number are allowed after dash", 2);
-			return (-1);
+			return (1);
 		}
 		i++;
 	}
@@ -65,7 +65,7 @@ int		check_number(char **cmd)
 		if (cmd[0][i] < '0' || cmd[0][i] > '9')
 		{
 			ft_putendl_fd("Must choose between number and char", 2);
-			return (-1);
+			return (1);
 		}
 		i++;
 	}
@@ -82,7 +82,7 @@ int		check_alpha(char **cmd)
 		if (cmd[0][i] >= '0' && cmd[0][i] <= '9')
 		{
 			ft_putendl_fd("Must choose between number and char", 2);
-			return (-1);
+			return (1);
 		}
 		i++;
 	}

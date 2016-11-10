@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/08 21:44:14 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/10 17:42:00 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,6 @@ void				exec_env(t_shell *sh, char *arg, char **env_cpy);
 void				push_node(t_env *env, t_env **head);
 void				push_hist(t_hist **head, t_hist *new_node);
 void				add_history(t_shell *sh);
-void				do_option(t_shell *sh, char **cmd);
-void				option_d(t_shell *sh, char **cmd);
-void				option_r(t_shell *sh);
 void				get_prompt(t_env *env);
 void				free_env(t_env *env);
 void				free_hist(t_hist *hist);
@@ -104,6 +101,9 @@ int					arg_in_dir(t_env *env, char *arg);
 int					get_index(t_env *env);
 int					get_index(t_env *env);
 int					do_history(t_shell *sh, char **cmd);
+int					do_option(t_shell *sh, char **cmd);
+int					option_d(t_shell *sh, char **cmd);
+int					option_r(t_shell *sh);
 int					get_intel(t_env *env, char *str);
 int					check_env(t_env *env);
 int					reset_term(t_shell *sh);

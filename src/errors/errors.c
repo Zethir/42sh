@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 17:27:17 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 21:08:20 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/10 17:25:13 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ int		print_alpha_error(char **arg)
 	return (0);
 }
 
-void	print_main_error(char *arg)
+int		print_main_error(char *arg)
 {
 	ft_putstr_fd("env: illegal option -- ", 2);
 	ft_putendl_fd(arg, 2);
 	ft_putstr_fd("usage: env [-iv] [-P utilpath] [-S string] [-u name]\n", 2);
 	ft_putstr_fd("           [name=value ...] [utility [argument ...]]\n", 2);
+	return (1);
 }
 
 void	print_parse_error(char c)

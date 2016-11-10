@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 16:11:24 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 21:38:14 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/10 17:35:07 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	deal_with_int(t_shell *sh, t_job *job, t_parse *parse)
 		if (parse->argv[j][i] < '0' || parse->argv[j][i] > '9')
 		{
 			ft_putendl_fd("exit: Badly formed number.", 2);
-			return (-1);
+			return (1);
 		}
 		i++;
 	}
@@ -52,9 +52,9 @@ int			do_exit(t_shell *sh, t_job *job, t_parse *parse)
 	if (i > 2)
 	{
 		ft_putendl_fd("exit: Expression Syntax.", 2);
-		return (-1);
+		return (1);
 	}
-	else if (deal_with_int(sh, job, parse) == -1)
-		return (-1);
-	return (-1);
+	else if (deal_with_int(sh, job, parse) == 1)
+		return (1);
+	return (0);
 }

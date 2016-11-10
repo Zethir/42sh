@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 19:39:25 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 18:23:42 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/10 17:32:42 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	cmp_list_arg(t_env *env, char **arg)
 	return (0);
 }
 
-static void	handle_arg_setenv(t_env *env, char **arg)
+static int	handle_arg_setenv(t_env *env, char **arg)
 {
 	t_env	*new_elem;
 	char	*str;
@@ -72,9 +72,13 @@ static void	handle_arg_setenv(t_env *env, char **arg)
 			free(str);
 			push_node(new_elem, &env);
 		}
+		return (0);
 	}
 	else
+	{
 		ft_putendl_fd("setenv: Variable name must begin with a letter.", 2);
+		return (1);
+	}
 }
 
 int			do_setenv(t_env *env, char **arg)
@@ -86,12 +90,15 @@ int			do_setenv(t_env *env, char **arg)
 	while (arg[i])
 		i++;
 	if (i > 2)
+	{
 		ft_putendl_fd("setenv: Too many arguments", 2);
-	else if (!*arg)
+		return (1);
+	}
+	if (!*arg)
 		print_env(env);
 	else if (print_alpha_error(arg) == 1)
-		return (-1);
-	else
-		handle_arg_setenv(env, arg);
-	return (-1);
+		return (1);
+	else if (handle_arg_setenv(env, arg) == 1)
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 20:57:11 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/10 18:39:56 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void		deal_with_inhib(t_shell *sh, t_lex *lex)
 
 static int		lexer_parser(t_shell *sh, t_lex *lex, t_token_ht *token_ht)
 {
+	dollar_symbol(sh, lex);
+	printf("lex->line = %s\n", lex->line);
 	if ((lex->token = check_lexer(lex, token_ht, sh)) == NULL)
 	{
 		free_lex(&lex);

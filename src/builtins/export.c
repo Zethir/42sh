@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/10 11:45:51 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 18:23:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/10 17:52:26 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int				do_export(t_env *env, char **arg)
 		while (arg[i])
 		{
 			if (export_arg(env, arg[i]) == -1)
-				return (-1);
+				return (1);
 			i++;
 		}
 	}

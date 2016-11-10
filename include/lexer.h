@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/02 16:23:58 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/10 18:37:35 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void				get_missing_cmd(t_lex *lex, t_token_ht *token_ht,
 void				truncate_redir(t_shell *sh, t_token *token, char *filename);
 void				append_redir(t_shell *sh, t_token *token, char *filename);
 void				parse_cmd(t_shell *sh, t_token *token);
+void				dollar_symbol(t_shell *sh, t_lex *lex);
 int					get_second_fd(t_lex *lex, int i);
 int					is_redir(t_lex *lex, t_token_ht *token_ht, int i);
 int					is_token(t_lex *lex, t_token_ht *token_ht, int i);

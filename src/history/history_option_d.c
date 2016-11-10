@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 15:09:15 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/04 19:23:07 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/10 17:44:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void		option_dbis2(t_shell *sh, int nbr, int fd)
 	sh->hist = hist;
 }
 
-static void		option_dbis(t_shell *sh, char **cmd)
+static int		option_dbis(t_shell *sh, char **cmd)
 {
 	char	*pathb;
 	int		fd;
@@ -88,20 +88,21 @@ static void		option_dbis(t_shell *sh, char **cmd)
 	{
 		ft_putendl_fd("history : No such file or directory", 2);
 		free(pathb);
-		return ;
+		return (1);
 	}
 	if (check_if_out_of_range(cmd, nbr) == 1)
 	{
 		free(pathb);
-		return ;
+		return (1);
 	}
 	option_dbis2(sh, nbr, fd);
 	unlink("/tmp/history");
 	rename(pathb, "/tmp/history");
 	free(pathb);
+	return (0);
 }
 
-void			option_d(t_shell *sh, char **cmd)
+int			option_d(t_shell *sh, char **cmd)
 {
 	int		i;
 
@@ -111,9 +112,11 @@ void			option_d(t_shell *sh, char **cmd)
 		if (cmd[2][i] < '0' || cmd[2][i] > '9')
 		{
 			out_of_range_error(cmd);
-			return ;
+			return (1);
 		}
 		i++;
 	}
-	option_dbis(sh, cmd);
+	if (option_dbis(sh, cmd) == 1)
+		return (1);
+	return (0);
 }

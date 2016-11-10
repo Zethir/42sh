@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 15:10:14 by cboussau          #+#    #+#             */
-/*   Updated: 2016/10/28 15:10:17 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/10 17:46:22 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void		add_to_file_bis(t_shell *sh, int fd)
 	}
 }
 
-static void		add_to_file(t_shell *sh)
+static int		add_to_file(t_shell *sh)
 {
 	char	*pathb;
 	int		fd;
@@ -54,12 +54,13 @@ static void		add_to_file(t_shell *sh)
 	{
 		ft_putendl_fd("history : No such file or directory", 2);
 		free(pathb);
-		return ;
+		return (1);
 	}
 	add_to_file_bis(sh, fd);
 	unlink("/tmp/history");
 	rename(pathb, "/tmp/history");
 	free(pathb);
+	return (0);
 }
 
 static void		refresh_hist(t_shell *sh, char *line)
@@ -73,7 +74,7 @@ static void		refresh_hist(t_shell *sh, char *line)
 	free(tmp);
 }
 
-void			option_r(t_shell *sh)
+int				option_r(t_shell *sh)
 {
 	int		fd;
 	char	*line;
@@ -83,14 +84,16 @@ void			option_r(t_shell *sh)
 	if ((fd = open("/tmp/history", O_RDWR | O_CREAT, 0644)) == -1)
 	{
 		ft_putendl_fd("history : No such file or directory", 2);
-		return ;
+		return (1);
 	}
 	while (get_next_line(fd, &line) > 0)
 		refresh_hist(sh, line);
 	free(line);
-	add_to_file(sh);
+	if (add_to_file(sh) == 1)
+		return (1);
 	free(sh->hist->str);
 	sh->hist->str = ft_strdup(str);
 	close(fd);
 	free(str);
+	return (0);
 }
