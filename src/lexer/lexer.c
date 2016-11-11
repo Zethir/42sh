@@ -6,16 +6,17 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:40:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/11 17:02:13 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:14:16 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
-static int	check_parse_error(t_lex *lex, int i)
+static int	check_parse_error(t_lex *lex, int i, char *tmp)
 {
 	if (i < 0)
 	{
+		free(tmp);
 		print_parse_error(lex->line[lex->hd]);
 		return (-1);
 	}
@@ -44,11 +45,8 @@ t_token		*check_lexer(t_lex *lex, t_token_ht *token_ht, t_shell *sh)
 	{
 		tmp = ft_strsub(lex->line, lex->tl, lex->hd + 1);
 		i = is_token(lex, token_ht, lex->hd);
-		if (check_parse_error(lex, i) == -1)
-		{
-			free(tmp);
+		if (check_parse_error(lex, i, tmp) == -1)
 			return (NULL);
-		}
 		if (!lex->line[lex->hd + 1] && i == 0)
 			if ((token_ht = add_token(lex, token_ht, tmp, 13)) == NULL)
 			{

@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/24 14:47:18 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/10 17:42:00 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:41:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,10 @@ int					arg_in_dir(t_env *env, char *arg);
 int					get_index(t_env *env);
 int					get_index(t_env *env);
 int					do_history(t_shell *sh, char **cmd);
-int					do_option(t_shell *sh, char **cmd);
-int					option_d(t_shell *sh, char **cmd);
-int					option_r(t_shell *sh);
+int					do_option(t_shell *sh, char **cmd, int fd);
+int					option_d(t_shell *sh, char **cmd, int fd);
+int					option_r(t_shell *sh, int fd);
+int					open_history(void);
 int					get_intel(t_env *env, char *str);
 int					check_env(t_env *env);
 int					reset_term(t_shell *sh);

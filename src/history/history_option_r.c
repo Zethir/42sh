@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 15:10:14 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 17:46:22 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:41:18 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,12 @@ static void		refresh_hist(t_shell *sh, char *line)
 	free(tmp);
 }
 
-int				option_r(t_shell *sh)
+int				option_r(t_shell *sh, int fd)
 {
-	int		fd;
 	char	*line;
 	char	*str;
 
 	str = ft_strdup(sh->hist->str);
-	if ((fd = open("/tmp/history", O_RDWR | O_CREAT, 0644)) == -1)
-	{
-		ft_putendl_fd("history : No such file or directory", 2);
-		return (1);
-	}
 	while (get_next_line(fd, &line) > 0)
 		refresh_hist(sh, line);
 	free(line);

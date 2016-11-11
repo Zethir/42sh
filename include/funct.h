@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 16:38:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 17:26:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:42:24 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int					check_builtins(char *cmd);
 int					do_echo(char **cmd);
 int					check_caract(char *str, char c);
 int					check_for_quotes(char *arg);
-int					check_if_out_of_range(char **cmd, int nbr);
+int					check_if_out_of_range(char **cmd, int nbr, int fd);
 char				*split_line(char *line);
 char				*join_tab(char **arg);
 char				**malloc_tab(char **arg);

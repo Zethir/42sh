@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/11 17:08:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:59:51 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int			deal_with_opt(t_shell *sh, char **arg, char **env_cpy)
 			check_i_opt(sh, arg, env_cpy) == 1)
 	{
 		if (!arg[1] && !arg[0][2] && (arg[0][1] == 'u' || arg[0][1] == 'i'))
-			return(print_error_arg());
+			return (print_error_arg());
 		else
 			return (print_main_error(&*arg[0]));
 	}

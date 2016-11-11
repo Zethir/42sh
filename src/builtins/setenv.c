@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/27 19:39:25 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 17:32:42 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:55:00 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ static int	handle_arg_setenv(t_env *env, char **arg)
 		return (0);
 	}
 	else
-	{
-		ft_putendl_fd("setenv: Variable name must begin with a letter.", 2);
 		return (1);
-	}
 }
 
 int			do_setenv(t_env *env, char **arg)
@@ -99,6 +96,9 @@ int			do_setenv(t_env *env, char **arg)
 	else if (print_alpha_error(arg) == 1)
 		return (1);
 	else if (handle_arg_setenv(env, arg) == 1)
+	{
+		ft_putendl_fd("setenv: Variable name must begin with a letter.", 2);
 		return (1);
+	}
 	return (0);
 }

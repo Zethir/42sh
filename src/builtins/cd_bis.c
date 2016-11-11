@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 17:14:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 18:09:23 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 19:05:39 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		change_varcontent(t_env *env, char *name_ref, char *data)
 	}
 	env = tmp;
 }
-	
+
 void		change_directory(t_env *env, char *cmd)
 {
 	char		buf[512];

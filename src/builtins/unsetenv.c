@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/28 17:12:34 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 17:32:00 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:55:23 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void	browse_env(t_env *env, char *arg, int flag)
 		env = env->next;
 		count++;
 	}
-
 }
 
 int			do_unsetenv(t_env *env, char **arg, int flag)

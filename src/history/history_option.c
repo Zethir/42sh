@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 14:04:26 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 17:41:30 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:52:52 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 static int		option_c(t_shell *sh)
 {
-	int		fd;
 	char	*str;
 
-	if ((fd = open("/tmp/history", O_WRONLY | O_TRUNC, 0644)) == -1)
+	if (open("/tmp/history", O_WRONLY | O_TRUNC, 0644) == -1)
 	{
 		ft_putendl_fd("history : No such file or directory", 2);
 		return (1);
@@ -31,7 +30,22 @@ static int		option_c(t_shell *sh)
 	return (0);
 }
 
-int				do_option(t_shell *sh, char **cmd)
+static int		do_option_bis(t_shell *sh, char **cmd, int fd)
+{
+	if (!cmd[2])
+	{
+		if (option_r(sh, fd) == 1)
+			return (1);
+	}
+	else
+	{
+		ft_putendl_fd("Option [-r] doesn't need any arguments", 2);
+		return (1);
+	}
+	return (0);
+}
+
+int				do_option(t_shell *sh, char **cmd, int fd)
 {
 	if (ft_strcmp(cmd[1], "-c") == 0)
 	{
@@ -47,22 +61,12 @@ int				do_option(t_shell *sh, char **cmd)
 		}
 		else
 		{
-			if (option_d(sh, cmd) == 1)
+			if (option_d(sh, cmd, fd) == 1)
 				return (1);
 		}
 	}
 	else if (ft_strcmp(cmd[1], "-r") == 0)
-	{
-		if (!cmd[2])
-		{
-			if (option_r(sh) == 1)
-				return (1);
-		}
-		else
-		{
-			ft_putendl_fd("Option [-r] doesn't need any arguments", 2);
+		if (do_option_bis(sh, cmd, fd) == 1)
 			return (1);
-		}
-	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:32:18 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 15:19:33 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 17:58:40 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	win_size(int id)
 	prompt_print(prompt, 1);
 }
 
-int			reset_term(t_shell *sh)
+int		reset_term(t_shell *sh)
 {
 	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
 	if (tcgetattr(0, &(sh->term)) == -1)
@@ -37,7 +37,7 @@ int			reset_term(t_shell *sh)
 	return (0);
 }
 
-int			reset_term_no_free(t_shell *sh)
+int		reset_term_no_free(t_shell *sh)
 {
 	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
 	if (tcgetattr(0, &(sh->term)) == -1)
@@ -48,7 +48,7 @@ int			reset_term_no_free(t_shell *sh)
 	return (0);
 }
 
-int			init_term(t_shell *sh)
+int		init_term(t_shell *sh)
 {
 	char			*name_term;
 

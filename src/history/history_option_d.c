@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 15:09:15 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 17:44:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:40:13 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void		option_dbis2(t_shell *sh, int nbr, int fd)
 	sh->hist = hist;
 }
 
-static int		option_dbis(t_shell *sh, char **cmd)
+static int		option_dbis(t_shell *sh, char **cmd, int fd_first)
 {
 	char	*pathb;
 	int		fd;
@@ -90,7 +90,7 @@ static int		option_dbis(t_shell *sh, char **cmd)
 		free(pathb);
 		return (1);
 	}
-	if (check_if_out_of_range(cmd, nbr) == 1)
+	if (check_if_out_of_range(cmd, nbr, fd_first) == 1)
 	{
 		free(pathb);
 		return (1);
@@ -99,10 +99,11 @@ static int		option_dbis(t_shell *sh, char **cmd)
 	unlink("/tmp/history");
 	rename(pathb, "/tmp/history");
 	free(pathb);
+	close(fd);
 	return (0);
 }
 
-int			option_d(t_shell *sh, char **cmd)
+int				option_d(t_shell *sh, char **cmd, int fd)
 {
 	int		i;
 
@@ -116,7 +117,7 @@ int			option_d(t_shell *sh, char **cmd)
 		}
 		i++;
 	}
-	if (option_dbis(sh, cmd) == 1)
+	if (option_dbis(sh, cmd, fd) == 1)
 		return (1);
 	return (0);
 }

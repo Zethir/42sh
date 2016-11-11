@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 14:52:09 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 17:46:47 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:49:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ static int	history_option(t_shell *sh, char **cmd, int fd)
 	if (numeric_error(cmd) == 1)
 		return (1);
 	nbr = ft_atoi(cmd[1]);
-	while (sh->hist->prev)
+	while (hist->prev)
 	{
-		sh->hist = sh->hist->prev;
+		hist = hist->prev;
 		i++;
 	}
-	sh->hist = hist;
 	nbr = i - 1 - nbr;
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -59,7 +58,7 @@ static int	do_history_bis(t_shell *sh, char **cmd, int fd)
 	{
 		if (cmd[1][0] == '-')
 		{
-			if (do_option(sh, cmd) == 1)
+			if (do_option(sh, cmd, fd) == 1)
 				return (1);
 		}
 		else
@@ -71,15 +70,24 @@ static int	do_history_bis(t_shell *sh, char **cmd, int fd)
 	return (0);
 }
 
-int			do_history(t_shell *sh, char **cmd)
+int			open_history(void)
 {
 	int		fd;
 
 	if ((fd = open("/tmp/history", O_RDONLY)) == -1)
 	{
 		ft_putendl_fd("history : No such file or directory", 2);
-		return (1);
+		return (-1);
 	}
+	return (fd);
+}
+
+int			do_history(t_shell *sh, char **cmd)
+{
+	int		fd;
+
+	if ((fd = open_history()) == -1)
+		return (1);
 	if (do_history_bis(sh, cmd, fd) == 1)
 		return (1);
 	close(fd);

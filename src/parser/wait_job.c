@@ -6,13 +6,13 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/29 12:56:15 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 18:10:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 18:04:04 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
 
-int		job_success(t_job *job)
+int			job_success(t_job *job)
 {
 	t_process *process;
 
@@ -26,7 +26,7 @@ int		job_success(t_job *job)
 	return (1);
 }
 
-int		get_num_process(t_process *process)
+int			get_num_process(t_process *process)
 {
 	t_process	*tmp;
 	int			i;
@@ -42,7 +42,26 @@ int		get_num_process(t_process *process)
 	return (i);
 }
 
-void	update_process_status(t_shell *sh, t_process *p, pid_t pid, int status)
+static void	update_return_value(t_shell *sh, t_process *process, int status)
+{
+	if (WIFEXITED(status) && status == 0)
+	{
+		process->completed = 1;
+		sh->return_val = WEXITSTATUS(status);
+	}
+	if (WIFEXITED(status) && status != 0)
+	{
+		process->completed = 0;
+		sh->return_val = WEXITSTATUS(status);
+	}
+	if (WIFSIGNALED(status))
+	{
+		process->completed = 1;
+		sh->return_val = WEXITSTATUS(status);
+	}
+}
+
+void		update_process_status(t_shell *sh, t_process *p, pid_t pid, int st)
 {
 	t_process *tmp;
 
@@ -50,29 +69,13 @@ void	update_process_status(t_shell *sh, t_process *p, pid_t pid, int status)
 	while (p)
 	{
 		if (p->pid == pid)
-		{
-			if (WIFEXITED(status) && status == 0)
-			{
-				p->completed = 1;
-				sh->return_val = WEXITSTATUS(status);
-			}
-			if (WIFEXITED(status) && status != 0)
-			{
-				p->completed = 0;
-				sh->return_val = WEXITSTATUS(status);
-			}
-			if (WIFSIGNALED(status))
-			{
-				p->completed = 1;
-				sh->return_val = WEXITSTATUS(status);
-			}
-		}
+			update_return_value(sh, p, st);
 		p = p->next;
 	}
 	p = tmp;
 }
 
-void	wait_for_job(t_shell *sh, t_job *job, int i)
+void		wait_for_job(t_shell *sh, t_job *job, int i)
 {
 	int		status;
 	pid_t	pid;
