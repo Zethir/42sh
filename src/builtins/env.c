@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 21:38:15 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/11 17:12:28 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static int	deal_with_arg(t_shell *sh, char **arg, char **env_cpy)
 			{
 				cmd = join_tab(arg);
 				exec_env(sh, cmd, env_cpy);
+				free(cmd);
 				return (sh->return_val);
 			}
 			else if (check_caract(*arg, '=') == 1)
@@ -85,18 +86,20 @@ static int	deal_with_arg(t_shell *sh, char **arg, char **env_cpy)
 int			deal_with_env(t_shell *sh, char **arg)
 {
 	char	**env_cpy;
+	int		i;
 
 	env_cpy = get_env(sh->env);
 	arg++;
+	i = 0;
 	if (*arg)
 	{
 		if (*arg[0] == '-')
-			return (deal_with_opt(sh, arg, env_cpy));
+			i = deal_with_opt(sh, arg, env_cpy);
 		else
-			return (deal_with_arg(sh, arg, env_cpy));
+			i = deal_with_arg(sh, arg, env_cpy);
 	}
 	else
 		print_env(sh->env);
 	ft_free_tab(env_cpy);
-	return (0);
+	return (i);
 }

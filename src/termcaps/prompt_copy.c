@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 14:37:07 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 15:00:04 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 17:08:54 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	copy_string(t_prompt *prompt, char *buff)
 	if (COPY_STRING && prompt->copy_mode == 1)
 	{
 		prompt->copy_mode = 0;
+		if (prompt->copy_str)
+			free(prompt->copy_str);
 		prompt->copy_str = ft_strsub(prompt->cmd, prompt->cursor_start,
 				prompt->cursor_end - prompt->cursor_start + 1);
 		prompt->cursor_start = 0;
@@ -43,6 +45,8 @@ void	cut_string(t_prompt *prompt, char *buff)
 	if (CUT_STRING && prompt->copy_mode == 1)
 	{
 		prompt->copy_mode = 0;
+		if (prompt->copy_str)
+			free(prompt->copy_str);
 		prompt->copy_str = ft_strsub(prompt->cmd, prompt->cursor_start,
 				prompt->cursor_end - prompt->cursor_start + 1);
 		len = ft_strlen(prompt->copy_str);

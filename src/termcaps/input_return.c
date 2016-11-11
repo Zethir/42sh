@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 15:45:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/05 12:06:32 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 17:07:33 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char		*input_return(t_shell *sh, t_prompt *prompt)
 		sh->hist = sh->hist->next;
 	if (prompt->cmd[0])
 	{
+		if (sh->hist->str)
+			free(sh->hist->str);
 		sh->hist->str = ft_strdup(prompt->cmd);
 		str = ft_strdup(sh->hist->str);
 		return (str);

@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 17:27:26 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 17:08:29 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_arg(char **env_cpy, char *arg)
 	i = 0;
 	while (env_cpy[i])
 	{
-		if (ft_strccmp(env_cpy[i], arg, '=') == 0)
+		if (ft_strncmp(env_cpy[i], arg, ft_strlen(arg)) == 0)
 		{
 			free(env_cpy[i]);
 			env_cpy[i] = ft_strdup("");
@@ -40,6 +40,7 @@ static int	check_i_opt(t_shell *sh, char **arg, char **env_cpy)
 		cmd = join_tab(arg);
 		env_cpy = NULL;
 		exec_env(sh, cmd, env_cpy);
+		free(cmd);
 		return (0);
 	}
 	else
@@ -60,6 +61,7 @@ static int	check_u_opt(t_shell *sh, char **arg, char **env_cpy)
 		{
 			cmd = join_tab(arg);
 			exec_env(sh, cmd, env_cpy);
+			free(cmd);
 			return (sh->return_val);
 		}
 		else
