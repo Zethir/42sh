@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 18:37:35 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/11 17:46:26 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct		s_lex
 	int				fd[2];
 	int				hd;
 	int				tl;
+	int				lencmd;
 	struct s_token	*token;
 }					t_lex;
 
