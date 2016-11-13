@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 18:45:03 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/11 18:59:51 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/13 15:58:12 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	check_arg(char **env_cpy, char *arg)
 		{
 			free(env_cpy[i]);
 			env_cpy[i] = ft_strdup("");
+			ft_strclr(env_cpy[i]);
 			return (1);
 		}
 		i++;

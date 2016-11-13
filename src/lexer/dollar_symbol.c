@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 18:25:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/11 17:51:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/13 15:37:16 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static int	check_env_data(t_shell *sh, t_lex *lex, char *data, int *i)
 	{
 		if (!ft_strcmp(env->name, data))
 		{
-			val = ft_strsub(env->line, 5, ft_strlen(env->line) - 5);
+			val = ft_strsub(env->line, ft_strlen(env->name) + 1,
+					ft_strlen(env->line) - ft_strlen(env->name) - 1);
 			lex->lencmd = ft_strlen(lex->token->cmd) - (*i) -
 				ft_strlen(data) - 1;
 			change_value(lex, val, i, ft_strlen(data) + 1);

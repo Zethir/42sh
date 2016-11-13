@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/10 11:45:51 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 17:52:26 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/13 16:03:48 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				check_local_variable(t_env *env, char *arg, int flag)
 	tmp = env;
 	while (env)
 	{
-		if (ft_strncmp(arg, env->name, ft_strlen(env->name)) == 0 &&
+		if (ft_strncmp(env->name, arg, ft_strlen(arg)) == 0 &&
 				env->flag == flag)
 		{
 			if (ft_strchr(arg, '=') != NULL)

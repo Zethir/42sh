@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:37:50 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 22:20:09 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/13 16:00:29 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ t_env		*init_env(char **env)
 		node->next = NULL;
 		if (ft_strncmp(*env, "SHLVL", 5) == 0)
 			shell_level(&*env);
-		node->line = ft_strdup(*env);
+		if (*env[0])
+			node->line = ft_strdup(*env);
 		node->flag = 0;
 		node->name = ft_strsub(*env, 0, ft_strlen_char(*env, '='));
 		push_node(node, &head);

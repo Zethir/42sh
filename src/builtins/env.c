@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 14:55:13 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/11 17:12:28 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/13 16:13:24 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,24 @@ static int	deal_with_arg(t_shell *sh, char **arg, char **env_cpy)
 	char	*cmd;
 
 	res = NULL;
-	while (*arg)
+	if (cmp_line(arg, env_cpy) == 0)
 	{
-		if (cmp_line(arg, env_cpy) == 0)
+		if (check_caract(*arg, '=') < 0)
+			return (print_wrong_identifier_env(*arg));
+		else if (check_caract(*arg, '=') != 1)
 		{
-			if (check_caract(*arg, '=') < 0)
-				return (print_wrong_identifier_env(*arg));
-			else if (check_caract(*arg, '=') != 1)
-			{
-				cmd = join_tab(arg);
-				exec_env(sh, cmd, env_cpy);
-				free(cmd);
-				return (sh->return_val);
-			}
-			else if (check_caract(*arg, '=') == 1)
-			{
-				res = add_elem(env_cpy, *arg);
-				ft_print_tab(res);
-				ft_free_tab(res);
-				return (0);
-			}
+			cmd = join_tab(arg);
+			exec_env(sh, cmd, env_cpy);
+			free(cmd);
+			return (sh->return_val);
 		}
-		arg++;
+		else if (check_caract(*arg, '=') == 1)
+		{
+			res = add_elem(env_cpy, *arg);
+			ft_print_tab(res);
+			ft_free_tab(res);
+			return (0);
+		}
 	}
 	ft_print_tab(env_cpy);
 	return (0);
