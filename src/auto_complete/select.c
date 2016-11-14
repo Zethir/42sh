@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:41:54 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/04 15:17:14 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/14 15:16:34 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ char		*main_select(int argc, char **argv)
 	if (argc >= 2)
 		str = do_select(argv, id);
 	else
-	{
-		ft_putendl_fd("Too few argument to function call", 2);
 		return (NULL);
-	}
 	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 	if (str && str[0])
 		return (str);

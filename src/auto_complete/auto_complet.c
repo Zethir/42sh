@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:49:21 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/05 15:52:49 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/14 15:16:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char			*exec_select(char *cmd)
 	int		i;
 
 	i = 0;
-	if (!(tab_files = tab_to_select(cmd, i)))
+	if (!(tab_files = tab_to_select(cmd, i)) || !tab_files[0])
 		return (NULL);
 	frag_cmd = split_if_dir(cmd);
 	if (frag_cmd)
