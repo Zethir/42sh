@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 15:09:15 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/11 18:40:13 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/14 14:24:09 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,28 +77,21 @@ static void		option_dbis2(t_shell *sh, int nbr, int fd)
 
 static int		option_dbis(t_shell *sh, char **cmd, int fd_first)
 {
-	char	*pathb;
 	int		fd;
 	int		nbr;
 
-	pathb = ft_strjoin("/tmp/history", "bis");
 	nbr = ft_atoi(cmd[2]);
 	nbr -= 1;
-	if ((fd = open(pathb, O_RDWR | O_CREAT, 0644)) == -1)
+	if ((fd = open("/tmp/historybis", O_RDWR | O_CREAT, 0644)) == -1)
 	{
 		ft_putendl_fd("history : No such file or directory", 2);
-		free(pathb);
 		return (1);
 	}
 	if (check_if_out_of_range(cmd, nbr, fd_first) == 1)
-	{
-		free(pathb);
 		return (1);
-	}
 	option_dbis2(sh, nbr, fd);
 	unlink("/tmp/history");
-	rename(pathb, "/tmp/history");
-	free(pathb);
+	rename("/tmp/historybis", "/tmp/history");
 	close(fd);
 	return (0);
 }
