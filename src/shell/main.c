@@ -6,36 +6,42 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 20:15:11 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/15 13:30:52 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
-static void		deal_with_inhib(t_shell *sh, t_lex *lex)
+static void		deal_with_inhib(t_shell *sh, char **str)
 {
 	char	*tmp;
 	char	*tmp2;
 
 	tmp = NULL;
-	while (check_for_quotes(lex->line) != 0)
+	while (check_for_quotes(*str) != 0)
 	{
 		tmp = termcap_heredoc(sh);
 		tmp2 = ft_strjoin("\n", tmp);
 		free(tmp);
-		tmp = ft_strjoin(lex->line, tmp2);
-		free(lex->line);
+		tmp = ft_strjoin(*str, tmp2);
+		free(*str);
 		free(tmp2);
-		lex->line = ft_strdup(tmp);
+		*str = ft_strdup(tmp);
 		free(tmp);
 		free(sh->hist->str);
-		sh->hist->str = ft_strdup(lex->line);
+		sh->hist->str = ft_strdup(*str);
 		ft_putchar('\n');
 	}
 }
 
-static int		lexer_parser(t_shell *sh, t_lex *lex, t_token_ht *token_ht)
+static int		lexer_parser(t_shell *sh, char *cmd)
 {
+	t_token_ht	*token_ht;
+	t_lex		*lex;
+
+	token_ht = init_token_ht();
+	lex = init_lexer_struct();
+	lex->line = ft_strdup(cmd);
 	if ((lex->token = check_lexer(lex, token_ht, sh)) == NULL)
 	{
 		free_lex(&lex);
@@ -46,33 +52,33 @@ static int		lexer_parser(t_shell *sh, t_lex *lex, t_token_ht *token_ht)
 	init_stdio(sh);
 	sh->return_val = 0;
 	parse_cmd(sh, lex->token);
+	free_lex(&lex);
+	free_token_ht(&token_ht);
 	return (0);
 }
 
 static void		deal_with_prompt(t_shell *sh)
 {
-	t_token_ht	*token_ht;
-	t_lex		*lex;
+	char		*str;
+	char		**cmd;
+	int			i;
 
-	if (!(token_ht = (t_token_ht *)malloc(sizeof(t_lex))))
-		return ;
-	token_ht->head = NULL;
-	token_ht->tail = NULL;
-	lex = init_lexer_struct();
-	lex->line = deal_with_termcap(sh);
+	i = 0;
+	str = deal_with_termcap(sh);
 	ft_putchar('\n');
-	if (!lex->line)
+	if (!str)
+		return ;
+	deal_with_inhib(sh, &str);
+	cmd = ft_strsplit(str, ';');
+	free(str);
+	while (cmd[i])
 	{
-		free_lex(&lex);
-		free_token_ht(&token_ht);
-		return ;
+		if (lexer_parser(sh, cmd[i]) == -1)
+			return ;
+		i++;
 	}
-	deal_with_inhib(sh, lex);
-	if (lexer_parser(sh, lex, token_ht) == -1)
-		return ;
 	add_history(sh);
-	free_lex(&lex);
-	free_token_ht(&token_ht);
+	ft_free_tab(cmd);
 }
 
 static void		start_prog(char **env)

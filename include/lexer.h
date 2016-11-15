@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 11:37:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/11 17:46:26 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/15 12:20:57 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_token_ht			*add_token(t_lex *lex, t_token_ht *token_ht, char *cmd,
 		int val);
 t_token				*check_lexer(t_lex *lex, t_token_ht *token_ht, t_shell *sh);
 t_token				*cmd_is_empty(t_lex *lex, t_token *new_elem, int val);
+t_token_ht			*init_token_ht(void);
 void				free_struct_lex(t_lex **lex);
 void				free_lex(t_lex **lex);
 void				free_token_ht(t_token_ht **token);
