@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 12:52:43 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 21:18:30 by qdiaz            ###   ########.fr       */
+/*   Updated: 2016/11/15 14:13:44 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,36 +28,42 @@ int			get_index(t_env *node)
 	return (i);
 }
 
-static int	check_for_sister(char *arg, char c, int i)
+static int	check_for_sister(char *arg, char c, size_t *i)
 {
-	while (arg[i])
+	while (arg[*i])
 	{
-		if (arg[i] == c)
+		if (arg[*i] == c)
+		{
+			ft_memmove(arg + *i, arg + *i + 1, ft_strlen(arg + *i + 1) + 1);
+			*i -= 1;
 			return (1);
-		i++;
+		}
+		(*i)++;
 	}
 	return (0);
 }
 
 int			check_for_quotes(char *arg)
 {
-	int		i;
+	size_t	i;
 
 	i = 0;
 	while (arg[i])
 	{
 		if (arg[i] == 39)
 		{
-			if (check_for_sister(arg, 39, i + 1) == 1)
+			ft_memmove(arg + i, arg + i + 1, ft_strlen(arg + i + 1) + 1);
+			if (check_for_sister(arg, 39, &i) == 1 && i == ft_strlen(arg))
 				return (0);
-			else
+			else if (i == ft_strlen(arg))
 				return (1);
 		}
 		if (arg[i] == 34)
 		{
-			if (check_for_sister(arg, 34, i + 1) == 1)
+			ft_memmove(arg + i, arg + i + 1, ft_strlen(arg + i + 1) + 1);
+			if (check_for_sister(arg, 34, &i) == 1 && i == ft_strlen(arg))
 				return (0);
-			else
+			else if (i == ft_strlen(arg))
 				return (1);
 		}
 		i++;
