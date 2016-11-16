@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/30 15:36:52 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/10 18:12:56 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/16 15:23:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		exec_env(t_shell *sh, char *arg, char **env_cpy)
 
 	parse = init_parse(sh, arg);
 	job = NULL;
-	if (check_builtins(arg))
+	if (check_builtins(parse->argv[0]))
 		do_builtins(sh, job, parse);
 	else if ((parse->pid = fork()) == 0)
 	{

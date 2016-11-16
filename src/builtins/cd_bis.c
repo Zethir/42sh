@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 17:14:22 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/11 19:05:39 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/16 14:53:05 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		change_directory(t_env *env, char *cmd)
 
 	ft_bzero(buf, 512);
 	getcwd(buf, 512);
-	if (buf[0] != 0)
+	if (buf[0] != 0 || cmd)
 	{
 		change_varcontent(env, "OLDPWD", buf);
 		chdir(cmd);

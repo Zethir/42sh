@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 17:24:05 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/11 19:03:45 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/16 15:01:56 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ static void		cd_prev(t_env *env)
 {
 	t_env	*tmp;
 	char	*str;
+	char	buf[512];
 
 	tmp = env;
 	str = NULL;
+	ft_bzero(buf, 512);
 	while (env)
 	{
 		if (ft_strcmp(env->name, "OLDPWD") == 0)
@@ -26,7 +28,7 @@ static void		cd_prev(t_env *env)
 		env = env->next;
 	}
 	env = tmp;
-	if (str)
+	if (str && getcwd(buf, 512))
 	{
 		change_directory(env, str);
 		free(str);
@@ -75,8 +77,10 @@ static char		*go_to_dir_from_root(t_env *env, char **cmd)
 static void		deal_with_cd_arg(t_env *env, char **cmd)
 {
 	struct stat	st;
+	char		buf[512];
 
-	if (stat(cmd[1], &st) == -1)
+	ft_bzero(buf, 512);
+	if (stat(cmd[1], &st) == -1 || !getcwd(buf, 512))
 	{
 		ft_putstr_fd(cmd[1], 2);
 		ft_putstr_fd(": No such file or directory.\n", 2);
