@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/17 12:25:42 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/17 14:02:59 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void		deal_with_prompt(t_shell *sh)
 		if (init_term(sh) == -1)
 			return ;
 		if (lexer_parser(sh, cmd[i]) == -1)
-			return ;
+			break ;
 		i++;
 	}
 	add_history(sh);
