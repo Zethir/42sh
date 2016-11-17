@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/16 16:18:39 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/17 12:57:45 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ void	ign_signal(int id)
 	signal(SIGCONT, sigcont);
 	signal(SIGTSTP, sigtstp);
 	signal(SIGINT, sigint);
+	signal(SIGSEGV, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGABRT, SIG_IGN);
 }
