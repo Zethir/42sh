@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/12 16:36:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/08 17:45:29 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/17 12:41:54 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void		prompt_shell(t_shell *sh, t_prompt *prompt, char *buff)
 	cut_string(prompt, buff);
 	paste_string(prompt, buff);
 	start_auto_complete(prompt, buff);
+	input_clear(sh, prompt, buff);
 }
 
 char		*deal_with_termcap(t_shell *sh)

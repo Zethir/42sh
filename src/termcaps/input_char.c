@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 16:28:53 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/01 14:59:24 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/17 12:42:41 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,23 @@ void	deal_with_charac(t_prompt *prompt, char *buff)
 				ft_strlen(prompt->cmd + prompt->i) + 1);
 		prompt->cmd[prompt->i] = *buff;
 		prompt->i++;
+		prompt_print(prompt, 1);
+	}
+}
+
+void	input_clear(t_shell *sh, t_prompt *prompt, char *buff)
+{
+	char	*cmd;
+	char	**env_cpy;
+
+	if (buff[0] == 12)
+	{
+		cmd = ft_strdup("clear");
+		env_cpy = get_env(sh->env);
+		exec_env(sh, cmd, env_cpy);
+		ft_free_tab(env_cpy);
+		free(cmd);
+		get_prompt(sh->env);
 		prompt_print(prompt, 1);
 	}
 }

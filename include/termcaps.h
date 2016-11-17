@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/20 10:50:30 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/04 15:15:53 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/17 12:42:06 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void			go_up_line(t_prompt *prompt, char *buff);
 void			prompt_print(t_prompt *prompt, int show_cursor);
 void			prompt_shell(t_shell *sh, t_prompt *prompt, char *buff);
 void			exit_eof(t_shell *sh, t_prompt *prompt);
+void			input_clear(t_shell *sh, t_prompt *prompt, char *buff);
 char			*input_return(t_shell *sh, t_prompt *prompt);
 char			*input_eof(t_prompt *prompt, char buff);
 
