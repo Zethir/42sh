@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:55:11 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/02 19:21:02 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/16 16:18:39 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	sigtstp(int id)
 	signal(SIGTSTP, SIG_DFL);
 	tcsetattr(0, 0, &(sh->term));
 	ioctl(0, TIOCSTI, cp);
+	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
 }
 
 void	sigcont(int id)
