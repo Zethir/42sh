@@ -6,7 +6,7 @@
 /*   By: qdiaz <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 15:25:57 by qdiaz             #+#    #+#             */
-/*   Updated: 2016/11/04 15:16:50 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/17 12:16:02 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	*exec_select_cmd(char *frag_cmd, char **tab_files)
 	free(filenames);
 	filenames = main_select(ft_tablen(tab_for_exec), tab_for_exec);
 	ft_free_tab(tab_for_exec);
+	if (!filenames)
+		return (NULL);
 	frag_cmd = ft_strdup(filenames);
 	free(filenames);
 	return (frag_cmd);
