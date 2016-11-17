@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 11:47:31 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/15 15:21:51 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/17 12:24:40 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static void		deal_with_prompt(t_shell *sh)
 	free(str);
 	while (cmd[i])
 	{
+		if (init_term(sh) == -1)
+			return ;
 		if (lexer_parser(sh, cmd[i]) == -1)
 			return ;
 		i++;
