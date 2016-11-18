@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/29 12:56:15 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/11 18:04:04 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/17 14:23:25 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	update_return_value(t_shell *sh, t_process *process, int status)
 	if (WIFSIGNALED(status))
 	{
 		process->completed = 1;
-		sh->return_val = WEXITSTATUS(status);
+		sh->return_val = WSTOPSIG(status);
 	}
 }
 

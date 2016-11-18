@@ -6,7 +6,7 @@
 /*   By: cboussau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 16:35:58 by cboussau          #+#    #+#             */
-/*   Updated: 2016/11/16 12:05:53 by cboussau         ###   ########.fr       */
+/*   Updated: 2016/11/17 18:34:54 by cboussau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	delete_quotes(char *arg, char c, size_t *i)
 int			check_for_quotes(char *arg)
 {
 	static size_t	i;
-	int		j;
+	int				j;
 
 	while (arg[i])
 	{
@@ -71,5 +71,6 @@ int			check_for_quotes(char *arg)
 		}
 		i++;
 	}
+	i = 0;
 	return (0);
 }
